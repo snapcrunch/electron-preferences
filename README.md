@@ -23,7 +23,7 @@ Using the API, developers can:
 To see the library in action, clone this repository and see the demo Electron app that is included within the `example` folder:
 
     $ git clone https://github.com/tkambler/electron-preferences.git
-    $ cd electron-Preferences
+    $ cd electron-preferences
     $ npm i
     $ npm run example
 
