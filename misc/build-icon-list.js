@@ -6,22 +6,22 @@ const path = require('path');
 const srcFolder = path.resolve(__dirname, '../assets/svg');
 
 const tpl = Handlebars.compile(`
-    <table width="100%">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Icon</th>
-            </tr>
-        </thead>
-    <tbody>
-        {{#each icons}}
-            <tr>
-                <td>{{name}}</td>
-                <td><img src="{{{path}}}" height="40" width="40" /></td>
-            </tr>
-        {{/each}}
-    </tbody>
-    </table>
+<table style="width: 100%;">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Icon</th>
+        </tr>
+    </thead>
+<tbody>
+    {{#each icons}}
+        <tr>
+            <td>{{name}}</td>
+            <td><img src="{{{path}}}" height="40" width="40" /></td>
+        </tr>
+    {{/each}}
+</tbody>
+</table>
 `);
 
 const icons = glob.sync('*.svg', {

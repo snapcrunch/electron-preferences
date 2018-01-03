@@ -11,7 +11,7 @@ Using the API, developers can:
 - Read / write values on demand
 - Define the layout of the preferences window.
 
-<table width="100%">
+<table style="width: 100%;">
 <thead>
     <tr>
         <th>Name</th>
