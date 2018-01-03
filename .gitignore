@@ -1,0 +1,8 @@
+# Files
+.DS_Store
+
+# Folders
+.cache_loader
+.sass-cache
+node_modules
+build
