@@ -22,6 +22,154 @@ To see the library in action, clone this repository and see the demo Electron ap
 
 <img src="misc/demo.gif" />
 
+## Getting Started
+
+### Initialize the Preferences Service
+
+Within your application's main process, create a new instance of the `ElectronPreferences` class, as shown below.
+
+```
+const electron = require('electron');
+const { app } = electron;
+const path = require('path');
+const os = require('os');
+const ElectronPreferences = require('electron-preferences');
+
+const preferences = new ElectronPreferences({
+    /**
+     * Where should preferences be saved?
+     */
+    'dataStore': path.resolve(app.getPath('userData'), 'preferences.json'),
+    /**
+     * Default values.
+     */
+    'defaults': {
+        'notes': {
+            'folder': path.resolve(os.homedir(), 'Notes')
+        },
+        'markdown': {
+            'auto_format_links': true,
+            'show_gutter': false
+        },
+        'preview': {
+            'show': true
+        },
+        'drawer': {
+            'show': true
+        }
+    },
+    /**
+     * The preferences window is divided into "sections." Each section has a label, an icon, and one or
+     * more fields associated with it. Each section should also be given a unique ID.
+     */
+    'sections': [
+        {
+            'id': 'about',
+            'label': 'About You',
+            /**
+             * See the list of available icons below.
+             */
+            'icon': 'single-01',
+            'form': {
+                'groups': [
+                    {
+                        /**
+                         * Group heading is optional.
+                         */
+                        'label': 'About You',
+                        'fields': [
+                            {
+                                'label': 'First Name',
+                                'key': 'first_name',
+                                'type': 'text'
+                            },
+                            {
+                                'label': 'Last Name',
+                                'key': 'last_name',
+                                'type': 'text'
+                            },
+                            {
+                                'label': 'Gender',
+                                'key': 'gender',
+                                'type': 'dropdown',
+                                'options': [
+                                    { 'label': 'Male', 'value': 'male' },
+                                    { 'label': 'Female', 'value': 'female' },
+                                    { 'label': 'Unspecified', 'value': 'unspecified' },
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            'id': 'notes',
+            'label': 'Notes',
+            'icon': 'folder-15',
+            'form': {
+                'groups': [
+                    {
+                        'label': 'Stuff',
+                        'fields': [
+                            {
+                                'label': 'Read notes from folder',
+                                'key': 'folder',
+                                'type': 'directory'
+                            },
+                            {
+                                'heading': 'Important Message',
+                                'content': '<p>The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence.</p>',
+                                'type': 'message'
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            'id': 'space',
+            'label': 'Other Settings',
+            'icon': 'spaceship',
+            'form': {
+                'groups': [
+                    {
+                        'label': 'Other Settings',
+                        'fields': [
+                            {
+                                'label': 'Phone Number',
+                                'key': 'phone_number',
+                                'type': 'text'
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+});
+````
+
+### Interacting with the Preferences Service from the Renderer Process
+
+```
+const { ipcRenderer, remote } = require('electron');
+
+// Fetch the preferences object
+const preferences = ipcRenderer.sendSync('getPreferences');
+
+// Display the preferences window
+ipcRenderer.send('showPreferences');
+
+// Listen to the `preferencesUpdated` event to be notified when preferences are changed.
+ipcRenderer.on('preferencesUpdated', (e, preferences) => {
+    console.log('Preferences were updated', preferences);
+});
+
+// Instruct the preferences service to update the preferences object from within the renderer.
+ipcRenderer.sendSync('setPreferences', { ... });
+```
+
 ## Icons
 
 The following icons come packaged with the library and can be specified when you define the layout of your preferences window.
