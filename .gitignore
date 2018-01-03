@@ -3,7 +3,7 @@
 example/preferences.json
 
 # Folders
-.cache_loader
+.cache-loader
 .sass-cache
 node_modules
 build
