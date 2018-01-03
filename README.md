@@ -1,5 +1,7 @@
 # Electron Preferences
 
+## Introduction
+
 This module provides users of the [Electron](https://electronjs.org/) desktop application development framework with with a simple, consistent interface for managing user preferences. It includes two primary components:
 
 - A GUI interface within which the users of your application can manage their preferences.
@@ -10,6 +12,19 @@ Using the API, developers can:
 - Define default preferences
 - Read / write values on demand
 - Define the layout of the preferences window.
+
+To see the library in action, clone this repository and see the demo Electron app that is included within the `example` folder:
+
+    $ git clone https://github.com/tkambler/electron-preferences.git
+    $ cd electron-Preferences
+    $ npm i
+    $ npm run example
+
+<img src="misc/demo.gif" />
+
+## Icons
+
+The following icons come packaged with the library and can be specified when you define the layout of your preferences window.
 
 <table style="width: 100%;">
 <thead>
