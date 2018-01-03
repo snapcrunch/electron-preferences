@@ -39,9 +39,7 @@ class ElectronPreferences {
         });
         if (!this.preferences) {
             this.preferences = this.defaults;
-            fs.writeJsonSync(this.dataStore, this.preferences, {
-                'spaces': 4
-            });
+            this.save();
         }
 
         ipcMain.on('showPreferences', (event) => {
@@ -54,9 +52,7 @@ class ElectronPreferences {
 
         ipcMain.on('restoreDefaults', (event, value) => {
             this.preferences = this.defaults;
-            fs.writeJsonSync(this.dataStore, this.preferences, {
-                'spaces': 4
-            });
+            this.save();
             this.broadcast();
         });
 
@@ -70,9 +66,7 @@ class ElectronPreferences {
 
         ipcMain.on('setPreferences', (event, value) => {
             this.preferences = value;
-            fs.writeJsonSync(this.dataStore, this.preferences, {
-                'spaces': 4
-            });
+            this.save();
             this.broadcast();
             event.returnValue = null;
         });
@@ -100,6 +94,34 @@ class ElectronPreferences {
     set preferences(value) {
 
         this._preferences = value;
+
+    }
+
+    save() {
+
+        fs.writeJsonSync(this.dataStore, this.preferences, {
+            'spaces': 4
+        });
+
+    }
+
+    value(key, value) {
+
+        if (_.isArray(key)) {
+            key.forEach(({ key, value }) => {
+                _.set(this.preferences, key, value);
+            });
+            this.save();
+            this.broadcast();
+        } else if (!_.isUndefined(key) && !_.isUndefined(value)) {
+            _.set(this.preferences, key, value);
+            this.save();
+            this.broadcast();
+        } else if (!_.isUndefined(key)) {
+            return _.cloneDeep(_.get(this.preferences, key));
+        } else {
+            return _.cloneDeep(this.preferences);
+        }
 
     }
 
