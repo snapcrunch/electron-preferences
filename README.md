@@ -1,5 +1,12 @@
 # Electron Preferences
 
+- [Introduction](#introduction)
+- [Getting Started](#getting-started)
+ - [Initializing the Preferences Service](#initializing-the-preferences-service)
+ - [Interacting with the Preferences Service from the Renderer Process](#interacting-with-the-preferences-service-from-the-renderer-process)
+ - [Field Types](#field-types)
+ - [Icons](#icons)
+
 ## Introduction
 
 This module provides users of the [Electron](https://electronjs.org/) desktop application development framework with with a simple, consistent interface for managing user preferences. It includes two primary components:
@@ -24,7 +31,7 @@ To see the library in action, clone this repository and see the demo Electron ap
 
 ## Getting Started
 
-### Initialize the Preferences Service
+### Initializing the Preferences Service
 
 Within your application's main process, create a new instance of the `ElectronPreferences` class, as shown below.
 
