@@ -170,6 +170,17 @@ ipcRenderer.on('preferencesUpdated', (e, preferences) => {
 ipcRenderer.sendSync('setPreferences', { ... });
 ```
 
+## Field Types
+
+The library includes built-in support for the following field types:
+
+- Text
+- Dropdown
+- Message
+- Folder selection
+
+Adding support for additional field types if easy, if you're familiar with React. PR's for such additions are welcome.
+
 ## Icons
 
 The following icons come packaged with the library and can be specified when you define the layout of your preferences window.

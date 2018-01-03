@@ -1,8 +1,16 @@
 {
   "name": "electron-preferences",
-  "version": "0.0.2",
-  "description": "",
+  "version": "0.0.3",
+  "description": "A simple, consistent interface for managing user preferences within an Electron application.",
   "main": "index.js",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/tkambler/electron-preferences.git"
+  },
+  "keywords": [
+    "electron",
+    "preferences"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "example": "cd example; electron main.js"
