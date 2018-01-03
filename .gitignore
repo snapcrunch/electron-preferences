@@ -1,5 +1,6 @@
 # Files
 .DS_Store
+example/preferences.json
 
 # Folders
 .cache_loader
