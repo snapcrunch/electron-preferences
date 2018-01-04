@@ -13,6 +13,7 @@ class TextField extends React.Component {
             <div className="field field-text">
                 <div className="field-label">{ this.label }</div>
                 <input type="text" onChange={ this.onChange.bind(this) } value={ this.value } />
+                { this.help && <span className="help">{ this.help }</span> }
             </div>
         );
 
@@ -36,9 +37,9 @@ class TextField extends React.Component {
 
     }
 
-    get type() {
+    get help() {
 
-        return this.field.type;
+        return this.field.help;
 
     }
 

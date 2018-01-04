@@ -31,6 +31,7 @@ class DirectoryField extends React.Component {
                 <div className="bt" onClick={ choose }>
                     { btLabel }
                 </div>
+                { this.help && <span className="help">{ this.help }</span> }
             </div>
         );
 
@@ -57,6 +58,12 @@ class DirectoryField extends React.Component {
     get type() {
 
         return this.field.type;
+
+    }
+
+    get help() {
+
+        return this.field.help;
 
     }
 

@@ -66,7 +66,7 @@ module.exports = (grunt) => {
         'watch': {
             'scss': {
                 'files': 'scss/**/*',
-                'tasks': ['compass'],
+                'tasks': ['compass', 'webpack:watch'],
                 'options': {
                     'interrupt': true,
                     'atBegin': true
@@ -98,6 +98,6 @@ module.exports = (grunt) => {
     });
 
     grunt.registerTask('build', ['concat', 'cssmin', 'copy', 'compass', 'webpack:once']);
-    grunt.registerTask('build-watch', ['concat', 'cssmin', 'copy', 'compass', 'webpack:watch']);
+    grunt.registerTask('build-watch', ['concat', 'cssmin', 'copy', 'compass', 'watch']);
 
 };

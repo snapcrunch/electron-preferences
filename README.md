@@ -3,6 +3,7 @@
 - [Introduction](#introduction)
 - [Getting Started](#getting-started)
  - [Initializing the Preferences Service](#initializing-the-preferences-service)
+ - [Interacting with the Preferences Service from the Main Process](#interacting-with-the-preferences-service-from-the-main-process)
  - [Interacting with the Preferences Service from the Renderer Process](#interacting-with-the-preferences-service-from-the-renderer-process)
  - [Field Types](#field-types)
  - [Icons](#icons)
@@ -88,7 +89,11 @@ const preferences = new ElectronPreferences({
                             {
                                 'label': 'First Name',
                                 'key': 'first_name',
-                                'type': 'text'
+                                'type': 'text',
+                                /**
+                                 * Optional text to be displayed beneath the field.
+                                 */
+                                'help': 'What is your first name?'
                             },
                             {
                                 'label': 'Last Name',
@@ -156,6 +161,21 @@ const preferences = new ElectronPreferences({
     ]
 });
 ````
+
+### Interacting with the Preferences Service from the Main Process
+
+```
+
+// Show the preferences window on demand.
+preferences.show();
+
+// Get a value from the preferences data store
+const myPref = preferences.value('some.nested.key');
+
+// Save a value within the preferences data store
+preferences.value('some.nested.key', 'my-value');
+
+```
 
 ### Interacting with the Preferences Service from the Renderer Process
 

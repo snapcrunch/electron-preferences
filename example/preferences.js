@@ -36,12 +36,14 @@ const preferences = new ElectronPreferences({
                             {
                                 'label': 'First Name',
                                 'key': 'first_name',
-                                'type': 'text'
+                                'type': 'text',
+                                'help': 'What is your first name?'
                             },
                             {
                                 'label': 'Last Name',
                                 'key': 'last_name',
-                                'type': 'text'
+                                'type': 'text',
+                                'help': 'What is your last name?'
                             },
                             {
                                 'label': 'Gender',
@@ -51,7 +53,8 @@ const preferences = new ElectronPreferences({
                                     { 'label': 'Male', 'value': 'male' },
                                     { 'label': 'Female', 'value': 'female' },
                                     { 'label': 'Unspecified', 'value': 'unspecified' },
-                                ]
+                                ],
+                                'help': 'What is your gender?'
                             }
                         ]
                     }
@@ -70,12 +73,13 @@ const preferences = new ElectronPreferences({
                             {
                                 'label': 'Read notes from folder',
                                 'key': 'folder',
-                                'type': 'directory'
+                                'type': 'directory',
+                                'help': 'The location where your notes will be stored.'
                             },
                             {
                                 'heading': 'Important Message',
                                 'content': '<p>The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence.</p>',
-                                'type': 'message'
+                                'type': 'message',
                             }
                         ]
                     }
@@ -94,7 +98,8 @@ const preferences = new ElectronPreferences({
                             {
                                 'label': 'Phone Number',
                                 'key': 'phone_number',
-                                'type': 'text'
+                                'type': 'text',
+                                'help': 'What is your phone number?'
                             }
                         ]
                     }

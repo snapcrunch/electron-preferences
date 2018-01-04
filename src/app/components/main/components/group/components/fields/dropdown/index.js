@@ -22,6 +22,7 @@ class DropdownField extends React.Component {
                     <option value="">-- Select One --</option>
                     { options }
                 </select>
+                { this.help && <span className="help">{ this.help }</span> }
             </div>
         );
 
@@ -48,6 +49,12 @@ class DropdownField extends React.Component {
     get options() {
 
         return this.field.options || [];
+
+    }
+
+    get help() {
+
+        return this.field.help;
 
     }
 
