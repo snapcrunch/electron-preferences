@@ -12,7 +12,10 @@ class ElectronPreferences {
     constructor(options = {}) {
 
         _.defaultsDeep(options, {
-            'sections': []
+            'sections': [],
+            'webPreferences': {
+                'devTools': false
+            }
         });
 
         options.sections.forEach((section, sectionIdx) => {
@@ -34,13 +37,20 @@ class ElectronPreferences {
         }
 
         fs.ensureFileSync(this.dataStore);
+
         this.preferences = fs.readJsonSync(this.dataStore, {
             'throws': false
         });
+
         if (!this.preferences) {
             this.preferences = this.defaults;
-            this.save();
         }
+
+        if (_.isFunction(options.onLoad)) {
+            this.preferences = options.onLoad(this.preferences);
+        }
+
+        this.save();
 
         ipcMain.on('showPreferences', (event) => {
             this.show();
@@ -150,10 +160,9 @@ class ElectronPreferences {
             'acceptFirstMouse': true,
             'maximizable': false,
             'backgroundColor': '#E7E7E7',
-            'show': true
+            'show': true,
+            'webPreferences': this.options.webPreferences
         });
-
-//         this.prefsWindow.webContents.openDevTools();
 
         this.prefsWindow.loadURL(url.format({
             'pathname': path.join(__dirname, 'build/index.html'),

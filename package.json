@@ -1,6 +1,6 @@
 {
   "name": "electron-preferences",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A simple, consistent interface for managing user preferences within an Electron application.",
   "main": "index.js",
   "repository" : {

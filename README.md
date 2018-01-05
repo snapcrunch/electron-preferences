@@ -67,6 +67,15 @@ const preferences = new ElectronPreferences({
         }
     },
     /**
+     * If the `onLoad` method is specified, this function will be called immediately after
+     * preferences are loaded for the first time. The return value of this method will be stored as the
+     * preferences object.
+     */
+    'onLoad': (preferences) => {
+        // ...
+        return preferences;
+    },
+    /**
      * The preferences window is divided into "sections." Each section has a label, an icon, and one or
      * more fields associated with it. Each section should also be given a unique ID.
      */
