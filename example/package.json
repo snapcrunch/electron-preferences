@@ -5,6 +5,6 @@
   "description": "Example",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "electron ."
   }
 }
