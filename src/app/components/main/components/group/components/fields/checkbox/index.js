@@ -11,8 +11,8 @@ class CheckboxField extends React.Component {
 
         return (
             <div className="field field-checkbox">
-                <label className="field-label">{ this.label }</label>
                 <input type="checkbox" onChange={ this.onChange.bind(this) } checked={ this.value } />
+                <label className="field-label">{ this.label }</label>
                 { this.help && <span className="help">{ this.help }</span> }
             </div>
         );
