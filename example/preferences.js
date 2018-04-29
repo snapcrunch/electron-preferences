@@ -23,6 +23,9 @@ const preferences = new ElectronPreferences({
             'show': true
         }
     },
+    'webPreferences': {
+        'devTools': true
+    },
     'sections': [
         {
             'id': 'about',
@@ -55,6 +58,12 @@ const preferences = new ElectronPreferences({
                                     { 'label': 'Unspecified', 'value': 'unspecified' },
                                 ],
                                 'help': 'What is your gender?'
+                            },
+                            {
+                                'label':'Single',
+                                'key':'single',
+                                'type':'checkbox',
+                                'help':'Are you single?'
                             }
                         ]
                     }
