@@ -3,9 +3,9 @@
   "version": "0.0.6",
   "description": "A simple, consistent interface for managing user preferences within an Electron application.",
   "main": "index.js",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/tkambler/electron-preferences.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tkambler/electron-preferences.git"
   },
   "keywords": [
     "electron",
@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "example": "cd example; electron main.js"
+    "example": "cd example && electron main.js"
   },
   "author": "Tim Ambler <tkambler@gmail.com>",
   "license": "ISC",
