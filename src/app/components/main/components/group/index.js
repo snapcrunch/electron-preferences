@@ -6,12 +6,14 @@ import DirectoryField from './components/fields/directory';
 import TextField from './components/fields/text';
 import MessageField from './components/fields/message';
 import DropdownField from './components/fields/dropdown';
+import CheckboxField from "./components/fields/checkbox";
 
 const fieldMap = {
     'directory': DirectoryField,
     'text': TextField,
     'message': MessageField,
     'dropdown': DropdownField,
+    'checkbox': CheckboxField
 };
 
 class Group extends React.Component {
@@ -23,7 +25,7 @@ class Group extends React.Component {
         let label;
         if (this.label) {
             label = (
-                <div className="group-label">{ this.label }</div>
+                <div className="group-label">{this.label}</div>
             );
         }
 
@@ -32,7 +34,7 @@ class Group extends React.Component {
             if (!Field) {
                 return;
             }
-            return <Field field={ field } key={ idx } value={ this.preferences[field.key] } onChange={ this.onFieldChange.bind(this, field.key) } />
+            return <Field field={field} key={idx} value={this.preferences[field.key]} onChange={this.onFieldChange.bind(this, field.key)}/>
         })
             .filter((field) => {
                 return field;
@@ -40,8 +42,8 @@ class Group extends React.Component {
 
         return (
             <div className="group">
-                { label }
-                { fields }
+                {label}
+                {fields}
             </div>
         );
 
