@@ -13,7 +13,8 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "example": "cd example && electron main.js"
+    "example": "cd example && electron main.js",
+    "build": "grunt build"
   },
   "author": "Tim Ambler <tkambler@gmail.com>",
   "license": "ISC",
@@ -27,7 +28,7 @@
     "bottlejs": "^1.6.3",
     "cache-loader": "^1.2.0",
     "css-loader": "^0.28.7",
-    "electron": "^1.7.10",
+    "electron": "^1.8.6",
     "font-awesome": "^4.7.0",
     "glob": "^7.1.2",
     "grunt": "^1.0.1",
@@ -50,7 +51,8 @@
     "react-dom": "^16.2.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",
-    "webpack": "^3.10.0"
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.15"
   },
   "dependencies": {
     "fs-extra": "^5.0.0",
