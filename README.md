@@ -44,7 +44,13 @@ const os = require('os');
 const ElectronPreferences = require('electron-preferences');
 
 const preferences = new ElectronPreferences({
+    /**
+     * Where should preferences be saved?
+     */
     'dataStore': path.resolve(app.getPath('userData'), 'preferences.json'),
+    /**
+     * Default values.
+     */
     'defaults': {
         'notes': {
             'folder': path.resolve(os.homedir(), 'Notes')
@@ -68,9 +74,6 @@ const preferences = new ElectronPreferences({
     'onLoad': (preferences) => {
         // ...
         return preferences;
-    },
-    'webPreferences': {
-        'devTools': true
     },
     /**
      * The preferences window is divided into sections. Each section has a label, an icon, and one or
