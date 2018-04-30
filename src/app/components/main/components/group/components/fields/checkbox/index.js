@@ -38,7 +38,7 @@ class CheckboxField extends React.Component {
 
     get value() {
 
-        return this.props.value || false;
+        return this.props.value || [];
 
     }
 
