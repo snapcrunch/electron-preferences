@@ -15,7 +15,7 @@ class CheckboxField extends React.Component {
             const id = `${fieldID}_${idx}`;
             return (
                 <div className="checkbox-option" key={ idx }>
-                <input type="checkbox" id={ id } onChange={ this.onChange.bind(this) } checked={ this.value.indexOf(option.value) >= 0 } /> <label for={ id }>{ option.label }</label>
+                <input type="checkbox" id={ id } onChange={ this.onChange.bind(this) } checked={ this.value.indexOf(option.value) >= 0 } /> <label htmlFor={ id }>{ option.label }</label>
                 </div>
             );
         });
@@ -75,8 +75,6 @@ class CheckboxField extends React.Component {
                 this.value.splice(valIdx, 1);
             }
         }
-        
-        console.log('value', this.value);
 
         return this.props.onChange(this.value);
 
