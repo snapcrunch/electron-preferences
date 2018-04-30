@@ -127,6 +127,12 @@ const preferences = new ElectronPreferences({
                                     {'label': 'FooBar', 'value': 'foobar'},
                                 ],
                                 'help': 'Foo? Bar?'
+                            },
+                            {
+                                'label': 'Shortcut',
+                                'key': 'shortcut',
+                                'type': 'accelerator',
+                                'help': 'A keyboard shortcut'
                             }
                         ]
                     }

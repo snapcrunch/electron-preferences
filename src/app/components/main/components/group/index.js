@@ -9,6 +9,7 @@ import DropdownField from './components/fields/dropdown';
 import CheckboxField from "./components/fields/checkbox";
 import RadioField from "./components/fields/radio";
 import SliderField from "./components/fields/slider";
+import AcceleratorField from "./components/fields/accelerator";
 
 const fieldMap = {
     'directory': DirectoryField,
@@ -17,7 +18,8 @@ const fieldMap = {
     'dropdown': DropdownField,
     'checkbox': CheckboxField,
     'radio': RadioField,
-    'slider': SliderField
+    'slider': SliderField,
+    'accelerator': AcceleratorField
 };
 
 class Group extends React.Component {
