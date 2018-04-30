@@ -109,6 +109,17 @@ const preferences = new ElectronPreferences({
                                 'key': 'phone_number',
                                 'type': 'text',
                                 'help': 'What is your phone number?'
+                            },
+                            {
+                                'label':"Foo or Bar?",
+                                'key':'foobar',
+                                'type':'radio',
+                                'options':[
+                                    { 'label': 'Foo', 'value': 'foo' },
+                                    { 'label': 'Bar', 'value': 'bar' },
+                                    { 'label': 'FooBar', 'value': 'foobar' },
+                                ],
+                                'help':'Foo? Bar?'
                             }
                         ]
                     }
