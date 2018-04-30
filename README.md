@@ -2,11 +2,11 @@
 
 - [Introduction](#introduction)
 - [Getting Started](#getting-started)
- - [Initializing the Preferences Service](#initializing-the-preferences-service)
- - [Interacting with the Preferences Service from the Main Process](#interacting-with-the-preferences-service-from-the-main-process)
- - [Interacting with the Preferences Service from the Renderer Process](#interacting-with-the-preferences-service-from-the-renderer-process)
- - [Field Types](#field-types)
- - [Icons](#icons)
+- [Initializing the Preferences Service](#initializing-the-preferences-service)
+- [Interacting with the Preferences Service from the Main Process](#interacting-with-the-preferences-service-from-the-main-process)
+- [Interacting with the Preferences Service from the Renderer Process](#interacting-with-the-preferences-service-from-the-renderer-process)
+- [Field Types](#field-types)
+- [Icons](#icons)
 
 ## Introduction
 
