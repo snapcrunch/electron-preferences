@@ -8,13 +8,16 @@ class AcceleratorField extends React.Component {
     state = {};
 
     constructor(props) {
+        
         super(props);
+        
         this.pressedKeys = [];
         this.keyCount = 0;
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleKeyUp = this.handleKeyUp.bind(this);
         this.mapAccelerator = this.mapAccelerator.bind(this);
         this.onChange = this.onChange.bind(this);
+        
     }
 
     render() {
@@ -22,7 +25,7 @@ class AcceleratorField extends React.Component {
         return (
             <div className="field field-accelerator">
                 <div className="field-label">{ this.label }</div>
-                <input type="text" value={ this.value } onKeyDown={ this.handleKeyDown } onKeyUp={ this.handleKeyUp } readonly/>
+                <input type="text" value={ this.value } onKeyDown={ this.handleKeyDown } onKeyUp={ this.handleKeyUp } readOnly />
                 { this.help && <span className="help">{ this.help }</span> }
             </div>
         );
@@ -30,8 +33,9 @@ class AcceleratorField extends React.Component {
     }
 
     handleKeyDown(event) {
+        
         event.preventDefault();
-        // If no more keys are pressed, reset the keys for another go
+
         if (this.keyCount <= 0) {
             this.pressedKeys = [];
         }
@@ -40,23 +44,30 @@ class AcceleratorField extends React.Component {
             this.pressedKeys.push(event.key);
             this.keyCount++;
         }
+        
         this.mapAccelerator(this.pressedKeys);
+        
     }
 
     handleKeyUp(event) {
+        
         event.preventDefault();
         this.keyCount--;
         this.mapAccelerator(this.pressedKeys);
+        
     }
 
     mapAccelerator(keys) {
+        
         let arr = keys.map((item) => {
             if (item === ' ') return "Space";
             if (item === '+') return "Plus";
             if (/^[a-z]$/.test(item)) return item.toUpperCase();
             return item;
         });
+        
         this.onChange(arr.join("+"));
+        
     }
 
     get field() {

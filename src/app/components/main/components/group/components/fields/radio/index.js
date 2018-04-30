@@ -8,12 +8,14 @@ class RadioField extends React.Component {
     state = {};
 
     render() {
-
+        
+        const fieldID = `radio_${String((new Date()).getTime())}`;
+        
         const options = this.options.map((option, idx) => {
+            const id = `${fieldID}_${idx}`;
             return (
-                <div className="field field-radio-option">
-                    <input type="radio" value={ option.value } key={ idx } onChange={ this.onChange.bind(this) } checked={ this.value === option.value }/>
-                    <label className="field-label">{ option.label }</label>
+                <div className="radio-option" key={ idx }>
+                    <input type="radio" id={ id } onChange={ this.onChange.bind(this) } checked={ option.value === this.value } /> <label htmlFor={ id }>{ option.label }</label>
                 </div>
             );
         });
@@ -36,7 +38,7 @@ class RadioField extends React.Component {
 
     get value() {
 
-        return this.props.value || '';
+        return this.props.value || false;
 
     }
 
@@ -45,7 +47,7 @@ class RadioField extends React.Component {
         return this.field.label;
 
     }
-
+    
     get options() {
 
         return this.field.options || [];
@@ -59,8 +61,11 @@ class RadioField extends React.Component {
     }
 
     onChange(e) {
+        
+        const idx = e.target.id.split('_')[2];
+        const option = this.options[idx];
 
-        return this.props.onChange(e.target.value);
+        return this.props.onChange(option.value);
 
     }
 
