@@ -251,6 +251,7 @@ The library includes built-in support for the following field types:
 - Checkbox
 - Radio
 - Slider
+- Accelerator (for shortcut input)
 
 Adding support for additional field types if easy, if you're familiar with React. PR's for such additions are welcome.
 
