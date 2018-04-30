@@ -8,6 +8,7 @@ import MessageField from './components/fields/message';
 import DropdownField from './components/fields/dropdown';
 import CheckboxField from "./components/fields/checkbox";
 import RadioField from "./components/fields/radio";
+import SliderField from "./components/fields/slider";
 
 const fieldMap = {
     'directory': DirectoryField,
@@ -15,7 +16,8 @@ const fieldMap = {
     'message': MessageField,
     'dropdown': DropdownField,
     'checkbox': CheckboxField,
-    'radio': RadioField
+    'radio': RadioField,
+    'slider': SliderField
 };
 
 class Group extends React.Component {

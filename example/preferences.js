@@ -53,17 +53,24 @@ const preferences = new ElectronPreferences({
                                 'key': 'gender',
                                 'type': 'dropdown',
                                 'options': [
-                                    { 'label': 'Male', 'value': 'male' },
-                                    { 'label': 'Female', 'value': 'female' },
-                                    { 'label': 'Unspecified', 'value': 'unspecified' },
+                                    {'label': 'Male', 'value': 'male'},
+                                    {'label': 'Female', 'value': 'female'},
+                                    {'label': 'Unspecified', 'value': 'unspecified'},
                                 ],
                                 'help': 'What is your gender?'
                             },
                             {
-                                'label':'Single',
-                                'key':'single',
-                                'type':'checkbox',
-                                'help':'Are you single?'
+                                'label': 'Single',
+                                'key': 'single',
+                                'type': 'checkbox',
+                                'help': 'Are you single?'
+                            },
+                            {
+                                'label': 'Coolness',
+                                'key': 'coolness',
+                                'type': 'slider',
+                                'min': 0,
+                                'max': 9001
                             }
                         ]
                     }
@@ -111,15 +118,15 @@ const preferences = new ElectronPreferences({
                                 'help': 'What is your phone number?'
                             },
                             {
-                                'label':"Foo or Bar?",
-                                'key':'foobar',
-                                'type':'radio',
-                                'options':[
-                                    { 'label': 'Foo', 'value': 'foo' },
-                                    { 'label': 'Bar', 'value': 'bar' },
-                                    { 'label': 'FooBar', 'value': 'foobar' },
+                                'label': "Foo or Bar?",
+                                'key': 'foobar',
+                                'type': 'radio',
+                                'options': [
+                                    {'label': 'Foo', 'value': 'foo'},
+                                    {'label': 'Bar', 'value': 'bar'},
+                                    {'label': 'FooBar', 'value': 'foobar'},
                                 ],
-                                'help':'Foo? Bar?'
+                                'help': 'Foo? Bar?'
                             }
                         ]
                     }
