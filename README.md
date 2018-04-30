@@ -38,19 +38,13 @@ Within your application's main process, create a new instance of the `ElectronPr
 
 ```
 const electron = require('electron');
-const { app } = electron;
+const app = electron.app;
 const path = require('path');
 const os = require('os');
-const ElectronPreferences = require('electron-preferences');
+const ElectronPreferences = require('../');
 
 const preferences = new ElectronPreferences({
-    /**
-     * Where should preferences be saved?
-     */
-    'dataStore': path.resolve(app.getPath('userData'), 'preferences.json'),
-    /**
-     * Default values.
-     */
+    'dataStore': path.resolve(__dirname, 'preferences.json'),
     'defaults': {
         'notes': {
             'folder': path.resolve(os.homedir(), 'Notes')
@@ -66,58 +60,54 @@ const preferences = new ElectronPreferences({
             'show': true
         }
     },
-    /**
-     * If the `onLoad` method is specified, this function will be called immediately after
-     * preferences are loaded for the first time. The return value of this method will be stored as the
-     * preferences object.
-     */
-    'onLoad': (preferences) => {
-        // ...
-        return preferences;
+    'webPreferences': {
+        'devTools': true
     },
-    /**
-     * The preferences window is divided into "sections." Each section has a label, an icon, and one or
-     * more fields associated with it. Each section should also be given a unique ID.
-     */
     'sections': [
         {
             'id': 'about',
             'label': 'About You',
-            /**
-             * See the list of available icons below.
-             */
             'icon': 'single-01',
             'form': {
                 'groups': [
                     {
-                        /**
-                         * Group heading is optional.
-                         */
                         'label': 'About You',
                         'fields': [
                             {
                                 'label': 'First Name',
                                 'key': 'first_name',
                                 'type': 'text',
-                                /**
-                                 * Optional text to be displayed beneath the field.
-                                 */
                                 'help': 'What is your first name?'
                             },
                             {
                                 'label': 'Last Name',
                                 'key': 'last_name',
-                                'type': 'text'
+                                'type': 'text',
+                                'help': 'What is your last name?'
                             },
                             {
                                 'label': 'Gender',
                                 'key': 'gender',
                                 'type': 'dropdown',
                                 'options': [
-                                    { 'label': 'Male', 'value': 'male' },
-                                    { 'label': 'Female', 'value': 'female' },
-                                    { 'label': 'Unspecified', 'value': 'unspecified' },
-                                ]
+                                    {'label': 'Male', 'value': 'male'},
+                                    {'label': 'Female', 'value': 'female'},
+                                    {'label': 'Unspecified', 'value': 'unspecified'},
+                                ],
+                                'help': 'What is your gender?'
+                            },
+                            {
+                                'label': 'Single',
+                                'key': 'single',
+                                'type': 'checkbox',
+                                'help': 'Are you single?'
+                            },
+                            {
+                                'label': 'Coolness',
+                                'key': 'coolness',
+                                'type': 'slider',
+                                'min': 0,
+                                'max': 9001
                             }
                         ]
                     }
@@ -136,12 +126,13 @@ const preferences = new ElectronPreferences({
                             {
                                 'label': 'Read notes from folder',
                                 'key': 'folder',
-                                'type': 'directory'
+                                'type': 'directory',
+                                'help': 'The location where your notes will be stored.'
                             },
                             {
                                 'heading': 'Important Message',
                                 'content': '<p>The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence.</p>',
-                                'type': 'message'
+                                'type': 'message',
                             }
                         ]
                     }
@@ -160,7 +151,19 @@ const preferences = new ElectronPreferences({
                             {
                                 'label': 'Phone Number',
                                 'key': 'phone_number',
-                                'type': 'text'
+                                'type': 'text',
+                                'help': 'What is your phone number?'
+                            },
+                            {
+                                'label': "Foo or Bar?",
+                                'key': 'foobar',
+                                'type': 'radio',
+                                'options': [
+                                    {'label': 'Foo', 'value': 'foo'},
+                                    {'label': 'Bar', 'value': 'bar'},
+                                    {'label': 'FooBar', 'value': 'foobar'},
+                                ],
+                                'help': 'Foo? Bar?'
                             }
                         ]
                     }
