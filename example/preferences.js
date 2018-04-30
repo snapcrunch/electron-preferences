@@ -7,7 +7,7 @@ const os = require('os');
 const ElectronPreferences = require('../');
 
 const preferences = new ElectronPreferences({
-    'dataStore': path.resolve(__dirname, 'preferences.json'),
+    'dataStore': path.resolve(app.getPath('userData'), 'preferences.json'),
     'defaults': {
         'notes': {
             'folder': path.resolve(os.homedir(), 'Notes')
@@ -22,6 +22,13 @@ const preferences = new ElectronPreferences({
         'drawer': {
             'show': true
         }
+    },
+    'onLoad': (data) => {
+        
+        console.log('data', data);
+        
+        return data;
+        
     },
     'webPreferences': {
         'devTools': true
@@ -53,17 +60,23 @@ const preferences = new ElectronPreferences({
                                 'key': 'gender',
                                 'type': 'dropdown',
                                 'options': [
-                                    {'label': 'Male', 'value': 'male'},
-                                    {'label': 'Female', 'value': 'female'},
-                                    {'label': 'Unspecified', 'value': 'unspecified'},
+                                    { 'label': 'Male', 'value': 'male' },
+                                    { 'label': 'Female', 'value': 'female' },
+                                    { 'label': 'Unspecified', 'value': 'unspecified' },
                                 ],
                                 'help': 'What is your gender?'
                             },
                             {
-                                'label': 'Single',
-                                'key': 'single',
+                                'label': 'Which of the following foods do you like?',
+                                'key': 'foods',
                                 'type': 'checkbox',
-                                'help': 'Are you single?'
+                                'options': [
+                                    { 'label': 'Ice Cream', 'value': 'ice_cream' },
+                                    { 'label': 'Carrots', 'value': 'carrots' },
+                                    { 'label': 'Cake', 'value': 'cake' },
+                                    { 'label': 'Spinach', 'value': 'spinach' }
+                                ],
+                                'help': 'Select one or more foods that you like.'
                             },
                             {
                                 'label': 'Coolness',

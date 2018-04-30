@@ -41,10 +41,10 @@ const electron = require('electron');
 const app = electron.app;
 const path = require('path');
 const os = require('os');
-const ElectronPreferences = require('../');
+const ElectronPreferences = require('electron-preferences');
 
 const preferences = new ElectronPreferences({
-    'dataStore': path.resolve(__dirname, 'preferences.json'),
+    'dataStore': path.resolve(app.getPath('userData'), 'preferences.json'),
     'defaults': {
         'notes': {
             'folder': path.resolve(os.homedir(), 'Notes')
@@ -60,23 +60,45 @@ const preferences = new ElectronPreferences({
             'show': true
         }
     },
+    /**
+     * If the `onLoad` method is specified, this function will be called immediately after
+     * preferences are loaded for the first time. The return value of this method will be stored as the
+     * preferences object.
+     */
+    'onLoad': (preferences) => {
+        // ...
+        return preferences;
+    },
     'webPreferences': {
         'devTools': true
     },
+    /**
+     * The preferences window is divided into sections. Each section has a label, an icon, and one or
+     * more fields associated with it. Each section should also be given a unique ID.
+     */
     'sections': [
         {
             'id': 'about',
             'label': 'About You',
+            /**
+             * See the list of available icons below.
+             */
             'icon': 'single-01',
             'form': {
                 'groups': [
                     {
+                        /**
+                         * Group heading is optional.
+                         */
                         'label': 'About You',
                         'fields': [
                             {
                                 'label': 'First Name',
                                 'key': 'first_name',
                                 'type': 'text',
+                                /**
+                                 * Optional text to be displayed beneath the field.
+                                 */
                                 'help': 'What is your first name?'
                             },
                             {
@@ -97,10 +119,16 @@ const preferences = new ElectronPreferences({
                                 'help': 'What is your gender?'
                             },
                             {
-                                'label': 'Single',
-                                'key': 'single',
+                                'label': 'Which of the following foods do you like?',
+                                'key': 'foods',
                                 'type': 'checkbox',
-                                'help': 'Are you single?'
+                                'options': [
+                                    { 'label': 'Ice Cream', 'value': 'ice_cream' },
+                                    { 'label': 'Carrots', 'value': 'carrots' },
+                                    { 'label': 'Cake', 'value': 'cake' },
+                                    { 'label': 'Spinach', 'value': 'spinach' }
+                                ],
+                                'help': 'Select one or more foods that you like.'
                             },
                             {
                                 'label': 'Coolness',
