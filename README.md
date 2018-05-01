@@ -144,7 +144,7 @@ const preferences = new ElectronPreferences({
                                 'label': 'Eye Color',
                                'key': 'eye_color',
                                 'type': 'color',
-                                'format': 'hex',
+                                'format': 'hex', // can be hex, hsl, hsv or rgb
                                 'help': 'Your eye color'
                             },
                             {
