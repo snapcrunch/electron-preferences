@@ -7,7 +7,7 @@ const os = require('os');
 const ElectronPreferences = require('../');
 
 const preferences = new ElectronPreferences({
-    'dataStore': path.resolve(app.getPath('userData'), 'preferences.json'),
+    'dataStore': path.resolve(__dirname, 'preferences.json'),
     'defaults': {
         'notes': {
             'folder': path.resolve(os.homedir(), 'Notes')
@@ -24,11 +24,11 @@ const preferences = new ElectronPreferences({
         }
     },
     'onLoad': (data) => {
-        
+
         console.log('data', data);
-        
+
         return data;
-        
+
     },
     'webPreferences': {
         'devTools': true
@@ -60,9 +60,9 @@ const preferences = new ElectronPreferences({
                                 'key': 'gender',
                                 'type': 'dropdown',
                                 'options': [
-                                    { 'label': 'Male', 'value': 'male' },
-                                    { 'label': 'Female', 'value': 'female' },
-                                    { 'label': 'Unspecified', 'value': 'unspecified' },
+                                    {'label': 'Male', 'value': 'male'},
+                                    {'label': 'Female', 'value': 'female'},
+                                    {'label': 'Unspecified', 'value': 'unspecified'},
                                 ],
                                 'help': 'What is your gender?'
                             },
@@ -71,10 +71,10 @@ const preferences = new ElectronPreferences({
                                 'key': 'foods',
                                 'type': 'checkbox',
                                 'options': [
-                                    { 'label': 'Ice Cream', 'value': 'ice_cream' },
-                                    { 'label': 'Carrots', 'value': 'carrots' },
-                                    { 'label': 'Cake', 'value': 'cake' },
-                                    { 'label': 'Spinach', 'value': 'spinach' }
+                                    {'label': 'Ice Cream', 'value': 'ice_cream'},
+                                    {'label': 'Carrots', 'value': 'carrots'},
+                                    {'label': 'Cake', 'value': 'cake'},
+                                    {'label': 'Spinach', 'value': 'spinach'}
                                 ],
                                 'help': 'Select one or more foods that you like.'
                             },
@@ -84,6 +84,20 @@ const preferences = new ElectronPreferences({
                                 'type': 'slider',
                                 'min': 0,
                                 'max': 9001
+                            },
+                            {
+                                'label': 'Eye Color',
+                                'key': 'eye_color',
+                                'type': 'color',
+                                'format': 'hex',
+                                'help': 'Your eye color'
+                            },
+                            {
+                                'label': 'Hair Color',
+                                'key': 'hair_color',
+                                'type': 'color',
+                                'format': 'rgb',
+                                'help': 'Your hair color'
                             }
                         ]
                     }
