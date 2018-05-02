@@ -104,8 +104,6 @@ class ColorField extends React.Component {
             color = color.rgb;
         } else if (this.format === "hex") {
             color = color.hex;
-        } else if (this.format === "hsv") {
-            color = color.hsv;
         } else if (this.format === "hsl") {
             color = color.hsl;
         }
