@@ -67,6 +67,12 @@ const preferences = new ElectronPreferences({
                                 'help': 'What is your gender?'
                             },
                             {
+                                'label': 'Age',
+                                'key': 'age',
+                                'type': 'text',
+                                'inputType': 'number'
+                            },
+                            {
                                 'label': 'Which of the following foods do you like?',
                                 'key': 'foods',
                                 'type': 'checkbox',
