@@ -139,6 +139,20 @@ const preferences = new ElectronPreferences({
                                 'type': 'slider',
                                 'min': 0,
                                 'max': 9001
+                            },
+                            {
+                                'label': 'Eye Color',
+                               'key': 'eye_color',
+                                'type': 'color',
+                                'format': 'hex', // can be hex, hsl or rgb
+                                'help': 'Your eye color'
+                            },
+                            {
+                                'label': 'Hair Color',
+                                'key': 'hair_color',
+                                'type': 'color',
+                                'format': 'rgb',
+                                'help': 'Your hair color'
                             }
                         ]
                     }
@@ -252,6 +266,7 @@ The library includes built-in support for the following field types:
 - Radio
 - Slider
 - Accelerator (for shortcut input)
+- Color picker
 
 Adding support for additional field types if easy, if you're familiar with React. PR's for such additions are welcome.
 
