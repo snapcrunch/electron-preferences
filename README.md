@@ -10,7 +10,7 @@
 
 ## Introduction
 
-This module provides users of the [Electron](https://electronjs.org/) desktop application development framework with with a simple, consistent interface for managing user preferences. It includes two primary components:
+This module provides [Electron](https://electronjs.org/) developers with with a simple, consistent interface for managing user preferences. It includes two primary components:
 
 - A GUI interface within which the users of your application can manage their preferences.
 - An API for interacting with the service.
