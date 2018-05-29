@@ -1,6 +1,6 @@
 {
   "name": "electron-preferences",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A simple, consistent interface for managing user preferences within an Electron application.",
   "main": "index.js",
   "repository": {
@@ -55,6 +55,7 @@
     "webpack-cli": "^2.0.15"
   },
   "dependencies": {
+    "eventemitter2": "^5.0.1",
     "fs-extra": "^5.0.0",
     "lodash": "^4.17.4",
     "react-color": "^2.14.1"

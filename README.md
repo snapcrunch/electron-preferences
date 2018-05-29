@@ -222,7 +222,6 @@ const preferences = new ElectronPreferences({
 ### Interacting with the Preferences Service from the Main Process
 
 ```
-
 // Show the preferences window on demand.
 preferences.show();
 
@@ -232,6 +231,10 @@ const myPref = preferences.value('some.nested.key');
 // Save a value within the preferences data store
 preferences.value('some.nested.key', 'my-value');
 
+// Subscribing to preference changes.
+preferences.on('save', (preferences) => {
+    console.log(`Preferences were saved.`, JSON.stringify(preferences, null, 4));
+});
 ```
 
 ### Interacting with the Preferences Service from the Renderer Process

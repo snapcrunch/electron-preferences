@@ -8,6 +8,10 @@ const os = require('os');
 const url = require('url');
 const preferences = require('./preferences');
 
+preferences.on('save', (preferences) => {
+    console.log(`Preferences were saved.`, JSON.stringify(preferences, null, 4));
+});
+
 let mainWindow;
 
 function createWindow() {

@@ -6,10 +6,13 @@ const path = require('path');
 const url = require('url');
 const fs = require('fs-extra');
 const _ = require('lodash');
+const { EventEmitter2 } = require('eventemitter2');
 
-class ElectronPreferences {
+class ElectronPreferences extends EventEmitter2 {
 
     constructor(options = {}) {
+        
+        super();
 
         _.defaultsDeep(options, {
             'sections': [],
@@ -78,6 +81,7 @@ class ElectronPreferences {
             this.preferences = value;
             this.save();
             this.broadcast();
+            this.emit('save', Object.freeze(_.cloneDeep(this.preferences)));
             event.returnValue = null;
         });
 
