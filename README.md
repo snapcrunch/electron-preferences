@@ -21,7 +21,7 @@ Using the API, developers can:
 - Read / write values on demand
 - Define the layout of the preferences window.
 
-To see the library in action, clone this repository and see the demo Electron app that is included within the `example` folder:
+To see the library in action, clone this repository and see the demo application that is included within the `example` folder:
 
     $ git clone https://github.com/tkambler/electron-preferences.git
     $ cd electron-preferences
