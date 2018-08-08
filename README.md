@@ -26,6 +26,7 @@ To see the library in action, clone this repository and see the demo application
     $ git clone https://github.com/tkambler/electron-preferences.git
     $ cd electron-preferences
     $ npm i
+    $ npm run build
     $ npm run example
 
 <img src="misc/demo.gif" />
