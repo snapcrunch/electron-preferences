@@ -168,6 +168,41 @@ const preferences = new ElectronPreferences({
                                 'help': 'A keyboard shortcut'
                             }
                         ]
+                    },
+                    {
+                        'label': 'Lists',
+                        'fields': [
+                            {
+                                'label': 'Favorite foods',
+                                'key': 'foods',
+                                'type': 'list',
+                                'size': 15,
+                                'help': 'A list of your favorite foods',
+                                'addItemValidator': /^[A-Za-z ]+$/.toString(),
+                                'addItemLabel': 'Add favorite food'
+                            },
+                            {
+                                'label': 'Best places to visit',
+                                'key': 'places',
+                                'type': 'list',
+                                'size': 10,
+                                'style': {
+                                    'width': '75%'
+                                },
+                                'modalStyle': {
+                                    'content': {
+                                      'top': '50%',
+                                      'left': '50%',
+                                      'bottom': 'auto',
+                                      'right': 'auto',
+                                      'marginRight': '-50%',
+                                      'transform': 'translate(-50%, -50%)'
+                                    }
+                                  },
+                                'help': 'An ordered list of nice places to visit',
+                                'orderable': true
+                            }
+                        ]
                     }
                 ]
             }
