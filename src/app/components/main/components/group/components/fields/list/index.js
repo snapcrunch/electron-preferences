@@ -46,7 +46,7 @@ class ListField extends React.Component {
                       <span className="ep-list-button" onClick={ this.downClick }><span className="ep-list-button-text">↓</span></span>
                     </React.Fragment>
                   }
-                  <ReactModal style={ this.modalStyle } isOpen={ this.state.showInputModal } contentLabel='add item' closeTimeoutMS={100}>
+                  <ReactModal style={ this.modalStyle } isOpen={ this.state.showInputModal } contentLabel='add item' closeTimeoutMS={ this.modalCloseTimeoutMS }>
                     <div className="ep-list-modal-container">
                       <div className="ep-list-modal-input-container">
                         <label className="ep-list-modal-input-label">{ this.addItemLabel }: </label>
@@ -67,7 +67,7 @@ class ListField extends React.Component {
             </div>
         );
     }
-//disabled={ this.addItemValidator.test(this.state.itemToAdd) ? undefined : 'disabled' }
+
     selectItem = (e) => {
       this.setState({ selectedIndex: e.target.selectedIndex });
     };
@@ -158,6 +158,10 @@ class ListField extends React.Component {
           'transform': 'translate(-50%, -50%)'
         }
       };
+    }
+
+    get modalCloseTimeoutMS() {
+      return this.field.modalCloseTimeoutMS || 100;
     }
 
     get addItemLabel() {
