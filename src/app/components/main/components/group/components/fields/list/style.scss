@@ -1,0 +1,75 @@
+.field-list {
+  .ep-list {
+    width: 25%;
+    border: 1px solid black;
+  }
+
+  .ep-list-button-first {
+    border: 1px solid black;
+    background-color: #fff;
+    box-shadow: 0px 0px 1px rgba(0,0,0,0.20);
+  }
+
+  .ep-list-button {
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    background-color: #fff;
+    box-shadow: 0px 0px 1px rgba(0,0,0,0.20);
+  }
+
+  .ep-list-button:active {
+    background: linear-gradient(#779BD8, #0B54D3);
+    box-shadow: 0px 0px 1px rgba(0,0,0,0.65);
+  }
+
+  .ep-list-button-text {
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+}
+
+.ep-list-modal-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.ep-list-modal-input-container {
+  flex: 1;
+}
+
+.ep-list-modal-button-container {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.ep-list-modal-button {
+  flex: 0 1 auto;
+}
+
+.ReactModalPortal {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+}
+
+.ReactModalPortal > * {
+  transform: translate(0, -100%);
+}
+
+.ReactModal__Overlay {
+  overflow-y: scroll;
+  height: 100%;
+  transition: transform 100ms ease-in-out;
+  &--after-open {
+    transform: translate(0, 0%);
+  }
+  &--before-close {
+    transform: translate(0, -100%);
+  }
+}
