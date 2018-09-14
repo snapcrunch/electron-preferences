@@ -12,14 +12,6 @@ class ListField extends React.Component {
       selectedIndex: 0
     };
 
-    constructor(props) {
-      super(props);
-      this.addClick = this.addClick.bind(this);
-      this.removeClick = this.removeClick.bind(this);
-      this.upClick = this.upClick.bind(this);
-      this.downClick = this.downClick.bind(this);
-    }
-
     render() {
         return (
             <div className="field field-list">
