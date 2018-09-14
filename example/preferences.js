@@ -189,16 +189,6 @@ const preferences = new ElectronPreferences({
                                 'style': {
                                     'width': '75%'
                                 },
-                                'modalStyle': {
-                                    'content': {
-                                      'top': '50%',
-                                      'left': '50%',
-                                      'bottom': 'auto',
-                                      'right': 'auto',
-                                      'marginRight': '-50%',
-                                      'transform': 'translate(-50%, -50%)'
-                                    }
-                                  },
                                 'help': 'An ordered list of nice places to visit',
                                 'orderable': true
                             }

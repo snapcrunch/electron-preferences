@@ -34,10 +34,16 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  font-size: 14px;
 }
 
 .ep-list-modal-input-container {
-  flex: 1;
+    .ep-list-modal-input {
+        display: block;
+    }
+    .ep-list-modal-input-label {
+        display: block;
+    }
 }
 
 .ep-list-modal-button-container {
@@ -65,11 +71,15 @@
 .ReactModal__Overlay {
   overflow-y: scroll;
   height: 100%;
-  transition: transform 100ms ease-in-out;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: opacity 100ms ease-in-out;
+  opacity: 0;
   &--after-open {
     transform: translate(0, 0%);
+    opacity: 1;
   }
   &--before-close {
     transform: translate(0, -100%);
+    opacity: 0;
   }
 }

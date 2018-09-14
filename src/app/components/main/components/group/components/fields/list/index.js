@@ -30,6 +30,9 @@ class ListField extends React.Component {
                       }
                     </select>
                   </div>
+                  <div style={{
+                      'marginTop': '10px'
+                  }}>
                   <span className="ep-list-button-first" onClick={ this.addClick }><span className="ep-list-button-text">+</span></span>
                   <span className="ep-list-button" onClick={ this.removeClick }><span className="ep-list-button-text">-</span></span>
                   { this.orderable &&
@@ -38,11 +41,16 @@ class ListField extends React.Component {
                       <span className="ep-list-button" onClick={ this.downClick }><span className="ep-list-button-text">↓</span></span>
                     </React.Fragment>
                   }
-                  <ReactModal style={ this.modalStyle } isOpen={ this.state.showInputModal } contentLabel='add item' closeTimeoutMS={ this.modalCloseTimeoutMS }>
+                  </div>
+                  <ReactModal style={ this.modalStyle } shouldCloseOnOverlayClick={true} isOpen={ this.state.showInputModal } contentLabel='Add Item' closeTimeoutMS={ this.modalCloseTimeoutMS }>
                     <div className="ep-list-modal-container">
                       <div className="ep-list-modal-input-container">
-                        <label className="ep-list-modal-input-label">{ this.addItemLabel }: </label>
-                        <input className="ep-list-modal-input" type="text" value={ this.state.itemToAdd } onChange={ this.itemToAddChanged.bind(this) } />
+                        <label className="ep-list-modal-input-label">{ this.addItemLabel }</label>
+                        <input className="ep-list-modal-input" type="text" value={ this.state.itemToAdd } onChange={ this.itemToAddChanged }
+                        style={{
+                            'width': '100%'
+                        }}
+                         />
                       </div>
                       <div className="ep-list-modal-button-container">
                         <button className="ep-list-modal-button" onClick={ this.cancelAdd.bind(this) }>Cancel</button>
@@ -141,13 +149,17 @@ class ListField extends React.Component {
 
     get modalStyle() {
       return this.field.modalStyle || {
+        'overlay': {
+            'backgroundColor': 'rgba(0, 0, 0, 0.5)'
+        },
         'content': {
-          'top': '40px',
-          'left': '50%',
-          'bottom': 'auto',
-          'right': 'auto',
-          'marginRight': '-50%',
-          'transform': 'translate(-50%, -50%)'
+            'top': '50%',
+            'left': '50%',
+            'bottom': 'auto',
+            'right': 'auto',
+            'marginRight': '-50%',
+            'transform': 'translate(-50%, -50%)',
+            'width': '300px'
         }
       };
     }
@@ -157,7 +169,7 @@ class ListField extends React.Component {
     }
 
     get addItemLabel() {
-      return this.field.addItemLabel || 'Add item';
+      return this.field.addItemLabel || 'Add Item';
     }
 
     get addItemValidator() {
