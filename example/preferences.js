@@ -30,6 +30,9 @@ const preferences = new ElectronPreferences({
         return data;
 
     },
+    'afterLoad': ({ preferences }) => {
+        console.log('afterLoad', preferences);
+    },
     'webPreferences': {
         'devTools': true
     },

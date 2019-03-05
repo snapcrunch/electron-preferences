@@ -85,6 +85,10 @@ class ElectronPreferences extends EventEmitter2 {
             event.returnValue = null;
         });
 
+        if (_.isFunction(options.afterLoad)) {
+            options.afterLoad(this);
+        }
+
     }
 
     get dataStore() {
