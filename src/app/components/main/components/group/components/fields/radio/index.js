@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import uuid from 'uuidv4'
 import './style.scss';
 
 class RadioField extends React.Component {
@@ -9,7 +10,7 @@ class RadioField extends React.Component {
 
     render() {
         
-        const fieldID = `radio_${String((new Date()).getTime())}`;
+        const fieldID = `radio_${uuid()}`;
         
         const options = this.options.map((option, idx) => {
             const id = `${fieldID}_${idx}`;

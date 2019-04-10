@@ -165,6 +165,17 @@ const preferences = new ElectronPreferences({
                                 'help': 'Foo? Bar?'
                             },
                             {
+                                'label': "Bar or Baz?",
+                                'key': 'barbaz',
+                                'type': 'radio',
+                                'options': [
+                                    {'label': 'Bar', 'value': 'bar'},
+                                    {'label': 'Baz', 'value': 'baz'},
+                                    {'label': 'BarBaz', 'value': 'barbaz'},
+                                ],
+                                'help': 'Bar? Baz?'
+                            },
+                            {
                                 'label': 'Shortcut',
                                 'key': 'shortcut',
                                 'type': 'accelerator',
