@@ -14,6 +14,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "example": "cd example && electron main.js",
+    "prepare": "npm run build",
     "build": "grunt build"
   },
   "author": "Tim Ambler <tkambler@gmail.com>",
