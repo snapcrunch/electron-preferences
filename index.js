@@ -11,7 +11,7 @@ const { EventEmitter2 } = require('eventemitter2');
 class ElectronPreferences extends EventEmitter2 {
 
     constructor(options = {}) {
-        
+
         super();
 
         _.defaultsDeep(options, {
@@ -158,7 +158,7 @@ class ElectronPreferences extends EventEmitter2 {
             return;
         }
 
-        this.prefsWindow = new BrowserWindow({
+        let browserWindowOpts = {
             'title': 'Preferences',
             'width': 800,
             'maxWidth': 800,
@@ -170,7 +170,13 @@ class ElectronPreferences extends EventEmitter2 {
             'backgroundColor': '#E7E7E7',
             'show': true,
             'webPreferences': this.options.webPreferences
-        });
+        };
+
+        if (this.options.browserWindowOverrides) {
+            browserWindowOpts = Object.assign(browserWindowOpts, this.options.browserWindowOverrides);
+        }
+
+        this.prefsWindow = new BrowserWindow(browserWindowOpts);
 
         this.prefsWindow.loadURL(url.format({
             'pathname': path.join(__dirname, 'build/index.html'),
