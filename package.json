@@ -18,7 +18,7 @@
     "build": "grunt build"
   },
   "author": "Tim Ambler <tkambler@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
