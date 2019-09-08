@@ -178,6 +178,12 @@ class ElectronPreferences extends EventEmitter2 {
 
         this.prefsWindow = new BrowserWindow(browserWindowOpts);
 
+        if (this.options.menuBar) {
+            this.prefsWindow.setMenu(this.options.menuBar);
+        } else {
+            this.prefsWindow.removeMenu();
+        }
+
         this.prefsWindow.loadURL(url.format({
             'pathname': path.join(__dirname, 'build/index.html'),
             'protocol': 'file:',
