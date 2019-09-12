@@ -172,11 +172,25 @@ class ElectronPreferences extends EventEmitter2 {
             'webPreferences': this.options.webPreferences
         };
 
+        if (browserWindowOpts.webPreferences) {
+            browserWindowOpts.webPreferences = Object.assign({ nodeIntegration: true }, browserWindowOpts.webPreferences)
+        } else {
+            browserWindowOpts.webPreferences = {
+                nodeIntegration: true
+            };
+        }
+
         if (this.options.browserWindowOverrides) {
             browserWindowOpts = Object.assign(browserWindowOpts, this.options.browserWindowOverrides);
         }
 
         this.prefsWindow = new BrowserWindow(browserWindowOpts);
+
+        if (this.options.menuBar) {
+            this.prefsWindow.setMenu(this.options.menuBar);
+        } else {
+            this.prefsWindow.removeMenu();
+        }
 
         this.prefsWindow.loadURL(url.format({
             'pathname': path.join(__dirname, 'build/index.html'),
