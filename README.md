@@ -1,16 +1,17 @@
 # Electron Preferences
 
-- [Introduction](#introduction)
-- [Getting Started](#getting-started)
-- [Initializing the Preferences Service](#initializing-the-preferences-service)
-- [Interacting with the Preferences Service from the Main Process](#interacting-with-the-preferences-service-from-the-main-process)
-- [Interacting with the Preferences Service from the Renderer Process](#interacting-with-the-preferences-service-from-the-renderer-process)
-- [Field Types](#field-types)
-- [Icons](#icons)
+- [Electron Preferences](#electron-preferences)
+  - [Introduction](#introduction)
+  - [Getting Started](#getting-started)
+    - [Initializing the Preferences Service](#initializing-the-preferences-service)
+    - [Interacting with the Preferences Service from the Main Process](#interacting-with-the-preferences-service-from-the-main-process)
+    - [Interacting with the Preferences Service from the Renderer Process](#interacting-with-the-preferences-service-from-the-renderer-process)
+  - [Field Types](#field-types)
+  - [Icons](#icons)
 
 ## Introduction
 
-This module provides [Electron](https://electronjs.org/) developers with with a simple, consistent interface for managing user preferences. It includes two primary components:
+This package provides [Electron](https://electronjs.org/) developers with a simple, consistent interface for managing user preferences. It includes two primary components:
 
 - A GUI interface within which the users of your application can manage their preferences.
 - An API for interacting with the service.
