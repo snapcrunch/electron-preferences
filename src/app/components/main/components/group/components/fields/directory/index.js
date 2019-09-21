@@ -13,10 +13,23 @@ class DirectoryField extends React.Component {
 
         const choose = () => {
 
-            const value = dialog.showOpenDialog({properties: ['openDirectory']});
-            if (value) {
-                this.onChange(value[0]);
-            }
+            dialog.showOpenDialog({
+                properties: [
+                    'openDirectory',
+                    'createDirectory',
+                ]
+            })
+                .then((res) => {
+
+                    if (res.canceled) {
+                        return;
+                    }
+
+                    if (res.filePaths && res.filePaths.length) {
+                        this.onChange(res.filePaths[0]);
+                    }
+
+                });
 
         }
 
