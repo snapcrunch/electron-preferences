@@ -205,6 +205,19 @@ class ElectronPreferences extends EventEmitter2 {
 
     }
 
+    browserWindowOverride(key, value) {
+
+        if (key === 'webPreferences') {
+            this.options.webPreferences = _.merge(this.options.webPreferences, value)
+        } else {
+            if (!this.options.browserWindowOverrides) {
+                this.options.browserWindowOverrides = {}
+            }
+            this.options.browserWindowOverrides[key] = value
+        }
+
+    }
+
 }
 
 module.exports = ElectronPreferences;
