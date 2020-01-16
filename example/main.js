@@ -4,7 +4,6 @@ const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const path = require('path');
-const os = require('os');
 const url = require('url');
 const preferences = require('./preferences');
 
@@ -19,7 +18,10 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         'width': 1200,
         'height': 700,
-        'accept-first-mouse': true
+        'accept-first-mouse': true,
+        webPreferences: {
+            nodeIntegration: true
+        }
     });
 
     mainWindow.loadURL(url.format({
