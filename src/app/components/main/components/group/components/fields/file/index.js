@@ -5,7 +5,7 @@ import './style.scss';
 const { remote } = window.require('electron');
 const { dialog } = remote;
 
-class DirectoryField extends React.Component {
+class FileField extends React.Component {
 
     state = {};
 
@@ -15,31 +15,30 @@ class DirectoryField extends React.Component {
 
             dialog.showOpenDialog({
                 properties: [
-                    'openDirectory',
-                    'createDirectory',
+                    'openFile'
+                ],
+                filters: [
+                    this.filter
                 ]
-            })
-                .then((res) => {
+            }).then((res) => {
 
-                    if (res.canceled) {
-                        return;
-                    }
+                if (res.canceled) {
+                    return;
+                }
 
-                    if (res.filePaths && res.filePaths.length) {
-                        this.onChange(res.filePaths[0]);
-                    }
-
-                });
-
+                if (res.filePaths && res.filePaths.length) {
+                    this.onChange(res.filePaths[0]);
+                }
+            });
         };
 
-        let btLabel = this.value ? ((this.buttonLabel[1] && this.buttonLabel[0]) ? this.buttonLabel[1] : 'Choose Another Directory') : ((this.buttonLabel[1] && this.buttonLabel[0]) ? this.buttonLabel[0] : 'Choose a Directory');
+        let btLabel = this.value ? ((this.buttonLabel[1] && this.buttonLabel[0]) ? this.buttonLabel[1] : 'Choose Another File') : ((this.buttonLabel[1] && this.buttonLabel[0]) ? this.buttonLabel[0] : 'Choose a File');
 
         return (
             <div className="field field-directory">
                 <div className="field-label">{ this.label }</div>
                 <div className="value">
-                    { this.hidePrefix === 'true' ? '' : (this.prefix  ? this.prefix + ':' : 'Directory:') } { this.value }
+                    { this.hidePrefix === 'true' ? '' : (this.prefix  ? this.prefix + ':' : 'File:') } { this.value }
                 </div>
                 <div className="bt" onClick={ choose }>
                     { btLabel }
@@ -94,10 +93,14 @@ class DirectoryField extends React.Component {
         return this.field.prefix;
     }
 
+    get filter() {
+        return this.field.filter || {}
+    }
+
     get hidePrefix() {
         return this.field.hidePrefix;
     }
 
 }
 
-export default DirectoryField;
+export default FileField;

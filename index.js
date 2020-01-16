@@ -115,6 +115,10 @@ class ElectronPreferences extends EventEmitter2 {
 
     }
 
+    get windowOptions() {
+        return this.options.window || {};
+    }
+
     save() {
 
         fs.writeJsonSync(this.dataStore, this.preferences, {
@@ -169,7 +173,8 @@ class ElectronPreferences extends EventEmitter2 {
             'maximizable': false,
             'backgroundColor': '#E7E7E7',
             'show': true,
-            'webPreferences': this.options.webPreferences
+            'webPreferences': this.options.webPreferences,
+            ...this.windowOptions
         };
 
         if (browserWindowOpts.webPreferences) {

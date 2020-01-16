@@ -7,6 +7,9 @@ const os = require('os');
 const ElectronPreferences = require('../');
 
 const preferences = new ElectronPreferences({
+    window: {
+        icon: path.join(__dirname, 'example.png')
+    },
     'dataStore': path.resolve(__dirname, 'preferences.json'),
     'defaults': {
         'notes': {
@@ -127,6 +130,30 @@ const preferences = new ElectronPreferences({
                                 'key': 'folder',
                                 'type': 'directory',
                                 'help': 'The location where your notes will be stored.'
+                            },
+                            {
+                                'label': 'Folder with Custom Button Label',
+                                'key': 'customButtonLabel',
+                                'type': 'directory',
+                                'buttonLabel': ['Label1', 'Label2']
+                            },
+                            {
+                                'label': 'Folder with Custom Prefix',
+                                'key': 'customPrefix',
+                                'type': 'directory',
+                                'prefix': 'Custom'
+                            },
+                            {
+                                'label': 'Folder without Prefix',
+                                'key': 'noPrefix',
+                                'type': 'directory',
+                                'hidePrefix':'true'
+                            },
+                            {
+                                'label': 'File',
+                                'key': 'file',
+                                'type': 'file',
+                                'help': 'Same stuff applies to file selector as well'
                             },
                             {
                                 'heading': 'Important Message',

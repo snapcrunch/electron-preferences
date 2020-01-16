@@ -177,9 +177,33 @@ const preferences = new ElectronPreferences({
                                 'help': 'The location where your notes will be stored.'
                             },
                             {
+                                'label': 'Folder with Custom Button Label',
+                                'key': 'customButtonLabel',
+                                'type': 'directory',
+                                'buttonLabel': ['Label1', 'Label2']
+                            },
+                            {
+                                'label': 'Folder with Custom Prefix',
+                                'key': 'customPrefix',
+                                'type': 'directory',
+                                'prefix': 'Custom'
+                            },
+                            {
+                                'label': 'Folder without Prefix',
+                                'key': 'noPrefix',
+                                'type': 'directory',
+                                'hidePrefix':'true'
+                            },
+                            {
+                                'label': 'File',
+                                'key': 'file',
+                                'type': 'file',
+                                'help': 'Same stuff applies to file selector as well'
+                            },
+                            {
                                 'heading': 'Important Message',
                                 'content': '<p>The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence.</p>',
-                                'type': 'message',
+                                'type': 'message'
                             }
                         ]
                     }
@@ -257,6 +281,18 @@ ipcRenderer.on('preferencesUpdated', (e, preferences) => {
 
 // Instruct the preferences service to update the preferences object from within the renderer.
 ipcRenderer.sendSync('setPreferences', { ... });
+```
+
+## BrowserWindow Settings
+
+```
+const preferences = new ElectronPreferences({
+...
+    window: {
+        icon: 'iconpath/icon'
+    }
+...
+});
 ```
 
 ## Field Types

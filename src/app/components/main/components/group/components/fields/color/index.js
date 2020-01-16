@@ -50,7 +50,7 @@ class ColorField extends React.Component {
         if (!domNode || !domNode.contains(event.target)) {
             this.handleClose();
         }
-    }
+    };
 
     get field() {
 
