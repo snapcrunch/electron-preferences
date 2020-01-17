@@ -12,6 +12,7 @@ import SliderField from "./components/fields/slider";
 import AcceleratorField from "./components/fields/accelerator";
 import ColorField from "./components/fields/color";
 import FileField from "./components/fields/file";
+import ButtonField from "./components/fields/button";
 
 const fieldMap = {
     'directory': DirectoryField,
@@ -23,7 +24,8 @@ const fieldMap = {
     'slider': SliderField,
     'accelerator': AcceleratorField,
     'color': ColorField,
-    'file': FileField
+    'file': FileField,
+    'button': ButtonField
 };
 
 class Group extends React.Component {

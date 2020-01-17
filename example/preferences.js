@@ -9,8 +9,7 @@ const ElectronPreferences = require('../');
 const preferences = new ElectronPreferences({
     window: {
         icon: path.join(__dirname, 'example.png'),
-        title: 'Title can be changed',
-        frame: false
+        title: 'Title can be changed'
     },
     'dataStore': path.resolve(__dirname, 'preferences.json'),
     'defaults': {
@@ -156,6 +155,13 @@ const preferences = new ElectronPreferences({
                                 'key': 'file',
                                 'type': 'file',
                                 'help': 'Same stuff applies to file selector as well'
+                            },
+                            {
+                                'label': 'Ipc Button',
+                                'key': 'ipcButton',
+                                'type': 'button',
+                                'message': 'uniqueMessage',
+                                'buttonLabel': 'Restart to apply changes'
                             },
                             {
                                 'heading': 'Important Message',

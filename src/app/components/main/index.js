@@ -35,12 +35,6 @@ class Main extends React.Component {
 
     }
 
-    get options() {
-
-        return this.props.options;
-
-    }
-
     get preferences() {
 
         return this.props.preferences;

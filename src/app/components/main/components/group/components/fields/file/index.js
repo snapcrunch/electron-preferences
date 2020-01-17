@@ -35,7 +35,7 @@ class FileField extends React.Component {
         let btLabel = this.value ? ((this.buttonLabel[1] && this.buttonLabel[0]) ? this.buttonLabel[1] : 'Choose Another File') : ((this.buttonLabel[1] && this.buttonLabel[0]) ? this.buttonLabel[0] : 'Choose a File');
 
         return (
-            <div className="field field-directory">
+            <div className="field field-file">
                 <div className="field-label">{ this.label }</div>
                 <div className="value">
                     { this.hidePrefix === 'true' ? '' : (this.prefix  ? this.prefix + ':' : 'File:') } { this.value }

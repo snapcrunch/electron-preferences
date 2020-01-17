@@ -85,6 +85,10 @@ class ElectronPreferences extends EventEmitter2 {
             event.returnValue = null;
         });
 
+        ipcMain.on('buttonClicked', (event, message) => {
+           this.broadcastButtonClick(message);
+        });
+
         if (_.isFunction(options.afterLoad)) {
             options.afterLoad(this);
         }
@@ -154,6 +158,13 @@ class ElectronPreferences extends EventEmitter2 {
                 wc.send('preferencesUpdated', this.preferences);
             });
 
+    }
+
+    broadcastButtonClick(message) {
+        webContents.getAllWebContents()
+            .forEach((wc) => {
+                wc.send(message);
+            })
     }
 
     show() {

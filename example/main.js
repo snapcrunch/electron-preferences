@@ -38,7 +38,14 @@ function createWindow() {
 
 }
 
-app.on('ready', createWindow);
+app.on('ready', () => {
+    createWindow();
+
+    electron.ipcMain.on('buttonClick', () => {
+        app.relaunch();
+        app.quit();
+    });
+});
 
 app.on('window-all-closed', function() {
     if (process.platform !== 'darwin') {
