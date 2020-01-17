@@ -8,7 +8,9 @@ const ElectronPreferences = require('../');
 
 const preferences = new ElectronPreferences({
     window: {
-        icon: path.join(__dirname, 'example.png')
+        icon: path.join(__dirname, 'example.png'),
+        title: 'Title can be changed',
+        frame: false
     },
     'dataStore': path.resolve(__dirname, 'preferences.json'),
     'defaults': {
