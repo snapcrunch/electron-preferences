@@ -273,7 +273,9 @@ const preferences = new ElectronPreferences({
                                 'label': 'File without Prefix',
                                 'key': 'noPrefix',
                                 'type': 'file',
-                                'hidePrefix':'true'
+                                'hidePrefix':'true',
+                                'filter': {name: 'Word document', extensions: ['docx']},
+                                'help': 'File name and extension can be specified and will be the only thing showing up in this dialog'
                             }
                         ]
                     }
