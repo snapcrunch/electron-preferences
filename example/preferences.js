@@ -199,7 +199,8 @@ const preferences = new ElectronPreferences({
                                 'key': 'ipcButton',
                                 'type': 'button',
                                 'channel': 'applyChanges',
-                                'buttonLabel': 'Restart to apply changes'
+                                'buttonLabel': 'Restart to apply changes',
+                                'help': 'This button sends on a custom ipc channel'
                             },
                         ]
                     }
