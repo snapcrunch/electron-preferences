@@ -21,6 +21,16 @@ const preferences = new ElectronPreferences({
         'notes': {
             'folder': path.resolve(os.homedir(), 'Notes')
         },
+        'folderVariations': {
+            'customButtonLabel': path.resolve(app.getPath('downloads')),
+            'customPrefix': path.resolve(app.getPath('downloads')),
+            'noPrefix': path.resolve(app.getPath('downloads'))
+        },
+        'fileVariations': {
+            'customButtonLabel': path.resolve(app.getPath('downloads'), 'file.docx'),
+            'customPrefix': path.resolve(app.getPath('downloads'), 'file.docx'),
+            'noPrefix': path.resolve(app.getPath('downloads'), 'file.docx')
+        },
         'markdown': {
             'auto_format_links': true,
             'show_gutter': false
@@ -138,37 +148,6 @@ const preferences = new ElectronPreferences({
                                 'help': 'The location where your notes will be stored.'
                             },
                             {
-                                'label': 'Folder with Custom Button Label',
-                                'key': 'customButtonLabel',
-                                'type': 'directory',
-                                'buttonLabel': ['Label1', 'Label2']
-                            },
-                            {
-                                'label': 'Folder with Custom Prefix',
-                                'key': 'customPrefix',
-                                'type': 'directory',
-                                'prefix': 'Custom'
-                            },
-                            {
-                                'label': 'Folder without Prefix',
-                                'key': 'noPrefix',
-                                'type': 'directory',
-                                'hidePrefix':'true'
-                            },
-                            {
-                                'label': 'File',
-                                'key': 'file',
-                                'type': 'file',
-                                'help': 'Same stuff applies to file selector as well'
-                            },
-                            {
-                                'label': 'Ipc Button',
-                                'key': 'ipcButton',
-                                'type': 'button',
-                                'channel': 'applyChanges',
-                                'buttonLabel': 'Restart to apply changes'
-                            },
-                            {
                                 'heading': 'Important Message',
                                 'content': '<p>The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence.</p>',
                                 'type': 'message',
@@ -209,11 +188,96 @@ const preferences = new ElectronPreferences({
                                 'key': 'shortcut',
                                 'type': 'accelerator',
                                 'help': 'A keyboard shortcut'
+                            },
+                            {
+                                'heading': 'Child Window',
+                                'content': 'Child Window options can be overriden: <a href="https://www.duckduckgo.com" target="_blank">duckduckgo.com</a>',
+                                'type': 'message'
+                            },
+                            {
+                                'label': 'Ipc button',
+                                'key': 'ipcButton',
+                                'type': 'button',
+                                'channel': 'applyChanges',
+                                'buttonLabel': 'Restart to apply changes'
+                            },
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            'id': 'folderVariations',
+            'label': 'Folder Variations',
+            'icon': 'folder-15',
+            'form': {
+                'groups': [
+                    {
+                        'label': 'Folder Variations',
+                        'fields': [
+                            {
+                                'label': 'Folder with Custom Button Label',
+                                'key': 'customButtonLabel',
+                                'type': 'directory',
+                                'buttonLabel': ['Custom Label', 'Another Custom Label']
+                            },
+                            {
+                                'label': 'Folder with Custom Prefix',
+                                'key': 'customPrefix',
+                                'type': 'directory',
+                                'prefix': 'Custom'
+                            },
+                            {
+                                'label': 'Folder without Prefix',
+                                'key': 'noPrefix',
+                                'type': 'directory',
+                                'hidePrefix':'true'
                             }
                         ]
                     }
                 ]
             }
+        },
+        {
+            'id': 'fileVariations',
+            'label': 'File Variations',
+            'icon': 'single-folded-content',
+            'form': {
+                'groups': [
+                    {
+                        'label': 'File Variations',
+                        'fields': [
+                            {
+                                'label': 'File with Custom Button Label',
+                                'key': 'customButtonLabel',
+                                'type': 'file',
+                                'buttonLabel': ['Custom Label', 'Another Custom Label']
+                            },
+                            {
+                                'label': 'File with Custom Prefix',
+                                'key': 'customPrefix',
+                                'type': 'file',
+                                'prefix': 'Custom'
+                            },
+                            {
+                                'label': 'File without Prefix',
+                                'key': 'noPrefix',
+                                'type': 'file',
+                                'hidePrefix':'true'
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            'id': 'customIcon',
+            'label': 'Custom Icon',
+            'icon': 'electron-preferences2/example/example.png',
+        },
+        {
+            'id': 'noIcon',
+            'label': 'No Icon',
         }
     ]
 });
