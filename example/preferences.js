@@ -274,7 +274,7 @@ const preferences = new ElectronPreferences({
         {
             'id': 'customIcon',
             'label': 'Custom Icon',
-            'icon': 'electron-preferences2/example/example.png',
+            'icon': 'electron-preferences/example/example.png',
         },
         {
             'id': 'noIcon',
