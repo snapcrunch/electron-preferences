@@ -7,9 +7,14 @@ const os = require('os');
 const ElectronPreferences = require('../');
 
 const preferences = new ElectronPreferences({
-    window: {
+    browserWindowOverrides: {
         icon: path.join(__dirname, 'example.png'),
-        title: 'Title can be changed'
+        title: 'Custom Title'
+    },
+    childBrowserWindowOverrides: {
+        offset: 20,
+        resizable: true,
+        maximizable: true
     },
     'dataStore': path.resolve(__dirname, 'preferences.json'),
     'defaults': {

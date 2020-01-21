@@ -119,8 +119,8 @@ class ElectronPreferences extends EventEmitter2 {
 
     }
 
-    get windowOptions() {
-        return this.options.window || {};
+    get childBrowserWindowOverrides() {
+        return this.options.childBrowserWindowOverrides || {};
     }
 
     save() {
@@ -184,8 +184,7 @@ class ElectronPreferences extends EventEmitter2 {
             'maximizable': false,
             'backgroundColor': '#E7E7E7',
             'show': true,
-            'webPreferences': this.options.webPreferences,
-            ...this.windowOptions
+            'webPreferences': this.options.webPreferences
         };
 
         if (browserWindowOpts.webPreferences) {
@@ -218,6 +217,44 @@ class ElectronPreferences extends EventEmitter2 {
             this.prefsWindow = null;
         });
 
+
+        this.prefsWindow.webContents.on('new-window', (event, url, frameName, disposition, options, additionalFeatures) => {
+            event.preventDefault();
+            let win;
+
+            const currPos = this.prefsWindow.getPosition();
+
+            const offset = () => {
+                if(this.childBrowserWindowOverrides.offset) {
+                    return {
+                        x: currPos[0] + this.childBrowserWindowOverrides.offset,
+                        y: currPos[1] + this.childBrowserWindowOverrides.offset
+                    }
+                }
+                return {};
+            };
+
+            const resize = () => {
+                if(this.childBrowserWindowOverrides.resizable === true) {
+                    return {
+                        maxHeight: undefined,
+                        maxWidth: undefined,
+                        resizable: true
+                    }
+                }
+                return {};
+            };
+
+             win = new BrowserWindow(Object.assign(options, {
+                 ...resize(),
+                 ...offset(),
+                 ...this.childBrowserWindowOverrides
+             }));
+
+            win.loadURL(url);
+
+            event.newGuest = win;
+        });
 
     }
 
