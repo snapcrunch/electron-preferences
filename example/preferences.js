@@ -160,7 +160,7 @@ const preferences = new ElectronPreferences({
                                 'label': 'Ipc Button',
                                 'key': 'ipcButton',
                                 'type': 'button',
-                                'message': 'uniqueMessage',
+                                'channel': 'applyChanges',
                                 'buttonLabel': 'Restart to apply changes'
                             },
                             {

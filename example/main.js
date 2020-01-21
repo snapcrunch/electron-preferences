@@ -41,7 +41,7 @@ function createWindow() {
 app.on('ready', () => {
     createWindow();
 
-    electron.ipcMain.on('buttonClick', () => {
+    electron.ipcMain.on('applyChangesClick', () => {
         app.relaunch();
         app.quit();
     });

@@ -11,7 +11,7 @@ class ButtonField extends React.Component {
     render() {
 
         const choose = () => {
-            ipcRenderer.send('buttonClicked', (this.message))
+            ipcRenderer.send('buttonClicked', (this.channel))
         };
 
         let btLabel = this.buttonLabel ? this.buttonLabel : 'Click Here';
@@ -56,8 +56,8 @@ class ButtonField extends React.Component {
         return this.field.buttonLabel;
     }
 
-    get message() {
-        return this.field.message;
+    get channel() {
+        return this.field.channel;
     }
 
 }

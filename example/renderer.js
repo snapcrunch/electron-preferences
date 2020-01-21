@@ -14,6 +14,6 @@ ipcRenderer.on('preferencesUpdated', (e, preferences) => {
     prefsEl.innerHTML = JSON.stringify(preferences, null, 4);
 });
 
-ipcRenderer.on('uniqueMessage', () => {
-    ipcRenderer.send('buttonClick');
+ipcRenderer.on('applyChanges', () => {
+    ipcRenderer.send('applyChangesClick');
 });
