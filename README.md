@@ -147,6 +147,15 @@ const preferences = new ElectronPreferences({
                                 'help': 'What is your gender?'
                             },
                             {
+                                'label': 'Custom Default',
+                                'key': 'custom',
+                                'type': 'dropdown',
+                                'default': 'Custom',
+                                'options': [
+                                    {'label': 'Option 1', 'value': 'option1'},
+                                ]
+                            },
+                            {
                                 'label': 'Age',
                                 'key': 'age',
                                 'type': 'text',
