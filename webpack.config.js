@@ -4,6 +4,10 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
+    'target': 'node',
+    node: {
+        __dirname: false
+    },
     'entry': './src/app/index.js',
     'watchOptions': {
         'ignored': /node_modules/

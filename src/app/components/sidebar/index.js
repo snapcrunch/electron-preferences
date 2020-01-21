@@ -2,6 +2,7 @@
 
 import React from 'react';
 import './style.scss';
+const fs = window.require('fs');
 
 class Sidebar extends React.Component {
 
@@ -14,7 +15,7 @@ class Sidebar extends React.Component {
             }
             return (
                 <div key={ section.id } className={ className } onClick={ this.selectSection.bind(this, section.id) }>
-                    <img className="section-icon" src={ 'svg/' + section.icon + '.svg' } />
+                    { section.icon ? (fs.existsSync(__dirname + '/../../' + section.icon) ? <img className="section-icon" src={ __dirname + '/../../' + section.icon } /> : <img className="section-icon" src={ 'svg/' + section.icon + '.svg' } />) : '' }
                     <span className="section-label">{ section.label }</span>
                 </div>
             );
