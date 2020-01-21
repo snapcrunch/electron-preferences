@@ -47,6 +47,18 @@ const ElectronPreferences = require('electron-preferences');
 
 const preferences = new ElectronPreferences({
     /**
+     * Window options, as well as child window options can be overriden.
+     */
+    browserWindowOverrides: {
+        icon: path.join(__dirname, 'example.png'),
+        title: 'Custom Title'
+    },
+    childBrowserWindowOverrides: {
+        offset: 20,
+        resizable: true,
+        maximizable: true
+    },
+    /**
      * Where should preferences be saved?
      */
     'dataStore': path.resolve(app.getPath('userData'), 'preferences.json'),
@@ -56,6 +68,16 @@ const preferences = new ElectronPreferences({
     'defaults': {
         'notes': {
             'folder': path.resolve(os.homedir(), 'Notes')
+        },
+        'folderVariations': {
+            'customButtonLabel': path.resolve(app.getPath('downloads')),
+            'customPrefix': path.resolve(app.getPath('downloads')),
+            'noPrefix': path.resolve(app.getPath('downloads'))
+        },
+        'fileVariations': {
+            'customButtonLabel': path.resolve(app.getPath('downloads'), 'file.docx'),
+            'customPrefix': path.resolve(app.getPath('downloads'), 'file.docx'),
+            'noPrefix': path.resolve(app.getPath('downloads'), 'file.docx')
         },
         'markdown': {
             'auto_format_links': true,
@@ -87,6 +109,7 @@ const preferences = new ElectronPreferences({
             'label': 'About You',
             /**
              * See the list of available icons below.
+             * Own icon can be used as well, or none at all.
              */
             'icon': 'single-01',
             'form': {
@@ -122,6 +145,12 @@ const preferences = new ElectronPreferences({
                                     {'label': 'Unspecified', 'value': 'unspecified'},
                                 ],
                                 'help': 'What is your gender?'
+                            },
+                            {
+                                'label': 'Age',
+                                'key': 'age',
+                                'type': 'text',
+                                'inputType': 'number'
                             },
                             {
                                 'label': 'Which of the following foods do you like?',
@@ -177,30 +206,6 @@ const preferences = new ElectronPreferences({
                                 'help': 'The location where your notes will be stored.'
                             },
                             {
-                                'label': 'Folder with Custom Button Label',
-                                'key': 'customButtonLabel',
-                                'type': 'directory',
-                                'buttonLabel': ['Label1', 'Label2']
-                            },
-                            {
-                                'label': 'Folder with Custom Prefix',
-                                'key': 'customPrefix',
-                                'type': 'directory',
-                                'prefix': 'Custom'
-                            },
-                            {
-                                'label': 'Folder without Prefix',
-                                'key': 'noPrefix',
-                                'type': 'directory',
-                                'hidePrefix':'true'
-                            },
-                            {
-                                'label': 'File',
-                                'key': 'file',
-                                'type': 'file',
-                                'help': 'Same stuff applies to file selector as well'
-                            },
-                            {
                                 'heading': 'Important Message',
                                 'content': '<p>The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence.</p>',
                                 'type': 'message'
@@ -235,14 +240,109 @@ const preferences = new ElectronPreferences({
                                     {'label': 'FooBar', 'value': 'foobar'},
                                 ],
                                 'help': 'Foo? Bar?'
+                            },
+                            {
+                                'label': 'Shortcut',
+                                'key': 'shortcut',
+                                'type': 'accelerator',
+                                'help': 'A keyboard shortcut'
+                            },
+                            {
+                                'heading': 'Child Window',
+                                'content': 'Child Window options can be overriden: <a href="https://www.duckduckgo.com" target="_blank">duckduckgo.com</a>',
+                                'type': 'message'
+                            },
+                            {
+                                'label': 'Ipc button',
+                                'key': 'ipcButton',
+                                'type': 'button',
+                                'channel': 'applyChanges',
+                                'buttonLabel': 'Restart to apply changes',
+                                'help': 'This button sends on a custom ipc channel'
+                            },
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            'id': 'folderVariations',
+            'label': 'Folder Variations',
+            'icon': 'folder-15',
+            'form': {
+                'groups': [
+                    {
+                        'label': 'Folder Variations',
+                        'fields': [
+                            {
+                                'label': 'Folder with Custom Button Label',
+                                'key': 'customButtonLabel',
+                                'type': 'directory',
+                                'buttonLabel': ['Custom Label', 'Another Custom Label']
+                            },
+                            {
+                                'label': 'Folder with Custom Prefix',
+                                'key': 'customPrefix',
+                                'type': 'directory',
+                                'prefix': 'Custom'
+                            },
+                            {
+                                'label': 'Folder without Prefix',
+                                'key': 'noPrefix',
+                                'type': 'directory',
+                                'hidePrefix':'true'
                             }
                         ]
                     }
                 ]
             }
+        },
+        {
+            'id': 'fileVariations',
+            'label': 'File Variations',
+            'icon': 'single-folded-content',
+            'form': {
+                'groups': [
+                    {
+                        'label': 'File Variations',
+                        'fields': [
+                            {
+                                'label': 'File with Custom Button Label',
+                                'key': 'customButtonLabel',
+                                'type': 'file',
+                                'buttonLabel': ['Custom Label', 'Another Custom Label']
+                            },
+                            {
+                                'label': 'File with Custom Prefix',
+                                'key': 'customPrefix',
+                                'type': 'file',
+                                'prefix': 'Custom'
+                            },
+                            {
+                                'label': 'File without Prefix',
+                                'key': 'noPrefix',
+                                'type': 'file',
+                                'hidePrefix':'true'
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            'id': 'customIcon',
+            'label': 'Custom Icon',
+            'icon': 'electron-preferences2/example/example.png',
+        },
+        {
+            'id': 'noIcon',
+            'label': 'No Icon',
         }
     ]
 });
+
+module.exports = preferences;
+
 ````
 
 ### Interacting with the Preferences Service from the Main Process
@@ -283,18 +383,6 @@ ipcRenderer.on('preferencesUpdated', (e, preferences) => {
 ipcRenderer.sendSync('setPreferences', { ... });
 ```
 
-## BrowserWindow Settings
-
-```
-const preferences = new ElectronPreferences({
-...
-    window: {
-        icon: 'iconpath/icon'
-    }
-...
-});
-```
-
 ## Field Types
 
 The library includes built-in support for the following field types:
@@ -303,6 +391,8 @@ The library includes built-in support for the following field types:
 - Dropdown
 - Message
 - Folder selection
+- File selection
+- Ipc Button
 - Checkbox
 - Radio
 - Slider
