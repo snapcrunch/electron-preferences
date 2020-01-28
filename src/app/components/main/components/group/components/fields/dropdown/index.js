@@ -15,9 +15,11 @@ class DropdownField extends React.Component {
             );
         });
 
+        const fieldLabel = this.hideLabel  === 'true' ? '': <div className="field-label">{ this.label }</div>;
+
         return (
             <div className="field field-dropdown">
-                <div className="field-label">{ this.label }</div>
+                { fieldLabel }
                 <select onChange={ this.onChange.bind(this) } value={ this.value }>
                     <option value=""> { this.default ? '-- ' + this.default + ' --' : '-- Select One --' } </option>
                     { options }
@@ -60,6 +62,12 @@ class DropdownField extends React.Component {
 
     get default() {
         return this.field.default;
+    }
+
+    get hideLabel() {
+
+        return this.field.hideLabel;
+
     }
 
     onChange(e) {

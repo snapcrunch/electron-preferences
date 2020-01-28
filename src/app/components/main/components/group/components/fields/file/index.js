@@ -32,11 +32,13 @@ class FileField extends React.Component {
             });
         };
 
-        let btLabel = this.value ? ((this.buttonLabel[1] && this.buttonLabel[0]) ? this.buttonLabel[1] : 'Choose Another File') : ((this.buttonLabel[1] && this.buttonLabel[0]) ? this.buttonLabel[0] : 'Choose a File');
+        const fieldLabel = this.hideLabel  === 'true' ? '': <div className="field-label">{ this.label }</div>;
+
+        const btLabel = this.value ? ((this.buttonLabel[1] && this.buttonLabel[0]) ? this.buttonLabel[1] : 'Choose Another File') : ((this.buttonLabel[1] && this.buttonLabel[0]) ? this.buttonLabel[0] : 'Choose a File');
 
         return (
             <div className="field field-file">
-                <div className="field-label">{ this.label }</div>
+                { fieldLabel }
                 <div className="value">
                     { this.hidePrefix === 'true' ? '' : (this.prefix  ? this.prefix + ':' : 'File:') } { this.value }
                 </div>
@@ -99,6 +101,12 @@ class FileField extends React.Component {
 
     get hidePrefix() {
         return this.field.hidePrefix;
+    }
+
+    get hideLabel() {
+
+        return this.field.hideLabel;
+
     }
 
 }

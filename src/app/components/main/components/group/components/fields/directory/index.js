@@ -33,11 +33,13 @@ class DirectoryField extends React.Component {
 
         };
 
-        let btLabel = this.value ? ((this.buttonLabel[1] && this.buttonLabel[0]) ? this.buttonLabel[1] : 'Choose Another Directory') : ((this.buttonLabel[1] && this.buttonLabel[0]) ? this.buttonLabel[0] : 'Choose a Directory');
+        const fieldLabel = this.hideLabel  === 'true' ? '': <div className="field-label">{ this.label }</div>;
+
+        const btLabel = this.value ? ((this.buttonLabel[1] && this.buttonLabel[0]) ? this.buttonLabel[1] : 'Choose Another Directory') : ((this.buttonLabel[1] && this.buttonLabel[0]) ? this.buttonLabel[0] : 'Choose a Directory');
 
         return (
             <div className="field field-directory">
-                <div className="field-label">{ this.label }</div>
+                { fieldLabel }
                 <div className="value">
                     { this.hidePrefix === 'true' ? '' : (this.prefix  ? this.prefix + ':' : 'Directory:') } { this.value }
                 </div>
@@ -96,6 +98,12 @@ class DirectoryField extends React.Component {
 
     get hidePrefix() {
         return this.field.hidePrefix;
+    }
+
+    get hideLabel() {
+
+        return this.field.hideLabel;
+
     }
 
 }

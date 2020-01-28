@@ -159,7 +159,12 @@ const preferences = new ElectronPreferences({
                             {
                                 'heading': 'Important Message',
                                 'content': '<p>The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence.</p>',
+                                'type': 'message'
+                            },
+                            {
+                                'content': '<p>Heading can be hidden.</p>',
                                 'type': 'message',
+                                'hideHeading': 'true'
                             }
                         ]
                     }
@@ -191,7 +196,8 @@ const preferences = new ElectronPreferences({
                                 'key': 'propsChangeButton',
                                 'type': 'button',
                                 'channel': 'buttonClickPropChange',
-                                'help': 'Refresh react components'
+                                'help': 'Refresh react components',
+                                'hideLabel': 'true'
                             },
                             {
                                 'label': "Foo or Bar?",

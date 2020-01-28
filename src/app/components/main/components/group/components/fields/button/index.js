@@ -14,11 +14,13 @@ class ButtonField extends React.Component {
             ipcRenderer.send('buttonClicked', (this.channel))
         };
 
-        let btLabel = this.buttonLabel ? this.buttonLabel : 'Click Here';
+        const fieldLabel = this.hideLabel  === 'true' ? '': <div className="field-label">{ this.label }</div>;
+
+        const btLabel = this.buttonLabel ? this.buttonLabel : 'Click Here';
 
         return (
             <div className="field field-button">
-                <div className="field-label">{ this.label }</div>
+                { fieldLabel }
                 <div className="bt" onClick={ choose }>
                     { btLabel }
                 </div>
@@ -58,6 +60,12 @@ class ButtonField extends React.Component {
 
     get channel() {
         return this.field.channel;
+    }
+
+    get hideLabel() {
+
+        return this.field.hideLabel;
+
     }
 
 }

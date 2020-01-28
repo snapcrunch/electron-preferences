@@ -13,9 +13,11 @@ class ColorField extends React.Component {
 
     render() {
 
+        const fieldLabel = this.hideLabel  === 'true' ? '': <div className="field-label">{ this.label }</div>;
+
         return (
             <div className="field field-color">
-                <div className="field-label">{ this.label }</div>
+                { fieldLabel }
                 <div className="color-swatch" onClick={ this.handleClick }>
                     <div className="color" style={ this.style }/>
                 </div>
@@ -79,6 +81,12 @@ class ColorField extends React.Component {
     get format() {
 
         return this.field.format;
+
+    }
+
+    get hideLabel() {
+
+        return this.field.hideLabel;
 
     }
 

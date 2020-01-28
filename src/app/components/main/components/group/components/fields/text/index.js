@@ -9,9 +9,11 @@ class TextField extends React.Component {
 
     render() {
 
+        const fieldLabel = this.hideLabel  === 'true' ? '': <div className="field-label">{ this.label }</div>;
+
         return (
             <div className="field field-text">
-                <div className="field-label">{ this.label }</div>
+                { fieldLabel }
                 <input type={ this.inputType } onChange={ this.onChange.bind(this) } value={ this.value }/>
                 { this.help && <span className="help">{ this.help }</span> }
             </div>
@@ -46,6 +48,12 @@ class TextField extends React.Component {
     get help() {
 
         return this.field.help;
+
+    }
+
+    get hideLabel() {
+
+        return this.field.hideLabel;
 
     }
 

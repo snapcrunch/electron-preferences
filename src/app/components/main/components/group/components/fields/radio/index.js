@@ -8,9 +8,10 @@ class RadioField extends React.Component {
     state = {};
 
     render() {
-        
+        const fieldLabel = this.hideLabel  === 'true' ? '': <div className="field-label">{ this.label }</div>;
+
         const fieldID = `radio_${String((new Date()).getTime())}`;
-        
+
         const options = this.options.map((option, idx) => {
             const id = `${fieldID}_${idx}`;
             return (
@@ -22,7 +23,7 @@ class RadioField extends React.Component {
 
         return (
             <div className="field field-radio">
-                <div className="field-label">{ this.label }</div>
+                { fieldLabel }
                 { options }
                 { this.help && <span className="help">{ this.help }</span> }
             </div>
@@ -47,7 +48,7 @@ class RadioField extends React.Component {
         return this.field.label;
 
     }
-    
+
     get options() {
 
         return this.field.options || [];
@@ -60,8 +61,14 @@ class RadioField extends React.Component {
 
     }
 
+    get hideLabel() {
+
+        return this.field.hideLabel;
+
+    }
+
     onChange(e) {
-        
+
         const idx = e.target.id.split('_')[2];
         const option = this.options[idx];
 

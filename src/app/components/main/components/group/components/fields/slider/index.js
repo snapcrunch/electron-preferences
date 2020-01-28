@@ -9,9 +9,11 @@ class SliderField extends React.Component {
 
     render() {
 
+        const fieldLabel = this.hideLabel  === 'true' ? '': <div className="field-label">{ this.label }</div>;
+
         return (
             <div className="field field-slider">
-                <div className="field-label">{ this.label }</div>
+                { fieldLabel }
                 <input type="range" onChange={ this.onChange.bind(this) } min={ this.min } max={ this.max } value={ this.value }/>
                 <label>{ this.value }</label>
                 { this.help && <span className="help">{ this.help }</span> }
@@ -53,6 +55,12 @@ class SliderField extends React.Component {
     get help() {
 
         return this.field.help;
+
+    }
+
+    get hideLabel() {
+
+        return this.field.hideLabel;
 
     }
 
