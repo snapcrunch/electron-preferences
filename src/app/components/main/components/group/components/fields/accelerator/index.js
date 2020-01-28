@@ -8,23 +8,25 @@ class AcceleratorField extends React.Component {
     state = {};
 
     constructor(props) {
-        
+
         super(props);
-        
+
         this.pressedKeys = [];
         this.keyCount = 0;
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleKeyUp = this.handleKeyUp.bind(this);
         this.mapAccelerator = this.mapAccelerator.bind(this);
         this.onChange = this.onChange.bind(this);
-        
+
     }
 
     render() {
 
+        const fieldLabel = this.hideLabel  === 'true' ? '': <div className="field-label">{ this.label }</div>;
+
         return (
             <div className="field field-accelerator">
-                <div className="field-label">{ this.label }</div>
+                { fieldLabel }
                 <input type="text" value={ this.value } onKeyDown={ this.handleKeyDown } onKeyUp={ this.handleKeyUp } readOnly />
                 { this.help && <span className="help">{ this.help }</span> }
             </div>
@@ -33,7 +35,7 @@ class AcceleratorField extends React.Component {
     }
 
     handleKeyDown(event) {
-        
+
         event.preventDefault();
 
         if (this.keyCount <= 0) {
@@ -44,30 +46,30 @@ class AcceleratorField extends React.Component {
             this.pressedKeys.push(event.key);
             this.keyCount++;
         }
-        
+
         this.mapAccelerator(this.pressedKeys);
-        
+
     }
 
     handleKeyUp(event) {
-        
+
         event.preventDefault();
         this.keyCount--;
         this.mapAccelerator(this.pressedKeys);
-        
+
     }
 
     mapAccelerator(keys) {
-        
+
         let arr = keys.map((item) => {
             if (item === ' ') return "Space";
             if (item === '+') return "Plus";
             if (/^[a-z]$/.test(item)) return item.toUpperCase();
             return item;
         });
-        
+
         this.onChange(arr.join("+"));
-        
+
     }
 
     get field() {
@@ -92,6 +94,10 @@ class AcceleratorField extends React.Component {
 
         return this.field.help;
 
+    }
+
+    get hideLabel() {
+        return this.field.hideLabel;
     }
 
     onChange(value) {

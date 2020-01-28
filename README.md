@@ -401,12 +401,32 @@ The library includes built-in support for the following field types:
 - Message
 - Folder selection
 - File selection
-- Ipc Button
+- Button
 - Checkbox
 - Radio
 - Slider
 - Accelerator (for shortcut input)
 - Color picker
+
+Prefix of following types can be changed or left:
+- Folder selection
+- File selection
+    
+Label of following types can be left:
+- Text  
+- Dropdown  
+- Folder selection  
+- File Selection  
+- Button  
+- Checkbox  
+- Radio  
+- Slider  
+- Accelerator  
+- Color picker  
+    
+Heading off following types can be changed or left:
+- Message
+    
 
 Adding support for additional field types if easy, if you're familiar with React. PR's for such additions are welcome.
 
