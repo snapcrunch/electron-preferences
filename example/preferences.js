@@ -29,7 +29,7 @@ const preferences = new ElectronPreferences({
         'fileVariations': {
             'customButtonLabel': path.resolve(app.getPath('downloads'), 'file.docx'),
             'customPrefix': path.resolve(app.getPath('downloads'), 'file.docx'),
-            'noPrefix': path.resolve(app.getPath('downloads'), 'file.docx')
+            'noPrefix': path.resolve(app.getPath('downloads'), 'file.docx'),
         },
         'markdown': {
             'auto_format_links': true,
@@ -182,6 +182,18 @@ const preferences = new ElectronPreferences({
                                 'help': 'What is your phone number?'
                             },
                             {
+                                'label': 'Random Number',
+                                'key': 'random_number',
+                                'type': 'text'
+                            },
+                            {
+                                'buttonLabel': 'Generate random number',
+                                'key': 'propsChangeButton',
+                                'type': 'button',
+                                'channel': 'buttonClickPropChange',
+                                'help': 'Refresh react components'
+                            },
+                            {
                                 'label': "Foo or Bar?",
                                 'key': 'foobar',
                                 'type': 'radio',
@@ -200,7 +212,7 @@ const preferences = new ElectronPreferences({
                             },
                             {
                                 'heading': 'Child Window',
-                                'content': 'Child Window options can be overriden: <a href="https://www.duckduckgo.com" target="_blank">duckduckgo.com</a>',
+                                'content': 'Child Window options can be overridden: <a href="https://www.duckduckgo.com" target="_blank">duckduckgo.com</a>',
                                 'type': 'message'
                             },
                             {
@@ -274,7 +286,7 @@ const preferences = new ElectronPreferences({
                                 'key': 'noPrefix',
                                 'type': 'file',
                                 'hidePrefix':'true',
-                                'filter': {name: 'Word document', extensions: ['docx']},
+                                'filter': {name: 'Word document', extensions: ['docx', 'doc']},
                                 'help': 'File name and extension can be specified and will be the only thing showing up in this dialog'
                             }
                         ]

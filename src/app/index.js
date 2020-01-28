@@ -8,7 +8,7 @@ import _ from 'lodash';
 
 const { ipcRenderer } = window.require('electron');
 const options = ipcRenderer.sendSync('getPreferenceOptions');
-const preferences = ipcRenderer.sendSync('getPreferences');
+let preferences = ipcRenderer.sendSync('getPreferences');
 const defaults = ipcRenderer.sendSync('getDefaults');
 
 options.sections = options.sections.filter((section) => {
@@ -28,6 +28,12 @@ class App extends React.Component {
         'activeSection': options.sections[0].id,
         'preferences': preferences
     };
+
+    componentDidMount() {
+        ipcRenderer.on('changeProps', () => {
+            this.setState({'preferences': ipcRenderer.sendSync('getPreferences')});
+        });
+    }
 
     render() {
 

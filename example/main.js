@@ -45,6 +45,10 @@ app.on('ready', () => {
         app.relaunch();
         app.quit();
     });
+
+    electron.ipcMain.on('changePreferencesValue', () => {
+        preferences.value('space.random_number', Math.round(Math.random() * 100) )
+    });
 });
 
 app.on('window-all-closed', function() {

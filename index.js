@@ -86,7 +86,15 @@ class ElectronPreferences extends EventEmitter2 {
         });
 
         ipcMain.on('buttonClicked', (event, message) => {
-           this.broadcastButtonClick(message);
+            this.broadcastButtonClick(message);
+        });
+
+        ipcMain.on('readPreferences', () => {
+            this.preferences = fs.readJsonSync(this.dataStore, {
+                'throws': false
+            });
+
+            webContents.getAllWebContents().forEach(webContent => webContent.send('changeProps'))
         });
 
         if (_.isFunction(options.afterLoad)) {
@@ -170,6 +178,7 @@ class ElectronPreferences extends EventEmitter2 {
     show() {
 
         if (this.prefsWindow) {
+            this.prefsWindow.focus();
             return;
         }
 
@@ -245,11 +254,11 @@ class ElectronPreferences extends EventEmitter2 {
                 return {};
             };
 
-             win = new BrowserWindow(Object.assign(options, {
-                 ...resize(),
-                 ...offset(),
-                 ...this.childBrowserWindowOverrides
-             }));
+            win = new BrowserWindow(Object.assign(options, {
+                ...resize(),
+                ...offset(),
+                ...this.childBrowserWindowOverrides
+            }));
 
             win.loadURL(url);
 

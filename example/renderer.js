@@ -17,3 +17,8 @@ ipcRenderer.on('preferencesUpdated', (e, preferences) => {
 ipcRenderer.on('applyChanges', () => {
     ipcRenderer.send('applyChangesClick');
 });
+
+ipcRenderer.on('buttonClickPropChange', () => {
+    ipcRenderer.send('changePreferencesValue');
+    ipcRenderer.send('readPreferences')
+});
