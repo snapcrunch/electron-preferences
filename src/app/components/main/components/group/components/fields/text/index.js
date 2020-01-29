@@ -2,10 +2,17 @@
 
 import React from 'react';
 import './style.scss';
+const { ipcRenderer } = window.require('electron');
 
 class TextField extends React.Component {
 
     state = {};
+
+    componentDidUpdate() {
+        ipcRenderer.on('manualOnChange', () => {
+            this.props.onChange(this.value);
+        })
+    }
 
     render() {
 
