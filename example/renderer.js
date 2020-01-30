@@ -20,5 +20,5 @@ ipcRenderer.on('applyChanges', () => {
 
 ipcRenderer.on('buttonClickPropChange', () => {
     ipcRenderer.send('changePreferencesValue');
-    ipcRenderer.send('renderPreferences');
+    ipcRenderer.send('readPreferences')
 });

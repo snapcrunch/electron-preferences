@@ -89,15 +89,12 @@ class ElectronPreferences extends EventEmitter2 {
             this.broadcastButtonClick(message);
         });
 
-        ipcMain.on('renderPreferences', () => {
+        ipcMain.on('readPreferences', () => {
             this.preferences = fs.readJsonSync(this.dataStore, {
                 'throws': false
             });
 
-            webContents.getAllWebContents().forEach(webContent => {
-                webContent.send('changeProps');
-                webContent.send('manualOnChange');
-            });
+            webContents.getAllWebContents().forEach(webContent => webContent.send('changeProps'))
         });
 
         if (_.isFunction(options.afterLoad)) {
