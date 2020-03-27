@@ -40,7 +40,7 @@ Within your application's main process, create a new instance of the `ElectronPr
 
 ```
 const electron = require('electron');
-const app = electron.app;
+const { Menu, app } = require('electron')
 const path = require('path');
 const os = require('os');
 const ElectronPreferences = require('electron-preferences');
@@ -217,7 +217,38 @@ const preferences = new ElectronPreferences({
                 ]
             }
         }
-    ]
+    ],
+    /**
+     * These parameters on the preference window settings can be overwrinten
+     */
+    browserWindowOpts: {
+        'title': 'My Preferences Title',
+        'width': 900,
+        'maxWidth': 1000,
+        'height': 700,
+        'maxHeight': 1000,
+        'resizable': true,
+        'maximizable': false,
+        'backgroundColor': '#E7E7E7'
+    },
+    /**
+     * These parameters create an optional menu bar
+     */
+    menu: Menu.buildFromTemplate(
+        [
+            {
+            label: 'Window',
+            role: 'window',
+            submenu: [
+                {
+                label: 'Close',
+                accelerator: 'CmdOrCtrl+W',
+                role: 'close'
+                }
+            ]
+            }
+        ]
+    )
 });
 ````
 

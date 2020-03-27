@@ -159,15 +159,15 @@ class ElectronPreferences extends EventEmitter2 {
         }
 
         let browserWindowOpts = {
-            'title': 'Preferences',
-            'width': 800,
-            'maxWidth': 800,
-            'height': 600,
-            'maxHeight': 600,
-            'resizable': false,
+            'title': this.options.browserWindowOpts.title || 'Preferences',
+            'width': this.options.browserWindowOpts.width ||800,
+            'maxWidth': this.options.browserWindowOpts.maxWidth || 800,
+            'height': this.options.browserWindowOpts.height || 600,
+            'maxHeight': this.options.browserWindowOpts.maxHeight || 600,
+            'resizable': this.options.browserWindowOpts.resizable || false,
             'acceptFirstMouse': true,
-            'maximizable': false,
-            'backgroundColor': '#E7E7E7',
+            'maximizable': this.options.browserWindowOpts.maximizable || false,
+            'backgroundColor': this.options.browserWindowOpts.backgroundColor || '#E7E7E7',
             'show': true,
             'webPreferences': this.options.webPreferences
         };
