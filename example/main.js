@@ -19,7 +19,10 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         'width': 1200,
         'height': 700,
-        'accept-first-mouse': true
+        'accept-first-mouse': true,
+        webPreferences: {
+            preload: path.join(__dirname, './Preload.js')
+        }
     });
 
     mainWindow.loadURL(url.format({
