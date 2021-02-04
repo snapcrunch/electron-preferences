@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Adding a new preference will set a default value
+- Ability to override the preferences window's title
 
 ### Changed
 - enableRemoteModule set to true
