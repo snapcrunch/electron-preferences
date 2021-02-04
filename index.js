@@ -47,6 +47,12 @@ class ElectronPreferences extends EventEmitter2 {
 
         if (!this.preferences) {
             this.preferences = this.defaults;
+        } else {
+            _.keys(this.defaults).forEach(prefDefault => {
+                if (!(prefDefault in this.preferences)) {
+                    this.preferences[prefDefault] = this.defaults[prefDefault]
+                }
+            })
         }
 
         if (_.isFunction(options.onLoad)) {
