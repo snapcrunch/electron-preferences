@@ -7,3 +7,4 @@ example/preferences.json
 .sass-cache
 node_modules
 build
+.idea
