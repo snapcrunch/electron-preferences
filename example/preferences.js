@@ -23,16 +23,6 @@ const preferences = new ElectronPreferences({
             'show': true
         }
     },
-    'onLoad': (data) => {
-
-        console.log('data', data);
-
-        return data;
-
-    },
-    'afterLoad': ({ preferences }) => {
-        console.log('afterLoad', preferences);
-    },
     'webPreferences': {
         'devTools': true
     },
