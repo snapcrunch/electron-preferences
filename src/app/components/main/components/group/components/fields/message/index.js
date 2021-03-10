@@ -2,8 +2,6 @@
 
 import React from 'react';
 import './style.scss';
-const { remote } = window.require('electron');
-const { dialog } = remote;
 
 class MessageField extends React.Component {
 
