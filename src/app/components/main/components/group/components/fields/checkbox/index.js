@@ -2,6 +2,7 @@
 
 import React from 'react';
 import './style.scss';
+import {newGuid} from "../../../../../../../utils/newGuid";
 
 class CheckboxField extends React.Component {
 
@@ -9,7 +10,7 @@ class CheckboxField extends React.Component {
 
     render() {
         
-        const fieldID = `checkbox_${String((new Date()).getTime())}`;
+        const fieldID = `checkbox_${newGuid()}`;
         
         const options = this.options.map((option, idx) => {
             const id = `${fieldID}_${idx}`;
