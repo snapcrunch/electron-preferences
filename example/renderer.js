@@ -1,6 +1,7 @@
 'use strict';
 
-const { ipcRenderer, remote } = require('electron');
+// const { ipcRenderer } = require('electron');
+const ipcRenderer = window.ipcRenderer;
 const bt = document.getElementsByClassName('bt')[0];
 const prefsEl = document.getElementsByClassName('preferences')[0];
 prefsEl.innerHTML = JSON.stringify(ipcRenderer.sendSync('getPreferences'), null, 4);

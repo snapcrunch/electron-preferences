@@ -47,6 +47,12 @@ class ElectronPreferences extends EventEmitter2 {
 
         if (!this.preferences) {
             this.preferences = this.defaults;
+        } else {
+            _.keys(this.defaults).forEach(prefDefault => {
+                if (!(prefDefault in this.preferences)) {
+                    this.preferences[prefDefault] = this.defaults[prefDefault]
+                }
+            })
         }
 
         if (_.isFunction(options.onLoad)) {
@@ -159,25 +165,27 @@ class ElectronPreferences extends EventEmitter2 {
         }
 
         let browserWindowOpts = {
-            'title': 'Preferences',
-            'width': 800,
-            'maxWidth': 800,
-            'height': 600,
-            'maxHeight': 600,
-            'resizable': false,
-            'acceptFirstMouse': true,
-            'maximizable': false,
-            'backgroundColor': '#E7E7E7',
-            'show': true,
-            'webPreferences': this.options.webPreferences
+            title: 'Preferences',
+            width: 800,
+            maxWidth: 800,
+            height: 600,
+            maxHeight: 600,
+            resizable: false,
+            acceptFirstMouse: true,
+            maximizable: false,
+            backgroundColor: '#E7E7E7',
+            show: true,
+            webPreferences: this.options.webPreferences
         };
 
+        const defaultWebPreferences = {
+            nodeIntegration: true,
+            enableRemoteModule: true
+        }
         if (browserWindowOpts.webPreferences) {
-            browserWindowOpts.webPreferences = Object.assign({ nodeIntegration: true }, browserWindowOpts.webPreferences)
+            browserWindowOpts.webPreferences = Object.assign(defaultWebPreferences, browserWindowOpts.webPreferences)
         } else {
-            browserWindowOpts.webPreferences = {
-                nodeIntegration: true
-            };
+            browserWindowOpts.webPreferences = defaultWebPreferences;
         }
 
         if (this.options.browserWindowOverrides) {

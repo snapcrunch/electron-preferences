@@ -2,6 +2,7 @@
 
 import React from 'react';
 import './style.scss';
+import {newGuid} from "../../../../../../../utils/newGuid";
 
 class RadioField extends React.Component {
 
@@ -9,7 +10,7 @@ class RadioField extends React.Component {
 
     render() {
         
-        const fieldID = `radio_${String((new Date()).getTime())}`;
+        const fieldID = `radio_${newGuid()}`;
         
         const options = this.options.map((option, idx) => {
             const id = `${fieldID}_${idx}`;

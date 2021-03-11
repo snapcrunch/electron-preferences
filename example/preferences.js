@@ -1,7 +1,7 @@
 'use strict';
 
-const electron = require('electron');
-const app = electron.app;
+// const electron = require('electron');
+// const app = electron.app;
 const path = require('path');
 const os = require('os');
 const ElectronPreferences = require('../');
@@ -23,18 +23,11 @@ const preferences = new ElectronPreferences({
             'show': true
         }
     },
-    'onLoad': (data) => {
-
-        console.log('data', data);
-
-        return data;
-
-    },
-    'afterLoad': ({ preferences }) => {
-        console.log('afterLoad', preferences);
-    },
     'webPreferences': {
         'devTools': true
+    },
+    'browserWindowOverrides': {
+        'title': 'My Electron Preferences',
     },
     'sections': [
         {
