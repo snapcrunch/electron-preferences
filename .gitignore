@@ -4,6 +4,7 @@ example/preferences.json
 
 # Folders
 .cache-loader
+.idea
 .sass-cache
 node_modules
 build
