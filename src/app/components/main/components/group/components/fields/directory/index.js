@@ -38,7 +38,7 @@ class DirectoryField extends React.Component {
         return (
             <div className="field field-directory">
                 <div className="field-label">{ this.label }</div>
-                <div className="value">
+                <div className="value" onClick={ choose }>
                     Folder: { this.value }
                 </div>
                 <div className="bt" onClick={ choose }>

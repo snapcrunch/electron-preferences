@@ -26,19 +26,28 @@
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
-        color: #afb9c0;
+        color: #5d5d5d;
+        font-weight: 600;
 
         &.active {
             //background-color: #0084ff;
             color: #0084ff;
-            font-weight: 600;
+            font-weight: bold;
+
+            .section-icon {
+                background-color: #0084ff;
+            }
         }
 
         .section-icon {
+            background-color: #afb9c0;
             margin-right: 4px;
             width: 30px;
             max-width: 30px;
             min-width: 30px;
+            height: 30px;
+            max-height: 30px;
+            min-height: 30px;
         }
 
         .section-label {

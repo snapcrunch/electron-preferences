@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - UI of the settings menu
+- New icons
+- Clicking on the path of a directory will also open the select folder dialog
 
 ## [2.1.1] - 2020-03-11
 ### Fixed
