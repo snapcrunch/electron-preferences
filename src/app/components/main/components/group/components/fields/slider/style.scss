@@ -1,16 +1,52 @@
 .field-slider {
 
   input {
-
     width: 88%;
-
+    margin: 10px 0;
+    background-color: transparent;
+    -webkit-appearance: none;
+    outline: none;
+    opacity: 0.85;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    
+    &:focus {
+      outline: none;
+    }
+    
+    &:hover {
+      opacity: 1;
+    }
   }
-
+  
+  input::-webkit-slider-runnable-track {
+    background: rgba(0, 0, 0, 0.1);
+    border: 0;
+    border-radius: 5px;
+    width: 100%;
+    height: 10px;
+    cursor: pointer;
+  }
+  
+  input::-webkit-slider-thumb {
+    margin-top: -10px;
+    width: 15px;
+    height: 30px;
+    background: #006dd9;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    -webkit-appearance: none;
+  }
+  
+  input:focus::-webkit-slider-runnable-track {
+    background: rgba(0, 0, 0, 0.15);
+  }
+  
   label {
     width: 8%;
     font-size: 14px;
     padding: 4px;
-    vertical-align: super;
   }
 
 }
