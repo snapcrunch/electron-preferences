@@ -51,11 +51,13 @@
         }
 
         .section-label {
-
             font-size: 12px;
-
         }
 
     }
 
+    &::-webkit-scrollbar
+    {
+        width: 8px;
+    }
 }
