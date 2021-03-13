@@ -250,6 +250,12 @@ ipcRenderer.on('preferencesUpdated', (e, preferences) => {
 ipcRenderer.sendSync('setPreferences', { ... });
 ```
 
+## Dark or Light? 🌓
+You prefer a dark theme over a light theme? No problem, we have them both. The library will use whatever theme you're using with Electron. See the example on how to add the option to your preferences.
+
+<img src="misc/dark.png" />
+<img src="misc/light.png" />
+
 ## Field Types
 
 The library includes built-in support for the following field types:
