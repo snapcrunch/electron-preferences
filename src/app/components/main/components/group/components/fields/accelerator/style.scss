@@ -7,6 +7,7 @@
     background-color: rgb(243, 243, 243);
     border-radius: 8px;
     outline: none;
+    transition: border-color 0.1s ease-out;
 
     &:focus {
       border: 2px solid #b5c7d9;
