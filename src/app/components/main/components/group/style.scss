@@ -60,6 +60,14 @@
             .help {
                 color: #5d5d5d;
             }
+
+            .bt {
+                background-color: rgba(0,0,0,0.1);
+
+                &:hover {
+                    background-color: rgba(0,0,0,0.4);
+                }
+            }
         }
     }
 }
