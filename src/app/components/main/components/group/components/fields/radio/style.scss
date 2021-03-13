@@ -49,8 +49,8 @@
       display: none;
       transform: scale(1);
       animation-delay: 0.3s;
-      animation: zoom-in 0.3s 1;
-      -webkit-animation: zoom-in 0.3s 1;
+      animation: zoom-in-check-circle 0.3s 1;
+      -webkit-animation: zoom-in-check-circle 0.3s 1;
     }
 
     input:checked ~ .check-circle:after {
@@ -67,7 +67,7 @@
       border: 2px solid white;
     }
 
-    @keyframes zoom-in {
+    @keyframes zoom-in-check-circle {
       0%   {transform: scale(0.0);}
       25%  {transform: scale(0.3);}
       50%  {transform: scale(0.8);}

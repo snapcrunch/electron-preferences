@@ -15,9 +15,11 @@ class CheckboxField extends React.Component {
         const options = this.options.map((option, idx) => {
             const id = `${fieldID}_${idx}`;
             return (
-                <div className="checkbox-option" key={ idx }>
-                <input type="checkbox" id={ id } onChange={ this.onChange.bind(this) } checked={ this.value.indexOf(option.value) >= 0 } /> <label htmlFor={ id }>{ option.label }</label>
-                </div>
+                <label htmlFor={ id } className="checkbox-option">
+                    { option.label }
+                    <input type="checkbox" id={ id } onChange={ this.onChange.bind(this) } checked={ this.value.indexOf(option.value) >= 0 } />
+                    <span className="check-square" />
+                </label>
             );
         });
 
