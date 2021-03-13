@@ -33,7 +33,7 @@ class DirectoryField extends React.Component {
 
         }
 
-        let btLabel = this.value ? 'Choose Another Folder' : 'Choose a Folder';
+        const btLabel = this.value ? 'Choose Another Folder' : 'Choose a Folder';
 
         return (
             <div className="field field-directory">
