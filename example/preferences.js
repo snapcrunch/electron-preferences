@@ -138,7 +138,6 @@ const preferences = new ElectronPreferences({
             'form': {
                 'groups': [
                     {
-                        'label': 'Other Settings',
                         'fields': [
                             {
                                 'label': 'Phone Number',
