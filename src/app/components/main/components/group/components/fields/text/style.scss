@@ -18,3 +18,14 @@
     }
 
 }
+
+@media (prefers-color-scheme: dark) {
+    .field-text {
+
+        input {
+            color: #e4e4e4;
+            background-color: #191919;
+            border: 1px solid #131313;
+        }
+    }
+}

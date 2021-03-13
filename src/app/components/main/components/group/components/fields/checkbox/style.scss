@@ -41,6 +41,7 @@
 
     &:hover input:checked ~ .check-square {
       background-color: #006dd9;
+      border-color: #006dd9;
     }
     
     .check-square:after {
@@ -73,6 +74,27 @@
       25%  {transform: scale(0.3) rotate(30deg);}
       50%  {transform: scale(0.8) rotate(45deg);}
       100% {transform: scale(1.0) rotate(45deg);}
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .field-checkbox {
+
+    .checkbox-option {
+      
+      &:hover input ~ .check-square {
+        background-color: rgba(0,0,0,0.1);
+      }
+      
+      .check-square {
+        border: 1px solid #0e0e0e;
+      }
+      
+      .check-square:after {
+        border: solid #252525;
+        border-width: 0 3px 3px 0;
+      }
     }
   }
 }

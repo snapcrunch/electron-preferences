@@ -41,6 +41,7 @@
 
     &:hover input:checked ~ .check-circle {
       background-color: #006dd9;
+      border-color: #006dd9;
     }
 
     .check-circle:after {
@@ -72,6 +73,26 @@
       25%  {transform: scale(0.3);}
       50%  {transform: scale(0.8);}
       100% {transform: scale(1.0);}
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .field-radio {
+
+    .radio-option {
+
+      &:hover input ~ .check-circle {
+        background-color: rgba(0,0,0,0.1);
+      }
+
+      .check-circle {
+        border: 1px solid #0e0e0e;
+      }
+
+      .check-circle:after {
+        border: 2px solid #252525;
+      }
     }
   }
 }

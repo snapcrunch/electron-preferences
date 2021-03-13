@@ -48,9 +48,18 @@
                 cursor: pointer;
                 background-color: rgba(0,0,0,0.4);
             }
-
         }
-
     }
+}
 
+@media (prefers-color-scheme: dark) {
+    .group {
+
+        .field {
+
+            .help {
+                color: #5d5d5d;
+            }
+        }
+    }
 }

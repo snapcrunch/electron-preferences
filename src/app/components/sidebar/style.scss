@@ -61,3 +61,17 @@
         width: 8px;
     }
 }
+
+@media (prefers-color-scheme: dark) {
+    .sidebar {
+        background-color: #212121;
+        
+        .sidebar-section {
+            color: #787878;
+            
+            .section-icon {
+                background-color: #787878;
+            }
+        }
+    }
+}
