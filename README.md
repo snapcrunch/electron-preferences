@@ -315,6 +315,10 @@ The following icons come packaged with the library and can be specified when you
         <td><img src="assets/svg/bookmark-2.svg" height="40" width="40" /></td>
     </tr>
     <tr>
+        <td>brightness-6</td>
+        <td><img src="assets/svg/brightness-6.svg" height="40" width="40" /></td>
+    </tr>
+    <tr>
         <td>briefcase-24</td>
         <td><img src="assets/svg/briefcase-24.svg" height="40" width="40" /></td>
     </tr>
