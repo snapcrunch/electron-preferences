@@ -3,8 +3,6 @@
     .group-label {
         font-size: 20px;
         font-weight: bold;
-        //text-transform: uppercase;
-        //border-bottom: 1px dashed #000;
         margin-bottom: 10px;
     }
 
@@ -18,7 +16,6 @@
 
         .field-label {
             font-weight: bold;
-            //border-bottom: 1px dashed #ccc;
             margin-bottom: 10px;
             font-size: 15px;
         }
@@ -48,9 +45,26 @@
                 cursor: pointer;
                 background-color: rgba(0,0,0,0.4);
             }
-
         }
-
     }
+}
 
+@media (prefers-color-scheme: dark) {
+    .group {
+
+        .field {
+
+            .help {
+                color: #5d5d5d;
+            }
+
+            .bt {
+                background-color: rgba(0,0,0,0.1);
+
+                &:hover {
+                    background-color: rgba(0,0,0,0.4);
+                }
+            }
+        }
+    }
 }

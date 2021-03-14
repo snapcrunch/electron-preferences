@@ -15,3 +15,14 @@
   }
 
 }
+
+@media (prefers-color-scheme: dark) {
+  .field-accelerator {
+
+    input {
+      color: #e4e4e4;
+      background-color: #3c3c3c;
+    }
+  }
+}
+

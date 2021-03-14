@@ -2,20 +2,24 @@
 
 const electron = require('electron');
 const app = electron.app;
+const nativeTheme = electron.nativeTheme;
 const BrowserWindow = electron.BrowserWindow;
 const path = require('path');
-const os = require('os');
 const url = require('url');
 const preferences = require('./preferences');
 
+nativeTheme.themeSource = preferences.preferences?.theme?.theme ?? "system";
+
 preferences.on('save', (preferences) => {
     console.log(`Preferences were saved.`, JSON.stringify(preferences, null, 4));
+
+    nativeTheme.themeSource = preferences?.theme?.theme ?? "system";
 });
 
 let mainWindow;
 
 function createWindow() {
-
+    
     mainWindow = new BrowserWindow({
         'width': 1200,
         'height': 700,

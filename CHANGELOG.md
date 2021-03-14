@@ -6,7 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- Dark theme! 🌗
 - Help information for the color component
+- Brightness icon
 
 ### Changed
 - UI of the settings menu

@@ -177,6 +177,30 @@ const preferences = new ElectronPreferences({
                     }
                 ]
             }
+        },
+        {
+            'id': 'theme',
+            'label': 'Theme',
+            'icon': 'brightness-6',
+            'form': {
+                'groups': [
+                    {
+                        'fields': [
+                            {
+                                'label': "Theme",
+                                'key': 'theme',
+                                'type': 'radio',
+                                'options': [
+                                    {'label': 'System (default)', 'value': 'system'},
+                                    {'label': 'Light', 'value': 'light'},
+                                    {'label': 'Dark', 'value': 'dark'}
+                                ],
+                                'help': 'Light or dark theme?'
+                            }
+                        ]
+                    }
+                ]
+            }
         }
     ]
 });
