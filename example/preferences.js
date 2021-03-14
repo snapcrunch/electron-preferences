@@ -138,7 +138,6 @@ const preferences = new ElectronPreferences({
             'form': {
                 'groups': [
                     {
-                        'label': 'Other Settings',
                         'fields': [
                             {
                                 'label': 'Phone Number',
@@ -156,6 +155,17 @@ const preferences = new ElectronPreferences({
                                     {'label': 'FooBar', 'value': 'foobar'},
                                 ],
                                 'help': 'Foo? Bar?'
+                            },
+                            {
+                                'label': "Bar or Foo?",
+                                'key': 'barfoo',
+                                'type': 'radio',
+                                'options': [
+                                    {'label': 'Bar', 'value': 'bar'},
+                                    {'label': 'Foo', 'value': 'foo'},
+                                    {'label': 'BarFoo', 'value': 'barfoo'},
+                                ],
+                                'help': 'Bar? Foo?'
                             },
                             {
                                 'label': 'Shortcut',

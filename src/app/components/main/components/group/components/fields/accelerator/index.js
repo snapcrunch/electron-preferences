@@ -59,7 +59,7 @@ class AcceleratorField extends React.Component {
 
     mapAccelerator(keys) {
         
-        let arr = keys.map((item) => {
+        const arr = keys.map((item) => {
             if (item === ' ') return "Space";
             if (item === '+') return "Plus";
             if (/^[a-z]$/.test(item)) return item.toUpperCase();

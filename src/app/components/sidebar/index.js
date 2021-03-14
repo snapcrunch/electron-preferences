@@ -12,9 +12,14 @@ class Sidebar extends React.Component {
             if (this.activeSection === section.id) {
                 className += ' active';
             }
+            
+            const style = {
+                mask: `url("svg/${section.icon}.svg") no-repeat center / contain`,
+                webkitMask: `url("svg/${section.icon}.svg") no-repeat center / contain`
+            }
             return (
                 <div key={ section.id } className={ className } onClick={ this.selectSection.bind(this, section.id) }>
-                    <img className="section-icon" src={ 'svg/' + section.icon + '.svg' } />
+                    <div className="section-icon" style={ style } />
                     <span className="section-label">{ section.label }</span>
                 </div>
             );

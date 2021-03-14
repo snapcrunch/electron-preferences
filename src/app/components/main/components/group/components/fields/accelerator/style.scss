@@ -1,12 +1,17 @@
 .field-accelerator {
 
   input {
-
     width: 100%;
     font-size: 14px;
-    padding: 4px;
+    padding: 8px;
     background-color: rgb(243, 243, 243);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.1s ease-out;
 
+    &:focus {
+      border: 2px solid #b5c7d9;
+    }
   }
 
 }

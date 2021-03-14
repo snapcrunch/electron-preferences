@@ -30,15 +30,10 @@ class Group extends React.Component {
 
     render() {
 
-        let label;
-        if (this.label) {
-            label = (
-                <div className="group-label">{ this.label }</div>
-            );
-        }
+        const label = this.label ? <div className="group-label">{ this.label }</div> : null;
 
-        let fields = this.fields.map((field, idx) => {
-            let Field = fieldMap[field.type];
+        const fields = this.fields.map((field, idx) => {
+            const Field = fieldMap[field.type];
             if (!Field) {
                 return;
             }
