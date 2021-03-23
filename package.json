@@ -14,9 +14,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "example": "cd example && electron main.js",
-    "prepare": "npm run build",
-    "build": "grunt build",
-    "build-example": "npm run build && npm run example"
+    "build:grunt": "grunt build",
+    "build:example": "npm run build:grunt && npm run example"
   },
   "author": "Tim Ambler <tkambler@gmail.com>",
   "license": "MIT",
@@ -40,6 +39,7 @@
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-cssmin": "^3.0.0",
     "grunt-contrib-watch": "^1.1.0",
+    "grunt-sass": "^3.1.0",
     "grunt-webpack": "^4.0.2",
     "handlebars": "^4.7.6",
     "html-loader": "^0.5.5",
