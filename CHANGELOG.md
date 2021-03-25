@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - 'step' property to slider input
+- hover state to sidebar items
 
 ## [2.2.0] - 2020-03-14
 ### Added

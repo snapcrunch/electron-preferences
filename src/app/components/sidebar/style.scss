@@ -28,6 +28,7 @@
         align-items: center;
         color: #5d5d5d;
         font-weight: 600;
+        cursor: pointer;
 
         &.active {
             //background-color: #0084ff;
@@ -37,6 +38,10 @@
             .section-icon {
                 background-color: #0084ff;
             }
+        }
+        
+        &:hover {
+            background-color: rgba(0,0,0,0.1);
         }
 
         .section-icon {
