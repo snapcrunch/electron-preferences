@@ -179,8 +179,10 @@ class ElectronPreferences extends EventEmitter2 {
         };
 
         const defaultWebPreferences = {
-            nodeIntegration: true,
-            enableRemoteModule: true
+            nodeIntegration: false,
+            enableRemoteModule: true,
+            contextIsolation: true,
+            preload: path.join(__dirname, './preload.js')
         }
         if (browserWindowOpts.webPreferences) {
             browserWindowOpts.webPreferences = Object.assign(defaultWebPreferences, browserWindowOpts.webPreferences)

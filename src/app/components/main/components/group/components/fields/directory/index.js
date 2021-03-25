@@ -2,8 +2,7 @@
 
 import React from 'react';
 import './style.scss';
-const { remote } = window.require('electron');
-const { dialog } = remote;
+const { dialog } = api;
 
 class DirectoryField extends React.Component {
 
