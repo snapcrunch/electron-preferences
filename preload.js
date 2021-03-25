@@ -6,17 +6,18 @@ const ipcRenderer = electron.ipcRenderer;
 
 contextBridge.exposeInMainWorld("api", {
     getPreferenceOptions: () => {
-        return ipcRenderer.sendSync('getPreferenceOptions');
+        return ipcRenderer.sendSync("getPreferenceOptions");
     },
     getPreferences: () => {
-        return ipcRenderer.sendSync('getPreferences');
+        return ipcRenderer.sendSync("getPreferences");
     },
     getDefaults: () => {
-        return ipcRenderer.sendSync('getDefaults');
+        return ipcRenderer.sendSync("getDefaults");
     },
     setPreferences: (preferences) => {
-        ipcRenderer.send('setPreferences', preferences);
+        return ipcRenderer.send("setPreferences", preferences);
     },
-    
-    dialog: electron.dialog
+    showOpenDialog: (dialogOptions) => {
+        return ipcRenderer.sendSync("showOpenDialog", dialogOptions);
+    }
 });

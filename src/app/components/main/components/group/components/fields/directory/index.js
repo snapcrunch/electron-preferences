@@ -2,7 +2,6 @@
 
 import React from 'react';
 import './style.scss';
-const { dialog } = api;
 
 class DirectoryField extends React.Component {
 
@@ -11,25 +10,19 @@ class DirectoryField extends React.Component {
     render() {
 
         const choose = () => {
-
-            dialog.showOpenDialog({
+            const result = api.showOpenDialog({
                 properties: [
                     'openDirectory',
                     'createDirectory',
                 ]
-            })
-                .then((res) => {
+            });
+            
+            if (!result)
+                return;
 
-                    if (res.canceled) {
-                        return;
-                    }
-
-                    if (res.filePaths && res.filePaths.length) {
-                        this.onChange(res.filePaths[0]);
-                    }
-
-                });
-
+            if (result.length) {
+                this.onChange(result[0]);
+            }
         }
 
         const btLabel = this.value ? 'Choose Another Folder' : 'Choose a Folder';

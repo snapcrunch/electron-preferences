@@ -1,7 +1,7 @@
 'use strict';
 
 const electron = require('electron');
-const { app, BrowserWindow, ipcMain, webContents } = electron;
+const { BrowserWindow, ipcMain, webContents, dialog } = electron;
 const path = require('path');
 const url = require('url');
 const fs = require('fs-extra');
@@ -69,17 +69,17 @@ class ElectronPreferences extends EventEmitter2 {
             event.returnValue = this.options;
         });
 
-        ipcMain.on('restoreDefaults', (event, value) => {
+        ipcMain.on('restoreDefaults', (event) => {
             this.preferences = this.defaults;
             this.save();
             this.broadcast();
         });
 
-        ipcMain.on('getDefaults', (event, value) => {
+        ipcMain.on('getDefaults', (event) => {
             event.returnValue = this.defaults;
         });
 
-        ipcMain.on('getPreferences', (event, value) => {
+        ipcMain.on('getPreferences', (event) => {
             event.returnValue = this.preferences;
         });
 
@@ -89,6 +89,10 @@ class ElectronPreferences extends EventEmitter2 {
             this.broadcast();
             this.emit('save', Object.freeze(_.cloneDeep(this.preferences)));
             event.returnValue = null;
+        });
+
+        ipcMain.on('showOpenDialog', (event, dialogOptions) => {
+            event.returnValue = dialog.showOpenDialogSync(dialogOptions);
         });
 
         if (_.isFunction(options.afterLoad)) {
@@ -180,7 +184,7 @@ class ElectronPreferences extends EventEmitter2 {
 
         const defaultWebPreferences = {
             nodeIntegration: false,
-            enableRemoteModule: true,
+            enableRemoteModule: false,
             contextIsolation: true,
             preload: path.join(__dirname, './preload.js')
         }
