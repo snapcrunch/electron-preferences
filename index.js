@@ -10,24 +10,17 @@ const { EventEmitter2 } = require('eventemitter2');
 
 class ElectronPreferences extends EventEmitter2 {
 
-    constructor(options = {}) {
+    constructor(options = {
+    	'sections': [],
+    	'webPreferences': {
+    	    'devTools': false
+    	}
+    }) {
 
         super();
 
-        _.defaultsDeep(options, {
-            'sections': [],
-            'webPreferences': {
-                'devTools': false
-            }
-        });
-
-        options.sections.forEach((section, sectionIdx) => {
-            _.defaultsDeep(section, {
-                'form': {
-                    'groups': []
-                }
-            });
-            section.form.groups = section.form.groups.map((group, groupIdx) => {
+        options.sections && options.sections.forEach((section, sectionIdx) => {
+            section.form && section.form.groups && section.form.groups.map((group, groupIdx) => {
                 group.id = 'group' + sectionIdx + groupIdx;
                 return group;
             });
@@ -36,7 +29,7 @@ class ElectronPreferences extends EventEmitter2 {
         this.options = options;
 
         if (!this.dataStore) {
-            throw new Error(`The 'dataStore' option is required.`);
+			this.dataStore = path.resolve(__dirname, 'preferences.json')
         }
 
         fs.ensureFileSync(this.dataStore);
@@ -45,6 +38,7 @@ class ElectronPreferences extends EventEmitter2 {
             'throws': false
         });
 
+        // Store default values into the current data
         if (!this.preferences) {
             this.preferences = this.defaults;
         } else {
@@ -61,6 +55,8 @@ class ElectronPreferences extends EventEmitter2 {
 
         this.save();
 
+
+        // Setup IPC
         ipcMain.on('showPreferences', (event) => {
             this.show();
         });
