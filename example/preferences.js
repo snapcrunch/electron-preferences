@@ -23,11 +23,11 @@ const preferences = new ElectronPreferences({
             'show': true
         }
     },
-    'webPreferences': {
-        'devTools': true
-    },
     'browserWindowOverrides': {
         'title': 'My Electron Preferences',
+        'webPreferences': {
+	        'devTools': true
+	    },
     },
     'sections': [
         {

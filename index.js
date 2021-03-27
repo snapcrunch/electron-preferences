@@ -161,9 +161,11 @@ class ElectronPreferences extends EventEmitter2 {
     show() {
 
         if (this.prefsWindow) {
+        	this.prefsWindow.show()
             return;
         }
 
+        // Default browserwindow options
         let browserWindowOpts = {
             title: 'Preferences',
             width: 800,
@@ -175,25 +177,27 @@ class ElectronPreferences extends EventEmitter2 {
             maximizable: false,
             backgroundColor: '#E7E7E7',
             show: true,
-            webPreferences: this.options.webPreferences
+            webPreferences: {
+	            nodeIntegration: true,
+	            enableRemoteModule: true
+	        }
         };
 
-        const defaultWebPreferences = {
-            nodeIntegration: true,
-            enableRemoteModule: true
-        }
-        if (browserWindowOpts.webPreferences) {
-            browserWindowOpts.webPreferences = Object.assign(defaultWebPreferences, browserWindowOpts.webPreferences)
-        } else {
-            browserWindowOpts.webPreferences = defaultWebPreferences;
-        }
+        // If we're going to keep lodash around, embrace it
 
         if (this.options.browserWindowOverrides) {
-            browserWindowOpts = Object.assign(browserWindowOpts, this.options.browserWindowOverrides);
+            _.merge(browserWindowOpts, this.options.browserWindowOverrides);
         }
 
+        // Legacy - Previously supported a separate webPreferences option
+        if (this.options.webPreferences) {
+        	_.merge(browserWindowOpts.webPreferences, this.options.webPreferences)
+        }
+
+        // Create the preferences window
         this.prefsWindow = new BrowserWindow(browserWindowOpts);
 
+        // Attach a file menu
         if (this.options.menuBar) {
             this.prefsWindow.setMenu(this.options.menuBar);
         } else {
