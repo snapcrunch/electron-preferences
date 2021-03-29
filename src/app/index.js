@@ -6,10 +6,9 @@ import Sidebar from './components/sidebar';
 import Main from './components/main';
 import _ from 'lodash';
 
-const { ipcRenderer } = window.require('electron');
-const options = ipcRenderer.sendSync('getPreferenceOptions');
-const preferences = ipcRenderer.sendSync('getPreferences');
-const defaults = ipcRenderer.sendSync('getDefaults');
+const options = api.getPreferenceOptions();
+const preferences = api.getPreferences();
+const defaults = api.getDefaults();
 
 options.sections = options.sections.filter((section) => {
     return _.isBoolean(section.enabled) ? section.enabled : true;
@@ -56,7 +55,7 @@ class App extends React.Component {
             'preferences': preferences
         });
 
-        ipcRenderer.send('setPreferences', preferences);
+        api.setPreferences(preferences);
 
     }
 
