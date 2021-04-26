@@ -24,34 +24,31 @@
     margin-top: 10px;
   }
 
-  .ep-list-button:first-child {
-    border: 1px solid black;
-    background-color: #fff;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-  }
-
-  .ep-list-button:last-child {
-    border: 1px solid black;
-    border-left: none;
-    background-color: #fff;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-  }
-
   .ep-list-button {
     cursor: pointer;
-    border-top: 1px solid black;
-    border-right: 1px solid black;
-    border-bottom: 1px solid black;
+    border-top: 1px solid;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    border-color: black;
     background-color: #fff;
     padding: 5px;
     font-size: 14px;
+    
+    &:first-child {
+      border: 1px solid;
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+    }
+    
+    &:last-child {
+      border: 1px solid;
+      border-left: none;
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
   }
 
   .ep-list-button:active {
-    //background: linear-gradient(#779BD8, #0B54D3);
-    //box-shadow: 0px 0px 1px rgba(0,0,0,0.65);
     border-color: #0084ff;
     color: #0084ff;
   }
@@ -145,5 +142,52 @@
 }
 
 .ReactModal__Content {
-  border-radius: 8px;
+  border-radius: 8px !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .field-list {
+    .ep-list {
+      color: white;
+      background-color: #191919;
+      border-color: #131313;
+    }
+
+    .ep-list-button {
+      background-color: #191919;
+      color: white;
+      border-color: #131313;
+      
+      &:first-child, &:last-child {
+        border-color: #131313;
+      }
+    }
+  }
+  
+  .ReactModal__Content {
+    background-color: #212121 !important;
+    border-color: #131313 !important;
+  }
+
+  .ep-list-modal-input-container {
+    .ep-list-modal-input {
+      color: #e4e4e4;
+      background-color: #191919;
+      border: 1px solid #131313;
+    }
+
+    .ep-list-modal-input-label {
+      color: white;
+    }
+  }
+
+  .ep-list-modal-button {
+    color: white;
+    background: #191919;
+    border: 2px solid grey;
+
+    &:disabled {
+      opacity: 0.7;
+    }
+  }
 }
