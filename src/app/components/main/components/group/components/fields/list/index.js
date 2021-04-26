@@ -30,9 +30,7 @@ class ListField extends React.Component {
                       }
                     </select>
                   </div>
-                  <div style={{
-                      'marginTop': '10px'
-                  }}>
+                  <div className="ep-list-button-container">
                   <span className="ep-list-button" onClick={ this.addClick }><span className="ep-list-button-text">+</span></span>
                   <span className="ep-list-button" onClick={ this.removeClick }><span className="ep-list-button-text">-</span></span>
                   { this.orderable &&
