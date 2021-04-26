@@ -1,11 +1,29 @@
 .field-dropdown {
 
     select {
-
         width: 100%;
         font-size: 14px;
-        padding: 4px;
+        border-radius: 8px;
+        border: 1px solid #bdc2c9;
+        background-color: #ffffff;
+        padding: 8px;
+        outline: none;
+        margin: 1px;
 
+        &:focus {
+            border: 2px solid #0084ff;
+            margin: 0;
+        }
     }
+}
 
+@media (prefers-color-scheme: dark) {
+    .field-dropdown {
+
+        select {
+            color: #e4e4e4;
+            background-color: #191919;
+            border: 1px solid #131313;
+        }
+    }
 }

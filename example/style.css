@@ -1,3 +1,14 @@
+body {
+    background: white;
+}
+
 .bt {
     margin: 25px;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #252525;
+        color: #e4e4e4;
+    }
 }

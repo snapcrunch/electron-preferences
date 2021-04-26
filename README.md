@@ -1,16 +1,17 @@
 # Electron Preferences
 
-- [Introduction](#introduction)
-- [Getting Started](#getting-started)
-- [Initializing the Preferences Service](#initializing-the-preferences-service)
-- [Interacting with the Preferences Service from the Main Process](#interacting-with-the-preferences-service-from-the-main-process)
-- [Interacting with the Preferences Service from the Renderer Process](#interacting-with-the-preferences-service-from-the-renderer-process)
-- [Field Types](#field-types)
-- [Icons](#icons)
+- [Electron Preferences](#electron-preferences)
+  - [Introduction](#introduction)
+  - [Getting Started](#getting-started)
+    - [Initializing the Preferences Service](#initializing-the-preferences-service)
+    - [Interacting with the Preferences Service from the Main Process](#interacting-with-the-preferences-service-from-the-main-process)
+    - [Interacting with the Preferences Service from the Renderer Process](#interacting-with-the-preferences-service-from-the-renderer-process)
+  - [Field Types](#field-types)
+  - [Icons](#icons)
 
 ## Introduction
 
-This module provides [Electron](https://electronjs.org/) developers with with a simple, consistent interface for managing user preferences. It includes two primary components:
+This package provides [Electron](https://electronjs.org/) developers with a simple, consistent interface for managing user preferences. It includes two primary components:
 
 - A GUI interface within which the users of your application can manage their preferences.
 - An API for interacting with the service.
@@ -66,15 +67,6 @@ const preferences = new ElectronPreferences({
         'drawer': {
             'show': true
         }
-    },
-    /**
-     * If the `onLoad` method is specified, this function will be called immediately after
-     * preferences are loaded for the first time. The return value of this method will be stored as the
-     * preferences object.
-     */
-    'onLoad': (preferences) => {
-        // ...
-        return preferences;
     },
     /**
      * The preferences window is divided into sections. Each section has a label, an icon, and one or
@@ -258,6 +250,12 @@ ipcRenderer.on('preferencesUpdated', (e, preferences) => {
 ipcRenderer.sendSync('setPreferences', { ... });
 ```
 
+## Dark or Light? 🌓
+You prefer a dark theme over a light theme? No problem, we have them both. The library will use whatever theme you're using with Electron. See the example on how to add the option to your preferences.
+
+<img src="misc/dark.png" />
+<img src="misc/light.png" />
+
 ## Field Types
 
 The library includes built-in support for the following field types:
@@ -321,6 +319,10 @@ The following icons come packaged with the library and can be specified when you
     <tr>
         <td>bookmark-2</td>
         <td><img src="assets/svg/bookmark-2.svg" height="40" width="40" /></td>
+    </tr>
+    <tr>
+        <td>brightness-6</td>
+        <td><img src="assets/svg/brightness-6.svg" height="40" width="40" /></td>
     </tr>
     <tr>
         <td>briefcase-24</td>

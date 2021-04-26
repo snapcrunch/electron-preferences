@@ -16,12 +16,15 @@ class ColorField extends React.Component {
         return (
             <div className="field field-color">
                 <div className="field-label">{ this.label }</div>
-                <div className="color-swatch" onClick={ this.handleClick }>
-                    <div className="color" style={ this.style }/>
+                <div className="color-container">
+                    <div className="color-swatch" onClick={ this.handleClick }>
+                        <div className="color" style={ this.style }/>
+                    </div>
+                    { this.state.displayColorPicker ? <div className="color-popover">
+                        <ChromePicker color={ this.value } onChange={ this.onChange.bind(this) } disableAlpha={ this.format === "hex" }/>
+                    </div> : null }
                 </div>
-                { this.state.displayColorPicker ? <div className="color-popover">
-                    <ChromePicker color={ this.value } onChange={ this.onChange.bind(this) } disableAlpha={ this.format === "hex" }/>
-                </div> : null }
+                { this.help && <span className="help">{ this.help }</span> }
             </div>
         );
 

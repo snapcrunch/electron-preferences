@@ -33,7 +33,7 @@ class ListField extends React.Component {
                   <div style={{
                       'marginTop': '10px'
                   }}>
-                  <span className="ep-list-button-first" onClick={ this.addClick }><span className="ep-list-button-text">+</span></span>
+                  <span className="ep-list-button" onClick={ this.addClick }><span className="ep-list-button-text">+</span></span>
                   <span className="ep-list-button" onClick={ this.removeClick }><span className="ep-list-button-text">-</span></span>
                   { this.orderable &&
                     <React.Fragment>
@@ -46,11 +46,7 @@ class ListField extends React.Component {
                     <div className="ep-list-modal-container">
                       <div className="ep-list-modal-input-container">
                         <label className="ep-list-modal-input-label">{ this.addItemLabel }</label>
-                        <input className="ep-list-modal-input" type="text" value={ this.state.itemToAdd } onChange={ this.itemToAddChanged }
-                        style={{
-                            'width': '100%'
-                        }}
-                         />
+                        <input className="ep-list-modal-input" type="text" value={ this.state.itemToAdd } autoFocus={ true } onChange={ this.itemToAddChanged } />
                       </div>
                       <div className="ep-list-modal-button-container">
                         <button className="ep-list-modal-button" onClick={ this.cancelAdd.bind(this) }>Cancel</button>

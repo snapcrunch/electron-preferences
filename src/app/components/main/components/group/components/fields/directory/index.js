@@ -2,8 +2,6 @@
 
 import React from 'react';
 import './style.scss';
-const { remote } = window.require('electron');
-const { dialog } = remote;
 
 class DirectoryField extends React.Component {
 
@@ -12,20 +10,27 @@ class DirectoryField extends React.Component {
     render() {
 
         const choose = () => {
+            const result = api.showOpenDialog({
+                properties: [
+                    'openDirectory',
+                    'createDirectory',
+                ]
+            });
+            
+            if (!result)
+                return;
 
-            const value = dialog.showOpenDialog({properties: ['openDirectory']});
-            if (value) {
-                this.onChange(value[0]);
+            if (result.length) {
+                this.onChange(result[0]);
             }
-
         }
 
-        let btLabel = this.value ? 'Choose Another Folder' : 'Choose a Folder';
+        const btLabel = this.value ? 'Choose Another Folder' : 'Choose a Folder';
 
         return (
             <div className="field field-directory">
                 <div className="field-label">{ this.label }</div>
-                <div className="value">
+                <div className="value" onClick={ choose }>
                     Folder: { this.value }
                 </div>
                 <div className="bt" onClick={ choose }>

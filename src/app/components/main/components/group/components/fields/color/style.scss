@@ -6,6 +6,10 @@
     border-radius: 2px;
   }
 
+  .color-container {
+    position: relative;
+  }
+
   .color-swatch {
     padding: 5px;
     background: #fff;
@@ -16,6 +20,9 @@
   }
 
   .color-popover {
+    position: absolute;
+    top: 0;
+    left: 50px;
     z-index: 2;
   }
 
@@ -26,5 +33,17 @@
     bottom: 0;
     left: 0;
   }
+  
+  .flexbox-fix {
+    font-family: 'Open Sans', sans-serif;
+  }
+}
 
+@media (prefers-color-scheme: dark) {
+  .field-color {
+
+    .color-swatch {
+      background-color: #191919;
+    }
+  }
 }

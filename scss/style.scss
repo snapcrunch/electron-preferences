@@ -63,3 +63,31 @@ body {
 .appearActive {
     border: 1px solid yellow;
 }
+
+::-webkit-scrollbar-track
+{
+    
+}
+
+::-webkit-scrollbar
+{
+    width: 12px;
+}
+
+::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    background-color: #afb9c0;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #252525;
+        color: #e4e4e4;
+    }
+
+    ::-webkit-scrollbar-thumb
+    {
+        background-color: #151515;
+    }
+}

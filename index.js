@@ -1,7 +1,7 @@
 'use strict';
 
 const electron = require('electron');
-const { app, BrowserWindow, ipcMain, webContents } = electron;
+const { BrowserWindow, ipcMain, webContents, dialog } = electron;
 const path = require('path');
 const url = require('url');
 const fs = require('fs-extra');
@@ -11,7 +11,7 @@ const { EventEmitter2 } = require('eventemitter2');
 class ElectronPreferences extends EventEmitter2 {
 
     constructor(options = {}) {
-        
+
         super();
 
         _.defaultsDeep(options, {
@@ -47,6 +47,12 @@ class ElectronPreferences extends EventEmitter2 {
 
         if (!this.preferences) {
             this.preferences = this.defaults;
+        } else {
+            _.keys(this.defaults).forEach(prefDefault => {
+                if (!(prefDefault in this.preferences)) {
+                    this.preferences[prefDefault] = this.defaults[prefDefault]
+                }
+            })
         }
 
         if (_.isFunction(options.onLoad)) {
@@ -63,17 +69,17 @@ class ElectronPreferences extends EventEmitter2 {
             event.returnValue = this.options;
         });
 
-        ipcMain.on('restoreDefaults', (event, value) => {
+        ipcMain.on('restoreDefaults', (event) => {
             this.preferences = this.defaults;
             this.save();
             this.broadcast();
         });
 
-        ipcMain.on('getDefaults', (event, value) => {
+        ipcMain.on('getDefaults', (event) => {
             event.returnValue = this.defaults;
         });
 
-        ipcMain.on('getPreferences', (event, value) => {
+        ipcMain.on('getPreferences', (event) => {
             event.returnValue = this.preferences;
         });
 
@@ -84,6 +90,14 @@ class ElectronPreferences extends EventEmitter2 {
             this.emit('save', Object.freeze(_.cloneDeep(this.preferences)));
             event.returnValue = null;
         });
+
+        ipcMain.on('showOpenDialog', (event, dialogOptions) => {
+            event.returnValue = dialog.showOpenDialogSync(dialogOptions);
+        });
+
+        if (_.isFunction(options.afterLoad)) {
+            options.afterLoad(this);
+        }
 
     }
 
@@ -154,19 +168,43 @@ class ElectronPreferences extends EventEmitter2 {
             return;
         }
 
-        this.prefsWindow = new BrowserWindow({
-            'title': 'Preferences',
-            'width': 800,
-            'maxWidth': 800,
-            'height': 600,
-            'maxHeight': 600,
-            'resizable': false,
-            'acceptFirstMouse': true,
-            'maximizable': false,
-            'backgroundColor': '#E7E7E7',
-            'show': true,
-            'webPreferences': this.options.webPreferences
-        });
+        let browserWindowOpts = {
+            title: 'Preferences',
+            width: 800,
+            maxWidth: 800,
+            height: 600,
+            maxHeight: 600,
+            resizable: false,
+            acceptFirstMouse: true,
+            maximizable: false,
+            backgroundColor: '#E7E7E7',
+            show: true,
+            webPreferences: this.options.webPreferences
+        };
+
+        const defaultWebPreferences = {
+            nodeIntegration: false,
+            enableRemoteModule: false,
+            contextIsolation: true,
+            preload: path.join(__dirname, './preload.js')
+        }
+        if (browserWindowOpts.webPreferences) {
+            browserWindowOpts.webPreferences = Object.assign(defaultWebPreferences, browserWindowOpts.webPreferences)
+        } else {
+            browserWindowOpts.webPreferences = defaultWebPreferences;
+        }
+
+        if (this.options.browserWindowOverrides) {
+            browserWindowOpts = Object.assign(browserWindowOpts, this.options.browserWindowOverrides);
+        }
+
+        this.prefsWindow = new BrowserWindow(browserWindowOpts);
+
+        if (this.options.menuBar) {
+            this.prefsWindow.setMenu(this.options.menuBar);
+        } else {
+            this.prefsWindow.removeMenu();
+        }
 
         this.prefsWindow.loadURL(url.format({
             'pathname': path.join(__dirname, 'build/index.html'),

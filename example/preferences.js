@@ -1,7 +1,7 @@
 'use strict';
 
-const electron = require('electron');
-const app = electron.app;
+// const electron = require('electron');
+// const app = electron.app;
 const path = require('path');
 const os = require('os');
 const ElectronPreferences = require('../');
@@ -23,15 +23,11 @@ const preferences = new ElectronPreferences({
             'show': true
         }
     },
-    'onLoad': (data) => {
-
-        console.log('data', data);
-
-        return data;
-
-    },
     'webPreferences': {
         'devTools': true
+    },
+    'browserWindowOverrides': {
+        'title': 'My Electron Preferences',
     },
     'sections': [
         {
@@ -142,7 +138,6 @@ const preferences = new ElectronPreferences({
             'form': {
                 'groups': [
                     {
-                        'label': 'Other Settings',
                         'fields': [
                             {
                                 'label': 'Phone Number',
@@ -162,13 +157,33 @@ const preferences = new ElectronPreferences({
                                 'help': 'Foo? Bar?'
                             },
                             {
+                                'label': "Bar or Foo?",
+                                'key': 'barfoo',
+                                'type': 'radio',
+                                'options': [
+                                    {'label': 'Bar', 'value': 'bar'},
+                                    {'label': 'Foo', 'value': 'foo'},
+                                    {'label': 'BarFoo', 'value': 'barfoo'},
+                                ],
+                                'help': 'Bar? Foo?'
+                            },
+                            {
                                 'label': 'Shortcut',
                                 'key': 'shortcut',
                                 'type': 'accelerator',
                                 'help': 'A keyboard shortcut'
                             }
                         ]
-                    },
+                    }
+                ]
+            }
+        },
+        {
+            'id': 'lists',
+            'label': 'Lists',
+            'icon': 'notes',
+            'form': {
+                'groups': [
                     {
                         'label': 'Lists',
                         'fields': [
@@ -191,6 +206,30 @@ const preferences = new ElectronPreferences({
                                 },
                                 'help': 'An ordered list of nice places to visit',
                                 'orderable': true
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            'id': 'theme',
+            'label': 'Theme',
+            'icon': 'brightness-6',
+            'form': {
+                'groups': [
+                    {
+                        'fields': [
+                            {
+                                'label': "Theme",
+                                'key': 'theme',
+                                'type': 'radio',
+                                'options': [
+                                    {'label': 'System (default)', 'value': 'system'},
+                                    {'label': 'Light', 'value': 'light'},
+                                    {'label': 'Dark', 'value': 'dark'}
+                                ],
+                                'help': 'Light or dark theme?'
                             }
                         ]
                     }
