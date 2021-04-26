@@ -6,13 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- Orderable List component
 - 'step' property to slider input
 - hover state to sidebar items
 
 ### Changed
-- update to electron v12
-- enable context isolation
-- disable remote module
+- Update to electron v12
+- Enable context isolation
+- Disable remote module
 
 ## [2.2.0] - 2020-03-14
 ### Added

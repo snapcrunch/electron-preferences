@@ -267,6 +267,7 @@ The library includes built-in support for the following field types:
 - Checkbox
 - Radio
 - Slider
+- (Ordered) Lists
 - Accelerator (for shortcut input)
 - Color picker
 
