@@ -5,14 +5,6 @@ module.exports = (grunt) => {
     require('load-grunt-tasks')(grunt);
 
     grunt.config.init({
-        'concat': {
-            'vendor': {
-                'src': [
-                ],
-                'dest': 'build/js/vendor.js',
-                'nonull': true
-            }
-        },
         'compass': {
             'all': {
                 'options': {
@@ -27,14 +19,6 @@ module.exports = (grunt) => {
                     'outputStyle': 'compressed',
                     'importPath': [
                         'node_modules'
-                    ]
-                }
-            }
-        },
-        'cssmin': {
-            'vendor': {
-                'files': {
-                    'build/css/vendor.css': [
                     ]
                 }
             }
@@ -97,7 +81,7 @@ module.exports = (grunt) => {
         }
     });
 
-    grunt.registerTask('build', ['concat', 'cssmin', 'copy', 'compass', 'webpack:once']);
-    grunt.registerTask('build-watch', ['concat', 'cssmin', 'copy', 'compass', 'watch']);
+    grunt.registerTask('build', ['copy', 'compass', 'webpack:once']);
+    grunt.registerTask('build-watch', ['copy', 'compass', 'watch']);
 
 };
