@@ -27,13 +27,7 @@ body {
 }
 
 .noselect {
-  -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
+    user-select: none;
 }
 
 ::-webkit-scrollbar-track
@@ -63,3 +57,6 @@ body {
         background-color: #151515;
     }
 }
+
+@import "../src/app/components/main/style";
+@import "../src/app/components/sidebar/style";
