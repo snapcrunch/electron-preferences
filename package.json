@@ -12,7 +12,7 @@
     "preferences"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: argh, you called my bluff. We don't have any tests yet :(\" && exit 1",
     "example": "cd example && electron main.js",
     "prepare": "npm run build",
     "build": "rimraf ./build && webpack-cli",
@@ -29,15 +29,15 @@
     "babel-preset-react": "^6.24.1",
     "cache-loader": "^4.1.0",
     "copy-webpack-plugin": "^8.1.1",
-    "css-loader": "^0.28.11",
-    "electron": "^12.0.2",
-    "handlebars": "^4.7.6",
+    "css-loader": "^5.2.4",
+    "electron": "^12.0.5",
+    "handlebars": "^4.7.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rimraf": "^3.0.2",
     "sass": "^1.32.11",
     "sass-loader": "^11.0.1",
-    "style-loader": "^0.23.1",
+    "style-loader": "^2.0.0",
     "webpack": "^5.36.1",
     "webpack-cli": "^4.6.0"
   },
