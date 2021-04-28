@@ -2,6 +2,7 @@
 
 const webpack = require('webpack');
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     'entry': './src/app/index.js',
@@ -9,8 +10,8 @@ module.exports = {
         'ignored': /node_modules/
     },
     'output': {
-        'path': path.resolve(__dirname, 'build/js'),
-        'filename': 'app.bundle.js'
+        'path': path.resolve(__dirname, 'build'),
+        'filename': 'app.js'
     },
     'resolve': {
         'extensions': [
@@ -25,11 +26,11 @@ module.exports = {
         }
     },
     'plugins': [
-//         new webpack.DefinePlugin({
-//             'process.env': {
-//                 'NODE_ENV': JSON.stringify('development')
-//             }
-//         })
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: 'assets' }
+            ]
+        })
     ],
     'module': {
         'rules': [
@@ -52,20 +53,9 @@ module.exports = {
             {
                 'test': /\.scss$/,
                 'use': [
-                    {
-                        'loader': 'cache-loader'
-                    },
-                    {
-                        'loader': 'style-loader'
-                    },
-                    {
-                        'loader': 'css-loader'
-                    },
-                    {
-                        'loader': 'sass-loader',
-                        'options': {
-                        }
-                    }
+                    "style-loader",
+                    "css-loader",
+                    "sass-loader"
                 ]
             }
         ]
