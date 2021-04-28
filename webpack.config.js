@@ -14,7 +14,7 @@ module.exports = {
     },
     'resolve': {
         'extensions': [
-            '.js', '.json', '.scss', '.html', '.txt'
+            '.js', '.scss'
         ],
         'modules': [
             path.resolve(__dirname, 'src'),
@@ -48,23 +48,6 @@ module.exports = {
                         }
                     }
                 ]
-            },
-            {
-                'test': /\.json5$/,
-                'use': 'json5-loader'
-            },
-            {
-                'test': /\.html$/,
-                'use': {
-                    'loader': 'html-loader',
-                    'options': {
-                        'attrs': false
-                    }
-                }
-            },
-            {
-                'test': /\.txt$/,
-                'use': 'raw-loader'
             },
             {
                 'test': /\.scss$/,
