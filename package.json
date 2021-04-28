@@ -60,6 +60,7 @@
     "eventemitter2": "^5.0.1",
     "fs-extra": "^5.0.0",
     "lodash": "^4.17.4",
-    "react-color": "^2.14.1"
+    "react-color": "^2.14.1",
+    "react-modal": "^3.13.1"
   }
 }
