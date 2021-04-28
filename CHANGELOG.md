@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update to electron v12
 - Enable context isolation
 - Disable remote module
+- Build with webpack
+
+### Removed
+- Grunt dependency for building
 
 ## [2.2.0] - 2020-03-14
 ### Added
