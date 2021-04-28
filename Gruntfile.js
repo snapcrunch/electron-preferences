@@ -24,22 +24,6 @@ module.exports = (grunt) => {
             }
         },
         'copy': {
-            'fonts': {
-                'files': [
-                    {
-                        'expand': true,
-                        'cwd': 'node_modules/opensans-npm-webfont/fonts',
-                        'src': '**/*',
-                        'dest': 'build/fonts'
-                    },
-                    {
-                        'expand': true,
-                        'cwd': 'node_modules/font-awesome/fonts',
-                        'src': '**/*',
-                        'dest': 'build/fonts'
-                    },
-                ]
-            },
             'assets': {
                 'expand': true,
                 'cwd': 'assets',
