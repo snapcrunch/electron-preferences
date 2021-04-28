@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import './style.scss';
 import {newGuid} from "../../../../../../../utils/newGuid";
 
 class RadioField extends React.Component {

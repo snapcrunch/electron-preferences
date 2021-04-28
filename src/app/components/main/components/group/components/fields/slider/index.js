@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import './style.scss';
 
 class SliderField extends React.Component {
 

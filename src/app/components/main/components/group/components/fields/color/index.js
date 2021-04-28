@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import './style.scss';
 import { ChromePicker } from "react-color";
 import * as ReactDOM from "react-dom";
 
