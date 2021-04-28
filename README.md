@@ -37,6 +37,7 @@ To see the library in action, clone this repository and see the demo application
 ### Initializing the Preferences Service
 
 Within your application's main process, create a new instance of the `ElectronPreferences` class, as shown below.
+Please keep in mind that not all available components are used here. For an example usage of them, check out `example/preferences.js`
 
 ```
 const electron = require('electron');
