@@ -12,10 +12,10 @@ body {
     height: 100%;
     min-height: 100%;
     overflow: hidden;
-    font-family: 'Open Sans', sans-serif;
+    font-family: sans-serif, Verdana;
 }
 
-#window {
+.window {
     height: 100%;
     min-height: 100%;
     display: flex;
@@ -27,41 +27,7 @@ body {
 }
 
 .noselect {
-  -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
-}
-
-@fa-font-path: "/fonts";
-@import "opensans-npm-webfont/style.scss";
-@import "font-awesome/scss/font-awesome.scss";
-
-.enter {
-    border: 1px solid green;
-}
-
-.enterActive {
-    border: 1px solid red;
-}
-
-.leave {
-    border: 1px solid blue;
-}
-
-.leaveActive {
-    border: 1px solid orange;
-}
-
-.appear {
-    border: 1px solid purple;
-}
-
-.appearActive {
-    border: 1px solid yellow;
+    user-select: none;
 }
 
 ::-webkit-scrollbar-track
@@ -91,3 +57,6 @@ body {
         background-color: #151515;
     }
 }
+
+@import "../src/app/components/main/style";
+@import "../src/app/components/sidebar/style";

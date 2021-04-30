@@ -2,19 +2,21 @@
 
 const webpack = require('webpack');
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
+    'mode': 'production',
     'entry': './src/app/index.js',
     'watchOptions': {
         'ignored': /node_modules/
     },
     'output': {
-        'path': path.resolve(__dirname, 'build/js'),
-        'filename': 'app.bundle.js'
+        'path': path.resolve(__dirname, 'build'),
+        'filename': 'app.js'
     },
     'resolve': {
         'extensions': [
-            '.js', '.json', '.scss', '.html', '.txt'
+            '.js', '.scss'
         ],
         'modules': [
             path.resolve(__dirname, 'src'),
@@ -25,11 +27,11 @@ module.exports = {
         }
     },
     'plugins': [
-//         new webpack.DefinePlugin({
-//             'process.env': {
-//                 'NODE_ENV': JSON.stringify('development')
-//             }
-//         })
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: 'assets' }
+            ]
+        })
     ],
     'module': {
         'rules': [
@@ -50,39 +52,11 @@ module.exports = {
                 ]
             },
             {
-                'test': /\.json5$/,
-                'use': 'json5-loader'
-            },
-            {
-                'test': /\.html$/,
-                'use': {
-                    'loader': 'html-loader',
-                    'options': {
-                        'attrs': false
-                    }
-                }
-            },
-            {
-                'test': /\.txt$/,
-                'use': 'raw-loader'
-            },
-            {
                 'test': /\.scss$/,
                 'use': [
-                    {
-                        'loader': 'cache-loader'
-                    },
-                    {
-                        'loader': 'style-loader'
-                    },
-                    {
-                        'loader': 'css-loader'
-                    },
-                    {
-                        'loader': 'sass-loader',
-                        'options': {
-                        }
-                    }
+                    "style-loader",
+                    "css-loader",
+                    "sass-loader"
                 ]
             }
         ]

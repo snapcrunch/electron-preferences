@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import './style.scss';
 import Group from './components/group';
 import _ from 'lodash';
 

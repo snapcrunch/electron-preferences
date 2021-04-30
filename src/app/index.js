@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import Sidebar from './components/sidebar';
 import Main from './components/main';
 import _ from 'lodash';
+import '../../scss/style.scss';
 
 const options = api.getPreferenceOptions();
 const preferences = api.getPreferences();
