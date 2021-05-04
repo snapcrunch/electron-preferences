@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.1] - 2020-05-04
+### Fixed
+- Accidentally overwriting webpreferences
+
 ## [2.3.0] - 2020-04-30
 ### Added
 - Orderable List component
