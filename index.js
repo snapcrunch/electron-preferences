@@ -188,14 +188,15 @@ class ElectronPreferences extends EventEmitter2 {
             contextIsolation: true,
             preload: path.join(__dirname, './preload.js')
         }
+
+        if (this.options.browserWindowOverrides) {
+            browserWindowOpts = Object.assign(browserWindowOpts, this.options.browserWindowOverrides);
+        }
+
         if (browserWindowOpts.webPreferences) {
             browserWindowOpts.webPreferences = Object.assign(defaultWebPreferences, browserWindowOpts.webPreferences)
         } else {
             browserWindowOpts.webPreferences = defaultWebPreferences;
-        }
-
-        if (this.options.browserWindowOverrides) {
-            browserWindowOpts = Object.assign(browserWindowOpts, this.options.browserWindowOverrides);
         }
 
         this.prefsWindow = new BrowserWindow(browserWindowOpts);
