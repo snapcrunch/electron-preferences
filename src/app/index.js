@@ -7,15 +7,15 @@ import Main from './components/main';
 import _ from 'lodash';
 import '../../scss/style.scss';
 
-const options = api.getPreferenceOptions();
+const allSections = api.getSections();
 const preferences = api.getPreferences();
 const defaults = api.getDefaults();
 
-options.sections = options.sections.filter((section) => {
+const sections = allSections.filter((section) => {
     return _.isBoolean(section.enabled) ? section.enabled : true;
 });
 
-options.sections.forEach((section) => {
+sections.forEach((section) => {
     if (!preferences[section.id]) {
         preferences[section.id] = {};
     }
@@ -24,8 +24,8 @@ options.sections.forEach((section) => {
 class App extends React.Component {
 
     state = {
-        'options': options,
-        'activeSection': options.sections[0].id,
+        'sections': sections,
+        'activeSection': sections[0].id,
         'preferences': preferences
     };
 

@@ -6,7 +6,7 @@ class Sidebar extends React.Component {
 
     render() {
 
-        const sections = this.options.sections.map((section) => {
+        const sections = this.sections.map((section) => {
             let className = 'sidebar-section';
             if (this.activeSection === section.id) {
                 className += ' active';
@@ -32,9 +32,9 @@ class Sidebar extends React.Component {
 
     }
 
-    get options() {
+    get sections() {
 
-        return this.props.options;
+        return this.props.sections;
 
     }
 

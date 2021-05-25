@@ -65,8 +65,8 @@ class ElectronPreferences extends EventEmitter2 {
             this.show();
         });
 
-        ipcMain.on('getPreferenceOptions', (event) => {
-            event.returnValue = this.options;
+        ipcMain.on('getSections', (event) => {
+            event.returnValue = this.options.sections;
         });
 
         ipcMain.on('restoreDefaults', (event) => {
