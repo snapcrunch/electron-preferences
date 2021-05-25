@@ -5,8 +5,8 @@ const contextBridge = electron.contextBridge;
 const ipcRenderer = electron.ipcRenderer;
 
 contextBridge.exposeInMainWorld("api", {
-    getPreferenceOptions: () => {
-        return ipcRenderer.sendSync("getPreferenceOptions");
+    getSections: () => {
+        return ipcRenderer.sendSync("getSections");
     },
     getPreferences: () => {
         return ipcRenderer.sendSync("getPreferences");

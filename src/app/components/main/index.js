@@ -22,9 +22,9 @@ class Main extends React.Component {
 
     }
 
-    get options() {
+    get sections() {
 
-        return this.props.options;
+        return this.props.sections;
 
     }
 
@@ -34,21 +34,9 @@ class Main extends React.Component {
 
     }
 
-    get options() {
-
-        return this.props.options;
-
-    }
-
     get preferences() {
 
         return this.props.preferences;
-
-    }
-
-    get sections() {
-
-        return this.options.sections;
 
     }
 
