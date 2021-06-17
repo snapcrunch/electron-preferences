@@ -4,9 +4,11 @@ const electron = require('electron');
 const { BrowserWindow, ipcMain, webContents, dialog } = electron;
 const path = require('path');
 const url = require('url');
-const fs = require('fs-extra');
+const fs = require('fs');
 const _ = require('lodash');
 const { EventEmitter2 } = require('eventemitter2');
+const loadJsonFile = require('load-json-file');
+const writeJsonFile = require('write-json-file');
 
 class ElectronPreferences extends EventEmitter2 {
 
@@ -39,15 +41,20 @@ class ElectronPreferences extends EventEmitter2 {
             throw new Error(`The 'dataStore' option is required.`);
         }
 
-        fs.ensureFileSync(this.dataStore);
-
-        this.preferences = fs.readJsonSync(this.dataStore, {
-            'throws': false
-        });
+        // Load preferences file if exists
+        try {
+			if (fs.existsSync(this.dataStore)) {
+				this.preferences = loadJsonFile.sync(this.dataStore)
+			}
+        } catch(err) {
+			console.error(err)
+			this.preferences = null
+        }
 
         if (!this.preferences) {
             this.preferences = this.defaults;
         } else {
+        	// Set default preference values
             _.keys(this.defaults).forEach(prefDefault => {
                 if (!(prefDefault in this.preferences)) {
                     this.preferences[prefDefault] = this.defaults[prefDefault]
@@ -127,8 +134,8 @@ class ElectronPreferences extends EventEmitter2 {
 
     save() {
 
-        fs.writeJsonSync(this.dataStore, this.preferences, {
-            'spaces': 4
+        writeJsonFile(this.dataStore, this.preferences, {
+            indent: 4
         });
 
     }
