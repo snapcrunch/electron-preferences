@@ -209,7 +209,38 @@ const preferences = new ElectronPreferences({
                 ]
             }
         }
-    ]
+    ],
+    /**
+     * These parameters on the preference window settings can be overwrinten
+     */
+    browserWindowOpts: {
+        'title': 'My custom preferences title',
+        'width': 900,
+        'maxWidth': 1000,
+        'height': 700,
+        'maxHeight': 1000,
+        'resizable': true,
+        'maximizable': false,
+        //...
+    },
+    /**
+     * These parameters create an optional menu bar
+     */
+    menu: Menu.buildFromTemplate(
+        [
+            {
+            label: 'Window',
+            role: 'window',
+            submenu: [
+                {
+                label: 'Close',
+                accelerator: 'CmdOrCtrl+W',
+                role: 'close'
+                }
+            ]
+            }
+        ]
+    )
 });
 ````
 
