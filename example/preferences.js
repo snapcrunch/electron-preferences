@@ -122,6 +122,24 @@ const preferences = new ElectronPreferences({
                                 'help': 'The location where your notes will be stored.'
                             },
                             {
+                                'label': 'Select some images',
+                                'key': 'images',
+                                'type': 'file',
+                                'help': 'List of selected images',
+                                'filters': [
+                                    { name: 'Joint Photographic Experts Group (JPG)', extensions: ['jpg', 'jpeg', 'jpe', 'jfif', 'jfi', 'jif'] },
+                                    { name: 'Portable Network Graphics (PNG)', extensions: ['png'] },
+                                    { name: 'Graphics Interchange Format (GIF)', extensions: ['gif'] },
+                                    { name: 'All Images', extensions: ['jpg', 'jpeg', 'jpe', 'jfif', 'jfi', 'jif', 'png', 'gif'] },
+                                    //{ name: 'All Files', extensions: ['*'] }
+                                ],
+                                'multiSelections': true,
+                                'showHiddenFiles': true,
+                                'noResolveAliases': false,
+                                'treatPackageAsDirectory': false,
+                                'dontAddToRecent': true
+                            },
+                            {
                                 'heading': 'Important Message',
                                 'content': '<p>The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence.</p>',
                                 'type': 'message',

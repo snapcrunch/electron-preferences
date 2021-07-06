@@ -23,4 +23,7 @@ ipcRenderer.on('preferencesUpdated', (e, preferences) => {
 });
 
 
+const preferences = ipcRenderer.sendSync('getPreferences');
+console.log(preferences);
+
 console.log("Preloaded");
