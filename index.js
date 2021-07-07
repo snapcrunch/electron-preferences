@@ -1,7 +1,7 @@
 'use strict';
 
 const electron = require('electron');
-const { BrowserWindow, ipcMain, webContents, dialog } = electron;
+const {app, BrowserWindow, ipcMain, webContents, dialog } = electron;
 const path = require('path');
 const url = require('url');
 const fs = require('fs');
@@ -224,9 +224,27 @@ class ElectronPreferences extends EventEmitter2 {
             'slashes': true
         }));
 
-        // show: false by default, then show when ready to prevent page "flicker"
-		this.prefsWindow.once( 'ready-to-show', () => {
+		this.prefsWindow.once( 'ready-to-show', async() => {
 
+			// load custom css file
+			if (this.options.css) {
+		        try {
+
+					if (fs.existsSync(this.options.css)) {
+					  	await this.prefsWindow.webContents.executeJavaScript(` \
+					  		var f = document.createElement("link"); \
+					  		f.rel = "stylesheet"; \
+					  		f.type = "text/css"; \
+					  		f.href = "${path.join(app.getAppPath(), this.options.css)}"; \
+					  		document.getElementsByTagName("head")[0].appendChild(f) \
+					  	`)
+					}
+		        } catch(err) {
+					console.error(`Could not load css file ${this.options.css}: ${err}`)
+		        }
+			}
+
+	        // show: false by default, then show when ready to prevent page "flicker"
 			this.prefsWindow.show()
 
 		} )
