@@ -207,6 +207,8 @@ class ElectronPreferences extends EventEmitter2 {
         }
 
         this.prefsWindow = new BrowserWindow(browserWindowOpts);
+        
+        this.prefsWindow.webContents.openDevTools();
 
         if (this.options.menuBar) {
             this.prefsWindow.setMenu(this.options.menuBar);
