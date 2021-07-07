@@ -228,19 +228,19 @@ class ElectronPreferences extends EventEmitter2 {
 
 			// load custom css file
 			if (this.options.css) {
+	        	const file = path.join(app.getAppPath(), this.options.css)
 		        try {
-
-					if (fs.existsSync(this.options.css)) {
+					if (fs.existsSync(file)) {
 					  	await this.prefsWindow.webContents.executeJavaScript(` \
 					  		var f = document.createElement("link"); \
 					  		f.rel = "stylesheet"; \
 					  		f.type = "text/css"; \
-					  		f.href = "${path.join(app.getAppPath(), this.options.css)}"; \
+					  		f.href = "${file}"; \
 					  		document.getElementsByTagName("head")[0].appendChild(f) \
 					  	`)
 					}
 		        } catch(err) {
-					console.error(`Could not load css file ${this.options.css}: ${err}`)
+					console.error(`Could not load css file ${file}: ${err}`)
 		        }
 			}
 
