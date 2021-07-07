@@ -142,6 +142,8 @@ class ElectronPreferences extends EventEmitter2 {
 
     value(key, value) {
 
+    	// wtf is this doing exactly
+
         if (_.isArray(key)) {
             key.forEach(({ key, value }) => {
                 _.set(this.preferences, key, value);
@@ -185,7 +187,7 @@ class ElectronPreferences extends EventEmitter2 {
             acceptFirstMouse: true,
             maximizable: false,
             backgroundColor: '#E7E7E7',
-            show: true,
+            show: false,
             webPreferences: this.options.webPreferences
         };
 
@@ -196,10 +198,12 @@ class ElectronPreferences extends EventEmitter2 {
             preload: path.join(__dirname, './preload.js')
         }
 
+        // User provider `browserWindow`, we load those
         if (this.options.browserWindowOverrides) {
             browserWindowOpts = Object.assign(browserWindowOpts, this.options.browserWindowOverrides);
         }
 
+        //
         if (browserWindowOpts.webPreferences) {
             browserWindowOpts.webPreferences = Object.assign(defaultWebPreferences, browserWindowOpts.webPreferences)
         } else {
@@ -219,6 +223,13 @@ class ElectronPreferences extends EventEmitter2 {
             'protocol': 'file:',
             'slashes': true
         }));
+
+        // show: false by default, then show when ready to prevent page "flicker"
+		this.prefsWindow.once( 'ready-to-show', () => {
+
+			this.prefsWindow.show()
+
+		} )
 
         this.prefsWindow.on('closed', () => {
             this.prefsWindow = null;
