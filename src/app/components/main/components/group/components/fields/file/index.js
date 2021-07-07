@@ -71,6 +71,8 @@ class FileField extends React.Component {
 
     get value() { //Always return an array
         const { value } = this.props;
+        if (typeof(value) === "undefined")
+            return undefined;
         return isArray(value) ? value : [value];
     }
 
