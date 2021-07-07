@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import {isArray} from "../../../../../../../utils/isArray";
 
 class FileField extends React.Component {
 
@@ -9,16 +10,17 @@ class FileField extends React.Component {
     render() {
 
         const choose = () => {
+            const { multiSelections, showHiddenFiles, noResolveAliases, treatPackageAsDirectory, dontAddToRecent } = this;
             const properties = ['openFile'];
-            if (this.multiSelections)
+            if (multiSelections)
                 properties.push("multiSelections");
-            if (this.showHiddenFiles)
+            if (showHiddenFiles)
                 properties.push("showHiddenFiles");
-            if (this.noResolveAliases)
+            if (noResolveAliases)
                 properties.push("noResolveAliases");
-            if (this.treatPackageAsDirectory)
+            if (treatPackageAsDirectory)
                 properties.push("treatPackageAsDirectory");
-            if (this.dontAddToRecent)
+            if (dontAddToRecent)
                 properties.push("dontAddToRecent");
 
             const result = api.showOpenDialog({
@@ -30,12 +32,12 @@ class FileField extends React.Component {
                 return;
 
             if (result.length) {
-                this.onChange(result);
+                this.onChange(multiSelections ? result : result[0]);
             }
         }
 
-        const { multiSelections, values, help, label } = this;
-        const btLabel = values && values.length > 0
+        const { multiSelections, value, help, label } = this;
+        const btLabel = value && value.length > 0
             ? (multiSelections ? 'Choose other Files' : 'Choose another File')
             : (multiSelections ? 'Choose Files' : 'Choose a File');
 
@@ -45,11 +47,11 @@ class FileField extends React.Component {
                 <div className="value" onClick={choose}>
                     {multiSelections ? "Files" : "File"}:&nbsp;
                     {
-                        values
+                        value
                             ? (
-                                multiSelections || values.length > 1
-                                    ? <ul>{values.map(v => <li>{v}</li>)}</ul>
-                                    : values[0]
+                                multiSelections || value.length > 1
+                                    ? <ul>{value.map(v => <li>{v}</li>)}</ul>
+                                    : value[0]
                             )
                             : 'None'
                     }
@@ -67,8 +69,9 @@ class FileField extends React.Component {
         return this.props.field;
     }
 
-    get values() {
-        return this.props.value;
+    get value() { //Always return an array
+        const { value } = this.props;
+        return isArray(value) ? value : [value];
     }
 
     get label() {
