@@ -120,7 +120,11 @@ const preferences = new ElectronPreferences({
                                 'label': 'Read notes from folder',
                                 'key': 'folder',
                                 'type': 'directory',
-                                'help': 'The location where your notes will be stored.'
+                                'help': 'The location where your notes will be stored.',
+                                'multiSelections': false,
+                                'noResolveAliases': false,
+                                'treatPackageAsDirectory': false,
+                                'dontAddToRecent': true
                             },
                             {
                                 'label': 'Select some images',
