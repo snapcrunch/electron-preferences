@@ -173,6 +173,7 @@ const preferences = new ElectronPreferences({
                                 'key': 'shortcut',
                                 'type': 'accelerator',
                                 'help': 'A keyboard shortcut'
+                                'modifierRequired': true
                             }
                         ]
                     }
