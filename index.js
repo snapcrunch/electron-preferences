@@ -142,8 +142,7 @@ class ElectronPreferences extends EventEmitter2 {
 
     value(key, value) {
 
-    	// wtf is this doing exactly
-
+		// place the key/value pair(s) into this.preferences var
         if (_.isArray(key)) {
             key.forEach(({ key, value }) => {
                 _.set(this.preferences, key, value);
@@ -154,9 +153,11 @@ class ElectronPreferences extends EventEmitter2 {
             _.set(this.preferences, key, value);
             this.save();
             this.broadcast();
-        } else if (!_.isUndefined(key)) {
+        } else if (_.isUndefined(value)) {
+        	// value is undefined
             return _.cloneDeep(_.get(this.preferences, key));
         } else {
+        	// key is undefined
             return _.cloneDeep(this.preferences);
         }
 
@@ -230,7 +231,7 @@ class ElectronPreferences extends EventEmitter2 {
 			if (this.options.css) {
 	        	const file = path.join(app.getAppPath(), this.options.css)
 		        try {
-					if (fs.existsSync(file)) {
+					if (await fs.promises.stat(file)) {
 					  	await this.prefsWindow.webContents.executeJavaScript(` \
 					  		var f = document.createElement("link"); \
 					  		f.rel = "stylesheet"; \
