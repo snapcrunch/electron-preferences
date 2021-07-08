@@ -49,6 +49,11 @@ class SliderField extends React.Component {
 
     }
 
+    get step() {
+
+        return this.field.step || 1;
+
+    }
     get help() {
 
         return this.field.help;
@@ -57,7 +62,7 @@ class SliderField extends React.Component {
 
     onChange(e) {
 
-        return this.props.onChange(parseInt(e.target.value));
+    	return this.props.onChange(parseInt(e.target.value));
 
     }
 

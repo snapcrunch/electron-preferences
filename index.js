@@ -1,7 +1,7 @@
 'use strict';
 
 const electron = require('electron');
-const { BrowserWindow, ipcMain, webContents, dialog } = electron;
+const {app, BrowserWindow, ipcMain, webContents, dialog } = electron;
 const path = require('path');
 const url = require('url');
 const fs = require('fs');
@@ -142,6 +142,7 @@ class ElectronPreferences extends EventEmitter2 {
 
     value(key, value) {
 
+		// place the key/value pair(s) into this.preferences var
         if (_.isArray(key)) {
             key.forEach(({ key, value }) => {
                 _.set(this.preferences, key, value);
@@ -152,9 +153,11 @@ class ElectronPreferences extends EventEmitter2 {
             _.set(this.preferences, key, value);
             this.save();
             this.broadcast();
-        } else if (!_.isUndefined(key)) {
+        } else if (_.isUndefined(value)) {
+        	// value is undefined
             return _.cloneDeep(_.get(this.preferences, key));
         } else {
+        	// key is undefined
             return _.cloneDeep(this.preferences);
         }
 
@@ -185,7 +188,7 @@ class ElectronPreferences extends EventEmitter2 {
             acceptFirstMouse: true,
             maximizable: false,
             backgroundColor: '#E7E7E7',
-            show: true,
+            show: false,
             webPreferences: this.options.webPreferences
         };
 
@@ -196,10 +199,12 @@ class ElectronPreferences extends EventEmitter2 {
             preload: path.join(__dirname, './preload.js')
         }
 
+        // User provider `browserWindow`, we load those
         if (this.options.browserWindowOverrides) {
             browserWindowOpts = Object.assign(browserWindowOpts, this.options.browserWindowOverrides);
         }
 
+        //
         if (browserWindowOpts.webPreferences) {
             browserWindowOpts.webPreferences = Object.assign(defaultWebPreferences, browserWindowOpts.webPreferences)
         } else {
@@ -219,6 +224,31 @@ class ElectronPreferences extends EventEmitter2 {
             'protocol': 'file:',
             'slashes': true
         }));
+
+		this.prefsWindow.once( 'ready-to-show', async() => {
+
+			// load custom css file
+			if (this.options.css) {
+	        	const file = path.join(app.getAppPath(), this.options.css)
+		        try {
+					if (await fs.promises.stat(file)) {
+					  	await this.prefsWindow.webContents.executeJavaScript(` \
+					  		var f = document.createElement("link"); \
+					  		f.rel = "stylesheet"; \
+					  		f.type = "text/css"; \
+					  		f.href = "${file}"; \
+					  		document.getElementsByTagName("head")[0].appendChild(f) \
+					  	`)
+					}
+		        } catch(err) {
+					console.error(`Could not load css file ${file}: ${err}`)
+		        }
+			}
+
+	        // show: false by default, then show when ready to prevent page "flicker"
+			this.prefsWindow.show()
+
+		} )
 
         this.prefsWindow.on('closed', () => {
             this.prefsWindow = null;
