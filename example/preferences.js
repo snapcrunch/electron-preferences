@@ -7,6 +7,7 @@ const os = require('os');
 const ElectronPreferences = require('../');
 
 const preferences = new ElectronPreferences({
+    'css': 'custom-style.css',
     'dataStore': path.resolve(__dirname, 'preferences.json'),
     'defaults': {
         'notes': {
