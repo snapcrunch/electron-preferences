@@ -1,65 +1,77 @@
-'use strict';
+'use strict'
 
-import React from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
 
 class Sidebar extends React.Component {
 
-    render() {
+	render() {
 
-        const sections = this.sections.map((section) => {
-            let className = 'sidebar-section';
-            if (this.activeSection === section.id) {
-                className += ' active';
-            }
-            
-            const style = {
-                mask: `url("svg/${section.icon}.svg") no-repeat center / contain`,
-                webkitMask: `url("svg/${section.icon}.svg") no-repeat center / contain`
-            }
-            return (
-                <div key={ section.id } className={ className } onClick={ this.selectSection.bind(this, section.id) }>
-                    <div className="section-icon" style={ style } />
-                    <span className="section-label">{ section.label }</span>
-                </div>
-            );
-        });
+		const sections = this.sections.map( section => {
 
-        return (
-            <div className="sidebar">
-                { sections }
-            </div>
-        );
+			let className = 'sidebar-section'
+			if ( this.activeSection === section.id ) {
 
-    }
+				className += ' active'
 
-    get sections() {
+			}
 
-        return this.props.sections;
+			const style = {
+				mask: `url("svg/${section.icon}.svg") no-repeat center / contain`,
+				webkitMask: `url("svg/${section.icon}.svg") no-repeat center / contain`,
+			}
 
-    }
+			return (
+				<div key={ section.id } className={ className } onClick={ this.selectSection.bind( this, section.id ) }>
+					<div className="section-icon" style={ style } />
+					<span className="section-label">{ section.label }</span>
+				</div>
+			)
 
-    get activeSection() {
+		} )
 
-        return this.props.activeSection;
+		return (
+			<div className="sidebar">
+				{ sections }
+			</div>
+		)
 
-    }
+	}
 
-    get onSelectSection() {
+	get sections() {
 
-        return this.props.onSelectSection;
+		return this.props.sections
 
-    }
+	}
 
-    selectSection(sectionId) {
+	get activeSection() {
 
-        this.setState({
-            'activeSection': sectionId
-        });
+		return this.props.activeSection
 
-        this.onSelectSection(sectionId);
+	}
 
-    }
+	get onSelectSection() {
+
+		return this.props.onSelectSection
+
+	}
+
+	selectSection( sectionId ) {
+
+		this.setState( {
+			activeSection: sectionId,
+		} )
+
+		this.onSelectSection( sectionId )
+
+	}
 
 }
 
-module.exports = Sidebar;
+Sidebar.propTypes = {
+	sections: PropTypes.string,
+	activeSection: PropTypes.string,
+	onSelectSection: PropTypes.funct,
+}
+
+module.exports = Sidebar
