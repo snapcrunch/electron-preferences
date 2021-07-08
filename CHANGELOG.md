@@ -1,10 +1,14 @@
-# Changelog
+﻿# Changelog
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- File select component
+- Support multiple selection of files and folders via the 'multiSelections' option
+
 ### Changed
 - Read/write settings file atomically
 - Debounced saving settings file to 200ms (prevent overwriting disk)
