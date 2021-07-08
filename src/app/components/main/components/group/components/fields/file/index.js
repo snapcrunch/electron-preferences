@@ -8,35 +8,8 @@ class FileField extends React.Component {
     state = {};
 
     render() {
-
-        const choose = () => {
-            const { multiSelections, showHiddenFiles, noResolveAliases, treatPackageAsDirectory, dontAddToRecent } = this;
-            const properties = ['openFile'];
-            if (multiSelections)
-                properties.push("multiSelections");
-            if (showHiddenFiles)
-                properties.push("showHiddenFiles");
-            if (noResolveAliases)
-                properties.push("noResolveAliases");
-            if (treatPackageAsDirectory)
-                properties.push("treatPackageAsDirectory");
-            if (dontAddToRecent)
-                properties.push("dontAddToRecent");
-
-            const result = api.showOpenDialog({
-                properties: properties,
-                filters: this.filters
-            });
-
-            if (!result)
-                return;
-
-            if (result.length) {
-                this.onChange(multiSelections ? result : result[0]);
-            }
-        }
-
         const { multiSelections, value, help, label } = this;
+        
         const btLabel = value && value.length > 0
             ? (multiSelections ? 'Choose other Files' : 'Choose another File')
             : (multiSelections ? 'Choose Files' : 'Choose a File');
@@ -44,7 +17,7 @@ class FileField extends React.Component {
         return (
             <div className="field field-file">
                 <div className="field-label">{label}</div>
-                <div className="value" onClick={choose}>
+                <div className="value" onClick={this.choose}>
                     {multiSelections ? "Files" : "File"}:&nbsp;
                     {
                         value
@@ -56,7 +29,7 @@ class FileField extends React.Component {
                             : 'None'
                     }
                 </div>
-                <div className="bt" onClick={choose}>
+                <div className="bt" onClick={this.choose}>
                     {btLabel}
                 </div>
                 {help && <span className="help">{help}</span>}
@@ -114,6 +87,33 @@ class FileField extends React.Component {
 
     get onChange() {
         return this.props.onChange;
+    }
+
+    choose = () => {
+        const { multiSelections, showHiddenFiles, noResolveAliases, treatPackageAsDirectory, dontAddToRecent, filters } = this;
+        const properties = ['openFile'];
+        if (multiSelections)
+            properties.push("multiSelections");
+        if (showHiddenFiles)
+            properties.push("showHiddenFiles");
+        if (noResolveAliases)
+            properties.push("noResolveAliases");
+        if (treatPackageAsDirectory)
+            properties.push("treatPackageAsDirectory");
+        if (dontAddToRecent)
+            properties.push("dontAddToRecent");
+
+        const result = api.showOpenDialog({
+            properties: properties,
+            filters: filters
+        });
+
+        if (!result)
+            return;
+
+        if (result.length) {
+            this.onChange(multiSelections ? result : result[0]);
+        }
     }
 
 }
