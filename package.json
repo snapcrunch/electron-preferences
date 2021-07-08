@@ -12,6 +12,7 @@
     "preferences"
   ],
   "scripts": {
+    "lint": "eslint . --fix --ext .js,.jsx,.ts,.tsx",
     "test": "echo \"Error: argh, you called my bluff. We don't have any tests yet :(\" && exit 1",
     "example": "cd example && electron main.js",
     "prepare": "npm run build",
@@ -42,11 +43,56 @@
     "webpack-cli": "^4.6.0"
   },
   "dependencies": {
+    "eslint": "^7.30.0",
+    "eslint-plugin-react": "^7.24.0",
     "eventemitter2": "^5.0.1",
     "load-json-file": "^6.2.0",
     "lodash": "^4.17.21",
     "react-color": "^2.14.1",
     "react-modal": "^3.13.1",
-    "write-json-file": "^4.3.0"
+    "write-json-file": "^4.3.0",
+    "xo": "^0.41.0"
+  },
+  "xo": {
+    "envs": [
+      "node",
+      "browser"
+    ],
+    "rules": {
+      "array-bracket-spacing": [
+        "error",
+        "always"
+      ],
+      "padded-blocks": [
+        "error",
+        {
+          "blocks": "always",
+          "switches": "always",
+          "classes": "always"
+        }
+      ],
+      "padding-line-between-statements": [
+        "error",
+        {
+          "blankLine": "always",
+          "prev": "multiline-block-like",
+          "next": "*"
+        },
+        {
+          "blankLine": "always",
+          "prev": "*",
+          "next": "return"
+        }
+      ],
+      "object-curly-spacing": [
+        "error",
+        "always"
+      ],
+      "space-in-parens": [
+        "error",
+        "always"
+      ]
+    },
+    "semicolon": false
   }
 }
