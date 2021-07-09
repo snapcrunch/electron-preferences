@@ -13,16 +13,11 @@ const preferences = new ElectronPreferences({
 		notes: {
 			folder: path.resolve(os.homedir(), 'Notes'),
 		},
-		markdown: {
-			auto_format_links: true,
-			show_gutter: false,
-		},
-		preview: {
-			show: true,
-		},
-		drawer: {
-			show: true,
-		},
+		about: {
+			firstName: "Pieter-Jan",
+			lastName: "Van Robays",
+		}
+		//...
 	},
 	webPreferences: {
 		devTools: true,
@@ -42,13 +37,13 @@ const preferences = new ElectronPreferences({
 						fields: [
 							{
 								label: 'First Name',
-								key: 'first_name',
+								key: 'firstName',
 								type: 'text',
 								help: 'What is your first name?',
 							},
 							{
 								label: 'Last Name',
-								key: 'last_name',
+								key: 'lastName',
 								type: 'text',
 								help: 'What is your last name?',
 							},
@@ -74,7 +69,7 @@ const preferences = new ElectronPreferences({
 								key: 'foods',
 								type: 'checkbox',
 								options: [
-									{ label: 'Ice Cream', value: 'ice_cream' },
+									{ label: 'Ice Cream', value: 'iceCream' },
 									{ label: 'Carrots', value: 'carrots' },
 									{ label: 'Cake', value: 'cake' },
 									{ label: 'Spinach', value: 'spinach' },
@@ -90,14 +85,14 @@ const preferences = new ElectronPreferences({
 							},
 							{
 								label: 'Eye Color',
-								key: 'eye_color',
+								key: 'eyeColor',
 								type: 'color',
 								format: 'hex',
 								help: 'Your eye color',
 							},
 							{
 								label: 'Hair Color',
-								key: 'hair_color',
+								key: 'hairColor',
 								type: 'color',
 								format: 'rgb',
 								help: 'Your hair color',
@@ -164,7 +159,7 @@ const preferences = new ElectronPreferences({
 						fields: [
 							{
 								label: 'Phone Number',
-								key: 'phone_number',
+								key: 'phoneNumber',
 								type: 'text',
 								help: 'What is your phone number?',
 							},
