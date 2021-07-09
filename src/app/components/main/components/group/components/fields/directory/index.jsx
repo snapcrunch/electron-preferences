@@ -5,8 +5,6 @@ import {isArray} from "../../../../../../../utils/isArray";
 
 class DirectoryField extends React.Component {
 
-    state = {};
-
     render() {
         const { multiSelections, value, help, label } = this;
 
@@ -41,7 +39,7 @@ class DirectoryField extends React.Component {
     get field() {
         return this.props.field;
     }
-    
+
     get value() { //Always return an array
         const { value } = this.props;
         if (typeof(value) === "undefined")
@@ -80,7 +78,7 @@ class DirectoryField extends React.Component {
     get onChange() {
         return this.props.onChange;
     }
-    
+
     choose = () => {
         const { multiSelections, noResolveAliases, treatPackageAsDirectory, dontAddToRecent } = this;
         const properties = ['openDirectory', 'createDirectory'];
@@ -92,7 +90,7 @@ class DirectoryField extends React.Component {
             properties.push("treatPackageAsDirectory");
         if (dontAddToRecent)
             properties.push("dontAddToRecent");
-        
+
         const result = api.showOpenDialog({
             properties: properties
         });

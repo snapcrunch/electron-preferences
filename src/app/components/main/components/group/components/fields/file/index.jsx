@@ -4,12 +4,9 @@ import React from 'react';
 import {isArray} from "../../../../../../../utils/isArray";
 
 class FileField extends React.Component {
-
-    state = {};
-
     render() {
         const { multiSelections, value, help, label } = this;
-        
+
         const btLabel = value && value.length > 0
             ? (multiSelections ? 'Choose other Files' : 'Choose another File')
             : (multiSelections ? 'Choose Files' : 'Choose a File');
@@ -60,27 +57,27 @@ class FileField extends React.Component {
     get help() {
         return this.field.help;
     }
-    
+
     get filters() {
         return this.field.filters || undefined;
     }
-    
+
     get multiSelections() {
         return this.field.multiSelections || false;
     }
-    
+
     get showHiddenFiles() {
         return this.field.showHiddenFiles || false;
     }
-    
+
     get noResolveAliases() {
         return this.field.noResolveAliases || false;
     }
-    
+
     get treatPackageAsDirectory() {
         return this.field.treatPackageAsDirectory || false;
     }
-    
+
     get dontAddToRecent() {
         return this.field.dontAddToRecent || false;
     }

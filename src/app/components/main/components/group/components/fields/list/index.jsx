@@ -5,11 +5,14 @@ import ReactModal from 'react-modal';
 
 class ListField extends React.Component {
 
-    state = {
-      showInputModal: false,
-      itemToAdd: '',
-      selectedIndex: 0
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            showInputModal: false,
+            itemToAdd: '',
+            selectedIndex: 0
+        };
+    }
 
     render() {
         return (

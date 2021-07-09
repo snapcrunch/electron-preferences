@@ -14,10 +14,10 @@ const preferences = new ElectronPreferences({
 			folder: path.resolve(os.homedir(), 'Notes'),
 		},
 		about: {
-			firstName: "Pieter-Jan",
-			lastName: "Van Robays",
-		}
-		//...
+			firstName: 'Pieter-Jan',
+			lastName: 'Van Robays',
+		},
+		// ...
 	},
 	webPreferences: {
 		devTools: true,

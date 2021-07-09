@@ -1,52 +1,52 @@
-'use strict';
+'use strict'
 
-import React from 'react';
+import React from 'react'
 
 class MessageField extends React.Component {
 
-    state = {};
+	render() {
 
-    render() {
+		if (!this.heading && !this.content) {
 
-        if (!this.heading && !this.content) {
-            return null;
-        }
+			return null
 
-        return (
-            <div className="field field-message">
-                { this.heading && <div className="field-heading">{ this.heading }</div> }
-                <div className="field-content" dangerouslySetInnerHTML={ this.getContent() }></div>
-            </div>
-        );
+		}
 
-    }
+		return (
+			<div className="field field-message">
+				{ this.heading && <div className="field-heading">{ this.heading }</div> }
+				<div className="field-content" dangerouslySetInnerHTML={this.getContent()}/>
+			</div>
+		)
 
-    get field() {
+	}
 
-        return this.props.field;
+	get field() {
 
-    }
+		return this.props.field
 
-    get content() {
+	}
 
-        return this.field.content;
+	get content() {
 
-    }
+		return this.field.content
 
-    get heading() {
+	}
 
-        return this.field.heading;
+	get heading() {
 
-    }
+		return this.field.heading
 
-    getContent() {
+	}
 
-        return {
-            '__html': this.content
-        };
+	getContent() {
 
-    }
+		return {
+			__html: this.content,
+		}
+
+	}
 
 }
 
-export default MessageField;
+export default MessageField
