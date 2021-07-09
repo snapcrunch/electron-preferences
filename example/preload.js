@@ -1,25 +1,29 @@
-﻿"use strict";
+'use strict'
 
-const electron = require("electron");
-const contextBridge = electron.contextBridge;
-const ipcRenderer = electron.ipcRenderer;
+const electron = require( 'electron' )
+const { contextBridge } = electron
+const { ipcRenderer } = electron
 
-let onPreferencesChangedHandler = (preferences) => {};
+let onPreferencesChangedHandler = () => {}
 
-contextBridge.exposeInMainWorld("api", {
-    showPreferences: () => {
-        ipcRenderer.send('showPreferences');
-    },
-    getPreferences: () => {
-        return ipcRenderer.sendSync('getPreferences');
-    },
-    onPreferencesChanged: (handler) => {
-        onPreferencesChangedHandler = handler;
-    }
-});
+contextBridge.exposeInMainWorld( 'api', {
+	showPreferences: () => {
 
-ipcRenderer.on('preferencesUpdated', (e, preferences) => {
-    onPreferencesChangedHandler(preferences);
-});
+		ipcRenderer.send( 'showPreferences' )
 
-console.log("Preloaded");
+	},
+	getPreferences: () => ipcRenderer.sendSync( 'getPreferences' ),
+	onPreferencesChanged: handler => {
+
+		onPreferencesChangedHandler = handler
+
+	},
+} )
+
+ipcRenderer.on( 'preferencesUpdated', ( e, preferences ) => {
+
+	onPreferencesChangedHandler( preferences )
+
+} )
+
+console.log( 'Preloaded' )

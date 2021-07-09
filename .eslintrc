@@ -1,7 +1,7 @@
 {
-	'extends': [
-		'xo',
-	    'plugin:react/recommended'
+	"extends": [
+		"xo",
+	    "plugin:react/recommended"
 	],
 	"rules": {
 		"array-bracket-spacing": [
@@ -41,5 +41,12 @@
 			"error",
 			"always"
 		]
+	},
+	"settings": {
+		"react": {
+			"pragma": "React",
+			"fragment": "Fragment",
+			"version": "detect"
+		}
 	}
 }
