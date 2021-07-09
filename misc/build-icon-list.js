@@ -1,11 +1,11 @@
 'use strict'
 
-const Handlebars = require( 'handlebars' )
-const glob = require( 'glob' )
-const path = require( 'path' )
-const srcFolder = path.resolve( __dirname, '../assets/svg' )
+const Handlebars = require('handlebars')
+const glob = require('glob')
+const path = require('path')
+const srcFolder = path.resolve(__dirname, '../assets/svg')
 
-const tpl = Handlebars.compile( `
+const tpl = Handlebars.compile(`
 <table style="width: 100%;">
     <thead>
         <tr>
@@ -22,18 +22,18 @@ const tpl = Handlebars.compile( `
     {{/each}}
 </tbody>
 </table>
-` )
+`)
 
-const icons = glob.sync( '*.svg', {
+const icons = glob.sync('*.svg', {
 	cwd: srcFolder,
-} )
-	.map( icon => ( {
+})
+	.map(icon => ({
 		path: `assets/svg/${icon}`,
-		name: path.basename( icon, '.svg' ),
-	} ) )
+		name: path.basename(icon, '.svg'),
+	}))
 
-const rendered = tpl( {
+const rendered = tpl({
 	icons,
-} )
+})
 
-console.log( rendered )
+console.log(rendered)

@@ -1,147 +1,147 @@
 'use strict'
 
-const electron = require( 'electron' )
+const electron = require('electron')
 const { app, BrowserWindow, ipcMain, webContents, dialog } = electron
-const path = require( 'path' )
-const url = require( 'url' )
-const fs = require( 'fs' )
-const _ = require( 'lodash' )
-const { EventEmitter2 } = require( 'eventemitter2' )
-const loadJsonFile = require( 'load-json-file' )
-const writeJsonFile = require( 'write-json-file' )
+const path = require('path')
+const url = require('url')
+const fs = require('fs')
+const _ = require('lodash')
+const { EventEmitter2 } = require('eventemitter2')
+const loadJsonFile = require('load-json-file')
+const writeJsonFile = require('write-json-file')
 
 class ElectronPreferences extends EventEmitter2 {
 
-	constructor( options = {} ) {
+	constructor(options = {}) {
 
 		super()
 
-		_.defaultsDeep( options, {
+		_.defaultsDeep(options, {
 			sections: [],
 			webPreferences: {
 				devTools: false,
 			},
-		} )
+		})
 
-		options.sections.forEach( ( section, sectionIdx ) => {
+		options.sections.forEach((section, sectionIdx) => {
 
-			_.defaultsDeep( section, {
+			_.defaultsDeep(section, {
 				form: {
 					groups: [],
 				},
-			} )
-			section.form.groups = section.form.groups.map( ( group, groupIdx ) => {
+			})
+			section.form.groups = section.form.groups.map((group, groupIdx) => {
 
 				group.id = 'group' + sectionIdx + groupIdx
 
 				return group
 
-			} )
+			})
 
-		} )
+		})
 
 		this.options = options
 
-		if ( !this.dataStore ) {
+		if (!this.dataStore) {
 
-			throw new Error( 'The \'dataStore\' option is required.' )
+			throw new Error('The \'dataStore\' option is required.')
 
 		}
 
 		// Load preferences file if exists
 		try {
 
-			if ( fs.existsSync( this.dataStore ) ) {
+			if (fs.existsSync(this.dataStore)) {
 
-				this.preferences = loadJsonFile.sync( this.dataStore )
+				this.preferences = loadJsonFile.sync(this.dataStore)
 
 			}
 
-		} catch ( err ) {
+		} catch (err) {
 
-			console.error( err )
+			console.error(err)
 			this.preferences = null
 
 		}
 
-		if ( !this.preferences ) {
+		if (!this.preferences) {
 
 			this.preferences = this.defaults
 
 		} else {
 
         	// Set default preference values
-			_.keys( this.defaults ).forEach( prefDefault => {
+			_.keys(this.defaults).forEach(prefDefault => {
 
-				if ( !( prefDefault in this.preferences ) ) {
+				if (!(prefDefault in this.preferences)) {
 
 					this.preferences[prefDefault] = this.defaults[prefDefault]
 
 				}
 
-			} )
+			})
 
 		}
 
-		if ( _.isFunction( options.onLoad ) ) {
+		if (_.isFunction(options.onLoad)) {
 
-			this.preferences = options.onLoad( this.preferences )
+			this.preferences = options.onLoad(this.preferences)
 
 		}
 
 		this.save()
 
-		ipcMain.on( 'showPreferences', event => {
+		ipcMain.on('showPreferences', event => {
 
 			this.show()
 
-		} )
+		})
 
-		ipcMain.on( 'getSections', event => {
+		ipcMain.on('getSections', event => {
 
 			event.returnValue = this.options.sections
 
-		} )
+		})
 
-		ipcMain.on( 'restoreDefaults', event => {
+		ipcMain.on('restoreDefaults', event => {
 
 			this.preferences = this.defaults
 			this.save()
 			this.broadcast()
 
-		} )
+		})
 
-		ipcMain.on( 'getDefaults', event => {
+		ipcMain.on('getDefaults', event => {
 
 			event.returnValue = this.defaults
 
-		} )
+		})
 
-		ipcMain.on( 'getPreferences', event => {
+		ipcMain.on('getPreferences', event => {
 
 			event.returnValue = this.preferences
 
-		} )
+		})
 
-		ipcMain.on( 'setPreferences', ( event, value ) => {
+		ipcMain.on('setPreferences', (event, value) => {
 
 			this.preferences = value
 			this.save()
 			this.broadcast()
-			this.emit( 'save', Object.freeze( _.cloneDeep( this.preferences ) ) )
+			this.emit('save', Object.freeze(_.cloneDeep(this.preferences)))
 			event.returnValue = null
 
-		} )
+		})
 
-		ipcMain.on( 'showOpenDialog', ( event, dialogOptions ) => {
+		ipcMain.on('showOpenDialog', (event, dialogOptions) => {
 
-			event.returnValue = dialog.showOpenDialogSync( dialogOptions )
+			event.returnValue = dialog.showOpenDialogSync(dialogOptions)
 
-		} )
+		})
 
-		if ( _.isFunction( options.afterLoad ) ) {
+		if (_.isFunction(options.afterLoad)) {
 
-			options.afterLoad( this )
+			options.afterLoad(this)
 
 		}
 
@@ -165,7 +165,7 @@ class ElectronPreferences extends EventEmitter2 {
 
 	}
 
-	set preferences( value ) {
+	set preferences(value) {
 
 		this._preferences = value
 
@@ -173,40 +173,40 @@ class ElectronPreferences extends EventEmitter2 {
 
 	save() {
 
-		writeJsonFile( this.dataStore, this.preferences, {
+		writeJsonFile(this.dataStore, this.preferences, {
 			indent: 4,
-		} )
+		})
 
 	}
 
-	value( key, value ) {
+	value(key, value) {
 
 		// Place the key/value pair(s) into this.preferences var
-		if ( _.isArray( key ) ) {
+		if (_.isArray(key)) {
 
-			key.forEach( ( { key, value } ) => {
+			key.forEach(({ key, value }) => {
 
-				_.set( this.preferences, key, value )
+				_.set(this.preferences, key, value)
 
-			} )
+			})
 			this.save()
 			this.broadcast()
 
-		} else if ( !_.isUndefined( key ) && !_.isUndefined( value ) ) {
+		} else if (!_.isUndefined(key) && !_.isUndefined(value)) {
 
-			_.set( this.preferences, key, value )
+			_.set(this.preferences, key, value)
 			this.save()
 			this.broadcast()
 
-		} else if ( _.isUndefined( value ) ) {
+		} else if (_.isUndefined(value)) {
 
         	// Value is undefined
-			return _.cloneDeep( _.get( this.preferences, key ) )
+			return _.cloneDeep(_.get(this.preferences, key))
 
 		} else {
 
         	// Key is undefined
-			return _.cloneDeep( this.preferences )
+			return _.cloneDeep(this.preferences)
 
 		}
 
@@ -215,17 +215,17 @@ class ElectronPreferences extends EventEmitter2 {
 	broadcast() {
 
 		webContents.getAllWebContents()
-			.forEach( wc => {
+			.forEach(wc => {
 
-				wc.send( 'preferencesUpdated', this.preferences )
+				wc.send('preferencesUpdated', this.preferences)
 
-			} )
+			})
 
 	}
 
 	show() {
 
-		if ( this.prefsWindow ) {
+		if (this.prefsWindow) {
 
 			return
 
@@ -249,20 +249,20 @@ class ElectronPreferences extends EventEmitter2 {
 			nodeIntegration: false,
 			enableRemoteModule: false,
 			contextIsolation: true,
-			preload: path.join( __dirname, './preload.js' ),
+			preload: path.join(__dirname, './preload.js'),
 		}
 
 		// User provider `browserWindow`, we load those
-		if ( this.options.browserWindowOverrides ) {
+		if (this.options.browserWindowOverrides) {
 
-			browserWindowOpts = Object.assign( browserWindowOpts, this.options.browserWindowOverrides )
+			browserWindowOpts = Object.assign(browserWindowOpts, this.options.browserWindowOverrides)
 
 		}
 
 		//
-		if ( browserWindowOpts.webPreferences ) {
+		if (browserWindowOpts.webPreferences) {
 
-			browserWindowOpts.webPreferences = Object.assign( defaultWebPreferences, browserWindowOpts.webPreferences )
+			browserWindowOpts.webPreferences = Object.assign(defaultWebPreferences, browserWindowOpts.webPreferences)
 
 		} else {
 
@@ -270,11 +270,11 @@ class ElectronPreferences extends EventEmitter2 {
 
 		}
 
-		this.prefsWindow = new BrowserWindow( browserWindowOpts )
+		this.prefsWindow = new BrowserWindow(browserWindowOpts)
 
-		if ( this.options.menuBar ) {
+		if (this.options.menuBar) {
 
-			this.prefsWindow.setMenu( this.options.menuBar )
+			this.prefsWindow.setMenu(this.options.menuBar)
 
 		} else {
 
@@ -282,35 +282,35 @@ class ElectronPreferences extends EventEmitter2 {
 
 		}
 
-		this.prefsWindow.loadURL( url.format( {
-			pathname: path.join( __dirname, 'build/index.html' ),
+		this.prefsWindow.loadURL(url.format({
+			pathname: path.join(__dirname, 'build/index.html'),
 			protocol: 'file:',
 			slashes: true,
-		} ) )
+		}))
 
-		this.prefsWindow.once( 'ready-to-show', async () => {
+		this.prefsWindow.once('ready-to-show', async () => {
 
 			// Load custom css file
-			if ( this.options.css ) {
+			if (this.options.css) {
 
-	        	const file = path.join( app.getAppPath(), this.options.css )
+	        	const file = path.join(app.getAppPath(), this.options.css)
 		        try {
 
-					if ( await fs.promises.stat( file ) ) {
+					if (await fs.promises.stat(file)) {
 
-					  	await this.prefsWindow.webContents.executeJavaScript( ` \
+					  	await this.prefsWindow.webContents.executeJavaScript(` \
 					  		var f = document.createElement("link"); \
 					  		f.rel = "stylesheet"; \
 					  		f.type = "text/css"; \
 					  		f.href = "${file}"; \
 					  		document.getElementsByTagName("head")[0].appendChild(f) \
-					  	` )
+					  	`)
 
 					}
 
-				} catch ( err ) {
+				} catch (err) {
 
-					console.error( `Could not load css file ${file}: ${err}` )
+					console.error(`Could not load css file ${file}: ${err}`)
 
 				}
 
@@ -319,13 +319,13 @@ class ElectronPreferences extends EventEmitter2 {
 	        // Show: false by default, then show when ready to prevent page "flicker"
 			this.prefsWindow.show()
 
-		} )
+		})
 
-		this.prefsWindow.on( 'closed', () => {
+		this.prefsWindow.on('closed', () => {
 
 			this.prefsWindow = null
 
-		} )
+		})
 
 	}
 

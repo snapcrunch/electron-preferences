@@ -7,10 +7,10 @@ class Sidebar extends React.Component {
 
 	render() {
 
-		const sections = this.sections.map( section => {
+		const sections = this.sections.map(section => {
 
 			let className = 'sidebar-section'
-			if ( this.activeSection === section.id ) {
+			if (this.activeSection === section.id) {
 
 				className += ' active'
 
@@ -22,13 +22,13 @@ class Sidebar extends React.Component {
 			}
 
 			return (
-				<div key={ section.id } className={ className } onClick={ this.selectSection.bind( this, section.id ) }>
+				<div key={ section.id } className={ className } onClick={ this.selectSection.bind(this, section.id) }>
 					<div className="section-icon" style={ style } />
 					<span className="section-label">{ section.label }</span>
 				</div>
 			)
 
-		} )
+		})
 
 		return (
 			<div className="sidebar">
@@ -56,13 +56,13 @@ class Sidebar extends React.Component {
 
 	}
 
-	selectSection( sectionId ) {
+	selectSection(sectionId) {
 
-		this.setState( {
+		this.setState({
 			activeSection: sectionId,
-		} )
+		})
 
-		this.onSelectSection( sectionId )
+		this.onSelectSection(sectionId)
 
 	}
 

@@ -39,7 +39,7 @@
 		],
 		"space-in-parens": [
 			"error",
-			"always"
+			"never"
 		]
 	},
 	"settings": {

@@ -3,7 +3,7 @@
 import React from 'react'
 import keycodeToChar from '../../../../../../../utils/keycodeToChar.js'
 
-const AcceleratorField = ( { field, value, onChange, ...props } ) => {
+const AcceleratorField = ({ field, value, onChange, ...props }) => {
 
 	/*
 		AcceleratorField
@@ -14,8 +14,8 @@ const AcceleratorField = ( { field, value, onChange, ...props } ) => {
 	*/
 
   	// Display the keys being pushed while trying to set accelerator
-  	const [ pressing, setPressing ] = React.useState( false )
-  	const [ accelerator, setAccelerator ] = React.useState( '' )
+  	const [ pressing, setPressing ] = React.useState(false)
+  	const [ accelerator, setAccelerator ] = React.useState('')
 
   	/*
   		Using this info: https://keycode.info/ we exclude some keys that we need for modifiers
@@ -29,44 +29,44 @@ const AcceleratorField = ( { field, value, onChange, ...props } ) => {
 		event.preventDefault()
 
 		const keys = []
-		event.ctrlKey && keys.push( 'Control' )
-		event.metaKey && keys.push( 'Command' ) // Probably should be called meta
-		event.altKey && keys.push( 'Alt' )
-		event.shiftKey && keys.push( 'Shift' )
+		event.ctrlKey && keys.push('Control')
+		event.metaKey && keys.push('Command') // Probably should be called meta
+		event.altKey && keys.push('Alt')
+		event.shiftKey && keys.push('Shift')
 
 		// I've not tested every combo to verify it will work in electron, all the documentation they provide:
        	// https://www.electronjs.org/docs/api/accelerator#available-key-codes
-		if ( !excludeKeyCodes.includes( event.which ) && keycodeToChar.hasOwnProperty( event.which ) ) {
+		if (!excludeKeyCodes.includes(event.which) && keycodeToChar.hasOwnProperty(event.which)) {
 
         	// We allow single-keys to be set, unless `modifierRequired` is passed
-        	if ( field.modifierRequired && keys.length < 1 ) {
+        	if (field.modifierRequired && keys.length < 1) {
 
         		return
 
 			}
 
 	        // Save values
-	        keys.push( keycodeToChar[event.which] )
-	        onChange( keys.join( '+' ) )
+	        keys.push(keycodeToChar[event.which])
+	        onChange(keys.join('+'))
 
 		}
 
 		// Display current keys pressed
-		setPressing( true )
-		setAccelerator( keys.join( '+' ) )
+		setPressing(true)
+		setAccelerator(keys.join('+'))
 
 	}
 
 	const handleKeyUp = event => {
 
-    	setPressing( false )
+    	setPressing(false)
 
 	}
 
 	return (
 		<div className="field field-accelerator">
 			<div className="field-label">{ field.label }</div>
-			<input type="text" value={ ( pressing && accelerator ) || value } onKeyDown={ handleKeyDown } onKeyUp={ handleKeyUp } readOnly />
+			<input type="text" value={ (pressing && accelerator) || value } onKeyDown={ handleKeyDown } onKeyUp={ handleKeyUp } readOnly />
 			{ field.help && <span className="help">{ field.help }</span> }
 		</div>
 	)

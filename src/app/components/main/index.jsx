@@ -9,9 +9,9 @@ class Main extends React.Component {
 
 	render() {
 
-		const groups = this.form.groups.map( ( group, idx ) => (
-			<Group key={ idx } group={ group } preferences={ this.preferences[this.section.id] } onFieldChange={ this.onFieldChange.bind( this ) } />
-		) )
+		const groups = this.form.groups.map((group, idx) => (
+			<Group key={ idx } group={ group } preferences={ this.preferences[this.section.id] } onFieldChange={ this.onFieldChange.bind(this) } />
+		))
 
 		return (
 			<div className="main">
@@ -47,9 +47,9 @@ class Main extends React.Component {
 
 	get section() {
 
-		return _.find( this.sections, {
+		return _.find(this.sections, {
 			id: this.activeSection,
-		} )
+		})
 
 	}
 
