@@ -1,104 +1,71 @@
 'use strict';
 
 import React from 'react';
+import keycodeToChar from '../../../../../../../utils/keycodeToChar.js'
 
-class AcceleratorField extends React.Component {
 
-    state = {};
+const AcceleratorField = ({field, value, onChange, ...props}) => {
 
-    constructor(props) {
-        
-        super(props);
-        
-        this.pressedKeys = [];
-        this.keyCount = 0;
-        this.handleKeyDown = this.handleKeyDown.bind(this);
-        this.handleKeyUp = this.handleKeyUp.bind(this);
-        this.mapAccelerator = this.mapAccelerator.bind(this);
-        this.onChange = this.onChange.bind(this);
-        
-    }
+	/*
+		AcceleratorField
 
-    render() {
+		props.field values: label, help, mofifierRequired
 
-        return (
-            <div className="field field-accelerator">
-                <div className="field-label">{ this.label }</div>
-                <input type="text" value={ this.value } onKeyDown={ this.handleKeyDown } onKeyUp={ this.handleKeyUp } readOnly />
-                { this.help && <span className="help">{ this.help }</span> }
-            </div>
-        );
+		modifierRequired: By default any key can be used, if this is true, a modifier must be provided.
+	*/
 
-    }
+  	// Display the keys being pushed while trying to set accelerator
+  	const [pressing, setPressing] = React.useState(false);
+  	const [accelerator, setAccelerator] = React.useState('');
 
-    handleKeyDown(event) {
-        
+  	/*
+  		Using this info: https://keycode.info/ we exclude some keys that we need for modifiers
+  		like control, shift, etc. as well as a handful of oddball codes.
+  		We only save if we receive one of these non-modifier keys.
+	*/
+  	const excludeKeyCodes = [0,1,2,3,4,5,6,7,10,11,16,17,18,21,22,23,24,25,26,28,29,30,31,91,92,93,94,95]
+
+	const handleKeyDown = (event) => {
         event.preventDefault();
 
-        if (this.keyCount <= 0) {
-            this.pressedKeys = [];
+        const keys = []
+        event.ctrlKey && keys.push('Control')
+        event.metaKey && keys.push('Command') // probably should be called meta
+        event.altKey && keys.push('Alt')
+        event.shiftKey && keys.push('Shift')
+
+        // I've not tested every combo to verify it will work in electron, all the documentation they provide:
+       	// https://www.electronjs.org/docs/api/accelerator#available-key-codes
+        if (!excludeKeyCodes.includes(event.which) && keycodeToChar.hasOwnProperty(event.which)) {
+
+
+        	// We allow single-keys to be set, unless `modifierRequired` is passed
+        	if (field.modifierRequired && keys.length < 1) {
+        		return;
+        	}
+
+	        // Save values
+	        keys.push(keycodeToChar[event.which])
+	        onChange(keys.join('+'))
         }
 
-        if (this.pressedKeys.indexOf(event.key) === -1) {
-            this.pressedKeys.push(event.key);
-            this.keyCount++;
-        }
-        
-        this.mapAccelerator(this.pressedKeys);
-        
-    }
-
-    handleKeyUp(event) {
-        
-        event.preventDefault();
-        this.keyCount--;
-        this.mapAccelerator(this.pressedKeys);
-        
-    }
-
-    mapAccelerator(keys) {
-        
-        const arr = keys.map((item) => {
-            if (item === ' ') return "Space";
-            if (item === '+') return "Plus";
-            if (/^[a-z]$/.test(item)) return item.toUpperCase();
-            return item;
-        });
-        
-        this.onChange(arr.join("+"));
-        
-    }
-
-    get field() {
-
-        return this.props.field;
+        // Display current keys pressed
+        setPressing(true)
+        setAccelerator(keys.join('+'))
 
     }
 
-    get value() {
-
-        return this.props.value || '';
-
+    const handleKeyUp = event => {
+    	setPressing(false)
     }
 
-    get label() {
-
-        return this.field.label;
-
-    }
-
-    get help() {
-
-        return this.field.help;
-
-    }
-
-    onChange(value) {
-
-        return this.props.onChange(value);
-
-    }
-
-}
+  return (
+        <div className="field field-accelerator">
+            <div className="field-label">{ field.label }</div>
+            <input type="text" value={ (pressing && accelerator) || value } onKeyDown={ handleKeyDown } onKeyUp={ handleKeyUp } readOnly />
+            { field.help && <span className="help">{ field.help }</span> }
+        </div>
+  );
+};
 
 export default AcceleratorField;
