@@ -271,7 +271,6 @@ class ElectronPreferences extends EventEmitter2 {
 		}
 
 		this.prefsWindow = new BrowserWindow(browserWindowOpts);
-		this.prefsWindow.webContents.openDevTools(); // TODO PJ: remove
 
 		if (this.options.menuBar) {
 
