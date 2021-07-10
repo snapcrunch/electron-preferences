@@ -304,7 +304,8 @@ class ElectronPreferences extends EventEmitter2 {
 					  		f.type = "text/css"; \
 					  		f.href = "${file}"; \
 					  		document.getElementsByTagName("head")[0].appendChild(f) \
-					  	`);
+					  		;0
+					  	`); // ";0" is needed so nothing is returned (especially not an non-cloneable IPC object) by JS.
 
 					}
 
