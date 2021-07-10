@@ -301,7 +301,11 @@ const preferences = new ElectronPreferences({
 			]
 			}
 		]
-	)
+	),
+	/**
+	* If you want to apply your own CSS. The path should be relative to your appPath.
+	*/
+	css: 'custom-style.css'
 });
 ````
 
@@ -348,6 +352,8 @@ You prefer a dark theme over a light theme? No problem, we have them both. The l
 
 <img src="misc/dark.png" />
 <img src="misc/light.png" />
+
+Still not matching your layout? You can easily customize the complete look by injecting your own custom CSS! 
 
 ## Field Types
 
