@@ -88,4 +88,4 @@ class Group extends React.Component {
 
 }
 
-module.exports = Group;
+export default Group;
