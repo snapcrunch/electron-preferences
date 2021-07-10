@@ -6,9 +6,13 @@ import * as ReactDOM from "react-dom";
 
 class ColorField extends React.Component {
 
-    state = {
-        displayColorPicker: false
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            displayColorPicker: false
+        };
+    }
 
     render() {
 
