@@ -1,10 +1,10 @@
-'use strict'
+'use strict';
 
 // Const electron = require('electron');
 // const app = electron.app;
-const path = require('path')
-const os = require('os')
-const ElectronPreferences = require('../')
+const path = require('path');
+const os = require('os');
+const ElectronPreferences = require('../');
 
 const preferences = new ElectronPreferences({
 	css: 'custom-style.css',
@@ -256,6 +256,6 @@ const preferences = new ElectronPreferences({
 			},
 		},
 	],
-})
+});
 
-module.exports = preferences
+module.exports = preferences;

@@ -1,17 +1,17 @@
-'use strict'
+'use strict';
 
-import React from 'react'
-import { newGuid } from '../../../../../../../utils/newGuid'
+import React from 'react';
+import { newGuid } from '../../../../../../../utils/newGuid';
 
 class CheckboxField extends React.Component {
 
 	render() {
 
-		const fieldID = `checkbox_${newGuid()}`
+		const fieldID = `checkbox_${newGuid()}`;
 
 		const options = this.options.map((option, idx) => {
 
-			const id = `${fieldID}_${idx}`
+			const id = `${fieldID}_${idx}`;
 
 			return (
 				<label htmlFor={ id } className="checkbox-option">
@@ -19,9 +19,9 @@ class CheckboxField extends React.Component {
 					<input type="checkbox" id={ id } onChange={ this.onChange.bind(this) } checked={ this.value.indexOf(option.value) >= 0 } />
 					<span className="check-square" />
 				</label>
-			)
+			);
 
-		})
+		});
 
 		return (
 			<div className="field field-checkbox">
@@ -29,68 +29,68 @@ class CheckboxField extends React.Component {
 				{ options }
 				{ this.help && <span className="help">{ this.help }</span> }
 			</div>
-		)
+		);
 
 	}
 
 	get field() {
 
-		return this.props.field
+		return this.props.field;
 
 	}
 
 	get value() {
 
-		return this.props.value || []
+		return this.props.value || [];
 
 	}
 
 	get label() {
 
-		return this.field.label
+		return this.field.label;
 
 	}
 
 	get options() {
 
-		return this.field.options || []
+		return this.field.options || [];
 
 	}
 
 	get help() {
 
-		return this.field.help
+		return this.field.help;
 
 	}
 
 	onChange(e) {
 
-		const idx = e.target.id.split('_')[2]
-		const option = this.options[idx]
+		const idx = e.target.id.split('_')[2];
+		const option = this.options[idx];
 
 		if (e.target.checked) {
 
 			if (this.value.indexOf(option.value) === -1) {
 
-				this.value.push(option.value)
+				this.value.push(option.value);
 
 			}
 
 		} else {
 
-			const valIdx = this.value.indexOf(option.value)
+			const valIdx = this.value.indexOf(option.value);
 			if (valIdx > -1) {
 
-				this.value.splice(valIdx, 1)
+				this.value.splice(valIdx, 1);
 
 			}
 
 		}
 
-		return this.props.onChange(this.value)
+		return this.props.onChange(this.value);
 
 	}
 
 }
 
-export default CheckboxField
+export default CheckboxField;

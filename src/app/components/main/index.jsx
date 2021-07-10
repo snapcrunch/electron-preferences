@@ -1,9 +1,9 @@
-'use strict'
+'use strict';
 
-import React from 'react'
-import PropTypes from 'prop-types'
-import Group from './components/group'
-import _ from 'lodash'
+import React from 'react';
+import PropTypes from 'prop-types';
+import Group from './components/group';
+import _ from 'lodash';
 
 class Main extends React.Component {
 
@@ -11,37 +11,37 @@ class Main extends React.Component {
 
 		const groups = this.form.groups.map((group, idx) => (
 			<Group key={ idx } group={ group } preferences={ this.preferences[this.section.id] } onFieldChange={ this.onFieldChange.bind(this) } />
-		))
+		));
 
 		return (
 			<div className="main">
 				{ groups }
 			</div>
-		)
+		);
 
 	}
 
 	get sections() {
 
-		return this.props.sections
+		return this.props.sections;
 
 	}
 
 	get form() {
 
-		return this.section.form
+		return this.section.form;
 
 	}
 
 	get preferences() {
 
-		return this.props.preferences
+		return this.props.preferences;
 
 	}
 
 	get activeSection() {
 
-		return this.props.activeSection
+		return this.props.activeSection;
 
 	}
 
@@ -49,13 +49,13 @@ class Main extends React.Component {
 
 		return _.find(this.sections, {
 			id: this.activeSection,
-		})
+		});
 
 	}
 
 	get onFieldChange() {
 
-		return this.props.onFieldChange
+		return this.props.onFieldChange;
 
 	}
 
@@ -66,6 +66,6 @@ Main.propTypes = {
 	preferences: PropTypes.string,
 	activeSection: PropTypes.string,
 	onFieldChange: PropTypes.func,
-}
+};
 
-module.exports = Main
+module.exports = Main;

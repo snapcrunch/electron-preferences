@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-import React from 'react'
+import React from 'react';
 
 class MessageField extends React.Component {
 
@@ -8,7 +8,7 @@ class MessageField extends React.Component {
 
 		if (!this.heading && !this.content) {
 
-			return null
+			return null;
 
 		}
 
@@ -17,25 +17,25 @@ class MessageField extends React.Component {
 				{ this.heading && <div className="field-heading">{ this.heading }</div> }
 				<div className="field-content" dangerouslySetInnerHTML={this.getContent()}/>
 			</div>
-		)
+		);
 
 	}
 
 	get field() {
 
-		return this.props.field
+		return this.props.field;
 
 	}
 
 	get content() {
 
-		return this.field.content
+		return this.field.content;
 
 	}
 
 	get heading() {
 
-		return this.field.heading
+		return this.field.heading;
 
 	}
 
@@ -43,10 +43,10 @@ class MessageField extends React.Component {
 
 		return {
 			__html: this.content,
-		}
+		};
 
 	}
 
 }
 
-export default MessageField
+export default MessageField;

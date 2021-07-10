@@ -35,7 +35,7 @@
 		],
 		"semi": [
 			2,
-			"never"
+			"always"
 		],
 		"space-in-parens": [
 			"error",

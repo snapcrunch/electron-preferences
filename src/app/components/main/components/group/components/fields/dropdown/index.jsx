@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-import React from 'react'
+import React from 'react';
 
 class DropdownField extends React.Component {
 
@@ -8,7 +8,7 @@ class DropdownField extends React.Component {
 
 		const options = this.options.map((option, idx) => (
 			<option value={option.value} key={idx}>{option.label}</option>
-		))
+		));
 
 		return (
 			<div className="field field-dropdown">
@@ -19,46 +19,46 @@ class DropdownField extends React.Component {
 				</select>
 				{ this.help && <span className="help">{ this.help }</span> }
 			</div>
-		)
+		);
 
 	}
 
 	get field() {
 
-		return this.props.field
+		return this.props.field;
 
 	}
 
 	get value() {
 
-		return this.props.value || ''
+		return this.props.value || '';
 
 	}
 
 	get label() {
 
-		return this.field.label
+		return this.field.label;
 
 	}
 
 	get options() {
 
-		return this.field.options || []
+		return this.field.options || [];
 
 	}
 
 	get help() {
 
-		return this.field.help
+		return this.field.help;
 
 	}
 
 	onChange(e) {
 
-		return this.props.onChange(e.target.value)
+		return this.props.onChange(e.target.value);
 
 	}
 
 }
 
-export default DropdownField
+export default DropdownField;

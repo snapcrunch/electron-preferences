@@ -2,22 +2,22 @@
 
 export default (func, delay) => {
 
-	let debounceTimer
+	let debounceTimer;
 
 	return function (...args) {
 
-		clearTimeout(debounceTimer)
+		clearTimeout(debounceTimer);
 
 		// Pass { abort: true } to cancel
 		if (args[0] && args[0].abort) {
 
-			return
+			return;
 
 		}
 
-		const context = this
-		debounceTimer = setTimeout(() => func.apply(context, args), delay)
+		const context = this;
+		debounceTimer = setTimeout(() => func.apply(context, args), delay);
 
-	}
+	};
 
-}
+};

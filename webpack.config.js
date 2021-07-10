@@ -1,7 +1,7 @@
-'use strict'
+'use strict';
 
-const path = require('path')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 	mode: 'production',
@@ -60,4 +60,4 @@ module.exports = {
 			},
 		],
 	},
-}
+};
