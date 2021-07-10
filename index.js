@@ -301,7 +301,9 @@ class ElectronPreferences extends EventEmitter2 {
 			// Load custom css file
 			if (this.options.css) {
 
-				const file = path.join(app.getAppPath(), this.options.css);
+				const file = path.join(app.getAppPath(), this.options.css)
+					.replace(/\\/g, '/'); // Make sure it also works in Windows
+
 				try {
 
 					if (await fs.promises.stat(file)) {
