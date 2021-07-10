@@ -68,4 +68,4 @@ Main.propTypes = {
 	onFieldChange: PropTypes.func,
 };
 
-module.exports = Main;
+export default Main;

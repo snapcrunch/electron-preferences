@@ -74,4 +74,4 @@ Sidebar.propTypes = {
 	onSelectSection: PropTypes.funct,
 };
 
-module.exports = Sidebar;
+export default Sidebar;
