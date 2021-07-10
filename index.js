@@ -271,6 +271,7 @@ class ElectronPreferences extends EventEmitter2 {
 		}
 
 		this.prefsWindow = new BrowserWindow(browserWindowOpts);
+		this.prefsWindow.webContents.openDevTools(); // TODO PJ: remove
 
 		if (this.options.menuBar) {
 
@@ -288,7 +289,14 @@ class ElectronPreferences extends EventEmitter2 {
 			slashes: true,
 		}));
 
-		this.prefsWindow.once('ready-to-show', async () => {
+		this.prefsWindow.once('ready-to-show', () => {
+
+			// Show: false by default, then show when ready to prevent page "flicker"
+			this.prefsWindow.show();
+
+		});
+
+		this.prefsWindow.webContents.on('dom-ready', async () => {
 
 			// Load custom css file
 			if (this.options.css) {
@@ -316,10 +324,6 @@ class ElectronPreferences extends EventEmitter2 {
 				}
 
 			}
-
-			// Show: false by default, then show when ready to prevent page "flicker"
-			this.prefsWindow.show();
-
 		});
 
 		this.prefsWindow.on('closed', () => {
