@@ -1,82 +1,87 @@
-'use strict';
+'use strict'
 
-import React from 'react';
+import React from 'react'
 
 class DirectoryField extends React.Component {
 
-    state = {};
+	render() {
 
-    render() {
+		const choose = () => {
 
-        const choose = () => {
-            const result = api.showOpenDialog({
-                properties: [
-                    'openDirectory',
-                    'createDirectory',
-                ]
-            });
-            
-            if (!result)
-                return;
+			const result = api.showOpenDialog( {
+				properties: [
+					'openDirectory',
+					'createDirectory',
+				],
+			} )
 
-            if (result.length) {
-                this.onChange(result[0]);
-            }
-        }
+			if ( !result ) {
 
-        const btLabel = this.value ? 'Choose Another Folder' : 'Choose a Folder';
+				return
 
-        return (
-            <div className="field field-directory">
-                <div className="field-label">{ this.label }</div>
-                <div className="value" onClick={ choose }>
+			}
+
+			if ( result.length ) {
+
+				this.onChange( result[0] )
+
+			}
+
+		}
+
+		const btLabel = this.value ? 'Choose Another Folder' : 'Choose a Folder'
+
+		return (
+			<div className="field field-directory">
+				<div className="field-label">{ this.label }</div>
+				<div className="value" onClick={ choose }>
                     Folder: { this.value }
-                </div>
-                <div className="bt" onClick={ choose }>
-                    { btLabel }
-                </div>
-                { this.help && <span className="help">{ this.help }</span> }
-            </div>
-        );
+				</div>
+				<div className="bt" onClick={ choose }>
+					{ btLabel }
+				</div>
+				{ this.help && <span className="help">{ this.help }</span> }
+			</div>
+		)
 
-    }
+	}
 
-    get field() {
+	get field() {
 
-        return this.props.field;
+		return this.props.field
 
-    }
+	}
 
-    get value() {
+	get value() {
 
-        return this.props.value;
+		return this.props.value
 
-    }
+	}
 
-    get label() {
+	get label() {
 
-        return this.field.label;
+		return this.field.label
 
-    }
+	}
 
-    get type() {
+	get type() {
 
-        return this.field.type;
+		return this.field.type
 
-    }
+	}
 
-    get help() {
+	get help() {
 
-        return this.field.help;
+		return this.field.help
 
-    }
+	}
 
-    get onChange() {
+	get onChange() {
 
-        return this.props.onChange;
+		return this.props.onChange
 
-    }
+	}
 
 }
 
-export default DirectoryField;
+export default DirectoryField

@@ -1,4 +1,18 @@
-/* Utilities */
+/*
+	Debounce utility function
+
+	Debounce a function by wrapping it in a debounce and providing a delay in ms:
+
+	const debouncedFunction = debounce((arg1) => {
+		// do whatever
+	}, 500)
+
+	myRapidlyUpdatingThing.onChange(() => {
+		debouncedFunction()
+	})
+
+	call debouncedFunction({abort: true}) before the delay to cancel the function from being called
+*/
 
 export default ( func, delay ) => {
 
