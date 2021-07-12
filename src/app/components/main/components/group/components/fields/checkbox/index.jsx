@@ -1,6 +1,7 @@
-'use strict'
+'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { newGuid } from '../../../../../../../utils/newGuid';
 
 class CheckboxField extends React.Component {
@@ -14,7 +15,7 @@ class CheckboxField extends React.Component {
 			const id = `${fieldID}_${idx}`;
 
 			return (
-				<label htmlFor={ id } className="checkbox-option">
+				<label htmlFor={ id } className="checkbox-option" key={idx}>
 					{ option.label }
 					<input type="checkbox" id={ id } onChange={ this.onChange.bind(this) } checked={ this.value.indexOf(option.value) >= 0 } />
 					<span className="check-square" />
@@ -93,4 +94,10 @@ class CheckboxField extends React.Component {
 
 }
 
-export default CheckboxField
+CheckboxField.propTypes = {
+	field: PropTypes.object,
+	value: PropTypes.string,
+	onChange: PropTypes.func,
+};
+
+export default CheckboxField;

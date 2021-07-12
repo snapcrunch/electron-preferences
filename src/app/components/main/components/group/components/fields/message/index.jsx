@@ -1,7 +1,7 @@
-'use strict'
+'use strict';
 
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 class MessageField extends React.Component {
 
@@ -52,6 +52,6 @@ class MessageField extends React.Component {
 
 MessageField.propTypes = {
 	field: PropTypes.object,
-}
+};
 
-export default MessageField
+export default MessageField;

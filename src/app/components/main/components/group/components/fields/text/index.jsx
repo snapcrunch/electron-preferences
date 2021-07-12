@@ -1,7 +1,7 @@
-'use strict'
+'use strict';
 
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 class TextField extends React.Component {
 
@@ -52,12 +52,13 @@ class TextField extends React.Component {
 		return this.props.onChange(e.target.value);
 
 	}
+
 }
 
 TextField.propTypes = {
 	field: PropTypes.object,
 	value: PropTypes.string,
 	onChange: PropTypes.func,
-}
+};
 
-export default TextField
+export default TextField;

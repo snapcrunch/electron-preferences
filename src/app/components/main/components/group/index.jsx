@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import DirectoryField from './components/fields/directory';
 import TextField from './components/fields/text';
 import MessageField from './components/fields/message';
@@ -93,6 +93,6 @@ Group.propTypes = {
 	preferences: PropTypes.object,
 	group: PropTypes.object,
 	onFieldChange: PropTypes.func,
-}
+};
 
 export default Group;

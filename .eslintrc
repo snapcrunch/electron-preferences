@@ -3,11 +3,6 @@
 		"xo",
 	    "plugin:react/recommended"
 	],
-	"settings": {
-	    "react": {
-	      "version": "detect"
-	    }
-    },
 	"rules": {
 		"array-bracket-spacing": [
 			"error",

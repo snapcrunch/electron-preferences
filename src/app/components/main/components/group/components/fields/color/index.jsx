@@ -1,15 +1,17 @@
-'use strict'
+/* global document */
+'use strict';
 
-import React from 'react'
-import { ChromePicker } from 'react-color'
-import * as ReactDOM from 'react-dom'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { ChromePicker } from 'react-color';
+import * as ReactDOM from 'react-dom';
 
 class ColorField extends React.Component {
 
-	constructor( props ) {
+	constructor(props) {
 
-		super( props )
-		this.state = { displayColorPicker: false }
+		super(props);
+		this.state = { displayColorPicker: false };
 
 	}
 
@@ -23,46 +25,47 @@ class ColorField extends React.Component {
 						<div className="color" style={ this.style }/>
 					</div>
 					{ this.state.displayColorPicker ? <div className="color-popover">
-						<ChromePicker color={ this.value } onChange={ this.onChange.bind( this ) } disableAlpha={ this.format === 'hex' }/>
+						<ChromePicker color={ this.value } onChange={ this.onChange.bind(this) } disableAlpha={ this.format === 'hex' }/>
 					</div> : null }
 				</div>
 				{ this.help && <span className="help">{ this.help }</span> }
 			</div>
-		)
+		);
 
 	}
 
 	handleClick() {
 
-		this.setState( { displayColorPicker: !this.state.displayColorPicker } )
+		this.setState({ displayColorPicker: !this.state.displayColorPicker });
 
 	}
 
 	handleClose() {
 
-		this.setState( { displayColorPicker: false } )
+		this.setState({ displayColorPicker: false });
 
 	}
 
 	componentDidMount() {
 
-		document.addEventListener( 'click', this.handleClickOutside, true )
+		document.addEventListener('click', this.handleClickOutside, true);
 
 	}
 
 	componentWillUnmount() {
 
-		document.removeEventListener( 'click', this.handleClickOutside, true )
+		document.removeEventListener('click', this.handleClickOutside, true);
 
 	}
 
-	handleClickOutside( event ) {
+	handleClickOutside(event) {
 
-		const domNode = ReactDOM.findDOMNode( this )
+		// Do not use findDOMNode. It doesn’t work with function components and is deprecated in StrictMode. See https://reactjs.org/docs/react-dom.html#finddomnode
+		const domNode = ReactDOM.findDOMNode(this);
 
-		if ( !domNode || !domNode.contains( event.target ) ) {
+		if (!domNode || !domNode.contains(event.target)) {
 
-			this.handleClose()
+			this.handleClose();
 
 		}
 
@@ -70,79 +73,85 @@ class ColorField extends React.Component {
 
 	get field() {
 
-		return this.props.field
+		return this.props.field;
 
 	}
 
 	get value() {
 
-		return this.props.value || '#fff'
+		return this.props.value || '#fff';
 
 	}
 
 	get label() {
 
-		return this.field.label
+		return this.field.label;
 
 	}
 
 	get help() {
 
-		return this.field.help
+		return this.field.help;
 
 	}
 
 	get format() {
 
-		return this.field.format
+		return this.field.format;
 
 	}
 
 	get style() {
 
-		let style = ''
-		if ( this.format === 'rgb' ) {
+		let style = '';
+		if (this.format === 'rgb') {
 
-			style = `rgba(${this.value.r}, ${this.value.g}, ${this.value.b}, ${this.value.a})`
+			style = `rgba(${this.value.r}, ${this.value.g}, ${this.value.b}, ${this.value.a})`;
 
-		} else if ( this.format === 'hex' ) {
+		} else if (this.format === 'hex') {
 
-			style = this.value
+			style = this.value;
 
-		} else if ( this.format === 'hsl' ) {
+		} else if (this.format === 'hsl') {
 
-			style = `hsla(${this.value.h}, ${this.value.s * 100}%, ${this.value.l * 100}%, ${this.value.a})`
+			style = `hsla(${this.value.h}, ${this.value.s * 100}%, ${this.value.l * 100}%, ${this.value.a})`;
 
-		} else if ( this.value.hex ) {
+		} else if (this.value.hex) {
 
-			style = this.value.hex
+			style = this.value.hex;
 
 		}
 
-		return { background: style }
+		return { background: style };
 
 	}
 
-	onChange( color ) {
+	onChange(color) {
 
-		if ( this.format === 'rgb' ) {
+		if (this.format === 'rgb') {
 
-			color = color.rgb
+			color = color.rgb;
 
-		} else if ( this.format === 'hex' ) {
+		} else if (this.format === 'hex') {
 
-			color = color.hex
+			color = color.hex;
 
-		} else if ( this.format === 'hsl' ) {
+		} else if (this.format === 'hsl') {
 
-			color = color.hsl
+			color = color.hsl;
 
 		}
 
-		return this.props.onChange( color )
+		return this.props.onChange(color);
 
 	}
 
 }
 
-export default ColorField
+ColorField.propTypes = {
+	field: PropTypes.object,
+	value: PropTypes.string,
+	onChange: PropTypes.func,
+};
+
+export default ColorField;

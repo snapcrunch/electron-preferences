@@ -1,7 +1,7 @@
-'use strict'
+'use strict';
 
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 class DropdownField extends React.Component {
 
@@ -59,12 +59,13 @@ class DropdownField extends React.Component {
 		return this.props.onChange(e.target.value);
 
 	}
+
 }
 
 DropdownField.propTypes = {
 	field: PropTypes.object,
 	value: PropTypes.string,
 	onChange: PropTypes.func,
-}
+};
 
-export default DropdownField
+export default DropdownField;
