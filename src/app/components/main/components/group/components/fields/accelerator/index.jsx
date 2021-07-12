@@ -38,6 +38,13 @@ const AcceleratorField = ({ field, value, onChange, ...props }) => {
 		// https://www.electronjs.org/docs/api/accelerator#available-key-codes
 		if (!excludeKeyCodes.includes(event.which) && keycodeToChar.hasOwnProperty(event.which)) {
 
+			// Clear the value on backspace (8) or delete (46)
+			if (keys.length < 1 && (event.which === 8 || event.which === 46)) {
+				setPressing(false);
+				onChange('')
+				return;
+			}
+
 			// We allow single-keys to be set, unless `modifierRequired` is passed
 			if (field.modifierRequired && keys.length < 1) {
 
