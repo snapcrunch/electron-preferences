@@ -1,6 +1,7 @@
 'use strict'
 
 import React from 'react';
+import PropTypes from 'prop-types'
 import keycodeToChar from '../../../../../../../utils/keycodeToChar.js';
 
 const AcceleratorField = ({ field, value, onChange, ...props }) => {
