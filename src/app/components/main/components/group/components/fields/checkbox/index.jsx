@@ -96,7 +96,7 @@ class CheckboxField extends React.Component {
 
 CheckboxField.propTypes = {
 	field: PropTypes.object,
-	value: PropTypes.string,
+	value: PropTypes.array,
 	onChange: PropTypes.func,
 };
 

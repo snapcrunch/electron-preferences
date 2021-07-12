@@ -70,7 +70,7 @@ class SliderField extends React.Component {
 
 SliderField.propTypes = {
 	field: PropTypes.object,
-	value: PropTypes.string,
+	value: PropTypes.number,
 	onChange: PropTypes.func,
 };
 
