@@ -12,6 +12,10 @@ class ColorField extends React.Component {
 		super(props);
 		this.wrapperRef = React.createRef();
 		this.state = { displayColorPicker: false };
+		this.handleClick = this.handleClick.bind(this);
+		this.handleClose = this.handleClose.bind(this);
+		this.handleClickOutside = this.handleClickOutside.bind(this);
+		this.onChange = this.onChange.bind(this);
 
 	}
 
@@ -25,7 +29,7 @@ class ColorField extends React.Component {
 						<div className="color" style={ this.style }/>
 					</div>
 					{ this.state.displayColorPicker ? <div className="color-popover">
-						<ChromePicker color={ this.value } onChange={ this.onChange.bind(this) } disableAlpha={ this.format === 'hex' }/>
+						<ChromePicker color={ this.value } onChange={ this.onChange } disableAlpha={ this.format === 'hex' }/>
 					</div> : null }
 				</div>
 				{ this.help && <span className="help">{ this.help }</span> }

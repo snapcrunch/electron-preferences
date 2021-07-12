@@ -7,6 +7,14 @@ import { isArray } from '../../../../../../../utils/isArray';
 
 class FileField extends React.Component {
 
+	constructor(props) {
+
+		super(props);
+
+		this.choose = this.choose.bind(this);
+
+	}
+
 	render() {
 
 		const { multiSelections, value, help, label } = this;

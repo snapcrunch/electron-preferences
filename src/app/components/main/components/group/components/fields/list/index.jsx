@@ -15,6 +15,15 @@ class ListField extends React.Component {
 			selectedIndex: 0,
 		};
 
+		this.addClick = this.addClick.bind(this);
+		this.removeClick = this.removeClick.bind(this);
+		this.upClick = this.upClick.bind(this);
+		this.downClick = this.downClick.bind(this);
+		this.cancelAdd = this.cancelAdd.bind(this);
+		this.itemToAddChanged = this.itemToAddChanged.bind(this);
+		this.selectItem = this.selectItem.bind(this);
+		this.saveItem = this.saveItem.bind(this);
+
 	}
 
 	render() {
