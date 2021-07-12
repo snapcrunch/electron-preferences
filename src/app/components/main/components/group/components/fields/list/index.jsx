@@ -5,47 +5,40 @@ import ReactModal from 'react-modal'
 
 class ListField extends React.Component {
 
-	  constructor( props ) {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showInputModal: false,
+            itemToAdd: '',
+            selectedIndex: 0
+        };
+    }
 
-	    super( props )
-	    this.state = {
-	      showInputModal: false,
-	      itemToAdd: '',
-	      selectedIndex: 0,
-	    }
-
-	}
-
-	render() {
-
-		return (
-			<div className="field field-list">
-				<div className="field-label">{ this.label }</div>
-				<div>
-					<div>
-						<select style={ this.style } className="ep-list" size={ this.size } onChange={ this.selectItem.bind( this ) }>
-							{
-								this.value.map( ( item, index ) => {
-
-									if ( index === this.state.selectedIndex ) {
-
-										return ( <option selected value={item}>{item}</option> )
-
-									}
-
-									return ( <option value={item}>{item}</option> )
-
-								} )
-							}
-						</select>
-					</div>
-					<div className="ep-list-button-container">
-						<span className="ep-list-button" onClick={ this.addClick }><span className="ep-list-button-text">+</span></span>
-						<span className="ep-list-button" onClick={ this.removeClick }><span className="ep-list-button-text">-</span></span>
-						{ this.orderable
-                    && <React.Fragment>
-                    	<span className="ep-list-button" onClick={ this.upClick }><span className="ep-list-button-text">↑</span></span>
-                    	<span className="ep-list-button" onClick={ this.downClick }><span className="ep-list-button-text">↓</span></span>
+    render() {
+        return (
+            <div className="field field-list">
+                <div className="field-label">{ this.label }</div>
+                <div>
+                  <div>
+                    <select style={ this.style } className="ep-list" size={ this.size } onChange={ this.selectItem.bind(this) }>
+                      {
+                        this.value.map((item, index) => {
+                          if (index === this.state.selectedIndex) {
+                            return (<option selected value={item}>{item}</option>);
+                          } else {
+                            return (<option value={item}>{item}</option>);
+                          }
+                        })
+                      }
+                    </select>
+                  </div>
+                  <div className="ep-list-button-container">
+                  <span className="ep-list-button" onClick={ this.addClick }><span className="ep-list-button-text">+</span></span>
+                  <span className="ep-list-button" onClick={ this.removeClick }><span className="ep-list-button-text">-</span></span>
+                  { this.orderable &&
+                    <React.Fragment>
+                      <span className="ep-list-button" onClick={ this.upClick }><span className="ep-list-button-text">↑</span></span>
+                      <span className="ep-list-button" onClick={ this.downClick }><span className="ep-list-button-text">↓</span></span>
                     </React.Fragment>
 						}
 					</div>

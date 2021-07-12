@@ -142,59 +142,118 @@ const preferences = new ElectronPreferences({
 								'type': 'color',
 								'format': 'hex', // can be hex, hsl or rgb
 								'help': 'Your eye color'
-							},
-							{
-								'label': 'Hair Color',
-								'key': 'hair_color',
-								'type': 'color',
-								'format': 'rgb',
-								'help': 'Your hair color'
 							}
-						]
-					}
-				]
-			}
-		},
-		{
-			'id': 'notes',
-			'label': 'Notes',
-			'icon': 'folder-15',
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            'id': 'notes',
+            'label': 'Notes',
+            'icon': 'folder-15',
+            'form': {
+                'groups': [
+                    {
+                        'label': 'Stuff',
+                        'fields': [
+                            {
+                                'label': 'Read notes from folder',
+                                'key': 'folder',
+                                'type': 'directory',
+                                'help': 'The location where your notes will be stored.',
+                                'multiSelections': false,
+                                'noResolveAliases': false,
+                                'treatPackageAsDirectory': false,
+                                'dontAddToRecent': true
+                            },
+                            {
+                                'label': 'Select some images',
+                                'key': 'images',
+                                'type': 'file',
+                                'help': 'List of selected images',
+                                'filters': [
+                                    { name: 'Joint Photographic Experts Group (JPG)', extensions: ['jpg', 'jpeg', 'jpe', 'jfif', 'jfi', 'jif'] },
+                                    { name: 'Portable Network Graphics (PNG)', extensions: ['png'] },
+                                    { name: 'Graphics Interchange Format (GIF)', extensions: ['gif'] },
+                                    { name: 'All Images', extensions: ['jpg', 'jpeg', 'jpe', 'jfif', 'jfi', 'jif', 'png', 'gif'] },
+                                    //{ name: 'All Files', extensions: ['*'] }
+                                ],
+                                'multiSelections': true, //Allow multiple paths to be selected
+                                'showHiddenFiles': true, //Show hidden files in dialog
+                                'noResolveAliases': false, //(macos) Disable the automatic alias (symlink) path resolution. Selected aliases will now return the alias path instead of their target path.
+                                'treatPackageAsDirectory': false, //(macos) Treat packages, such as .app folders, as a directory instead of a file.
+                                'dontAddToRecent': true //(windows) Do not add the item being opened to the recent documents list.
+                            },
+                            {
+                                'label': 'Other Settings',
+                                'fields': [
+                                    {
+                                        'label': "Foo or Bar?",
+                                        'key': 'foobar',
+                                        'type': 'radio',
+                                        'options': [
+                                            {'label': 'Foo', 'value': 'foo'},
+                                            {'label': 'Bar', 'value': 'bar'},
+                                            {'label': 'FooBar', 'value': 'foobar'},
+                                        ],
+                                        'help': 'Foo? Bar?'
+                                    }
+                                ]
+                          },
+                          {
+                              'heading': 'Important Message',
+                              'content': '<p>The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence.</p>',
+                              'type': 'message',
+                          }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            'id': 'lists',
+			'label': 'Lists',
+			'icon': 'notes',
 			'form': {
 				'groups': [
 					{
-						'label': 'Stuff',
+						'label': 'Lists',
 						'fields': [
 							{
-								'label': 'Read notes from folder',
-								'key': 'folder',
-								'type': 'directory',
-								'help': 'The location where your notes will be stored.'
-							},
-							{
-								'heading': 'Important Message',
-								'content': '<p>The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence.</p>',
-								'type': 'message',
-							}
-						]
-					}
-				]
-			}
-		},
-		{
-			'id': 'space',
-			'label': 'Other Settings',
-			'icon': 'spaceship',
-			'form': {
-				'groups': [
-					{
-						'label': 'Other Settings',
-						'fields': [
-							{
-								'label': 'Phone Number',
-								'key': 'phone_number',
-								'type': 'text',
-								'help': 'What is your phone number?'
-							},
+								'label': 'Favorite foods',
+								'key': 'foods',
+								'type': 'list',
+                                'size': 15,
+								'help': 'A list of your favorite foods',
+                                'addItemValidator': /^[A-Za-z ]+$/.toString(),
+                                'addItemLabel': 'Add favorite food'
+                            },
+                            {
+                                'label': 'Best places to visit',
+                                'key': 'places',
+                                'type': 'list',
+                                'size': 10,
+                                'style': {
+                                    'width': '75%'
+                                },
+                                'help': 'An ordered list of nice places to visit',
+                                'orderable': true
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            'id': 'space',
+            'label': 'Other Settings',
+            'icon': 'spaceship',
+            'form': {
+                'groups': [
+                    {
+                        'label': 'Other Settings',
+                        'fields': [
 							{
 								'label': "Foo or Bar?",
 								'key': 'foobar',
@@ -242,7 +301,11 @@ const preferences = new ElectronPreferences({
 			]
 			}
 		]
-	)
+	),
+	/**
+	* If you want to apply your own CSS. The path should be relative to your appPath.
+	*/
+	css: 'custom-style.css'
 });
 ````
 
@@ -289,6 +352,8 @@ You prefer a dark theme over a light theme? No problem, we have them both. The l
 
 <img src="misc/dark.png" />
 <img src="misc/light.png" />
+
+Still not matching your layout? You can easily customize the complete look by injecting your own custom CSS! 
 
 ## Field Types
 

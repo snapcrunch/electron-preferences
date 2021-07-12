@@ -6,24 +6,18 @@ const path = require( 'path' )
 const os = require( 'os' )
 const ElectronPreferences = require( '../' )
 
-/* eslint-disable camelcase */
-const preferences = new ElectronPreferences( {
+const preferences = new ElectronPreferences({
 	css: 'custom-style.css',
-	dataStore: path.resolve( __dirname, 'preferences.json' ),
+	dataStore: path.resolve(__dirname, 'preferences.json'),
 	defaults: {
 		notes: {
-			folder: path.resolve( os.homedir(), 'Notes' ),
+			folder: path.resolve(os.homedir(), 'Notes'),
 		},
-		markdown: {
-			auto_format_links: true,
-			show_gutter: false,
+		about: {
+			firstName: 'Pieter-Jan',
+			lastName: 'Van Robays',
 		},
-		preview: {
-			show: true,
-		},
-		drawer: {
-			show: true,
-		},
+		// ...
 	},
 	webPreferences: {
 		devTools: true,
@@ -43,13 +37,13 @@ const preferences = new ElectronPreferences( {
 						fields: [
 							{
 								label: 'First Name',
-								key: 'first_name',
+								key: 'firstName',
 								type: 'text',
 								help: 'What is your first name?',
 							},
 							{
 								label: 'Last Name',
-								key: 'last_name',
+								key: 'lastName',
 								type: 'text',
 								help: 'What is your last name?',
 							},
@@ -75,7 +69,7 @@ const preferences = new ElectronPreferences( {
 								key: 'foods',
 								type: 'checkbox',
 								options: [
-									{ label: 'Ice Cream', value: 'ice_cream' },
+									{ label: 'Ice Cream', value: 'iceCream' },
 									{ label: 'Carrots', value: 'carrots' },
 									{ label: 'Cake', value: 'cake' },
 									{ label: 'Spinach', value: 'spinach' },
@@ -91,14 +85,14 @@ const preferences = new ElectronPreferences( {
 							},
 							{
 								label: 'Eye Color',
-								key: 'eye_color',
+								key: 'eyeColor',
 								type: 'color',
 								format: 'hex',
 								help: 'Your eye color',
 							},
 							{
 								label: 'Hair Color',
-								key: 'hair_color',
+								key: 'hairColor',
 								type: 'color',
 								format: 'rgb',
 								help: 'Your hair color',
@@ -122,6 +116,28 @@ const preferences = new ElectronPreferences( {
 								key: 'folder',
 								type: 'directory',
 								help: 'The location where your notes will be stored.',
+								multiSelections: false,
+								noResolveAliases: false,
+								treatPackageAsDirectory: false,
+								dontAddToRecent: true,
+							},
+							{
+								label: 'Select some images',
+								key: 'images',
+								type: 'file',
+								help: 'List of selected images',
+								filters: [
+									{ name: 'Joint Photographic Experts Group (JPG)', extensions: [ 'jpg', 'jpeg', 'jpe', 'jfif', 'jfi', 'jif' ] },
+									{ name: 'Portable Network Graphics (PNG)', extensions: [ 'png' ] },
+									{ name: 'Graphics Interchange Format (GIF)', extensions: [ 'gif' ] },
+									{ name: 'All Images', extensions: [ 'jpg', 'jpeg', 'jpe', 'jfif', 'jfi', 'jif', 'png', 'gif' ] },
+									// { name: 'All Files', extensions: ['*'] }
+								],
+								multiSelections: true,
+								showHiddenFiles: true,
+								noResolveAliases: false,
+								treatPackageAsDirectory: false,
+								dontAddToRecent: true,
 							},
 							{
 								heading: 'Important Message',
@@ -143,7 +159,7 @@ const preferences = new ElectronPreferences( {
 						fields: [
 							{
 								label: 'Phone Number',
-								key: 'phone_number',
+								key: 'phoneNumber',
 								type: 'text',
 								help: 'What is your phone number?',
 							},
@@ -240,6 +256,6 @@ const preferences = new ElectronPreferences( {
 			},
 		},
 	],
-} )
+});
 
 module.exports = preferences

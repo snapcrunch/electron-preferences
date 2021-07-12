@@ -1,7 +1,7 @@
 {
-	'extends': [
-		'xo',
-	    'plugin:react/recommended'
+	"extends": [
+		"xo",
+	    "plugin:react/recommended"
 	],
 	"settings": {
 	    "react": {
@@ -40,11 +40,18 @@
 		],
 		"semi": [
 			2,
-			"never"
+			"always"
 		],
 		"space-in-parens": [
 			"error",
-			"always"
+			"never"
 		]
+	},
+	"settings": {
+		"react": {
+			"pragma": "React",
+			"fragment": "Fragment",
+			"version": "detect"
+		}
 	}
 }

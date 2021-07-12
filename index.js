@@ -1,50 +1,50 @@
-'use strict'
+'use strict';
 
-const electron = require( 'electron' )
-const { app, BrowserWindow, ipcMain, webContents, dialog } = electron
-const path = require( 'path' )
-const url = require( 'url' )
-const fs = require( 'fs' )
-const _ = require( 'lodash' )
-const { EventEmitter2 } = require( 'eventemitter2' )
-const loadJsonFile = require( 'load-json-file' )
-const writeJsonFile = require( 'write-json-file' )
+const electron = require('electron');
+const { app, BrowserWindow, ipcMain, webContents, dialog } = electron;
+const path = require('path');
+const url = require('url');
+const fs = require('fs');
+const _ = require('lodash');
+const { EventEmitter2 } = require('eventemitter2');
+const loadJsonFile = require('load-json-file');
+const writeJsonFile = require('write-json-file');
 
 class ElectronPreferences extends EventEmitter2 {
 
-	constructor( options = {} ) {
+	constructor(options = {}) {
 
-		super()
+		super();
 
-		_.defaultsDeep( options, {
+		_.defaultsDeep(options, {
 			sections: [],
 			webPreferences: {
 				devTools: false,
 			},
-		} )
+		});
 
-		options.sections.forEach( ( section, sectionIdx ) => {
+		options.sections.forEach((section, sectionIdx) => {
 
-			_.defaultsDeep( section, {
+			_.defaultsDeep(section, {
 				form: {
 					groups: [],
 				},
-			} )
-			section.form.groups = section.form.groups.map( ( group, groupIdx ) => {
+			});
+			section.form.groups = section.form.groups.map((group, groupIdx) => {
 
-				group.id = 'group' + sectionIdx + groupIdx
+				group.id = 'group' + sectionIdx + groupIdx;
 
-				return group
+				return group;
 
-			} )
+			});
 
-		} )
+		});
 
-		this.options = options
+		this.options = options;
 
-		if ( !this.dataStore ) {
+		if (!this.dataStore) {
 
-			throw new Error( 'The \'dataStore\' option is required.' )
+			throw new Error('The \'dataStore\' option is required.');
 
 		}
 
@@ -161,52 +161,52 @@ class ElectronPreferences extends EventEmitter2 {
 
 	get preferences() {
 
-		return this._preferences
+		return this._preferences;
 
 	}
 
-	set preferences( value ) {
+	set preferences(value) {
 
-		this._preferences = value
+		this._preferences = value;
 
 	}
 
 	save() {
 
-		writeJsonFile( this.dataStore, this.preferences, {
+		writeJsonFile(this.dataStore, this.preferences, {
 			indent: 4,
-		} )
+		});
 
 	}
 
-	value( key, value ) {
+	value(key, value) {
 
 		// Place the key/value pair(s) into this.preferences var
-		if ( _.isArray( key ) ) {
+		if (_.isArray(key)) {
 
-			key.forEach( ( { key, value } ) => {
+			key.forEach(({ key, value }) => {
 
-				_.set( this.preferences, key, value )
+				_.set(this.preferences, key, value);
 
-			} )
-			this.save()
-			this.broadcast()
+			});
+			this.save();
+			this.broadcast();
 
-		} else if ( !_.isUndefined( key ) && !_.isUndefined( value ) ) {
+		} else if (!_.isUndefined(key) && !_.isUndefined(value)) {
 
-			_.set( this.preferences, key, value )
-			this.save()
-			this.broadcast()
+			_.set(this.preferences, key, value);
+			this.save();
+			this.broadcast();
 
-		} else if ( _.isUndefined( value ) ) {
+		} else if (_.isUndefined(value)) {
 
 			// Value is undefined
-			return _.cloneDeep( _.get( this.preferences, key ) )
+			return _.cloneDeep(_.get(this.preferences, key));
 
 		} else {
 
 			// Key is undefined
-			return _.cloneDeep( this.preferences )
+			return _.cloneDeep(this.preferences);
 
 		}
 
@@ -215,19 +215,19 @@ class ElectronPreferences extends EventEmitter2 {
 	broadcast() {
 
 		webContents.getAllWebContents()
-			.forEach( wc => {
+			.forEach(wc => {
 
-				wc.send( 'preferencesUpdated', this.preferences )
+				wc.send('preferencesUpdated', this.preferences);
 
-			} )
+			});
 
 	}
 
 	show() {
 
-		if ( this.prefsWindow ) {
+		if (this.prefsWindow) {
 
-			return
+			return;
 
 		}
 
@@ -243,89 +243,95 @@ class ElectronPreferences extends EventEmitter2 {
 			backgroundColor: '#E7E7E7',
 			show: false,
 			webPreferences: this.options.webPreferences,
-		}
+		};
 
 		const defaultWebPreferences = {
 			nodeIntegration: false,
 			enableRemoteModule: false,
 			contextIsolation: true,
-			preload: path.join( __dirname, './preload.js' ),
-		}
+			preload: path.join(__dirname, './preload.js'),
+		};
 
 		// User provider `browserWindow`, we load those
-		if ( this.options.browserWindowOverrides ) {
+		if (this.options.browserWindowOverrides) {
 
-			browserWindowOpts = Object.assign( browserWindowOpts, this.options.browserWindowOverrides )
+			browserWindowOpts = Object.assign(browserWindowOpts, this.options.browserWindowOverrides);
 
 		}
 
 		//
-		if ( browserWindowOpts.webPreferences ) {
+		if (browserWindowOpts.webPreferences) {
 
-			browserWindowOpts.webPreferences = Object.assign( defaultWebPreferences, browserWindowOpts.webPreferences )
-
-		} else {
-
-			browserWindowOpts.webPreferences = defaultWebPreferences
-
-		}
-
-		this.prefsWindow = new BrowserWindow( browserWindowOpts )
-
-		if ( this.options.menuBar ) {
-
-			this.prefsWindow.setMenu( this.options.menuBar )
+			browserWindowOpts.webPreferences = Object.assign(defaultWebPreferences, browserWindowOpts.webPreferences);
 
 		} else {
 
-			this.prefsWindow.removeMenu()
+			browserWindowOpts.webPreferences = defaultWebPreferences;
 
 		}
 
-		this.prefsWindow.loadURL( url.format( {
-			pathname: path.join( __dirname, 'build/index.html' ),
+		this.prefsWindow = new BrowserWindow(browserWindowOpts);
+
+		if (this.options.menuBar) {
+
+			this.prefsWindow.setMenu(this.options.menuBar);
+
+		} else {
+
+			this.prefsWindow.removeMenu();
+
+		}
+
+		this.prefsWindow.loadURL(url.format({
+			pathname: path.join(__dirname, 'build/index.html'),
 			protocol: 'file:',
 			slashes: true,
-		} ) )
+		}));
 
-		this.prefsWindow.once( 'ready-to-show', async () => {
+		this.prefsWindow.once('ready-to-show', () => {
+
+			// Show: false by default, then show when ready to prevent page "flicker"
+			this.prefsWindow.show();
+
+		});
+
+		this.prefsWindow.webContents.on('dom-ready', async () => {
 
 			// Load custom css file
-			if ( this.options.css ) {
+			if (this.options.css) {
 
-				const file = path.join( app.getAppPath(), this.options.css )
+				const file = path.join(app.getAppPath(), this.options.css)
+					.replace(/\\/g, '/'); // Make sure it also works in Windows
+
 				try {
 
-					if ( await fs.promises.stat( file ) ) {
+					if (await fs.promises.stat(file)) {
 
-						await this.prefsWindow.webContents.executeJavaScript( ` \
-							var f = document.createElement("link"); \
-							f.rel = "stylesheet"; \
-							f.type = "text/css"; \
-							f.href = "${file}"; \
-							document.getElementsByTagName("head")[0].appendChild(f) \
-						` )
+						await this.prefsWindow.webContents.executeJavaScript(` \
+					  		var f = document.createElement("link"); \
+					  		f.rel = "stylesheet"; \
+					  		f.type = "text/css"; \
+					  		f.href = "${file}"; \
+					  		document.getElementsByTagName("head")[0].appendChild(f) \
+					  		;0
+					  	`); // ";0" is needed so nothing is returned (especially not an non-cloneable IPC object) by JS.
 
 					}
 
-				} catch ( err ) {
+				} catch (err) {
 
-					console.error( `Could not load css file ${file}: ${err}` )
+					console.error(`Could not load css file ${file}: ${err}`);
 
 				}
 
 			}
+		});
 
-			// Show: false by default, then show when ready to prevent page "flicker"
-			this.prefsWindow.show()
+		this.prefsWindow.on('closed', () => {
 
-		} )
+			this.prefsWindow = null;
 
-		this.prefsWindow.on( 'closed', () => {
-
-			this.prefsWindow = null
-
-		} )
+		});
 
 	}
 

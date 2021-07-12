@@ -1,7 +1,7 @@
 'use strict'
 
-const path = require( 'path' )
-const CopyWebpackPlugin = require( 'copy-webpack-plugin' )
+const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 	mode: 'production',
@@ -10,7 +10,7 @@ module.exports = {
 		ignored: /node_modules/,
 	},
 	output: {
-		path: path.resolve( __dirname, 'build' ),
+		path: path.resolve(__dirname, 'build'),
 		filename: 'app.js',
 	},
 	resolve: {
@@ -18,19 +18,19 @@ module.exports = {
 			'.js', '.jsx', '.scss',
 		],
 		modules: [
-			path.resolve( __dirname, 'src' ),
-			path.resolve( __dirname, 'scss' ),
-			path.resolve( __dirname, 'node_modules' ),
+			path.resolve(__dirname, 'src'),
+			path.resolve(__dirname, 'scss'),
+			path.resolve(__dirname, 'node_modules'),
 		],
 		alias: {
 		},
 	},
 	plugins: [
-		new CopyWebpackPlugin( {
+		new CopyWebpackPlugin({
 			patterns: [
 				{ from: 'assets' },
 			],
-		} ),
+		}),
 	],
 	module: {
 		rules: [
@@ -44,8 +44,7 @@ module.exports = {
 					{
 						loader: 'babel-loader',
 						options: {
-							presets: [ 'env', 'react' ],
-							plugins: [ 'transform-object-rest-spread', 'transform-class-properties' ],
+							presets: [ '@babel/preset-env', '@babel/preset-react' ],
 						},
 					},
 				],
@@ -60,4 +59,4 @@ module.exports = {
 			},
 		],
 	},
-}
+};

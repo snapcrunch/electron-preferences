@@ -41,7 +41,7 @@ class App extends React.Component {
 			sections,
 			activeSection: sections[0].id,
 			preferences,
-		}
+		};
 
 	}
 
@@ -49,30 +49,30 @@ class App extends React.Component {
 
 		return (
 			<React.Fragment>
-				<Sidebar { ...this.state } onSelectSection={ this.onSelectSection.bind( this ) } />
-				<Main { ...this.state } onFieldChange={ this.onFieldChange.bind( this ) } />
+				<Sidebar { ...this.state } onSelectSection={ this.onSelectSection.bind(this) } />
+				<Main { ...this.state } onFieldChange={ this.onFieldChange.bind(this) } />
 			</React.Fragment>
-		)
+		);
 
 	}
 
-	onSelectSection( sectionId ) {
+	onSelectSection(sectionId) {
 
-		this.setState( {
+		this.setState({
 			activeSection: sectionId,
-		} )
+		});
 
 	}
 
-	onFieldChange( key, value ) {
+	onFieldChange(key, value) {
 
-		preferences[this.state.activeSection][key] = value
+		preferences[this.state.activeSection][key] = value;
 
-		this.setState( {
+		this.setState({
 			preferences,
-		} )
+		});
 
-		dSavePreferences( preferences )
+		dSavePreferences(preferences);
 
 	}
 
@@ -80,5 +80,5 @@ class App extends React.Component {
 
 ReactDOM.render(
 	<App />,
-	document.getElementById( 'window' ),
-)
+	document.getElementById('window'),
+);

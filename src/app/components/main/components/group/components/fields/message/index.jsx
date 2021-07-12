@@ -7,36 +7,36 @@ class MessageField extends React.Component {
 
 	render() {
 
-		if ( !this.heading && !this.content ) {
+		if (!this.heading && !this.content) {
 
-			return null
+			return null;
 
 		}
 
 		return (
 			<div className="field field-message">
 				{ this.heading && <div className="field-heading">{ this.heading }</div> }
-				<div className="field-content" dangerouslySetInnerHTML={ this.getContent() }></div>
+				<div className="field-content" dangerouslySetInnerHTML={this.getContent()}/>
 			</div>
-		)
+		);
 
 	}
 
 	get field() {
 
-		return this.props.field
+		return this.props.field;
 
 	}
 
 	get content() {
 
-		return this.field.content
+		return this.field.content;
 
 	}
 
 	get heading() {
 
-		return this.field.heading
+		return this.field.heading;
 
 	}
 
@@ -44,7 +44,9 @@ class MessageField extends React.Component {
 
 		return {
 			__html: this.content,
-		}
+		};
+
+	}
 
 	}
 

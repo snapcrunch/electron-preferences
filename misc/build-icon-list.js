@@ -24,16 +24,16 @@ const tpl = Handlebars.compile( `
 </table>
 ` )
 
-const icons = glob.sync( '*.svg', {
+const icons = glob.sync('*.svg', {
 	cwd: srcFolder,
-} )
-	.map( icon => ( {
+})
+	.map(icon => ({
 		path: `assets/svg/${icon}`,
-		name: path.basename( icon, '.svg' ),
-	} ) )
+		name: path.basename(icon, '.svg'),
+	}));
 
-const rendered = tpl( {
+const rendered = tpl({
 	icons,
-} )
+});
 
 console.log( rendered )

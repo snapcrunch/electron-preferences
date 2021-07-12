@@ -1,11 +1,9 @@
 'use strict'
 
-import React from 'react'
-import PropTypes from 'prop-types'
-import keycodeToChar from '../../../../../../../utils/keycodeToChar.js'
+import React from 'react';
+import keycodeToChar from '../../../../../../../utils/keycodeToChar.js';
 
-// Define used props explicitly
-const AcceleratorField = ( { field, value, onChange } ) => {
+const AcceleratorField = ({ field, value, onChange, ...props }) => {
 
 	/*
 		AcceleratorField
@@ -16,8 +14,8 @@ const AcceleratorField = ( { field, value, onChange } ) => {
 	*/
 
 	// Display the keys being pushed while trying to set accelerator
-	const [ pressing, setPressing ] = React.useState( false )
-	const [ accelerator, setAccelerator ] = React.useState( '' )
+	const [ pressing, setPressing ] = React.useState(false);
+	const [ accelerator, setAccelerator ] = React.useState('');
 
 	/*
 		Using this info: https://keycode.info/ we exclude some keys that we need for modifiers
