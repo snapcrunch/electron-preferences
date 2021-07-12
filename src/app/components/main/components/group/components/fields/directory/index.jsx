@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 import React from 'react';
 import {isArray} from "../../../../../../../utils/isArray";
@@ -34,7 +34,7 @@ class DirectoryField extends React.Component {
             </div>
         );
 
-    }
+	}
 
     get field() {
         return this.props.field;
@@ -105,4 +105,4 @@ class DirectoryField extends React.Component {
 
 }
 
-export default DirectoryField;
+export default DirectoryField

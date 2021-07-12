@@ -1,39 +1,42 @@
-'use strict';
+/* global api, document */
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import _ from 'lodash';
-import debounce from './utils/debounce';
-import Sidebar from './components/sidebar';
-import Main from './components/main';
-import '../../scss/style.scss';
+/* Eleectron Renderer Process */
+'use strict'
 
-const allSections = api.getSections();
-const preferences = api.getPreferences();
+import React from 'react'
+import ReactDOM from 'react-dom'
+import _ from 'lodash'
+import debounce from './utils/debounce'
+import Sidebar from './components/sidebar'
+import Main from './components/main'
+import '../../scss/style.scss'
 
-const sections = allSections.filter(section => _.isBoolean(section.enabled) ? section.enabled : true);
+const allSections = api.getSections()
+const preferences = api.getPreferences()
 
-const dSavePreferences = debounce(preferences => {
+const sections = allSections.filter( section => _.isBoolean( section.enabled ) ? section.enabled : true )
 
-	api.setPreferences(preferences);
+const dSavePreferences = debounce( preferences => {
 
-}, 200);
+	api.setPreferences( preferences )
 
-sections.forEach(section => {
+}, 200 )
 
-	if (!preferences[section.id]) {
+sections.forEach( section => {
 
-		preferences[section.id] = {};
+	if ( !preferences[section.id] ) {
+
+		preferences[section.id] = {}
 
 	}
 
-});
+} )
 
 class App extends React.Component {
 
-	constructor(props) {
+	constructor( props ) {
 
-		super(props);
+		super( props )
 		this.state = {
 			sections,
 			activeSection: sections[0].id,

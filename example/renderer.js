@@ -1,8 +1,9 @@
-'use strict';
+/* global api, document */
+'use strict'
 
-const bt = document.getElementsByClassName('bt')[0];
-const prefsEl = document.getElementsByClassName('preferences')[0];
-prefsEl.innerHTML = JSON.stringify(api.getPreferences(), null, 4);
+const bt = document.getElementsByClassName( 'bt' )[0]
+const prefsEl = document.getElementsByClassName( 'preferences' )[0]
+prefsEl.innerHTML = JSON.stringify( api.getPreferences(), null, 4 )
 
 bt.addEventListener('click', () => {
 

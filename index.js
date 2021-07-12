@@ -51,97 +51,97 @@ class ElectronPreferences extends EventEmitter2 {
 		// Load preferences file if exists
 		try {
 
-			if (fs.existsSync(this.dataStore)) {
+			if ( fs.existsSync( this.dataStore ) ) {
 
-				this.preferences = loadJsonFile.sync(this.dataStore);
+				this.preferences = loadJsonFile.sync( this.dataStore )
 
 			}
 
-		} catch (err) {
+		} catch ( err ) {
 
-			console.error(err);
-			this.preferences = null;
+			console.error( err )
+			this.preferences = null
 
 		}
 
-		if (!this.preferences) {
-
-			this.preferences = this.defaults;
-
-		} else {
+		if ( this.preferences ) {
 
 			// Set default preference values
-			_.keys(this.defaults).forEach(prefDefault => {
+			_.keys( this.defaults ).forEach( prefDefault => {
 
-				if (!(prefDefault in this.preferences)) {
+				if ( !( prefDefault in this.preferences ) ) {
 
-					this.preferences[prefDefault] = this.defaults[prefDefault];
+					this.preferences[prefDefault] = this.defaults[prefDefault]
 
 				}
 
-			});
+			} )
+
+		} else {
+
+			this.preferences = this.defaults
 
 		}
 
-		if (_.isFunction(options.onLoad)) {
+		if ( _.isFunction( options.onLoad ) ) {
 
-			this.preferences = options.onLoad(this.preferences);
+			this.preferences = options.onLoad( this.preferences )
 
 		}
 
-		this.save();
+		this.save()
 
-		ipcMain.on('showPreferences', event => {
+		ipcMain.on( 'showPreferences', _ => {
 
-			this.show();
+			this.show()
 
-		});
+		} )
 
-		ipcMain.on('getSections', event => {
+		ipcMain.on( 'getSections', event => {
 
-			event.returnValue = this.options.sections;
+			event.returnValue = this.options.sections
 
-		});
+		} )
 
-		ipcMain.on('restoreDefaults', event => {
+		ipcMain.on( 'restoreDefaults', _ => {
 
-			this.preferences = this.defaults;
-			this.save();
-			this.broadcast();
+			this.preferences = this.defaults
+			this.save()
+			this.broadcast()
 
-		});
+		} )
 
-		ipcMain.on('getDefaults', event => {
+		ipcMain.on( 'getDefaults', event => {
 
-			event.returnValue = this.defaults;
+			event.returnValue = this.defaults
 
-		});
+		} )
 
-		ipcMain.on('getPreferences', event => {
+		ipcMain.on( 'getPreferences', event => {
 
-			event.returnValue = this.preferences;
+			event.returnValue = this.preferences
 
-		});
+		} )
 
-		ipcMain.on('setPreferences', (event, value) => {
+		ipcMain.on( 'setPreferences', ( event, value ) => {
 
-			this.preferences = value;
-			this.save();
-			this.broadcast();
-			this.emit('save', Object.freeze(_.cloneDeep(this.preferences)));
-			event.returnValue = null;
+			this.preferences = value
+			this.save()
+			this.broadcast()
+			this.emit( 'save', Object.freeze( _.cloneDeep( this.preferences ) ) )
+			event.returnValue = null
 
-		});
+		} )
 
-		ipcMain.on('showOpenDialog', (event, dialogOptions) => {
+		ipcMain.on( 'showOpenDialog', ( event, dialogOptions ) => {
 
-			event.returnValue = dialog.showOpenDialogSync(dialogOptions);
+			event.returnValue = dialog.showOpenDialogSync( dialogOptions )
 
-		});
+		} )
 
-		if (_.isFunction(options.afterLoad)) {
+		if ( _.isFunction( options.afterLoad ) ) {
 
-			options.afterLoad(this);
+			options.afterLoad( this )
 
 		}
 
@@ -149,13 +149,13 @@ class ElectronPreferences extends EventEmitter2 {
 
 	get dataStore() {
 
-		return this.options.dataStore;
+		return this.options.dataStore
 
 	}
 
 	get defaults() {
 
-		return this.options.defaults || {};
+		return this.options.defaults || {}
 
 	}
 
@@ -337,4 +337,4 @@ class ElectronPreferences extends EventEmitter2 {
 
 }
 
-module.exports = ElectronPreferences;
+module.exports = ElectronPreferences

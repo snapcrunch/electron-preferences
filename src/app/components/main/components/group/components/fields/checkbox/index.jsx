@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 import React from 'react';
 import { newGuid } from '../../../../../../../utils/newGuid';
@@ -93,4 +93,4 @@ class CheckboxField extends React.Component {
 
 }
 
-export default CheckboxField;
+export default CheckboxField

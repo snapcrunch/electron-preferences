@@ -86,6 +86,10 @@ class Group extends React.Component {
 
 	}
 
+Group.propTypes = {
+	preferences: PropTypes.object,
+	group: PropTypes.object,
+	onFieldChange: PropTypes.func,
 }
 
 export default Group;
