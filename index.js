@@ -333,6 +333,8 @@ class ElectronPreferences extends EventEmitter2 {
 
 		});
 
+		return this.prefsWindow
+
 	}
 
 }
