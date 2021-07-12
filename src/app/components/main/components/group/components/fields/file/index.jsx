@@ -86,7 +86,7 @@ class FileField extends React.Component {
         return this.props.onChange;
     }
 
-    choose = () => {
+    choose() => {
         const { multiSelections, showHiddenFiles, noResolveAliases, treatPackageAsDirectory, dontAddToRecent, filters } = this;
         const properties = ['openFile'];
         if (multiSelections)
