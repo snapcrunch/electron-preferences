@@ -63,19 +63,6 @@ class RadioField extends React.Component {
 
 	}
 
-	onChange(e) {
-
-		const idx = e.target.id.split('_')[2];
-		const option = this.options[idx];
-
-		return this.props.onChange(option.value);
-
-	}
-
-		return this.field.help
-
-	}
-
 	onChange( e ) {
 
 		const idx = e.target.id.split( '_' )[2]

@@ -18,10 +18,6 @@ preferences.on('save', preferences => {
 
 });
 
-	nativeTheme.themeSource = preferences?.theme?.theme ?? 'system'
-
-} )
-
 let mainWindow
 
 function createWindow() {

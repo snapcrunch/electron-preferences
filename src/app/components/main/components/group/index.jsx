@@ -86,6 +86,8 @@ class Group extends React.Component {
 
 	}
 
+}
+
 Group.propTypes = {
 	preferences: PropTypes.object,
 	group: PropTypes.object,

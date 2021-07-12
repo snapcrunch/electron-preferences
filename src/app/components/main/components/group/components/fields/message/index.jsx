@@ -48,8 +48,6 @@ class MessageField extends React.Component {
 
 	}
 
-	}
-
 }
 
 MessageField.propTypes = {

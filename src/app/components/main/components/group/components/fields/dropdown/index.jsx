@@ -59,6 +59,7 @@ class DropdownField extends React.Component {
 		return this.props.onChange(e.target.value);
 
 	}
+}
 
 DropdownField.propTypes = {
 	field: PropTypes.object,

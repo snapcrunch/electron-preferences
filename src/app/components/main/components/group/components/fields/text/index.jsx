@@ -52,6 +52,7 @@ class TextField extends React.Component {
 		return this.props.onChange(e.target.value);
 
 	}
+}
 
 TextField.propTypes = {
 	field: PropTypes.object,
