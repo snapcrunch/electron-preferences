@@ -4,13 +4,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ChromePicker } from 'react-color';
-import * as ReactDOM from 'react-dom';
 
 class ColorField extends React.Component {
 
 	constructor(props) {
 
 		super(props);
+		this.wrapperRef = React.createRef();
 		this.state = { displayColorPicker: false };
 
 	}
@@ -18,7 +18,7 @@ class ColorField extends React.Component {
 	render() {
 
 		return (
-			<div className="field field-color">
+			<div className="field field-color" ref={this.wrapperRef}>
 				<div className="field-label">{ this.label }</div>
 				<div className="color-container">
 					<div className="color-swatch" onClick={ this.handleClick }>
@@ -61,9 +61,7 @@ class ColorField extends React.Component {
 	handleClickOutside(event) {
 
 		// Do not use findDOMNode. It doesn’t work with function components and is deprecated in StrictMode. See https://reactjs.org/docs/react-dom.html#finddomnode
-		const domNode = ReactDOM.findDOMNode(this);
-
-		if (!domNode || !domNode.contains(event.target)) {
+		if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
 
 			this.handleClose();
 
