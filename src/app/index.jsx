@@ -1,3 +1,6 @@
+/* global api, document */
+
+/* Eleectron Renderer Process */
 'use strict';
 
 import React from 'react';

@@ -18,7 +18,7 @@ class Sidebar extends React.Component {
 
 			const style = {
 				mask: `url("svg/${section.icon}.svg") no-repeat center / contain`,
-				webkitMask: `url("svg/${section.icon}.svg") no-repeat center / contain`,
+				WebkitMask: `url("svg/${section.icon}.svg") no-repeat center / contain`,
 			};
 
 			return (
@@ -69,9 +69,9 @@ class Sidebar extends React.Component {
 }
 
 Sidebar.propTypes = {
-	sections: PropTypes.string,
+	sections: PropTypes.array,
 	activeSection: PropTypes.string,
-	onSelectSection: PropTypes.funct,
+	onSelectSection: PropTypes.func,
 };
 
 export default Sidebar;

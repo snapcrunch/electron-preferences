@@ -1,22 +1,25 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { newGuid } from '../../../../../../../utils/newGuid';
 
 class CheckboxField extends React.Component {
 
 	render() {
+		const { value, help, label } = this;
 
 		const fieldID = `checkbox_${newGuid()}`;
 
 		const options = this.options.map((option, idx) => {
 
 			const id = `${fieldID}_${idx}`;
+			const checked = value.indexOf(option.value) >= 0;
 
 			return (
-				<label htmlFor={ id } className="checkbox-option">
+				<label htmlFor={ id } className="checkbox-option" key={idx}>
 					{ option.label }
-					<input type="checkbox" id={ id } onChange={ this.onChange.bind(this) } checked={ this.value.indexOf(option.value) >= 0 } />
+					<input type="checkbox" id={ id } onChange={ this.onChange.bind(this) } checked={ checked} />
 					<span className="check-square" />
 				</label>
 			);
@@ -25,9 +28,9 @@ class CheckboxField extends React.Component {
 
 		return (
 			<div className="field field-checkbox">
-				<div className="field-label">{ this.label }</div>
+				<div className="field-label">{ label }</div>
 				{ options }
-				{ this.help && <span className="help">{ this.help }</span> }
+				{ help && <span className="help">{ help }</span> }
 			</div>
 		);
 
@@ -64,33 +67,40 @@ class CheckboxField extends React.Component {
 	}
 
 	onChange(e) {
+		const { value } = this;
 
 		const idx = e.target.id.split('_')[2];
 		const option = this.options[idx];
 
 		if (e.target.checked) {
 
-			if (this.value.indexOf(option.value) === -1) {
+			if (value.indexOf(option.value) === -1) {
 
-				this.value.push(option.value);
+				value.push(option.value);
 
 			}
 
 		} else {
 
-			const valIdx = this.value.indexOf(option.value);
+			const valIdx = value.indexOf(option.value);
 			if (valIdx > -1) {
 
-				this.value.splice(valIdx, 1);
+				value.splice(valIdx, 1);
 
 			}
 
 		}
 
-		return this.props.onChange(this.value);
+		return this.props.onChange(value);
 
 	}
 
 }
+
+CheckboxField.propTypes = {
+	field: PropTypes.object,
+	value: PropTypes.array,
+	onChange: PropTypes.func,
+};
 
 export default CheckboxField;

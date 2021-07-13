@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { newGuid } from '../../../../../../../utils/newGuid';
 
 class RadioField extends React.Component {
@@ -73,5 +74,11 @@ class RadioField extends React.Component {
 	}
 
 }
+
+RadioField.propTypes = {
+	field: PropTypes.object,
+	value: PropTypes.string,
+	onChange: PropTypes.func,
+};
 
 export default RadioField;
