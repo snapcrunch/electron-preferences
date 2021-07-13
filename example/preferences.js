@@ -24,9 +24,6 @@ const preferences = new ElectronPreferences({
 	},
 	browserWindowOverrides: {
 		title: 'My Electron Preferences',
-		webPreferences: {
-			devTools: true,
-		},
 	},
 	sections: [
 		{
@@ -79,7 +76,7 @@ const preferences = new ElectronPreferences({
 								],
 								help: 'Select one or more foods that you like.',
 							},
-														{
+							{
 								label: 'Are you tired?',
 								key: 'tired',
 								type: 'checkbox',

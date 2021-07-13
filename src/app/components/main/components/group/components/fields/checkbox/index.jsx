@@ -7,6 +7,7 @@ import { newGuid } from '../../../../../../../utils/newGuid';
 class CheckboxField extends React.Component {
 
 	render() {
+
 		let { value } = this;
 		const { help, label } = this;
 
@@ -16,10 +17,14 @@ class CheckboxField extends React.Component {
 
 			// If only a single checkbox is being rendered, this allows you the ability to pass
 			// a boolean default value instead of ['value'], for convenience.
-			if (typeof value === 'boolean' && this.options.length === 1){
-				value = value ? [option] : []
-			} else if (typeof value !== 'object'){
-				value = []
+			if (typeof value === 'boolean' && this.options.length === 1) {
+
+				value = value ? [ option ] : [];
+
+			} else if (typeof value !== 'object') {
+
+				value = [];
+
 			}
 
 			const id = `${fieldID}_${idx}`;
@@ -76,14 +81,15 @@ class CheckboxField extends React.Component {
 	}
 
 	onChange(e) {
+
 		let { value } = this;
 
+		// Coerce values
+		if (typeof value !== 'object') {
 
-		// coerce values
-		if (typeof value !== 'object'){
-			value = []
+			value = [];
+
 		}
-
 
 		const idx = e.target.id.split('_')[2];
 		const option = this.options[idx];

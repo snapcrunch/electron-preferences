@@ -228,6 +228,7 @@ class ElectronPreferences extends EventEmitter2 {
 		if (this.prefsWindow) {
 
 			this.prefsWindow.focus();
+
 			return this.prefsWindow;
 
 		}
@@ -247,7 +248,6 @@ class ElectronPreferences extends EventEmitter2 {
 		};
 
 		const defaultWebPreferences = {
-			devTools: true,
 			nodeIntegration: false,
 			enableRemoteModule: false,
 			contextIsolation: true,
@@ -294,6 +294,7 @@ class ElectronPreferences extends EventEmitter2 {
 
 			// Show: false by default, then show when ready to prevent page "flicker"
 			this.prefsWindow.show();
+
 		});
 
 		this.prefsWindow.webContents.on('dom-ready', async () => {
@@ -335,7 +336,7 @@ class ElectronPreferences extends EventEmitter2 {
 
 		});
 
-		return this.prefsWindow
+		return this.prefsWindow;
 
 	}
 
