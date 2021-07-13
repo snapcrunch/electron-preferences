@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class TextField extends React.Component {
 
@@ -53,5 +54,11 @@ class TextField extends React.Component {
 	}
 
 }
+
+TextField.propTypes = {
+	field: PropTypes.object,
+	value: PropTypes.string,
+	onChange: PropTypes.func,
+};
 
 export default TextField;

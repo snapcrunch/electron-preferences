@@ -1,3 +1,4 @@
+/* global api, document */
 'use strict';
 
 const bt = document.getElementsByClassName('bt')[0];

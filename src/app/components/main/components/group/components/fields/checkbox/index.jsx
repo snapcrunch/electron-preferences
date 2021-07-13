@@ -1,11 +1,13 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { newGuid } from '../../../../../../../utils/newGuid';
 
 class CheckboxField extends React.Component {
 
 	render() {
+		const { value, help, label } = this;
 
 		const fieldID = `checkbox_${newGuid()}`;
 
@@ -21,10 +23,10 @@ class CheckboxField extends React.Component {
 			}
 
 			const id = `${fieldID}_${idx}`;
-			const checked = value.indexOf(option.value) >= 0
+			const checked = value.indexOf(option.value) >= 0;
 
 			return (
-				<label htmlFor={ id } className="checkbox-option">
+				<label htmlFor={ id } className="checkbox-option" key={idx}>
 					{ option.label }
 					<input type="checkbox" id={ id } onChange={ this.onChange.bind(this) } checked={ checked } />
 					<span className="check-square" />
@@ -35,9 +37,9 @@ class CheckboxField extends React.Component {
 
 		return (
 			<div className="field field-checkbox">
-				<div className="field-label">{ this.label }</div>
+				<div className="field-label">{ label }</div>
 				{ options }
-				{ this.help && <span className="help">{ this.help }</span> }
+				{ help && <span className="help">{ help }</span> }
 			</div>
 		);
 
@@ -74,6 +76,7 @@ class CheckboxField extends React.Component {
 	}
 
 	onChange(e) {
+		const { value } = this;
 
 
 		// coerce values
@@ -110,5 +113,11 @@ class CheckboxField extends React.Component {
 	}
 
 }
+
+CheckboxField.propTypes = {
+	field: PropTypes.object,
+	value: PropTypes.array,
+	onChange: PropTypes.func,
+};
 
 export default CheckboxField;

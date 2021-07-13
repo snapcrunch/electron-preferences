@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Focus the preference window when triggering .show() when window was already created
+- Allow the Accelerator value to be cleared via a single backspace or delete keydown
+- Checkbox crashing on invalid values
+- First click on a checkbox is ignored
 
 ## [2.4.0] - 2020-07-10
 ### Added
