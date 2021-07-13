@@ -247,7 +247,6 @@ class ElectronPreferences extends EventEmitter2 {
 		};
 
 		const defaultWebPreferences = {
-			devTools: true,
 			nodeIntegration: false,
 			enableRemoteModule: false,
 			contextIsolation: true,
