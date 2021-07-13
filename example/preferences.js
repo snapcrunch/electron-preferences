@@ -24,6 +24,9 @@ const preferences = new ElectronPreferences({
 	},
 	browserWindowOverrides: {
 		title: 'My Electron Preferences',
+		webPreferences: {
+			devTools: true,
+		},
 	},
 	sections: [
 		{

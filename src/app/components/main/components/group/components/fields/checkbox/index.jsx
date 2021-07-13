@@ -20,7 +20,7 @@ class CheckboxField extends React.Component {
 			}
 
 			const id = `${fieldID}_${idx}`;
-			const checked = this.value.indexOf(option.value) >= 0
+			const checked = value.indexOf(option.value) >= 0
 
 			return (
 				<label htmlFor={ id } className="checkbox-option">
@@ -74,29 +74,39 @@ class CheckboxField extends React.Component {
 
 	onChange(e) {
 
+
+		// coerce values
+		let value = this.value
+		if (typeof value === 'boolean'){
+			value = value ? [value] : []
+		} else if (typeof value !== 'object'){
+			value = []
+		}
+
+
 		const idx = e.target.id.split('_')[2];
 		const option = this.options[idx];
 
 		if (e.target.checked) {
 
-			if (this.value.indexOf(option.value) === -1) {
+			if (value.indexOf(option.value) === -1) {
 
-				this.value.push(option.value);
+				value.push(option.value);
 
 			}
 
 		} else {
 
-			const valIdx = this.value.indexOf(option.value);
+			const valIdx = value.indexOf(option.value);
 			if (valIdx > -1) {
 
-				this.value.splice(valIdx, 1);
+				value.splice(valIdx, 1);
 
 			}
 
 		}
 
-		return this.props.onChange(this.value);
+		return this.props.onChange(value);
 
 	}
 

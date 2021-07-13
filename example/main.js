@@ -18,6 +18,8 @@ preferences.on('save', preferences => {
 
 });
 
+preferences.value('about.foods', true)
+
 let mainWindow;
 
 function createWindow() {
