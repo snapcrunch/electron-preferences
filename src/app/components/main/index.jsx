@@ -62,8 +62,8 @@ class Main extends React.Component {
 }
 
 Main.propTypes = {
-	sections: PropTypes.string,
-	preferences: PropTypes.string,
+	sections: PropTypes.array,
+	preferences: PropTypes.object,
 	activeSection: PropTypes.string,
 	onFieldChange: PropTypes.func,
 };

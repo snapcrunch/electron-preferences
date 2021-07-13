@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class SliderField extends React.Component {
 
@@ -61,10 +62,16 @@ class SliderField extends React.Component {
 
 	onChange(e) {
 
-    	return this.props.onChange(parseInt(e.target.value));
+		return this.props.onChange(parseInt(e.target.value, 10));
 
 	}
 
 }
+
+SliderField.propTypes = {
+	field: PropTypes.object,
+	value: PropTypes.number,
+	onChange: PropTypes.func,
+};
 
 export default SliderField;
