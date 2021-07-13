@@ -16,7 +16,8 @@
     "test": "echo \"Error: argh, you called my bluff. We don't have any tests yet :(\" && exit 1",
     "example": "cd example && electron main.js",
     "prepare": "npm run build",
-    "build": "rimraf ./build && webpack-cli",
+    "build": "rimraf ./build && webpack",
+    "build:dev": "rimraf ./build && webpack --mode development",
     "build-example": "npm run build && npm run example"
   },
   "author": "Tim Ambler <tkambler@gmail.com>",

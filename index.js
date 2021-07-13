@@ -64,11 +64,7 @@ class ElectronPreferences extends EventEmitter2 {
 
 		}
 
-		if (!this.preferences) {
-
-			this.preferences = this.defaults;
-
-		} else {
+		if (this.preferences) {
 
 			// Set default preference values
 			_.keys(this.defaults).forEach(prefDefault => {
@@ -81,6 +77,10 @@ class ElectronPreferences extends EventEmitter2 {
 
 			});
 
+		} else {
+
+			this.preferences = this.defaults;
+
 		}
 
 		if (_.isFunction(options.onLoad)) {
@@ -91,7 +91,7 @@ class ElectronPreferences extends EventEmitter2 {
 
 		this.save();
 
-		ipcMain.on('showPreferences', event => {
+		ipcMain.on('showPreferences', _ => {
 
 			this.show();
 
@@ -103,7 +103,7 @@ class ElectronPreferences extends EventEmitter2 {
 
 		});
 
-		ipcMain.on('restoreDefaults', event => {
+		ipcMain.on('restoreDefaults', _ => {
 
 			this.preferences = this.defaults;
 			this.save();
@@ -325,6 +325,7 @@ class ElectronPreferences extends EventEmitter2 {
 				}
 
 			}
+
 		});
 
 		this.prefsWindow.on('closed', () => {
