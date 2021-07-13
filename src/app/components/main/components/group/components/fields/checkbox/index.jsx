@@ -11,12 +11,21 @@ class CheckboxField extends React.Component {
 
 		const options = this.options.map((option, idx) => {
 
+			// coerce values
+			let value = this.value
+			if (typeof value === 'boolean'){
+				value = value ? [value] : []
+			} else if (typeof value !== 'object'){
+				value = []
+			}
+
 			const id = `${fieldID}_${idx}`;
+			const checked = this.value.indexOf(option.value) >= 0
 
 			return (
 				<label htmlFor={ id } className="checkbox-option">
 					{ option.label }
-					<input type="checkbox" id={ id } onChange={ this.onChange.bind(this) } checked={ this.value.indexOf(option.value) >= 0 } />
+					<input type="checkbox" id={ id } onChange={ this.onChange.bind(this) } checked={ checked } />
 					<span className="check-square" />
 				</label>
 			);
