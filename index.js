@@ -293,7 +293,6 @@ class ElectronPreferences extends EventEmitter2 {
 
 			// Show: false by default, then show when ready to prevent page "flicker"
 			this.prefsWindow.show();
-			this.prefsWindow.webContents.openDevTools()
 		});
 
 		this.prefsWindow.webContents.on('dom-ready', async () => {

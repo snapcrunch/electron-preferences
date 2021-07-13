@@ -13,8 +13,9 @@ class CheckboxField extends React.Component {
 
 			// coerce values
 			let value = this.value
-			if (typeof value === 'boolean'){
-				value = value ? [value] : []
+			if (typeof value === 'boolean' && this.options.length === 1){
+				// a true default value for a single checkbox is coerced
+				value = value ? [option] : []
 			} else if (typeof value !== 'object'){
 				value = []
 			}
@@ -77,9 +78,7 @@ class CheckboxField extends React.Component {
 
 		// coerce values
 		let value = this.value
-		if (typeof value === 'boolean'){
-			value = value ? [value] : []
-		} else if (typeof value !== 'object'){
+		if (typeof value !== 'object'){
 			value = []
 		}
 
