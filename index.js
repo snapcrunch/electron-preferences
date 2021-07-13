@@ -227,7 +227,8 @@ class ElectronPreferences extends EventEmitter2 {
 
 		if (this.prefsWindow) {
 
-			return;
+			this.prefsWindow.focus();
+			return this.prefsWindow;
 
 		}
 
