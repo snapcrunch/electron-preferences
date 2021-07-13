@@ -7,6 +7,7 @@ import { newGuid } from '../../../../../../../utils/newGuid';
 class CheckboxField extends React.Component {
 
 	render() {
+
 		let { value } = this;
 		const { help, label } = this;
 
@@ -15,8 +16,10 @@ class CheckboxField extends React.Component {
 		const options = this.options.map((option, idx) => {
 
 			// Coerce invalid values
-			if (typeof value !== 'object'){
-				value = []
+			if (typeof value !== 'object') {
+
+				value = [];
+
 			}
 
 			const id = `${fieldID}_${idx}`;
@@ -73,14 +76,15 @@ class CheckboxField extends React.Component {
 	}
 
 	onChange(e) {
+
 		let { value } = this;
 
+		// Coerce values
+		if (typeof value !== 'object') {
 
-		// coerce values
-		if (typeof value !== 'object'){
-			value = []
+			value = [];
+
 		}
-
 
 		const idx = e.target.id.split('_')[2];
 		const option = this.options[idx];
