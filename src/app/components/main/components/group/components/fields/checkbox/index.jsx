@@ -14,11 +14,8 @@ class CheckboxField extends React.Component {
 
 		const options = this.options.map((option, idx) => {
 
-			// If only a single checkbox is being rendered, this allows you the ability to pass
-			// a boolean default value instead of ['value'], for convenience.
-			if (typeof value === 'boolean' && this.options.length === 1){
-				value = value ? [option] : []
-			} else if (typeof value !== 'object'){
+			// Coerce invalid values
+			if (typeof value !== 'object'){
 				value = []
 			}
 
