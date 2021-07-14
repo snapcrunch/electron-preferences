@@ -59,7 +59,7 @@ class ElectronPreferences extends EventEmitter2 {
 
 		} catch (err) {
 
-			console.error(err);
+			console.error(`Datastore error - ${err}`);
 			this.preferences = null;
 
 		}
