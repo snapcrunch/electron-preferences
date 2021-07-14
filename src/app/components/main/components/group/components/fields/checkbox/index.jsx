@@ -19,7 +19,7 @@ class CheckboxField extends React.Component {
 			// a boolean default value instead of ['value'], for convenience.
 			if (typeof value === 'boolean' && this.options.length === 1) {
 
-				value = value ? [ option ] : [];
+				value = value ? [ option.value ] : [];
 
 			} else if (typeof value !== 'object') {
 
@@ -83,16 +83,19 @@ class CheckboxField extends React.Component {
 	onChange(e) {
 
 		let { value } = this;
+		const idx = e.target.id.split('_')[2];
+		const option = this.options[idx];
 
 		// Coerce values
-		if (typeof value !== 'object') {
+		if (typeof value === 'boolean' && this.options.length === 1) {
+
+			value = value ? [ option.value ] : [];
+
+		} else if (typeof value !== 'object') {
 
 			value = [];
 
 		}
-
-		const idx = e.target.id.split('_')[2];
-		const option = this.options[idx];
 
 		if (e.target.checked) {
 
