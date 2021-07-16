@@ -27,7 +27,7 @@ function createWindow() {
 		height: 700,
 		'accept-first-mouse': true,
 		webPreferences: {
-			preload: path.join(__dirname, './Preload.js'),
+			preload: path.join(__dirname, './preload.js'),
 			contextIsolation: true,
 		},
 	});
