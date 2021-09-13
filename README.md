@@ -47,6 +47,7 @@ const app = electron.app;
 const path = require('path');
 const os = require('os');
 const ElectronPreferences = require('electron-preferences');
+// import ElectronPreferences from 'electron-preferences' //Or if you prefer to use module imports
 
 const preferences = new ElectronPreferences({
 	/**
