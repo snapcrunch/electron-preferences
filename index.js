@@ -246,6 +246,7 @@ class ElectronPreferences extends EventEmitter2 {
 
 		const unOverridableWebPreferences = {
 			contextIsolation: true,
+			devTools: this.options.debug ? true : undefined
 		}
 
 		// User provider `browserWindow`, we load those
@@ -275,6 +276,12 @@ class ElectronPreferences extends EventEmitter2 {
 		if (this.prefsWindow) {
 
 			this.prefsWindow.focus();
+
+			if (this.options.debug) {
+
+				this.prefsWindow.webContents.openDevTools();
+
+			}
 
 			return this.prefsWindow;
 
@@ -343,6 +350,14 @@ class ElectronPreferences extends EventEmitter2 {
 			this.prefsWindow = null;
 
 		});
+
+
+
+        if (this.options.debug) {
+
+            this.prefsWindow.webContents.openDevTools();
+
+        }
 
 		return this.prefsWindow;
 
