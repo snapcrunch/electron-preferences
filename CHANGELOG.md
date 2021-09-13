@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Always enable electron contextIsolation
+
+### Changed
+- Checkbox type supports a single boolean value
 
 ## [2.4.1] - 2020-07-13
 ### Fixed
