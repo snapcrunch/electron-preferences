@@ -6,10 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Fixed
-- Always enable electron contextIsolation
+- Always enable electron contextIsolation (#122)
 
 ### Added
-- Preferences option `debug: true` which opens the devTools by default
+- Preferences option `debug: true` which opens the devTools by default (#124)
+- Expose `browserWindowOverrides` on the preference object (#112)
 
 ### Changed
 - Checkbox type supports a single boolean value

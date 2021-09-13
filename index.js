@@ -153,6 +153,12 @@ class ElectronPreferences extends EventEmitter2 {
 
 	}
 
+	get browserWindowOverrides() {
+
+		return this.options.browserWindowOverrides;
+
+	}
+
 	get defaults() {
 
 		return this.options.defaults || {};
