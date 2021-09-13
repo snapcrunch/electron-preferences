@@ -25,17 +25,15 @@ const tpl = Handlebars.compile(`
 `);
 
 const icons = glob.sync('*.svg', {
-    'cwd': srcFolder
+	cwd: srcFolder,
 })
-    .map((icon) => {
-        return {
-            'path': `assets/svg/${icon}`,
-            'name': path.basename(icon, '.svg')
-        };
-    });
+	.map(icon => ({
+		path: `assets/svg/${icon}`,
+		name: path.basename(icon, '.svg'),
+	}));
 
 const rendered = tpl({
-    'icons': icons
+	icons,
 });
 
 console.log(rendered);

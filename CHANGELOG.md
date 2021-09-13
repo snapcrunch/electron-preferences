@@ -1,10 +1,32 @@
-# Changelog
+﻿# Changelog
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Always enable electron contextIsolation (#122)
+
+### Added
+- Preferences option `debug: true` which opens the devTools by default (#124)
+- Expose `browserWindowOverrides` on the preference object (#112)
+
+### Changed
+- Checkbox type supports a single boolean value
+
+## [2.4.1] - 2020-07-13
+### Fixed
+- Focus the preference window when triggering .show() when window was already created
+- Allow the Accelerator value to be cleared via a single backspace or delete keydown
+- Checkbox crashing on invalid values
+- First click on a checkbox is ignored
+
+## [2.4.0] - 2020-07-10
+### Added
+- File select component
+- Support multiple selection of files and folders via the 'multiSelections' option
+
 ### Changed
 - Read/write settings file atomically
 - Debounced saving settings file to 200ms (prevent overwriting disk)

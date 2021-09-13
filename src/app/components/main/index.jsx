@@ -1,65 +1,71 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import Group from './components/group';
 import _ from 'lodash';
 
 class Main extends React.Component {
 
-    render() {
+	render() {
 
-        const groups = this.form.groups.map((group, idx) => {
-            return (
-                <Group key={ idx } group={ group } preferences={ this.preferences[this.section.id] } onFieldChange={ this.onFieldChange.bind(this) } />
-            );
-        });
+		const groups = this.form.groups.map((group, idx) => (
+			<Group key={ idx } group={ group } preferences={ this.preferences[this.section.id] } onFieldChange={ this.onFieldChange.bind(this) } />
+		));
 
-        return (
-            <div className="main" role="tabpanel">
-                { groups }
-            </div>
-        );
+		return (
+			<div className="main" role="tabpanel">
+				{ groups }
+			</div>
+		);
 
-    }
+	}
 
-    get sections() {
+	get sections() {
 
-        return this.props.sections;
+		return this.props.sections;
 
-    }
+	}
 
-    get form() {
+	get form() {
 
-        return this.section.form;
+		return this.section.form;
 
-    }
+	}
 
-    get preferences() {
+	get preferences() {
 
-        return this.props.preferences;
+		return this.props.preferences;
 
-    }
+	}
 
-    get activeSection() {
+	get activeSection() {
 
-        return this.props.activeSection;
+		return this.props.activeSection;
 
-    }
+	}
 
-    get section() {
+	get section() {
 
-        return _.find(this.sections, {
-            'id': this.activeSection
-        });
+		return _.find(this.sections, {
+			id: this.activeSection,
+		});
 
-    }
+	}
 
-    get onFieldChange() {
+	get onFieldChange() {
 
-        return this.props.onFieldChange;
+		return this.props.onFieldChange;
 
-    }
+	}
 
 }
 
-module.exports = Main;
+Main.propTypes = {
+	sections: PropTypes.array,
+	preferences: PropTypes.object,
+	activeSection: PropTypes.string,
+	onFieldChange: PropTypes.func,
+};
+
+export default Main;

@@ -1,67 +1,65 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Sidebar extends React.Component {
 
-    render() {
+	render() {
 
         const sections = this.sections.map((section) => {
-            const isActive = this.activeSection === section.id;
             let className = 'sidebar-section';
-            if (isActive) {
+            if (this.activeSection === section.id) {
                 className += ' active';
             }
-            
+
             const style = {
                 mask: `url("svg/${section.icon}.svg") no-repeat center / contain`,
                 webkitMask: `url("svg/${section.icon}.svg") no-repeat center / contain`
             }
             return (
-                <li key={ section.id } className={ className } role="tab" id={ `tab-${section.id}` }
-                    aria-selected={ isActive } aria-controls={ `tabpanel-${section.id}` } tabIndex={ isActive ? 0 : -1 }
-                    onClick={ this.selectSection.bind(this, section.id) }>
+                <div key={ section.id } className={ className } onClick={ this.selectSection.bind(this, section.id) }>
                     <div className="section-icon" style={ style } />
                     <span className="section-label">{ section.label }</span>
-                </li>
+                </div>
             );
         });
 
         return (
-            <ul className="sidebar" role="tablist" aria-label="Side bar" onKeyDown={ this.onTablistKeyDown }>
+            <div className="sidebar">
                 { sections }
-            </ul>
+            </div>
         );
 
-    }
+	}
 
-    get sections() {
+	get sections() {
 
-        return this.props.sections;
+		return this.props.sections;
 
-    }
+	}
 
-    get activeSection() {
+	get activeSection() {
 
-        return this.props.activeSection;
+		return this.props.activeSection;
 
-    }
+	}
 
-    get onSelectSection() {
+	get onSelectSection() {
 
-        return this.props.onSelectSection;
+		return this.props.onSelectSection;
 
-    }
+	}
 
-    selectSection(sectionId) {
+	selectSection(sectionId) {
 
-        this.setState({
-            'activeSection': sectionId
-        });
+		this.setState({
+			activeSection: sectionId,
+		});
 
-        this.onSelectSection(sectionId);
+		this.onSelectSection(sectionId);
 
-    }
+	}
 
     onTablistKeyDown = (e) => {
         if (e.repeat) return;
@@ -71,16 +69,16 @@ class Sidebar extends React.Component {
         } else if (e.keyCode === 37 || e.keyCode === 38) {
             tabIncrement--;
         }
-        
+
         if (tabIncrement === 0)
             return;
-        
+
         const { activeSection, sections } = this;
         const sectionIds = sections.map(section => section.id);
         console.log(activeSection, sectionIds);
         if (sectionIds.length <= 0)
             return;
-        
+
         let index = sectionIds.indexOf(activeSection);
         if (index === -1 || (tabIncrement > 0 && index >= sectionIds.length - 1)) {
             //last tab is selected, or no tab found... Just return to the first tab.
@@ -97,4 +95,10 @@ class Sidebar extends React.Component {
 
 }
 
-module.exports = Sidebar;
+Sidebar.propTypes = {
+	sections: PropTypes.array,
+	activeSection: PropTypes.string,
+	onSelectSection: PropTypes.func,
+};
+
+export default Sidebar;

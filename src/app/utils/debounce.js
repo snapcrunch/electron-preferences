@@ -1,23 +1,37 @@
-/* Utilities */
+/*
+	Debounce utility function
 
-export default ( func, delay ) => {
+	Debounce a function by wrapping it in a debounce and providing a delay in ms:
 
-	let debounceTimer
+	const debouncedFunction = debounce((arg1) => {
+		// do whatever
+	}, 500)
 
-	return function ( ...args ) {
+	myRapidlyUpdatingThing.onChange(() => {
+		debouncedFunction()
+	})
 
-		clearTimeout( debounceTimer )
+	call debouncedFunction({abort: true}) before the delay to cancel the function from being called
+*/
+
+export default (func, delay) => {
+
+	let debounceTimer;
+
+	return function (...args) {
+
+		clearTimeout(debounceTimer);
 
 		// Pass { abort: true } to cancel
-		if ( args[0] && args[0].abort ) {
+		if (args[0] && args[0].abort) {
 
-			return
+			return;
 
 		}
 
-		const context = this
-		debounceTimer = setTimeout( () => func.apply( context, args ), delay )
+		const context = this;
+		debounceTimer = setTimeout(() => func.apply(context, args), delay);
 
-	}
+	};
 
-}
+};
