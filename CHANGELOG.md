@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Always enable electron contextIsolation
 
+### Added
+- Preferences option `debug: true` which opens the devTools by default
+
 ### Changed
 - Checkbox type supports a single boolean value
 
