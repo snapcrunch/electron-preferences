@@ -223,16 +223,7 @@ class ElectronPreferences extends EventEmitter2 {
 
 	}
 
-	show() {
-
-		if (this.prefsWindow) {
-
-			this.prefsWindow.focus();
-
-			return this.prefsWindow;
-
-		}
-
+	getBrowserWindowOptions() {
 		let browserWindowOpts = {
 			title: 'Preferences',
 			width: 800,
@@ -250,9 +241,12 @@ class ElectronPreferences extends EventEmitter2 {
 		const defaultWebPreferences = {
 			nodeIntegration: false,
 			enableRemoteModule: false,
-			contextIsolation: true,
 			preload: path.join(__dirname, './preload.js'),
 		};
+
+		const unOverridableWebPreferences = {
+			contextIsolation: true,
+		}
 
 		// User provider `browserWindow`, we load those
 		if (this.options.browserWindowOverrides) {
@@ -261,7 +255,6 @@ class ElectronPreferences extends EventEmitter2 {
 
 		}
 
-		//
 		if (browserWindowOpts.webPreferences) {
 
 			browserWindowOpts.webPreferences = Object.assign(defaultWebPreferences, browserWindowOpts.webPreferences);
@@ -272,7 +265,22 @@ class ElectronPreferences extends EventEmitter2 {
 
 		}
 
-		this.prefsWindow = new BrowserWindow(browserWindowOpts);
+		browserWindowOpts.webPreferences = Object.assign(browserWindowOpts.webPreferences, unOverridableWebPreferences);
+
+		return browserWindowOpts;
+	}
+
+	show() {
+
+		if (this.prefsWindow) {
+
+			this.prefsWindow.focus();
+
+			return this.prefsWindow;
+
+		}
+
+		this.prefsWindow = new BrowserWindow(this.getBrowserWindowOptions());
 
 		if (this.options.menuBar) {
 
