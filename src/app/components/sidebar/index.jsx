@@ -78,7 +78,6 @@ class Sidebar extends React.Component {
 
         const { activeSection, sections } = this;
         const sectionIds = sections.map(section => section.id);
-        console.log(activeSection, sectionIds);
         if (sectionIds.length <= 0)
             return;
 

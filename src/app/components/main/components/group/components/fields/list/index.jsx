@@ -50,12 +50,12 @@ class ListField extends React.Component {
 						</select>
 					</div>
 					<div className="ep-list-button-container">
-						<span className="ep-list-button" onClick={ this.addClick }><span className="ep-list-button-text">+</span></span>
-						<span className="ep-list-button" onClick={ this.removeClick }><span className="ep-list-button-text">-</span></span>
+						<button className="ep-list-button" onClick={ this.addClick }><span className="ep-list-button-text">+</span></button>
+						<button className="ep-list-button" onClick={ this.removeClick }><span className="ep-list-button-text">-</span></button>
 						{ this.orderable
 					&& <React.Fragment>
-						<span className="ep-list-button" onClick={ this.upClick }><span className="ep-list-button-text">↑</span></span>
-						<span className="ep-list-button" onClick={ this.downClick }><span className="ep-list-button-text">↓</span></span>
+						<button className="ep-list-button" onClick={ this.upClick }><span className="ep-list-button-text">↑</span></button>
+						<button className="ep-list-button" onClick={ this.downClick }><span className="ep-list-button-text">↓</span></button>
 					</React.Fragment>
 						}
 					</div>

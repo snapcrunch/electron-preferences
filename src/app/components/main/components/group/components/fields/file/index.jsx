@@ -38,9 +38,9 @@ class FileField extends React.Component {
 							: 'None'
 					}
 				</div>
-				<div className="bt" onClick={this.choose}>
+				<button className="bt" onClick={this.choose}>
 					{btLabel}
-				</div>
+				</button>
 				{help && <span className="help">{help}</span>}
 			</div>
 		);

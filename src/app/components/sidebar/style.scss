@@ -31,6 +31,7 @@
         color: #8C8C8C;
         font-weight: 600;
         cursor: pointer;
+        outline: none;
 
         &.active {
             //background-color: #0084ff;
@@ -41,7 +42,11 @@
                 background-color: #0084ff;
             }
         }
-        
+
+        &:focus {
+            border: 2px solid #0084ff;
+        }
+
         &:hover {
             background-color: rgba(0,0,0,0.1);
         }
@@ -72,10 +77,10 @@
 @media (prefers-color-scheme: dark) {
     .sidebar {
         background-color: #212121;
-        
+
         .sidebar-section {
             color: #787878;
-            
+
             .section-icon {
                 background-color: #787878;
             }
