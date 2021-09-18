@@ -19,8 +19,9 @@ const preferences = new ElectronPreferences({
 		},
 		// ...
 	},
+	debug: false, //true will open the dev tools
 	webPreferences: {
-		devTools: true,
+		webSecurity: true
 	},
 	browserWindowOverrides: {
 		title: 'My Electron Preferences',
@@ -75,6 +76,14 @@ const preferences = new ElectronPreferences({
 									{ label: 'Spinach', value: 'spinach' },
 								],
 								help: 'Select one or more foods that you like.',
+							},
+							{
+								label: 'Are you tired?',
+								key: 'tired',
+								type: 'checkbox',
+								options: [
+									{ label: 'Yes', value: 'yes' },
+								],
 							},
 							{
 								label: 'Coolness',

@@ -25,7 +25,7 @@
             padding-top: 5px;
             padding-bottom: 5px;
             font-size: 12px;
-            color: #bdc2c9;
+            color: #606671;
         }
 
         .value {
@@ -40,8 +40,10 @@
             font-weight: 700;
             text-transform: uppercase;
             transition: all ease-out 0.3s;
+            border: none;
+            outline: none;
 
-            &:hover {
+            &:hover, &:focus {
                 cursor: pointer;
                 background-color: rgba(0,0,0,0.4);
             }
@@ -55,7 +57,7 @@
         .field {
 
             .help {
-                color: #5d5d5d;
+                color: #8C8C8C;
             }
 
             .bt {

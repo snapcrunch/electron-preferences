@@ -1,5 +1,5 @@
 .field-checkbox {
-  
+
   .checkbox-option {
     display: block;
     position: relative;
@@ -10,7 +10,7 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    
+
     input {
       position: absolute;
       opacity: 0;
@@ -18,7 +18,7 @@
       height: 0;
       width: 0;
     }
-    
+
     .check-square {
       position: absolute;
       top: 0;
@@ -29,34 +29,44 @@
       border: 1px solid #afb9c0;
       border-radius: 4px;
     }
-    
+
     &:hover input ~ .check-square {
       background-color: rgba(0,0,0,0.05);
     }
-    
+
     input:checked ~ .check-square {
       background-color: #0084ff;
       border-color: #0084ff;
+      border-width: 2px;
+    }
+
+    input:focus ~ .check-square {
+      border-color: #0084ff;
+      border-width: 2px;
+    }
+
+    input:checked:focus ~ .check-square {
+      border-color: #46a6ff;
     }
 
     &:hover input:checked ~ .check-square {
       background-color: #006dd9;
       border-color: #006dd9;
     }
-    
+
     .check-square:after {
       content: "";
       position: absolute;
       display: none;
     }
-    
+
     input:checked ~ .check-square:after {
       display: block;
     }
-    
+
     .check-square:after {
-      left: 6px;
-      top: 1px;
+      left: 5px;
+      top: 0;
       width: 5px;
       height: 10px;
       border: solid white;
@@ -68,7 +78,7 @@
       animation: zoom-in-check-square 0.3s 1;
       -webkit-animation: zoom-in-check-square 0.3s 1;
     }
-    
+
     @keyframes zoom-in-check-square {
       0%   {transform: scale(0.0) rotate(0deg);}
       25%  {transform: scale(0.3) rotate(30deg);}
@@ -82,15 +92,15 @@
   .field-checkbox {
 
     .checkbox-option {
-      
+
       &:hover input ~ .check-square {
         background-color: rgba(0,0,0,0.1);
       }
-      
+
       .check-square {
         border: 1px solid #0e0e0e;
       }
-      
+
       .check-square:after {
         border: solid #252525;
         border-width: 0 3px 3px 0;

@@ -23,7 +23,8 @@ const AcceleratorField = ({ field, value, onChange }) => {
 		like control, shift, etc. as well as a handful of oddball codes.
 		We only save if we receive one of these non-modifier keys.
 	*/
-	const specialKeyCodes = [ 0, 1, 2, 3, 4, 5, 6, 7, 10, 11, 16, 17, 18, 21, 22, 23, 24, 25, 26, 28, 29, 30, 31, 91, 92, 93, 94, 95 ];
+	// const modifierKeyCodes = [16, 17, 18, 91, 92, 93]
+	const specialKeyCodes = [ 0, 1, 2, 3, 4, 5, 6, 7, 10, 11, 16, 17, 18, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 91, 92, 93, 94, 95 ];
 
 	const handleKeyDown = event => {
 
@@ -42,9 +43,12 @@ const AcceleratorField = ({ field, value, onChange }) => {
 
 			// Clear the value on backspace (8) or delete (46)
 			if (keys.length < 1 && (event.which === 8 || event.which === 46)) {
+
 				setPressing(false);
-				onChange('')
+				onChange('');
+
 				return;
+
 			}
 
 			// We allow single-keys to be set, unless `modifierRequired` is passed
@@ -75,7 +79,7 @@ const AcceleratorField = ({ field, value, onChange }) => {
 	return (
 		<div className="field field-accelerator">
 			<div className="field-label">{ field.label }</div>
-			<input type="text" value={ (pressing && accelerator) || value } onKeyDown={ handleKeyDown } onKeyUp={ handleKeyUp } readOnly />
+			<input type="text" value={ (pressing && accelerator) || value } aria-label={ field.label } onKeyDown={ handleKeyDown } onKeyUp={ handleKeyUp } readOnly />
 			{ field.help && <span className="help">{ field.help }</span> }
 		</div>
 	);

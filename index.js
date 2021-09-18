@@ -59,7 +59,7 @@ class ElectronPreferences extends EventEmitter2 {
 
 		} catch (err) {
 
-			console.error(err);
+			console.error(`Datastore error - ${err}`);
 			this.preferences = null;
 
 		}
@@ -153,6 +153,12 @@ class ElectronPreferences extends EventEmitter2 {
 
 	}
 
+	get browserWindowOverrides() {
+
+		return this.options.browserWindowOverrides;
+
+	}
+
 	get defaults() {
 
 		return this.options.defaults || {};
@@ -223,15 +229,7 @@ class ElectronPreferences extends EventEmitter2 {
 
 	}
 
-	show() {
-
-		if (this.prefsWindow) {
-
-			this.prefsWindow.focus();
-			return this.prefsWindow;
-
-		}
-
+	getBrowserWindowOptions() {
 		let browserWindowOpts = {
 			title: 'Preferences',
 			width: 800,
@@ -249,9 +247,13 @@ class ElectronPreferences extends EventEmitter2 {
 		const defaultWebPreferences = {
 			nodeIntegration: false,
 			enableRemoteModule: false,
-			contextIsolation: true,
 			preload: path.join(__dirname, './preload.js'),
 		};
+
+		const unOverridableWebPreferences = {
+			contextIsolation: true,
+			devTools: this.options.debug ? true : undefined
+		}
 
 		// User provider `browserWindow`, we load those
 		if (this.options.browserWindowOverrides) {
@@ -260,7 +262,6 @@ class ElectronPreferences extends EventEmitter2 {
 
 		}
 
-		//
 		if (browserWindowOpts.webPreferences) {
 
 			browserWindowOpts.webPreferences = Object.assign(defaultWebPreferences, browserWindowOpts.webPreferences);
@@ -271,7 +272,28 @@ class ElectronPreferences extends EventEmitter2 {
 
 		}
 
-		this.prefsWindow = new BrowserWindow(browserWindowOpts);
+		browserWindowOpts.webPreferences = Object.assign(browserWindowOpts.webPreferences, unOverridableWebPreferences);
+
+		return browserWindowOpts;
+	}
+
+	show() {
+
+		if (this.prefsWindow) {
+
+			this.prefsWindow.focus();
+
+			if (this.options.debug) {
+
+				this.prefsWindow.webContents.openDevTools();
+
+			}
+
+			return this.prefsWindow;
+
+		}
+
+		this.prefsWindow = new BrowserWindow(this.getBrowserWindowOptions());
 
 		if (this.options.menuBar) {
 
@@ -335,7 +357,15 @@ class ElectronPreferences extends EventEmitter2 {
 
 		});
 
-		return this.prefsWindow
+
+
+        if (this.options.debug) {
+
+            this.prefsWindow.webContents.openDevTools();
+
+        }
+
+		return this.prefsWindow;
 
 	}
 
