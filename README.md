@@ -363,7 +363,7 @@ The library includes built-in support for the following field types:
 - Text
 - Dropdown
 - Message
-- Folder selection
+- Folder/File selection
 - Checkbox
 - Radio
 - Slider
