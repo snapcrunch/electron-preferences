@@ -33,7 +33,7 @@ class CheckboxField extends React.Component {
 			return (
 				<label htmlFor={ id } className="checkbox-option" key={idx}>
 					{ option.label }
-					<input type="checkbox" id={ id } onChange={ this.onChange.bind(this) } checked={ checked } />
+					<input type="checkbox" id={ id } onChange={ this.onChange.bind(this) } checked={ checked } aria-label={ option.label } />
 					<span className="check-square" />
 				</label>
 			);
@@ -42,7 +42,7 @@ class CheckboxField extends React.Component {
 
 		return (
 			<div className="field field-checkbox">
-				<div className="field-label">{ label }</div>
+				<div className="field-label" aria-label={ label }>{ label }</div>
 				{ options }
 				{ help && <span className="help">{ help }</span> }
 			</div>

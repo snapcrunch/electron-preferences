@@ -21,6 +21,7 @@ class Sidebar extends React.Component {
             return (
                 <li key={ section.id } className={ className } role="tab" id={ `tab-${section.id}` }
                     aria-selected={ isActive } aria-controls={ `tabpanel-${section.id}` } tabIndex={ isActive ? 0 : -1 }
+                    aria-label={ section.label }
                     onClick={ this.selectSection.bind(this, section.id) }>
                     <div className="section-icon" style={ style } />
                     <span className="section-label">{ section.label }</span>
