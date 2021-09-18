@@ -25,7 +25,7 @@ class FileField extends React.Component {
 
 		return (
 			<div className="field field-file">
-				<div className="field-label">{label}</div>
+				<div className="field-label" aria-label={ label }>{label}</div>
 				<div className="value" onClick={this.choose}>
 					{multiSelections ? 'Files' : 'File'}:&nbsp;
 					{
@@ -38,9 +38,9 @@ class FileField extends React.Component {
 							: 'None'
 					}
 				</div>
-				<div className="bt" onClick={this.choose}>
+				<button className="bt" onClick={this.choose} aria-label={ btLabel }>
 					{btLabel}
-				</div>
+				</button>
 				{help && <span className="help">{help}</span>}
 			</div>
 		);

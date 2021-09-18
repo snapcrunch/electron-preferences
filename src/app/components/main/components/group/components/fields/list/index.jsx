@@ -30,7 +30,7 @@ class ListField extends React.Component {
 
 		return (
 			<div className="field field-list">
-				<div className="field-label">{ this.label }</div>
+				<div className="field-label" aria-label={ this.label }>{ this.label }</div>
 				<div>
 					<div>
 						<select style={ this.style } className="ep-list" size={ this.size } onChange={ this.selectItem.bind(this) }>
@@ -39,23 +39,23 @@ class ListField extends React.Component {
 
 									if (index === this.state.selectedIndex) {
 
-										return (<option selected value={item} key={index}>{item}</option>);
+										return (<option selected value={item} key={index} aria-label={ item }>{item}</option>);
 
 									}
 
-									return (<option value={item} key={index}>{item}</option>);
+									return (<option value={item} key={index} aria-label={ item }>{item}</option>);
 
 								})
 							}
 						</select>
 					</div>
 					<div className="ep-list-button-container">
-						<span className="ep-list-button" onClick={ this.addClick }><span className="ep-list-button-text">+</span></span>
-						<span className="ep-list-button" onClick={ this.removeClick }><span className="ep-list-button-text">-</span></span>
+						<button className="ep-list-button" onClick={ this.addClick } aria-label="Add"><span className="ep-list-button-text">+</span></button>
+						<button className="ep-list-button" onClick={ this.removeClick } aria-label="Remove"><span className="ep-list-button-text">-</span></button>
 						{ this.orderable
 					&& <React.Fragment>
-						<span className="ep-list-button" onClick={ this.upClick }><span className="ep-list-button-text">↑</span></span>
-						<span className="ep-list-button" onClick={ this.downClick }><span className="ep-list-button-text">↓</span></span>
+						<button className="ep-list-button" onClick={ this.upClick } aria-label="Move up"><span className="ep-list-button-text">↑</span></button>
+						<button className="ep-list-button" onClick={ this.downClick } aria-label="Move down"><span className="ep-list-button-text">↓</span></button>
 					</React.Fragment>
 						}
 					</div>
@@ -63,13 +63,13 @@ class ListField extends React.Component {
 						<div className="ep-list-modal-container">
 							<div className="ep-list-modal-input-container">
 								<label className="ep-list-modal-input-label">{ this.addItemLabel }</label>
-								<input className="ep-list-modal-input" type="text" value={ this.state.itemToAdd } autoFocus={ true } onChange={ this.itemToAddChanged } />
+								<input className="ep-list-modal-input" type="text" value={ this.state.itemToAdd } autoFocus={ true } onChange={ this.itemToAddChanged } aria-label={ this.addItemLabel } />
 							</div>
 							<div className="ep-list-modal-button-container">
-								<button className="ep-list-modal-button" onClick={ this.cancelAdd.bind(this) }>Cancel</button>
+								<button className="ep-list-modal-button" onClick={ this.cancelAdd.bind(this) } aria-label="Cancel">Cancel</button>
 								{ (this.addItemValidator.test(this.state.itemToAdd)
-									&& <button className="ep-list-modal-button" onClick={ this.saveItem.bind(this) }>Save</button>)
-									|| <button className="ep-list-modal-button" disabled="disabled">Save</button>
+									&& <button className="ep-list-modal-button" onClick={ this.saveItem.bind(this) } aria-label="Save">Save</button>)
+									|| <button className="ep-list-modal-button" disabled="disabled" aria-label="Save">Save</button>
 								}
 							</div>
 						</div>

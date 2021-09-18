@@ -79,7 +79,7 @@ const AcceleratorField = ({ field, value, onChange }) => {
 	return (
 		<div className="field field-accelerator">
 			<div className="field-label">{ field.label }</div>
-			<input type="text" value={ (pressing && accelerator) || value } onKeyDown={ handleKeyDown } onKeyUp={ handleKeyUp } readOnly />
+			<input type="text" value={ (pressing && accelerator) || value } aria-label={ field.label } onKeyDown={ handleKeyDown } onKeyUp={ handleKeyUp } readOnly />
 			{ field.help && <span className="help">{ field.help }</span> }
 		</div>
 	);

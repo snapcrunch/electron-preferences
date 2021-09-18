@@ -12,6 +12,8 @@
     overflow-x: hidden;
     overflow-y: auto;
     background-color: #f8f9fb;
+    padding: 0;
+    margin: 0;
 
     .sidebar-section {
         height: 40px;
@@ -26,9 +28,10 @@
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
-        color: #5d5d5d;
+        color: #8C8C8C;
         font-weight: 600;
         cursor: pointer;
+        outline: none;
 
         &.active {
             //background-color: #0084ff;
@@ -39,7 +42,11 @@
                 background-color: #0084ff;
             }
         }
-        
+
+        &:focus {
+            border: 2px solid #0084ff;
+        }
+
         &:hover {
             background-color: rgba(0,0,0,0.1);
         }
@@ -70,10 +77,10 @@
 @media (prefers-color-scheme: dark) {
     .sidebar {
         background-color: #212121;
-        
+
         .sidebar-section {
             color: #787878;
-            
+
             .section-icon {
                 background-color: #787878;
             }

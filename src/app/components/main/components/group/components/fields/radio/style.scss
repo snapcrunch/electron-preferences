@@ -39,6 +39,11 @@
       border-color: #0084ff;
     }
 
+    input:focus ~ .check-circle {
+      background-color: #46a6ff;
+      border-color: #46a6ff;
+    }
+
     &:hover input:checked ~ .check-circle {
       background-color: #006dd9;
       border-color: #006dd9;

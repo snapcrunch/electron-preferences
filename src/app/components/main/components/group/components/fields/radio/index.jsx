@@ -17,7 +17,7 @@ class RadioField extends React.Component {
 			return (
 				<label htmlFor={ id } className="radio-option" key={ idx }>
 					{ option.label }
-					<input type="radio" id={ id } onChange={ this.onChange.bind(this) } checked={ option.value === this.value } />
+					<input type="radio" id={ id } onChange={ this.onChange.bind(this) } checked={ option.value === this.value } name={ fieldID } aria-label={ option.label } />
 					<span className="check-circle" />
 				</label>
 			);

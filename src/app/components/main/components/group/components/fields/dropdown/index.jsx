@@ -8,13 +8,13 @@ class DropdownField extends React.Component {
 	render() {
 
 		const options = this.options.map((option, idx) => (
-			<option value={option.value} key={idx}>{option.label}</option>
+			<option value={option.value} key={idx} aria-label={ option.label }>{option.label}</option>
 		));
 
 		return (
 			<div className="field field-dropdown">
 				<div className="field-label">{ this.label }</div>
-				<select onChange={ this.onChange.bind(this) } value={ this.value }>
+				<select onChange={ this.onChange.bind(this) } value={ this.value } aria-label={ this.label }>
 					<option value="">-- Select One --</option>
 					{ options }
 				</select>
