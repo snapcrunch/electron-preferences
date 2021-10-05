@@ -2,7 +2,6 @@
 
 const electron = require('electron');
 const { Menu } = electron;
-// const app = electron.app;
 const path = require('path');
 const os = require('os');
 const ElectronPreferences = require('../');
@@ -20,9 +19,9 @@ const preferences = new ElectronPreferences({
 		},
 		// ...
 	},
-	debug: false, //true will open the dev tools
+	debug: false, // True will open the dev tools
 	webPreferences: {
-		webSecurity: true
+		webSecurity: true,
 	},
 	menuBar: Menu.buildFromTemplate(
 		[
@@ -33,11 +32,11 @@ const preferences = new ElectronPreferences({
 					{
 						label: 'Close',
 						accelerator: 'CmdOrCtrl+W',
-						role: 'close'
-					}
-				]
-			}
-		]
+						role: 'close',
+					},
+				],
+			},
+		],
 	),
 	browserWindowOverrides: {
 		title: 'My Electron Preferences',
