@@ -97,6 +97,12 @@ class ElectronPreferences extends EventEmitter2 {
 
 		});
 
+		ipcMain.on('closePreferences', _ => {
+
+			this.close();
+
+		});
+
 		ipcMain.on('getSections', event => {
 
 			event.returnValue = this.options.sections;
@@ -367,6 +373,12 @@ class ElectronPreferences extends EventEmitter2 {
 
 		return this.prefsWindow;
 
+	}
+
+	close() {
+		if (!this.prefsWindow) return;
+
+		this.prefsWindow.close();
 	}
 
 }

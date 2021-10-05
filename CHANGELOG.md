@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added 
 - Preferences option `debug: true` which opens the devTools by default (#124)
 - Expose `browserWindowOverrides` on the preference object (#112)
+- Expose `close` function on preference object to close the preference window if opened (#130)
+- - Expose `closePreferences` function on the ipcRenderer to close the preference window if opened (#130)
 
 ### Changed
 - Checkbox type supports a single boolean value

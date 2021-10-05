@@ -2,6 +2,12 @@ body {
     background: white;
 }
 
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .bt {
     margin: 25px;
 }
