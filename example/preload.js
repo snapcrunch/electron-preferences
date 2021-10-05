@@ -12,6 +12,11 @@ contextBridge.exposeInMainWorld('api', {
 		ipcRenderer.send('showPreferences');
 
 	},
+	closePreferences: () => {
+
+		ipcRenderer.send('closePreferences');
+
+	},
 	getPreferences: () => ipcRenderer.sendSync('getPreferences'),
 	onPreferencesChanged: handler => {
 

@@ -1,7 +1,7 @@
 'use strict';
 
-// Const electron = require('electron');
-// const app = electron.app;
+const electron = require('electron');
+const { Menu } = electron;
 const path = require('path');
 const os = require('os');
 const ElectronPreferences = require('../');
@@ -19,10 +19,25 @@ const preferences = new ElectronPreferences({
 		},
 		// ...
 	},
-	debug: false, //true will open the dev tools
+	debug: false, // True will open the dev tools
 	webPreferences: {
-		webSecurity: true
+		webSecurity: true,
 	},
+	menuBar: Menu.buildFromTemplate(
+		[
+			{
+				label: 'Window',
+				role: 'window',
+				submenu: [
+					{
+						label: 'Close',
+						accelerator: 'CmdOrCtrl+W',
+						role: 'close',
+					},
+				],
+			},
+		],
+	),
 	browserWindowOverrides: {
 		title: 'My Electron Preferences',
 	},
