@@ -288,7 +288,7 @@ const preferences = new ElectronPreferences({
 	/**
 	 * These parameters create an optional menu bar
 	 */
-	menu: Menu.buildFromTemplate(
+	menuBar: Menu.buildFromTemplate(
 		[
 			{
 			label: 'Window',

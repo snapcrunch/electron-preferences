@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Accessibility issues: contrast, navigation with keyboard, labels (#76)
 - Always enable electron contextIsolation (#122)
+- Correct `menuBar` option in README (#130)
 
 ### Added 
 - Preferences option `debug: true` which opens the devTools by default (#124)
