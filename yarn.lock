@@ -2865,7 +2865,7 @@
 
 "exenv@^1.2.0":
   "integrity" "sha1-KueOhdmJQVhnCwPUe+wfA72Ru50="
-  "resolved" "https://npm-registry.rancher.sie.sony.com/e/exenv/_attachments/exenv-1.2.2.tgz"
+  "resolved" "https://registry.npmjs.org/exenv/-/exenv-1.2.2.tgz"
   "version" "1.2.2"
 
 "expand-brackets@^2.1.4":
@@ -5021,7 +5021,7 @@
 
 "react-lifecycles-compat@^3.0.0":
   "integrity" "sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA=="
-  "resolved" "https://npm-registry.rancher.sie.sony.com/r/react-lifecycles-compat/_attachments/react-lifecycles-compat-3.0.4.tgz"
+  "resolved" "https://registry.npmjs.org/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz"
   "version" "3.0.4"
 
 "react-modal@^3.14.3":
