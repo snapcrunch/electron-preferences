@@ -80,6 +80,7 @@ For an example usage of the library, check out `example/preferences.js`
 
 ```js
 const ElectronPreferences = require('electron-preferences');
+// import ElectronPreferences from 'electron-preferences'; // ...or if you prefer to use module imports
 
 const preferences = new ElectronPreferences({
 	// Override default preference BrowserWindow values
