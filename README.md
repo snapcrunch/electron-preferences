@@ -50,6 +50,8 @@ The library includes built-in support for the following field types:
 | `list`            | Ordered list with create/read/update/delete functionality |
 | `message`         | Read-only HTML panel for displaying information           |
 
+---
+
 <img src="misc/demo.gif" />
 
 
