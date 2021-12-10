@@ -6,11 +6,15 @@
 - [Electron Preferences](#electron-preferences)
   - [Introduction](#introduction)
   - [Features](#features)
-    - [Field Types](#field-types)
+  	- [Field Types](#field-types)
+  - [Demo](#demo)
   - [Getting Started](#getting-started)
 	- [From the Main process](#from-the-main-process)
 	- [From the Renderer process](#from-the-renderer-process)
-  - [Icons](#icons)
+  - [Customization](#customization)
+	- [Icons](#icons)
+  - [Example Code](#example-preferences-code)
+
 
 ## Introduction
 
@@ -55,28 +59,39 @@ The library includes built-in support for the following field types:
 <img src="misc/demo.gif" />
 
 
-## Getting Started
-
+## Demo
 To see the library in action, clone this repository and see the demo application that is included within the `example` folder:
 
 ```sh
 	$ git clone https://github.com/tkambler/electron-preferences.git
-	$ cd electron-preferences && npm i
+	$ cd electron-preferences && npm install
 	$ npm run build
+	$ npm run example
 ```
 
 ##### Other helpful scripts
 
 ```sh
-	$ npm run example
 	$ npm run lint
 ```
 
 
+## Getting Started
 
-#### From the Main process
+To quickly add `electron-preferences` to your existing Electron app:
+
+```sh
+	# From your Electron project root...
+	$ npm install electron-preferences
+```
+
+Then import and initialize the preference store.
+
+
+### From the Main process
 
 Within your application's main process, create a new instance of the `ElectronPreferences` class, as shown below.
+
 For an example usage of the library, check out `example/preferences.js`
 
 
@@ -148,7 +163,7 @@ preferences.on('save', (preferences) => {
 
 ```
 
-#### From the Renderer process
+### From the Renderer process
 
 ```js
 const { ipcRenderer, remote } = require('electron');
@@ -168,7 +183,10 @@ ipcRenderer.on('preferencesUpdated', (e, preferences) => {
 ipcRenderer.sendSync('setPreferences', { ... });
 ```
 
-## Dark or Light? 🌓
+
+## Customization
+
+### Dark or Light? 🌓
 You prefer a dark theme over a light theme? No problem, we have them both. The library will use whatever theme you're using with Electron. See the example on how to add the option to your preferences.
 
 <img src="misc/dark.png" />
@@ -176,7 +194,7 @@ You prefer a dark theme over a light theme? No problem, we have them both. The l
 
 Still not matching your layout? You can easily customize the complete look by injecting your own custom CSS! 
 
-## Icons
+### Icons
 
 The following icons come packaged with the library and can be specified when you define the layout of your preferences window.
 
