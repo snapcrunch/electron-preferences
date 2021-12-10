@@ -1,4 +1,7 @@
 # Electron Preferences
+> An Electron store with built-in preferences management
+
+<img src="misc/demo.png" />
 
 - [Electron Preferences](#electron-preferences)
   - [Introduction](#introduction)
@@ -13,14 +16,41 @@
 
 This package provides [Electron](https://electronjs.org/) developers with a simple, consistent interface for managing user preferences. It includes two primary components:
 
-- A GUI interface within which the users of your application can manage their preferences.
-- An API for interacting with the service.
+- A simple key/value store API for interacting with the service.
+- A GUI interface allowing users to manage preference values in the frontend of your application.
 
-Using the API, developers can:
-
+## Features
 - Define default preferences
 - Read / write values on demand
 - Define the layout of the preferences window.
+
+## Field Types
+
+The library includes built-in support for the following field types:
+
+| Type | Description |
+| text | a string input |
+
+- Text
+- Number
+- Select (dropdown)
+- Checkbox
+- Radio
+- Slider (number within range)
+- Folder/File selection
+- Accelerator (shortcut input)
+- Color picker
+- (Ordered) Lists
+- Message display
+
+Adding support for additional field types if easy, if you're familiar with React. PR's for such additions are welcome.
+
+
+
+<img src="misc/demo.gif" />
+
+
+## Getting Started
 
 To see the library in action, clone this repository and see the demo application that is included within the `example` folder:
 
@@ -32,9 +62,7 @@ To see the library in action, clone this repository and see the demo application
 	$ npm run lint
 
 
-<img src="misc/demo.gif" />
 
-## Getting Started
 
 ### Initializing the Preferences Service
 
@@ -355,23 +383,6 @@ You prefer a dark theme over a light theme? No problem, we have them both. The l
 <img src="misc/light.png" />
 
 Still not matching your layout? You can easily customize the complete look by injecting your own custom CSS! 
-
-## Field Types
-
-The library includes built-in support for the following field types:
-
-- Text
-- Dropdown
-- Message
-- Folder/File selection
-- Checkbox
-- Radio
-- Slider
-- (Ordered) Lists
-- Accelerator (for shortcut input)
-- Color picker
-
-Adding support for additional field types if easy, if you're familiar with React. PR's for such additions are welcome.
 
 ## Icons
 
