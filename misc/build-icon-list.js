@@ -1,8 +1,9 @@
 'use strict';
 
+const path = require('path');
 const Handlebars = require('handlebars');
 const glob = require('glob');
-const path = require('path');
+
 const srcFolder = path.resolve(__dirname, '../assets/svg');
 
 const tpl = Handlebars.compile(`

@@ -1,6 +1,7 @@
 'use strict';
 
 const electron = require('electron');
+
 const { contextBridge } = electron;
 const { ipcRenderer } = electron;
 

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { newGuid } from '../../../../../../../utils/newGuid';
+import { newGuid } from '../../../../../../../utils/newGuid.js';
 
 class RadioField extends React.Component {
 

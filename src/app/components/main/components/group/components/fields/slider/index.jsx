@@ -62,7 +62,7 @@ class SliderField extends React.Component {
 
 	onChange(e) {
 
-		return this.props.onChange(parseInt(e.target.value, 10));
+		return this.props.onChange(Number.parseInt(e.target.value, 10));
 
 	}
 

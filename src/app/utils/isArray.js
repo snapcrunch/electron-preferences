@@ -1,5 +1,5 @@
-export function isArray(obj) {
+export function isArray(object) {
 
-	return Array.isArray(obj);
+	return Array.isArray(object);
 
 }

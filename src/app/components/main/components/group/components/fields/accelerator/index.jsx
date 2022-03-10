@@ -24,7 +24,7 @@ const AcceleratorField = ({ field, value, onChange }) => {
 		We only save if we receive one of these non-modifier keys.
 	*/
 	// const modifierKeyCodes = [16, 17, 18, 91, 92, 93]
-	const specialKeyCodes = [ 0, 1, 2, 3, 4, 5, 6, 7, 10, 11, 16, 17, 18, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 91, 92, 93, 94, 95 ];
+	const specialKeyCodes = new Set([ 0, 1, 2, 3, 4, 5, 6, 7, 10, 11, 16, 17, 18, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 91, 92, 93, 94, 95 ]);
 
 	const handleKeyDown = event => {
 
@@ -39,10 +39,10 @@ const AcceleratorField = ({ field, value, onChange }) => {
 
 		// I've not tested every combo to verify it will work in electron, all the documentation they provide:
 		// https://www.electronjs.org/docs/api/accelerator#available-key-codes
-		if (!specialKeyCodes.includes(event.which) && event.which in keycodeToChar) {
+		if (!specialKeyCodes.has(event.which) && event.which in keycodeToChar) {
 
 			// Clear the value on backspace (8) or delete (46)
-			if (keys.length < 1 && (event.which === 8 || event.which === 46)) {
+			if (keys.length === 0 && (event.which === 8 || event.which === 46)) {
 
 				setPressing(false);
 				onChange('');
@@ -52,7 +52,7 @@ const AcceleratorField = ({ field, value, onChange }) => {
 			}
 
 			// We allow single-keys to be set, unless `modifierRequired` is passed
-			if (field.modifierRequired && keys.length < 1) {
+			if (field.modifierRequired && keys.length === 0) {
 
 				return;
 

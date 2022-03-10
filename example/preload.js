@@ -1,19 +1,20 @@
 'use strict';
 
 const electron = require('electron');
+
 const { contextBridge } = electron;
 const { ipcRenderer } = electron;
 
 let onPreferencesChangedHandler = () => {};
 
 contextBridge.exposeInMainWorld('api', {
-	showPreferences: () => {
+	showPreferences() {
 
 		ipcRenderer.send('showPreferences');
 
 	},
 	getPreferences: () => ipcRenderer.sendSync('getPreferences'),
-	onPreferencesChanged: handler => {
+	onPreferencesChanged(handler) {
 
 		onPreferencesChangedHandler = handler;
 

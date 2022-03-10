@@ -2,8 +2,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Group from './components/group';
 import _ from 'lodash';
+import Group from './components/group';
 
 class Main extends React.Component {
 

@@ -1,6 +1,7 @@
 'use strict';
 
 const electron = require('electron');
+
 const { app } = electron;
 const { nativeTheme } = electron;
 const { BrowserWindow } = electron;
