@@ -12,327 +12,327 @@ const writeJsonFile = require('write-json-file');
 
 class ElectronPreferences extends EventEmitter2 {
 
-    constructor(options = {}) {
+	constructor(options = {}) {
 
-        super();
+		super();
 
-        _.defaultsDeep(options, {
-            sections: [],
-            webPreferences: {
-                devTools: false,
-            },
-        });
+		_.defaultsDeep(options, {
+			sections: [],
+			webPreferences: {
+				devTools: false,
+			},
+		});
 
-        options.sections.forEach((section, sectionIdx) => {
+		options.sections.forEach((section, sectionIdx) => {
 
-            _.defaultsDeep(section, {
-                form: {
-                    groups: [],
-                },
-            });
-            section.form.groups = section.form.groups.map((group, groupIdx) => {
+			_.defaultsDeep(section, {
+				form: {
+					groups: [],
+				},
+			});
+			section.form.groups = section.form.groups.map((group, groupIdx) => {
 
-                group.id = 'group' + sectionIdx + groupIdx;
+				group.id = 'group' + sectionIdx + groupIdx;
 
-                return group;
+				return group;
 
-            });
+			});
 
-        });
+		});
 
-        this.options = options;
+		this.options = options;
 
-        if (!this.dataStore) {
+		if (!this.dataStore) {
 
-            throw new Error('The \'dataStore\' option is required.');
+			throw new Error('The \'dataStore\' option is required.');
 
-        }
+		}
 
-        // Load preferences file if exists
-        try {
+		// Load preferences file if exists
+		try {
 
-            if (fs.existsSync(this.dataStore)) {
+			if (fs.existsSync(this.dataStore)) {
 
-                this.preferences = loadJsonFile.sync(this.dataStore);
+				this.preferences = loadJsonFile.sync(this.dataStore);
 
-            }
+			}
 
-        } catch (err) {
+		} catch (err) {
 
-            console.error(`Datastore error - ${err}`);
-            this.preferences = null;
+			console.error(`Datastore error - ${err}`);
+			this.preferences = null;
 
-        }
+		}
 
-        if (this.preferences) {
+		if (this.preferences) {
 
-            // Set default preference values
-            _.keys(this.defaults).forEach(prefDefault => {
+			// Set default preference values
+			_.keys(this.defaults).forEach(prefDefault => {
 
-                if (!(prefDefault in this.preferences)) {
+				if (!(prefDefault in this.preferences)) {
 
-                    this.preferences[prefDefault] = this.defaults[prefDefault];
+					this.preferences[prefDefault] = this.defaults[prefDefault];
 
-                }
+				}
 
-            });
+			});
 
-        } else {
+		} else {
 
-            this.preferences = this.defaults;
+			this.preferences = this.defaults;
 
-        }
+		}
 
-        if (_.isFunction(options.onLoad)) {
+		if (_.isFunction(options.onLoad)) {
 
-            this.preferences = options.onLoad(this.preferences);
+			this.preferences = options.onLoad(this.preferences);
 
-        }
+		}
 
-        this.save();
+		this.save();
 
-        ipcMain.on('showPreferences', _ => {
+		ipcMain.on('showPreferences', _ => {
 
-            this.show();
+			this.show();
 
-        });
+		});
 
-        ipcMain.on('getSections', event => {
+		ipcMain.on('getSections', event => {
 
-            event.returnValue = this.options.sections;
+			event.returnValue = this.options.sections;
 
-        });
+		});
 
-        ipcMain.on('restoreDefaults', _ => {
+		ipcMain.on('restoreDefaults', _ => {
 
-            this.preferences = this.defaults;
-            this.save();
-            this.broadcast();
+			this.preferences = this.defaults;
+			this.save();
+			this.broadcast();
 
-        });
+		});
 
-        ipcMain.on('getDefaults', event => {
+		ipcMain.on('getDefaults', event => {
 
-            event.returnValue = this.defaults;
+			event.returnValue = this.defaults;
 
-        });
+		});
 
-        ipcMain.on('getPreferences', event => {
+		ipcMain.on('getPreferences', event => {
 
-            event.returnValue = this.preferences;
+			event.returnValue = this.preferences;
 
-        });
+		});
 
-        ipcMain.on('setPreferences', (event, value) => {
+		ipcMain.on('setPreferences', (event, value) => {
 
-            this.preferences = value;
-            this.save();
-            this.broadcast();
-            this.emit('save', Object.freeze(_.cloneDeep(this.preferences)));
-            event.returnValue = null;
+			this.preferences = value;
+			this.save();
+			this.broadcast();
+			this.emit('save', Object.freeze(_.cloneDeep(this.preferences)));
+			event.returnValue = null;
 
-        });
+		});
 
-        ipcMain.on('showOpenDialog', (event, dialogOptions) => {
+		ipcMain.on('showOpenDialog', (event, dialogOptions) => {
 
-            event.returnValue = dialog.showOpenDialogSync(dialogOptions);
+			event.returnValue = dialog.showOpenDialogSync(dialogOptions);
 
-        });
+		});
 
-        if (_.isFunction(options.afterLoad)) {
+		if (_.isFunction(options.afterLoad)) {
 
-            options.afterLoad(this);
+			options.afterLoad(this);
 
-        }
+		}
 
-    }
+	}
 
-    get dataStore() {
+	get dataStore() {
 
-        return this.options.dataStore;
+		return this.options.dataStore;
 
-    }
+	}
 
-    get browserWindowOverrides() {
+	get browserWindowOverrides() {
 
-        return this.options.browserWindowOverrides;
+		return this.options.browserWindowOverrides;
 
-    }
+	}
 
-    get defaults() {
+	get defaults() {
 
-        return this.options.defaults || {};
+		return this.options.defaults || {};
 
-    }
+	}
 
-    get preferences() {
+	get preferences() {
 
-        return this._preferences;
+		return this._preferences;
 
-    }
+	}
 
-    set preferences(value) {
+	set preferences(value) {
 
-        this._preferences = value;
+		this._preferences = value;
 
-    }
+	}
 
-    save() {
+	save() {
 
-        writeJsonFile(this.dataStore, this.preferences, {
-            indent: 4,
-        });
+		writeJsonFile(this.dataStore, this.preferences, {
+			indent: 4,
+		});
 
-    }
+	}
 
-    value(key, value) {
+	value(key, value) {
 
-        // Place the key/value pair(s) into this.preferences var
-        if (_.isArray(key)) {
+		// Place the key/value pair(s) into this.preferences var
+		if (_.isArray(key)) {
 
-            key.forEach(({ key, value }) => {
+			key.forEach(({ key, value }) => {
 
-                _.set(this.preferences, key, value);
+				_.set(this.preferences, key, value);
 
-            });
-            this.save();
-            this.broadcast();
+			});
+			this.save();
+			this.broadcast();
 
-        } else if (!_.isUndefined(key) && !_.isUndefined(value)) {
+		} else if (!_.isUndefined(key) && !_.isUndefined(value)) {
 
-            _.set(this.preferences, key, value);
-            this.save();
-            this.broadcast();
+			_.set(this.preferences, key, value);
+			this.save();
+			this.broadcast();
 
-        } else if (_.isUndefined(value)) {
+		} else if (_.isUndefined(value)) {
 
-            // Value is undefined
-            return _.cloneDeep(_.get(this.preferences, key));
+			// Value is undefined
+			return _.cloneDeep(_.get(this.preferences, key));
 
-        } else {
+		} else {
 
-            // Key is undefined
-            return _.cloneDeep(this.preferences);
+			// Key is undefined
+			return _.cloneDeep(this.preferences);
 
-        }
+		}
 
-    }
+	}
 
-    broadcast() {
+	broadcast() {
 
-        webContents.getAllWebContents()
-            .forEach(wc => {
+		webContents.getAllWebContents()
+			.forEach(wc => {
 
-                wc.send('preferencesUpdated', this.preferences);
+				wc.send('preferencesUpdated', this.preferences);
 
-            });
+			});
 
-    }
+	}
 
-    getBrowserWindowOptions() {
+	getBrowserWindowOptions() {
 
-        let browserWindowOpts = {
-            title: 'Preferences',
-            width: 800,
-            maxWidth: 800,
-            height: 600,
-            maxHeight: 600,
-            resizable: false,
-            acceptFirstMouse: true,
-            maximizable: false,
-            backgroundColor: '#E7E7E7',
-            show: false,
-            webPreferences: this.options.webPreferences,
-        };
+		let browserWindowOpts = {
+			title: 'Preferences',
+			width: 800,
+			maxWidth: 800,
+			height: 600,
+			maxHeight: 600,
+			resizable: false,
+			acceptFirstMouse: true,
+			maximizable: false,
+			backgroundColor: '#E7E7E7',
+			show: false,
+			webPreferences: this.options.webPreferences,
+		};
 
-        const defaultWebPreferences = {
-            nodeIntegration: false,
-            enableRemoteModule: false,
-            preload: path.join(__dirname, './preload.js'),
-        };
+		const defaultWebPreferences = {
+			nodeIntegration: false,
+			enableRemoteModule: false,
+			preload: path.join(__dirname, './preload.js'),
+		};
 
-        const unOverridableWebPreferences = {
-            contextIsolation: true,
-            devTools: this.options.debug ? true : undefined,
-        };
+		const unOverridableWebPreferences = {
+			contextIsolation: true,
+			devTools: this.options.debug ? true : undefined,
+		};
 
-        // User provider `browserWindow`, we load those
-        if (this.options.browserWindowOverrides) {
+		// User provider `browserWindow`, we load those
+		if (this.options.browserWindowOverrides) {
 
-            browserWindowOpts = Object.assign(browserWindowOpts, this.options.browserWindowOverrides);
+			browserWindowOpts = Object.assign(browserWindowOpts, this.options.browserWindowOverrides);
 
-        }
+		}
 
-        if (browserWindowOpts.webPreferences) {
+		if (browserWindowOpts.webPreferences) {
 
-            browserWindowOpts.webPreferences = Object.assign(defaultWebPreferences, browserWindowOpts.webPreferences);
+			browserWindowOpts.webPreferences = Object.assign(defaultWebPreferences, browserWindowOpts.webPreferences);
 
-        } else {
+		} else {
 
-            browserWindowOpts.webPreferences = defaultWebPreferences;
+			browserWindowOpts.webPreferences = defaultWebPreferences;
 
-        }
+		}
 
-        browserWindowOpts.webPreferences = Object.assign(browserWindowOpts.webPreferences, unOverridableWebPreferences);
+		browserWindowOpts.webPreferences = Object.assign(browserWindowOpts.webPreferences, unOverridableWebPreferences);
 
-        return browserWindowOpts;
+		return browserWindowOpts;
 
-    }
+	}
 
-    show() {
+	show() {
 
-        if (this.prefsWindow) {
+		if (this.prefsWindow) {
 
-            this.prefsWindow.focus();
+			this.prefsWindow.focus();
 
-            if (this.options.debug) {
+			if (this.options.debug) {
 
-                this.prefsWindow.webContents.openDevTools();
+				this.prefsWindow.webContents.openDevTools();
 
-            }
+			}
 
-            return this.prefsWindow;
+			return this.prefsWindow;
 
-        }
+		}
 
-        this.prefsWindow = new BrowserWindow(this.getBrowserWindowOptions());
+		this.prefsWindow = new BrowserWindow(this.getBrowserWindowOptions());
 
-        if (this.options.menuBar) {
+		if (this.options.menuBar) {
 
-            this.prefsWindow.setMenu(this.options.menuBar);
+			this.prefsWindow.setMenu(this.options.menuBar);
 
-        } else {
+		} else {
 
-            this.prefsWindow.removeMenu();
+			this.prefsWindow.removeMenu();
 
-        }
+		}
 
-        this.prefsWindow.loadURL(url.format({
-            pathname: path.join(__dirname, 'build/index.html'),
-            protocol: 'file:',
-            slashes: true,
-        }));
+		this.prefsWindow.loadURL(url.format({
+			pathname: path.join(__dirname, 'build/index.html'),
+			protocol: 'file:',
+			slashes: true,
+		}));
 
-        this.prefsWindow.once('ready-to-show', () => {
+		this.prefsWindow.once('ready-to-show', () => {
 
-            // Show: false by default, then show when ready to prevent page "flicker"
-            this.prefsWindow.show();
+			// Show: false by default, then show when ready to prevent page "flicker"
+			this.prefsWindow.show();
 
-        });
+		});
 
-        this.prefsWindow.webContents.on('dom-ready', async() => {
+		this.prefsWindow.webContents.on('dom-ready', async () => {
 
-            // Load custom css file
-            if (this.options.css) {
+			// Load custom css file
+			if (this.options.css) {
 
-                const file = path.join(app.getAppPath(), this.options.css)
-                    .replace(/\\/g, '/'); // Make sure it also works in Windows
+				const file = path.join(app.getAppPath(), this.options.css)
+					.replace(/\\/g, '/'); // Make sure it also works in Windows
 
-                try {
+				try {
 
-                    if (await fs.promises.stat(file)) {
+					if (await fs.promises.stat(file)) {
 
-                        await this.prefsWindow.webContents.executeJavaScript(` \
+						await this.prefsWindow.webContents.executeJavaScript(` \
 					  		var f = document.createElement("link"); \
 					  		f.rel = "stylesheet"; \
 					  		f.type = "text/css"; \
@@ -341,33 +341,33 @@ class ElectronPreferences extends EventEmitter2 {
 					  		;0
 					  	`); // ";0" is needed so nothing is returned (especially not an non-cloneable IPC object) by JS.
 
-                    }
+					}
 
-                } catch (err) {
+				} catch (err) {
 
-                    console.error(`Could not load css file ${file}: ${err}`);
+					console.error(`Could not load css file ${file}: ${err}`);
 
-                }
+				}
 
-            }
+			}
 
-        });
+		});
 
-        this.prefsWindow.on('closed', () => {
+		this.prefsWindow.on('closed', () => {
 
-            this.prefsWindow = null;
+			this.prefsWindow = null;
 
-        });
+		});
 
-        if (this.options.debug) {
+		if (this.options.debug) {
 
-            this.prefsWindow.webContents.openDevTools();
+			this.prefsWindow.webContents.openDevTools();
 
-        }
+		}
 
-        return this.prefsWindow;
+		return this.prefsWindow;
 
-    }
+	}
 
 }
 

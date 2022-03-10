@@ -14,7 +14,7 @@
 	call debouncedFunction({abort: true}) before the delay to cancel the function from being called
 */
 
-export default (func, delay) => {
+const debounce = (func, delay) => {
 
 	let debounceTimer;
 
@@ -29,9 +29,11 @@ export default (func, delay) => {
 
 		}
 
-		const context = this;
-		debounceTimer = setTimeout(() => func.apply(context, args), delay);
+		const _this = this;
+		debounceTimer = setTimeout(() => func.apply(_this, args), delay);
 
 	};
 
 };
+
+export default debounce;

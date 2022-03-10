@@ -83,6 +83,7 @@
                     "next": "return"
                 }
             ],
+            "no-redeclare": 0,
             "object-curly-spacing": [
                 "error",
                 "always"

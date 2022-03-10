@@ -1,8 +1,7 @@
 {
 	"extends": [
+		"plugin:react/recommended",
 		"xo",
-		"unicorn",
-		"plugin:react/recommended"
 	],
 	"rules": {
 		"array-bracket-spacing": [
@@ -43,7 +42,7 @@
 			"error",
 			"never"
 		],
-		"unicorn/prefer-module": "never"
+		"unicorn/prefer-module": 0
 	},
 	"settings": {
 		"react": {
