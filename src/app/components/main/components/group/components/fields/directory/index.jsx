@@ -3,7 +3,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isArray } from '../../../../../../../utils/isArray';
+import { isArray } from '../../../../../../../utils/isArray.js';
 
 class DirectoryField extends React.Component {
 
@@ -152,7 +152,7 @@ class DirectoryField extends React.Component {
 
 		}
 
-		if (result.length) {
+		if (result.length > 0) {
 
 			this.onChange(multiSelections ? result : result[0]);
 
