@@ -19,9 +19,9 @@ class ButtonField extends React.Component {
 		return (
 			<div className="field field-button">
 				{ fieldLabel }
-				<div className="bt" onClick={ choose }>
+				<button className="bt" onClick={ choose }>
 					{ btLabel }
-				</div>
+				</button>
 				{ this.help && <span className="help">{ this.help }</span> }
 			</div>
 		);
