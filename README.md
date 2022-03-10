@@ -163,8 +163,8 @@ preferences.on('save', (preferences) => {
 });
 
 // Using a button field with `channel: 'reset'`
-preferences.on('click', button => {
-	if(button === 'reset') {
+preferences.on('click', key => {
+	if(key === 'resetButton') {
 		resetApp()
 	}
 } )
@@ -570,11 +570,11 @@ const preferences = new ElectronPreferences({
 							},
 							{
 								'label': 'Ipc button',
-								'key': 'ipcButton',
+								'key': 'resetButton',
 								'type': 'button',
-								'channel': 'applyChanges',
 								'buttonLabel': 'Restart to apply changes',
-								'help': 'This button sends on a custom ipc channel'
+								'help': 'This button sends on a custom ipc channel',
+								'hideLabel': false
 							},
 						]
 					}
