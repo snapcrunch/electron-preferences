@@ -1,9 +1,7 @@
 /* global api */
-'use strict';
-
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isArray } from '../../../../../../../utils/isArray';
+import { isArray } from '../../../../../../../utils/isArray.js';
 
 class DirectoryField extends React.Component {
 
@@ -142,7 +140,7 @@ class DirectoryField extends React.Component {
 
 		}
 
-		const result = api.showOpenDialog({
+		const result = api?.showOpenDialog({
 			properties,
 		});
 

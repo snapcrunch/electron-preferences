@@ -46,6 +46,7 @@
     "eventemitter2": "^6.4.4",
     "load-json-file": "^6.2.0",
     "lodash": "^4.17.21",
+    "prop-types": "^15.8.1",
     "react-color": "^2.19.3",
     "react-modal": "^3.14.3",
     "write-json-file": "^4.3.0",
