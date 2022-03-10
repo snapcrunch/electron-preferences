@@ -150,7 +150,7 @@ class DirectoryField extends React.Component {
 
 		}
 
-		if (result.length) {
+		if (result.length > 0) {
 
 			this.onChange(multiSelections ? result : result[0]);
 

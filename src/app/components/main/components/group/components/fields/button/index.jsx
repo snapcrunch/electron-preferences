@@ -8,7 +8,7 @@ class ButtonField extends React.Component {
 
 		const choose = () => {
 
-			api.sendButtonClick(this.channel);
+			api.sendButtonClick(this.key);
 
 		};
 
@@ -58,9 +58,9 @@ class ButtonField extends React.Component {
 
 	}
 
-	get channel() {
+	get key() {
 
-		return this.field.channel;
+		return this.field.key;
 
 	}
 
