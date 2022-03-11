@@ -52,6 +52,7 @@ The library includes built-in support for the following field types:
 | `accelerator`     | Keyboard shortcut input                                   |
 | `color`           | Color picker input using simonwep/pickr                     |
 | `list`            | Ordered list with create/read/update/delete functionality |
+| `button` | A button to pass simple click events back to the main process |
 | `message`         | Read-only HTML panel for displaying information           |
 
 ---
@@ -160,6 +161,14 @@ preferences.value('about.name', 'Einstein');
 preferences.on('save', (preferences) => {
 	console.log(`Preferences were saved.`, JSON.stringify(preferences, null, 4));
 });
+
+// Using a button field with `channel: 'reset'`
+preferences.on('click', key => {
+	if(key === 'resetButton') {
+		resetApp()
+	}
+} )
+
 
 ```
 
@@ -554,81 +563,89 @@ const preferences = new ElectronPreferences({
 							},
 							{
 								'label': 'Eye Color',
-							   'key': 'eye_color',
+								'key': 'eye_color',
 								'type': 'color',
 								'format': 'hex', // can be hex, hsl or rgb
 								'help': 'Your eye color'
-							}
-                        ]
-                    }
-                ]
-            }
-        },
-        {
-            'id': 'notes',
-            'label': 'Notes',
-            'icon': 'folder-15',
-            'form': {
-                'groups': [
-                    {
-                        'label': 'Stuff',
-                        'fields': [
-                            {
-                                'label': 'Read notes from folder',
-                                'key': 'folder',
-                                'type': 'directory',
-                                'help': 'The location where your notes will be stored.',
-                                'multiSelections': false,
-                                'noResolveAliases': false,
-                                'treatPackageAsDirectory': false,
-                                'dontAddToRecent': true
-                            },
-                            {
-                                'label': 'Select some images',
-                                'key': 'images',
-                                'type': 'file',
-                                'help': 'List of selected images',
-                                'filters': [
-                                    { name: 'Joint Photographic Experts Group (JPG)', extensions: ['jpg', 'jpeg', 'jpe', 'jfif', 'jfi', 'jif'] },
-                                    { name: 'Portable Network Graphics (PNG)', extensions: ['png'] },
-                                    { name: 'Graphics Interchange Format (GIF)', extensions: ['gif'] },
-                                    { name: 'All Images', extensions: ['jpg', 'jpeg', 'jpe', 'jfif', 'jfi', 'jif', 'png', 'gif'] },
-                                    //{ name: 'All Files', extensions: ['*'] }
-                                ],
-                                'multiSelections': true, //Allow multiple paths to be selected
-                                'showHiddenFiles': true, //Show hidden files in dialog
-                                'noResolveAliases': false, //(macos) Disable the automatic alias (symlink) path resolution. Selected aliases will now return the alias path instead of their target path.
-                                'treatPackageAsDirectory': false, //(macos) Treat packages, such as .app folders, as a directory instead of a file.
-                                'dontAddToRecent': true //(windows) Do not add the item being opened to the recent documents list.
-                            },
-                            {
-                                'label': 'Other Settings',
-                                'fields': [
-                                    {
-                                        'label': "Foo or Bar?",
-                                        'key': 'foobar',
-                                        'type': 'radio',
-                                        'options': [
-                                            {'label': 'Foo', 'value': 'foo'},
-                                            {'label': 'Bar', 'value': 'bar'},
-                                            {'label': 'FooBar', 'value': 'foobar'},
-                                        ],
-                                        'help': 'Foo? Bar?'
-                                    }
-                                ]
-                          },
-                          {
-                              'heading': 'Important Message',
-                              'content': '<p>The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence.</p>',
-                              'type': 'message',
-                          }
-                        ]
-                    }
-                ]
-            }
-        },
-        {
-            'id': 'lists',
+							},
+							{
+								'label': 'Ipc button',
+								'key': 'resetButton',
+								'type': 'button',
+								'buttonLabel': 'Restart to apply changes',
+								'help': 'This button sends on a custom ipc channel',
+								'hideLabel': false
+							},
+						]
+					}
+				]
+			}
+		},
+		{
+			'id': 'notes',
+			'label': 'Notes',
+			'icon': 'folder-15',
+			'form': {
+				'groups': [
+					{
+						'label': 'Stuff',
+						'fields': [
+							{
+								'label': 'Read notes from folder',
+								'key': 'folder',
+								'type': 'directory',
+								'help': 'The location where your notes will be stored.',
+								'multiSelections': false,
+								'noResolveAliases': false,
+								'treatPackageAsDirectory': false,
+								'dontAddToRecent': true
+							},
+							{
+								'label': 'Select some images',
+								'key': 'images',
+								'type': 'file',
+								'help': 'List of selected images',
+								'filters': [
+									{ name: 'Joint Photographic Experts Group (JPG)', extensions: ['jpg', 'jpeg', 'jpe', 'jfif', 'jfi', 'jif'] },
+									{ name: 'Portable Network Graphics (PNG)', extensions: ['png'] },
+									{ name: 'Graphics Interchange Format (GIF)', extensions: ['gif'] },
+									{ name: 'All Images', extensions: ['jpg', 'jpeg', 'jpe', 'jfif', 'jfi', 'jif', 'png', 'gif'] },
+									//{ name: 'All Files', extensions: ['*'] }
+								],
+								'multiSelections': true, //Allow multiple paths to be selected
+								'showHiddenFiles': true, //Show hidden files in dialog
+								'noResolveAliases': false, //(macos) Disable the automatic alias (symlink) path resolution. Selected aliases will now return the alias path instead of their target path.
+								'treatPackageAsDirectory': false, //(macos) Treat packages, such as .app folders, as a directory instead of a file.
+								'dontAddToRecent': true //(windows) Do not add the item being opened to the recent documents list.
+							},
+							{
+								'label': 'Other Settings',
+								'fields': [
+									{
+										'label': "Foo or Bar?",
+										'key': 'foobar',
+										'type': 'radio',
+										'options': [
+											{'label': 'Foo', 'value': 'foo'},
+											{'label': 'Bar', 'value': 'bar'},
+											{'label': 'FooBar', 'value': 'foobar'},
+										],
+										'help': 'Foo? Bar?'
+									}
+								]
+						  },
+						  {
+							  'heading': 'Important Message',
+							  'content': '<p>The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence.</p>',
+							  'type': 'message',
+						  }
+						]
+					}
+				]
+			}
+		},
+		{
+			'id': 'lists',
 			'label': 'Lists',
 			'icon': 'notes',
 			'form': {
@@ -640,36 +657,36 @@ const preferences = new ElectronPreferences({
 								'label': 'Favorite foods',
 								'key': 'foods',
 								'type': 'list',
-                                'size': 15,
+								'size': 15,
 								'help': 'A list of your favorite foods',
-                                'addItemValidator': /^[A-Za-z ]+$/.toString(),
-                                'addItemLabel': 'Add favorite food'
-                            },
-                            {
-                                'label': 'Best places to visit',
-                                'key': 'places',
-                                'type': 'list',
-                                'size': 10,
-                                'style': {
-                                    'width': '75%'
-                                },
-                                'help': 'An ordered list of nice places to visit',
-                                'orderable': true
-                            }
-                        ]
-                    }
-                ]
-            }
-        },
-        {
-            'id': 'space',
-            'label': 'Other Settings',
-            'icon': 'spaceship',
-            'form': {
-                'groups': [
-                    {
-                        'label': 'Other Settings',
-                        'fields': [
+								'addItemValidator': /^[A-Za-z ]+$/.toString(),
+								'addItemLabel': 'Add favorite food'
+							},
+							{
+								'label': 'Best places to visit',
+								'key': 'places',
+								'type': 'list',
+								'size': 10,
+								'style': {
+									'width': '75%'
+								},
+								'help': 'An ordered list of nice places to visit',
+								'orderable': true
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			'id': 'space',
+			'label': 'Other Settings',
+			'icon': 'spaceship',
+			'form': {
+				'groups': [
+					{
+						'label': 'Other Settings',
+						'fields': [
 							{
 								'label': "Foo or Bar?",
 								'key': 'foobar',

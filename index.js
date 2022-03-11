@@ -139,6 +139,13 @@ class ElectronPreferences extends EventEmitter2 {
 
 		});
 
+		ipcMain.on('sendButtonClick', (event, message) => {
+
+			// Main process
+			this.emit('click', message);
+
+		});
+
 		if (_.isFunction(options.afterLoad)) {
 
 			options.afterLoad(this);
@@ -230,6 +237,7 @@ class ElectronPreferences extends EventEmitter2 {
 	}
 
 	getBrowserWindowOptions() {
+
 		let browserWindowOpts = {
 			title: 'Preferences',
 			width: 800,
@@ -252,8 +260,8 @@ class ElectronPreferences extends EventEmitter2 {
 
 		const unOverridableWebPreferences = {
 			contextIsolation: true,
-			devTools: this.options.debug ? true : undefined
-		}
+			devTools: this.options.debug ? true : undefined,
+		};
 
 		// User provider `browserWindow`, we load those
 		if (this.options.browserWindowOverrides) {
@@ -275,6 +283,7 @@ class ElectronPreferences extends EventEmitter2 {
 		browserWindowOpts.webPreferences = Object.assign(browserWindowOpts.webPreferences, unOverridableWebPreferences);
 
 		return browserWindowOpts;
+
 	}
 
 	show() {
@@ -357,13 +366,11 @@ class ElectronPreferences extends EventEmitter2 {
 
 		});
 
+		if (this.options.debug) {
 
+			this.prefsWindow.webContents.openDevTools();
 
-        if (this.options.debug) {
-
-            this.prefsWindow.webContents.openDevTools();
-
-        }
+		}
 
 		return this.prefsWindow;
 

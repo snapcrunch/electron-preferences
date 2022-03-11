@@ -19,9 +19,9 @@ const preferences = new ElectronPreferences({
 		},
 		// ...
 	},
-	debug: false, //true will open the dev tools
+	debug: false, // True will open the dev tools
 	webPreferences: {
-		webSecurity: true
+		webSecurity: true,
 	},
 	browserWindowOverrides: {
 		title: 'My Electron Preferences',

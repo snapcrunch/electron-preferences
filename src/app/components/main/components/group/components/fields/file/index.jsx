@@ -160,7 +160,7 @@ class FileField extends React.Component {
 
 		}
 
-		const result = api.showOpenDialog({
+		const result = api?.showOpenDialog({
 			properties,
 			filters,
 		});
@@ -171,7 +171,7 @@ class FileField extends React.Component {
 
 		}
 
-		if (result.length) {
+		if (result.length > 0) {
 
 			this.onChange(multiSelections ? result : result[0]);
 

@@ -13,6 +13,7 @@ import AcceleratorField from './components/fields/accelerator';
 import ColorField from './components/fields/color';
 import ListField from './components/fields/list';
 import FileField from './components/fields/file';
+import ButtonField from './components/fields/button';
 
 const fieldMap = {
 	directory: DirectoryField,
@@ -26,6 +27,7 @@ const fieldMap = {
 	color: ColorField,
 	list: ListField,
 	file: FileField,
+	button: ButtonField,
 };
 
 class Group extends React.Component {
