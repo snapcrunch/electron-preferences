@@ -140,6 +140,13 @@ class ElectronPreferences extends EventEmitter2 {
 
 		});
 
+		ipcMain.on('sendButtonClick', (event, message) => {
+
+			// Main process
+			this.emit('click', message);
+
+		});
+
 		if (_.isFunction(options.afterLoad)) {
 
 			options.afterLoad(this);
@@ -249,23 +256,22 @@ class ElectronPreferences extends EventEmitter2 {
 			nodeIntegration: false,
 			enableRemoteModule: false,
 			preload: path.join(__dirname, './preload.js'),
+			devTools: this.options.debug,
 		};
 
 		const unOverridableWebPreferences = {
 			contextIsolation: true,
-			devTools: this.options.debug ? true : undefined,
 		};
 
-		// User provider `browserWindow`, we load those
+		// User provided `browserWindow`, we load those
 		if (this.options.browserWindowOverrides) {
 
 			browserWindowOptions = Object.assign(browserWindowOptions, this.options.browserWindowOverrides);
 
 		}
 
-		browserWindowOptions.webPreferences = browserWindowOptions.webPreferences ? Object.assign(defaultWebPreferences, browserWindowOptions.webPreferences) : defaultWebPreferences;
-
-		browserWindowOptions.webPreferences = Object.assign(browserWindowOptions.webPreferences, unOverridableWebPreferences);
+		// Object.assign is shallow, let's process browserWindow.webPreferences
+		browserWindowOptions.webPreferences = Object.assign(defaultWebPreferences, browserWindowOptions.webPreferences, unOverridableWebPreferences)
 
 		return browserWindowOptions;
 

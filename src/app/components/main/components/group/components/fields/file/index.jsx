@@ -160,7 +160,7 @@ class FileField extends React.Component {
 
 		}
 
-		const result = api.showOpenDialog({
+		const result = api?.showOpenDialog({
 			properties,
 			filters,
 		});
