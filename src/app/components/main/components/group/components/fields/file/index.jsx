@@ -17,11 +17,11 @@ class FileField extends React.Component {
 
 	render() {
 
-		const { multiSelections, value, help, label } = this;
+		const { multiSelections, value, help, label, buttonLabel } = this;
 
-		const btLabel = value && value.length > 0
+		const btLabel = buttonLabel || (value && value.length > 0
 			? (multiSelections ? 'Choose other Files' : 'Choose another File')
-			: (multiSelections ? 'Choose Files' : 'Choose a File');
+			: (multiSelections ? 'Choose Files' : 'Choose a File'));
 
 		return (
 			<div className={`field field-file key-${this.field.key}`}>
@@ -63,6 +63,12 @@ class FileField extends React.Component {
 		}
 
 		return isArray(value) ? value : [ value ];
+
+	}
+
+	get buttonLabel() {
+
+		return this.field.buttonLabel;
 
 	}
 

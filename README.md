@@ -602,6 +602,7 @@ const preferences = new ElectronPreferences({
 							},
 							{
 								'label': 'Select some images',
+								'buttonLabel': 'Choose Files',
 								'key': 'images',
 								'type': 'file',
 								'help': 'List of selected images',
