@@ -17,7 +17,7 @@ class ButtonField extends React.Component {
 		const btLabel = this.buttonLabel ? this.buttonLabel : 'Click Here';
 
 		return (
-			<div className="field field-button">
+			<div className={`field field-button key-${this.key}`}>
 				{ fieldLabel }
 				<button className="bt" onClick={ choose }>
 					{ btLabel }

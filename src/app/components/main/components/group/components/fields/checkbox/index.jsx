@@ -41,7 +41,7 @@ class CheckboxField extends React.Component {
 		});
 
 		return (
-			<div className="field field-checkbox">
+			<div className={`field field-checkbox key-${this.field.key}`}>
 				<div className="field-label" aria-label={ label }>{ label }</div>
 				{ options }
 				{ help && <span className="help">{ help }</span> }

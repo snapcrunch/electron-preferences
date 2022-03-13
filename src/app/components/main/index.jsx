@@ -10,7 +10,7 @@ class Main extends React.Component {
 	render() {
 
 		const groups = this.form.groups.map((group, idx) => (
-			<Group key={ idx } group={ group } preferences={ this.preferences[this.section.id] } onFieldChange={ this.onFieldChange.bind(this) } />
+			<Group key={ idx } groupId={this.section.id} group={ group } preferences={ this.preferences[this.section.id] } onFieldChange={ this.onFieldChange.bind(this) } />
 		));
 
 		return (

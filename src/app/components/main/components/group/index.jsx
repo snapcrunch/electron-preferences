@@ -51,7 +51,7 @@ class Group extends React.Component {
 			.filter(field => field);
 
 		return (
-			<div className="group">
+			<div className={`group key-${this.props.groupId}`}>
 				{ label }
 				{ fields }
 			</div>

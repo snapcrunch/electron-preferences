@@ -24,7 +24,7 @@ class FileField extends React.Component {
 			: (multiSelections ? 'Choose Files' : 'Choose a File');
 
 		return (
-			<div className="field field-file">
+			<div className={`field field-file key-${this.field.key}`}>
 				<div className="field-label" aria-label={ label }>{label}</div>
 				<div className="value" onClick={this.choose}>
 					{multiSelections ? 'Files' : 'File'}:&nbsp;

@@ -29,7 +29,7 @@ class ListField extends React.Component {
 	render() {
 
 		return (
-			<div className="field field-list">
+			<div className={`field field-list key-${this.field.key}`}>
 				<div className="field-label" aria-label={ this.label }>{ this.label }</div>
 				<div>
 					<div>

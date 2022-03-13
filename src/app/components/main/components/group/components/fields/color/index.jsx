@@ -22,7 +22,7 @@ class ColorField extends React.Component {
 	render() {
 
 		return (
-			<div className="field field-color" ref={this.wrapperRef}>
+			<div className={`field field-color key-${this.field.key}`} ref={this.wrapperRef}>
 				<div className="field-label">{ this.label }</div>
 				<div className="color-container">
 					<div className="color-swatch" onClick={ this.handleClick }>

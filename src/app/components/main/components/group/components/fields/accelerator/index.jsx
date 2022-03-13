@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import keycodeToChar from '../../../../../../../utils/keycodeToChar.js';
 
-const AcceleratorField = ({ field, value, onChange }) => {
+const AcceleratorField = ({ field, value, onChange, key }) => {
 
 	/*
 		AcceleratorField
@@ -77,7 +77,7 @@ const AcceleratorField = ({ field, value, onChange }) => {
 	};
 
 	return (
-		<div className="field field-accelerator">
+		<div className={`field field-accelerator key-${field.key}`}>
 			<div className="field-label">{ field.label }</div>
 			<input type="text" value={ (pressing && accelerator) || value } aria-label={ field.label } onKeyDown={ handleKeyDown } onKeyUp={ handleKeyUp } readOnly />
 			{ field.help && <span className="help">{ field.help }</span> }

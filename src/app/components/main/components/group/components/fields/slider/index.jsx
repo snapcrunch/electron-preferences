@@ -8,7 +8,7 @@ class SliderField extends React.Component {
 	render() {
 
 		return (
-			<div className="field field-slider">
+			<div className={`field field-slider key-${this.field.key}`}>
 				<div className="field-label">{ this.label }</div>
 				<input type="range" onChange={ this.onChange.bind(this) } min={ this.min } max={ this.max } step={ this.step } value={ this.value } aria-label={ this.label }/>
 				<label>{ this.value }</label>
