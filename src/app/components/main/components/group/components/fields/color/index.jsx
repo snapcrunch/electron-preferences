@@ -22,7 +22,7 @@ class ColorField extends React.Component {
 	render() {
 
 		return (
-			<div className="field field-color" ref={this.wrapperRef}>
+			<div className={`field field-color key-${this.field.key}`} ref={this.wrapperRef}>
 				<div className="field-label">{ this.label }</div>
 				<div className="color-container">
 					<div className="color-swatch" onClick={ this.handleClick }>
@@ -106,21 +106,37 @@ class ColorField extends React.Component {
 	get style() {
 
 		let style = '';
-		if (this.format === 'rgb') {
+		switch (this.format) {
 
-			style = `rgba(${this.value.r}, ${this.value.g}, ${this.value.b}, ${this.value.a})`;
+			case 'rgb': {
 
-		} else if (this.format === 'hex') {
+				style = `rgba(${this.value.r}, ${this.value.g}, ${this.value.b}, ${this.value.a})`;
 
-			style = this.value;
+				break;
 
-		} else if (this.format === 'hsl') {
+			}
 
-			style = `hsla(${this.value.h}, ${this.value.s * 100}%, ${this.value.l * 100}%, ${this.value.a})`;
+			case 'hex': {
 
-		} else if (this.value.hex) {
+				style = this.value;
 
-			style = this.value.hex;
+				break;
+
+			}
+
+			case 'hsl': {
+
+				style = `hsla(${this.value.h}, ${this.value.s * 100}%, ${this.value.l * 100}%, ${this.value.a})`;
+
+				break;
+
+			}
+
+			default: if (this.value.hex) {
+
+				style = this.value.hex;
+
+			}
 
 		}
 
@@ -130,17 +146,32 @@ class ColorField extends React.Component {
 
 	onChange(color) {
 
-		if (this.format === 'rgb') {
+		switch (this.format) {
 
-			color = color.rgb;
+			case 'rgb': {
 
-		} else if (this.format === 'hex') {
+				color = color.rgb;
 
-			color = color.hex;
+				break;
 
-		} else if (this.format === 'hsl') {
+			}
 
-			color = color.hsl;
+			case 'hex': {
+
+				color = color.hex;
+
+				break;
+
+			}
+
+			case 'hsl': {
+
+				color = color.hsl;
+
+				break;
+
+			}
+		// No default
 
 		}
 

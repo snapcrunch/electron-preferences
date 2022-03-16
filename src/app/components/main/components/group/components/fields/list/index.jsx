@@ -29,7 +29,7 @@ class ListField extends React.Component {
 	render() {
 
 		return (
-			<div className="field field-list">
+			<div className={`field field-list key-${this.field.key}`}>
 				<div className="field-label" aria-label={ this.label }>{ this.label }</div>
 				<div>
 					<div>
@@ -236,9 +236,9 @@ class ListField extends React.Component {
 
 		if (this.field.addItemValidator) {
 
-			const str = this.field.addItemValidator;
-			const lastSlash = str.lastIndexOf('/');
-			const validator = new RegExp(str.slice(1, lastSlash), str.slice(lastSlash + 1));
+			const string_ = this.field.addItemValidator;
+			const lastSlash = string_.lastIndexOf('/');
+			const validator = new RegExp(string_.slice(1, lastSlash), string_.slice(lastSlash + 1));
 
 			return validator;
 

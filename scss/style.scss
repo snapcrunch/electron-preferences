@@ -1,61 +1,54 @@
 html {
-	margin: 0;
-	padding: 0;
-	height: 100%;
-	min-height: 100%;
-	overflow: auto;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    min-height: 100%;
+    overflow: auto;
 }
 
 body {
-	margin: 0;
-	padding: 0;
-	height: 100%;
-	min-height: 100%;
-	overflow: hidden;
-	font-family: sans-serif, Verdana;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    min-height: 100%;
+    overflow: hidden;
+    font-family: sans-serif, Verdana;
 }
 
 .window {
-	height: 100%;
-	min-height: 100%;
-	display: flex;
-	justify-content: flex-start;
+    height: 100%;
+    min-height: 100%;
+    display: flex;
+    justify-content: flex-start;
 }
 
 * {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .noselect {
-	user-select: none;
+    user-select: none;
 }
 
-::-webkit-scrollbar-track
-{
-	
+::-webkit-scrollbar-track {}
+
+::-webkit-scrollbar {
+    width: 12px;
 }
 
-::-webkit-scrollbar
-{
-	width: 12px;
-}
-
-::-webkit-scrollbar-thumb
-{
-	border-radius: 10px;
-	background-color: #afb9c0;
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #afb9c0;
 }
 
 @media (prefers-color-scheme: dark) {
-	body {
-		background: #252525;
-		color: #e4e4e4;
-	}
-
-	::-webkit-scrollbar-thumb
-	{
-		background-color: #151515;
-	}
+    body {
+        background: #252525;
+        color: #e4e4e4;
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: #151515;
+    }
 }
 
 // Import all the styles
@@ -64,7 +57,6 @@ body {
 @import "../src/app/components/main/components/group/components/fields/accelerator/style";
 @import "../src/app/components/main/components/group/components/fields/checkbox/style";
 @import "../src/app/components/main/components/group/components/fields/color/style";
-@import "../src/app/components/main/components/group/components/fields/directory/style";
 @import "../src/app/components/main/components/group/components/fields/dropdown/style";
 @import "../src/app/components/main/components/group/components/fields/list/style";
 @import "../src/app/components/main/components/group/components/fields/message/style";

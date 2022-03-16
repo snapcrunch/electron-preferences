@@ -22,8 +22,7 @@ module.exports = {
 			path.resolve(__dirname, 'scss'),
 			path.resolve(__dirname, 'node_modules'),
 		],
-		alias: {
-		},
+		alias: {},
 	},
 	plugins: [
 		new CopyWebpackPlugin({

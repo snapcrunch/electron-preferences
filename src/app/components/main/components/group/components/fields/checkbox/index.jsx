@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { newGuid } from '../../../../../../../utils/newGuid';
+import { newGuid } from '../../../../../../../utils/newGuid.js';
 
 class CheckboxField extends React.Component {
 
@@ -28,7 +28,7 @@ class CheckboxField extends React.Component {
 			}
 
 			const id = `${fieldID}_${idx}`;
-			const checked = value.indexOf(option.value) >= 0;
+			const checked = value.includes(option.value);
 
 			return (
 				<label htmlFor={ id } className="checkbox-option" key={idx}>
@@ -41,7 +41,7 @@ class CheckboxField extends React.Component {
 		});
 
 		return (
-			<div className="field field-checkbox">
+			<div className={`field field-checkbox key-${this.field.key}`}>
 				<div className="field-label" aria-label={ label }>{ label }</div>
 				{ options }
 				{ help && <span className="help">{ help }</span> }
@@ -99,7 +99,7 @@ class CheckboxField extends React.Component {
 
 		if (e.target.checked) {
 
-			if (value.indexOf(option.value) === -1) {
+			if (!value.includes(option.value)) {
 
 				value.push(option.value);
 
@@ -107,10 +107,10 @@ class CheckboxField extends React.Component {
 
 		} else {
 
-			const valIdx = value.indexOf(option.value);
-			if (valIdx > -1) {
+			const valueIdx = value.indexOf(option.value);
+			if (valueIdx > -1) {
 
-				value.splice(valIdx, 1);
+				value.splice(valueIdx, 1);
 
 			}
 

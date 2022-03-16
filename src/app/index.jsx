@@ -6,7 +6,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
-import debounce from './utils/debounce';
+import debounce from './utils/debounce.js';
 import Sidebar from './components/sidebar';
 import Main from './components/main';
 import '../../scss/style.scss';
@@ -22,7 +22,7 @@ const dSavePreferences = debounce(preferences => {
 
 }, 200);
 
-sections.forEach(section => {
+for (const section of sections) {
 
 	if (!preferences[section.id]) {
 
@@ -30,7 +30,7 @@ sections.forEach(section => {
 
 	}
 
-});
+}
 
 class App extends React.Component {
 
@@ -80,5 +80,5 @@ class App extends React.Component {
 
 ReactDOM.render(
 	<App />,
-	document.getElementById('window'),
+	document.querySelector('#window'),
 );

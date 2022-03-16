@@ -1,6 +1,7 @@
 'use strict';
 
 const electron = require('electron');
+
 const { app, BrowserWindow, ipcMain, webContents, dialog } = electron;
 const path = require('path');
 const url = require('url');
@@ -23,7 +24,7 @@ class ElectronPreferences extends EventEmitter2 {
 			},
 		});
 
-		options.sections.forEach((section, sectionIdx) => {
+		for (const [ sectionIdx, section ] of options.sections.entries()) {
 
 			_.defaultsDeep(section, {
 				form: {
@@ -38,7 +39,7 @@ class ElectronPreferences extends EventEmitter2 {
 
 			});
 
-		});
+		}
 
 		this.options = options;
 
@@ -57,9 +58,9 @@ class ElectronPreferences extends EventEmitter2 {
 
 			}
 
-		} catch (err) {
+		} catch (error) {
 
-			console.error(`Datastore error - ${err}`);
+			console.error(`Datastore error - ${error}`);
 			this.preferences = null;
 
 		}
@@ -67,7 +68,7 @@ class ElectronPreferences extends EventEmitter2 {
 		if (this.preferences) {
 
 			// Set default preference values
-			_.keys(this.defaults).forEach(prefDefault => {
+			for (const prefDefault of _.keys(this.defaults)) {
 
 				if (!(prefDefault in this.preferences)) {
 
@@ -75,7 +76,7 @@ class ElectronPreferences extends EventEmitter2 {
 
 				}
 
-			});
+			}
 
 		} else {
 
@@ -227,18 +228,17 @@ class ElectronPreferences extends EventEmitter2 {
 
 	broadcast() {
 
-		webContents.getAllWebContents()
-			.forEach(wc => {
+		for (const wc of webContents.getAllWebContents()) {
 
-				wc.send('preferencesUpdated', this.preferences);
+			wc.send('preferencesUpdated', this.preferences);
 
-			});
+		}
 
 	}
 
 	getBrowserWindowOptions() {
 
-		let browserWindowOpts = {
+		let browserWindowOptions = {
 			title: 'Preferences',
 			width: 800,
 			maxWidth: 800,
@@ -256,33 +256,24 @@ class ElectronPreferences extends EventEmitter2 {
 			nodeIntegration: false,
 			enableRemoteModule: false,
 			preload: path.join(__dirname, './preload.js'),
+			devTools: this.options.debug,
 		};
 
 		const unOverridableWebPreferences = {
 			contextIsolation: true,
-			devTools: this.options.debug ? true : undefined,
 		};
 
-		// User provider `browserWindow`, we load those
+		// User provided `browserWindow`, we load those
 		if (this.options.browserWindowOverrides) {
 
-			browserWindowOpts = Object.assign(browserWindowOpts, this.options.browserWindowOverrides);
+			browserWindowOptions = Object.assign(browserWindowOptions, this.options.browserWindowOverrides);
 
 		}
 
-		if (browserWindowOpts.webPreferences) {
+		// Object.assign is shallow, let's process browserWindow.webPreferences
+		browserWindowOptions.webPreferences = Object.assign(defaultWebPreferences, browserWindowOptions.webPreferences, unOverridableWebPreferences)
 
-			browserWindowOpts.webPreferences = Object.assign(defaultWebPreferences, browserWindowOpts.webPreferences);
-
-		} else {
-
-			browserWindowOpts.webPreferences = defaultWebPreferences;
-
-		}
-
-		browserWindowOpts.webPreferences = Object.assign(browserWindowOpts.webPreferences, unOverridableWebPreferences);
-
-		return browserWindowOpts;
+		return browserWindowOptions;
 
 	}
 
@@ -350,9 +341,9 @@ class ElectronPreferences extends EventEmitter2 {
 
 					}
 
-				} catch (err) {
+				} catch (error) {
 
-					console.error(`Could not load css file ${file}: ${err}`);
+					console.error(`Could not load css file ${file}: ${error}`);
 
 				}
 

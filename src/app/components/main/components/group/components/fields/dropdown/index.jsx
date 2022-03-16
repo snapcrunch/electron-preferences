@@ -12,7 +12,7 @@ class DropdownField extends React.Component {
 		));
 
 		return (
-			<div className="field field-dropdown">
+			<div className={`field field-dropdown key-${this.field.key}`}>
 				<div className="field-label">{ this.label }</div>
 				<select onChange={ this.onChange.bind(this) } value={ this.value } aria-label={ this.label }>
 					<option value="">-- Select One --</option>

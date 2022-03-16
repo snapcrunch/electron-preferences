@@ -1,13 +1,14 @@
 {
 	"extends": [
+		"plugin:react/recommended",
 		"xo",
-	    "plugin:react/recommended"
 	],
 	"rules": {
 		"array-bracket-spacing": [
 			"error",
 			"always"
 		],
+		"indent": ["error", "tab"],
 		"padded-blocks": [
 			"error",
 			{
@@ -40,7 +41,8 @@
 		"space-in-parens": [
 			"error",
 			"never"
-		]
+		],
+		"unicorn/prefer-module": 0
 	},
 	"settings": {
 		"react": {

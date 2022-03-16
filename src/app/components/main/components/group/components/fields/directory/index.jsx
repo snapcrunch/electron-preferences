@@ -22,7 +22,7 @@ class DirectoryField extends React.Component {
 			: (multiSelections ? 'Choose Folders' : 'Choose a Folder');
 
 		return (
-			<div className="field field-directory">
+			<div className={`field field-directory key-${this.field.key}`}>
 				<div className="field-label" aria-label={ label }>{ label }</div>
 				<div className="value" onClick={ this.choose }>
 					{multiSelections ? 'Folders' : 'Folder'}:&nbsp;

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { newGuid } from '../../../../../../../utils/newGuid';
+import { newGuid } from '../../../../../../../utils/newGuid.js';
 
 class RadioField extends React.Component {
 
@@ -25,7 +25,7 @@ class RadioField extends React.Component {
 		});
 
 		return (
-			<div className="field field-radio">
+			<div className={`field field-radio key-${this.field.key}`}>
 				<div className="field-label">{ this.label }</div>
 				{ options }
 				{ this.help && <span className="help">{ this.help }</span> }
