@@ -5,8 +5,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Set defaults for new preferences added in a group after app has started (#141)
+- Include files to be exposed in npm build (#119)
+- Updated dependencies
+- Improve README.md
+
 ### Added
-- Button component. Will trigger an event on the preferences.click when clicked.
+- Button component. Will trigger an event on the `preferences.click` when clicked. (#99)
 
 ## [2.5.0] - 2021-09-18
 ### Fixed
@@ -18,7 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Preferences option `debug: true` which opens the devTools by default (#124)
 - Expose `browserWindowOverrides` on the preference object (#112)
 - Expose `close` function on preference object to close the preference window if opened (#130)
-- - Expose `closePreferences` function on the ipcRenderer to close the preference window if opened (#130)
+- Expose `closePreferences` function on the ipcRenderer to close the preference window if opened (#130)
 
 ### Changed
 - Checkbox type supports a single boolean value
