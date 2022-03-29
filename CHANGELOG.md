@@ -8,23 +8,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Set defaults for new preferences added in a group after app has started (#141)
 - Include files to be exposed in npm build (#119)
+- Correct `menuBar` option in README (#130)
 - Updated dependencies
 - Improve README.md
 
 ### Added
 - Button component. Will trigger an event on the `preferences.click` when clicked. (#99)
+- Expose `close` function on preference object to close the preference window if opened (#130)
+- Expose `closePreferences` function on the ipcRenderer to close the preference window if opened (#130)
 
 ## [2.5.0] - 2021-09-18
 ### Fixed
 - Accessibility issues: contrast, navigation with keyboard, labels (#76)
 - Always enable electron contextIsolation (#122)
-- Correct `menuBar` option in README (#130)
 
 ### Added 
 - Preferences option `debug: true` which opens the devTools by default (#124)
 - Expose `browserWindowOverrides` on the preference object (#112)
-- Expose `close` function on preference object to close the preference window if opened (#130)
-- Expose `closePreferences` function on the ipcRenderer to close the preference window if opened (#130)
 
 ### Changed
 - Checkbox type supports a single boolean value
