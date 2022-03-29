@@ -11,8 +11,11 @@
         "electron",
         "preferences"
     ],
-    "files": ["index.js", "preload.js", "build"],
-    "main": "index.js",
+    "files": [
+        "index.js",
+        "preload.js",
+        "build"
+    ],
     "scripts": {
         "lint": "eslint . --fix --ext .js,.jsx,.ts,.tsx",
         "test": "echo \"Error: argh, you called my bluff. We don't have any tests yet :(\" && exit 1",
