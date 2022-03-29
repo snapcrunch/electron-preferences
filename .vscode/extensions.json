@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "spmeesseman.vscode-taskexplorer",
+    "gruntfuggly.todo-tree"
+  ]
+}
