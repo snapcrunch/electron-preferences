@@ -1,4 +1,5 @@
 # Electron Preferences
+
 > An Electron store with built-in preferences management
 
 <img src="misc/demo.png" />
@@ -6,15 +7,14 @@
 - [Electron Preferences](#electron-preferences)
   - [Introduction](#introduction)
   - [Features](#features)
-  	- [Field Types](#field-types)
+    - [Field Types](#field-types)
   - [Demo](#demo)
   - [Getting Started](#getting-started)
-	- [From the Main process](#from-the-main-process)
-	- [From the Renderer process](#from-the-renderer-process)
+  - [From the Main process](#from-the-main-process)
+  - [From the Renderer process](#from-the-renderer-process)
   - [Customization](#customization)
-	- [Icons](#icons)
+  - [Icons](#icons)
   - [Example Code](#example-preferences-code)
-
 
 ## Introduction
 
@@ -24,6 +24,7 @@ This package provides [Electron](https://electronjs.org/) developers with a simp
 - A GUI interface allowing users to manage preference values in the frontend of your application.
 
 ## Features
+
 - A drop-in Electron key/value store
 - Built-in preference manager
 - Icons for preference groups
@@ -32,7 +33,7 @@ This package provides [Electron](https://electronjs.org/) developers with a simp
 - Color Picker and Accelerator input for keyboard shortcuts
 - Easily read / write values via the built-in API
 - Components are written in React, adding new inputs is straightforward
-- Uses  write-json-file under the hood
+- Uses write-json-file under the hood
 - Customize styles using CSS
 - Customize the layout of the preference manager using JSON
 
@@ -40,54 +41,52 @@ This package provides [Electron](https://electronjs.org/) developers with a simp
 
 The library includes built-in support for the following field types:
 
-| Preference `type` | Description                                               |
-| ----------------- | --------------------------------------------------------- |
-| `text`            | `<input type="text"/>`                                    |
-| `number`          | `<input type="number"/>`                                  |
-| `dropdown`        | `<select>`                                                |
-| `radio`           | `<input type="radio"/>`                                   |
-| `checkbox`        | `<input type="checkbox"/>`                                |
-| `slider`          | `<input type="range"/>`                                   |
-| `file`            | `<input type="file"/>`                                    |
-| `accelerator`     | Keyboard shortcut input                                   |
-| `color`           | Color picker input using simonwep/pickr                     |
-| `list`            | Ordered list with create/read/update/delete functionality |
-| `button` | A button to pass simple click events back to the main process |
-| `message`         | Read-only HTML panel for displaying information           |
+| Preference `type` | Description                                                   |
+| ----------------- | ------------------------------------------------------------- |
+| `text`            | `<input type="text"/>`                                        |
+| `number`          | `<input type="number"/>`                                      |
+| `dropdown`        | `<select>`                                                    |
+| `radio`           | `<input type="radio"/>`                                       |
+| `checkbox`        | `<input type="checkbox"/>`                                    |
+| `slider`          | `<input type="range"/>`                                       |
+| `file`            | `<input type="file"/>`                                        |
+| `accelerator`     | Keyboard shortcut input                                       |
+| `color`           | Color picker input using simonwep/pickr                       |
+| `list`            | Ordered list with create/read/update/delete functionality     |
+| `button`          | A button to pass simple click events back to the main process |
+| `message`         | Read-only HTML panel for displaying information               |
 
 ---
 
 <img src="misc/demo.gif" />
 
-
 ## Demo
+
 To see the library in action, clone this repository and see the demo application that is included within the `example` folder:
 
 ```sh
-	$ git clone https://github.com/tkambler/electron-preferences.git
-	$ cd electron-preferences && npm install
-	$ npm run build
-	$ npm run example
+$ git clone https://github.com/tkambler/electron-preferences.git
+$ cd electron-preferences && npm install
+$ npm run build
+$ npm run example
 ```
 
 ##### Other helpful scripts
 
 ```sh
-	$ npm run lint
+$ npm run lint
 ```
-
 
 ## Getting Started
 
 To quickly add `electron-preferences` to your existing Electron app:
 
 ```sh
-	# From your Electron project root...
-	$ npm install electron-preferences
+# From your Electron project root...
+$ npm install electron-preferences
 ```
 
 Then import and initialize the preference store.
-
 
 ### From the Main process
 
@@ -95,58 +94,59 @@ Within your application's main process, create a new instance of the `ElectronPr
 
 For an example usage of the library, check out `example/preferences.js`
 
-
 ```js
 const ElectronPreferences = require('electron-preferences');
 // import ElectronPreferences from 'electron-preferences'; // ...or if you prefer to use module imports
 
 const preferences = new ElectronPreferences({
-	// Override default preference BrowserWindow values
-	browserWindowOpts: { /* ... */ },
-	
-	// Create an optional menu bar
-	menu: Menu.buildFromTemplate(/* ... */),
-	
-	// Provide a custom CSS file, relative to your appPath.
-	css: 'preference-styles.css'
+  // Override default preference BrowserWindow values
+  browserWindowOpts: {
+    /* ... */
+  },
 
-	// Preference file path
-	dataStore: '~/preferences.json', // defaults to <userData>/preferences.json
+  // Create an optional menu bar
+  menu: Menu.buildFromTemplate(/* ... */),
 
-	// Preference default values
-	defaults: { 
-		about: {
-			name: 'Albert'
-		}
-	 },
+  // Provide a custom CSS file, relative to your appPath.
+  css: 'preference-styles.css',
 
-	// Preference sections visible to the UI
-	sections: [
-		{
-			id: 'about',
-			label: 'About You',
-			icon: 'single-01', // See the list of available icons below
-			form: {
-				groups: [
-					{
-						'label': 'About You', // optional
-						'fields': [
-							{
-								label: 'Name',
-								key: 'name',
-								type: 'text',
-								help': 'What is your name?'
-							},
-							// ...
-						]
-					},
-					// ...
-				]
-			}
-		},
-		// ...
-	]
-})
+  // Preference file path
+  dataStore: '~/preferences.json', // defaults to <userData>/preferences.json
+
+  // Preference default values
+  defaults: {
+    about: {
+      name: 'Albert',
+    },
+  },
+
+  // Preference sections visible to the UI
+  sections: [
+    {
+      id: 'about',
+      label: 'About You',
+      icon: 'single-01', // See the list of available icons below
+      form: {
+        groups: [
+          {
+            label: 'About You', // optional
+            fields: [
+              {
+                label: 'Name',
+                key: 'name',
+                type: 'text',
+                help: 'What is your name?',
+              },
+              // ...
+            ],
+          },
+          // ...
+        ],
+      },
+    },
+    // ...
+  ],
+});
 
 // Show the preferences window on demand.
 preferences.show();
@@ -159,17 +159,15 @@ preferences.value('about.name', 'Einstein');
 
 // Subscribing to preference changes.
 preferences.on('save', (preferences) => {
-	console.log(`Preferences were saved.`, JSON.stringify(preferences, null, 4));
+  console.log(`Preferences were saved.`, JSON.stringify(preferences, null, 4));
 });
 
 // Using a button field with `channel: 'reset'`
-preferences.on('click', key => {
-	if(key === 'resetButton') {
-		resetApp()
-	}
-} )
-
-
+preferences.on('click', (key) => {
+  if (key === 'resetButton') {
+    resetApp();
+  }
+});
 ```
 
 ### From the Renderer process
@@ -192,16 +190,16 @@ ipcRenderer.on('preferencesUpdated', (e, preferences) => {
 ipcRenderer.sendSync('setPreferences', { ... });
 ```
 
-
 ## Customization
 
 ### Dark or Light? 🌓
+
 You prefer a dark theme over a light theme? No problem, we have them both. The library will use whatever theme you're using with Electron. See the example on how to add the option to your preferences.
 
 <img src="misc/dark.png" />
 <img src="misc/light.png" />
 
-Still not matching your layout? You can easily customize the complete look by injecting your own custom CSS! 
+Still not matching your layout? You can easily customize the complete look by injecting your own custom CSS!
 
 ### Icons
 
@@ -462,7 +460,6 @@ The following icons come packaged with the library and can be specified when you
 </tbody>
 </table>
 
-
 ## Example preferences code
 
 ```js
@@ -474,271 +471,291 @@ const ElectronPreferences = require('electron-preferences');
 // import ElectronPreferences from 'electron-preferences' //Or if you prefer to use module imports
 
 const preferences = new ElectronPreferences({
-	/**
-	 * Where should preferences be saved?
-	 */
-	'dataStore': path.resolve(app.getPath('userData'), 'preferences.json'),
-	/**
-	 * Default values.
-	 */
-	'defaults': {
-		'notes': {
-			'folder': path.resolve(os.homedir(), 'Notes')
-		},
-		'markdown': {
-			'auto_format_links': true,
-			'show_gutter': false
-		},
-		'preview': {
-			'show': true
-		},
-		'drawer': {
-			'show': true
-		}
-	},
-	/**
-	 * The preferences window is divided into sections. Each section has a label, an icon, and one or
-	 * more fields associated with it. Each section should also be given a unique ID.
-	 */
-	'sections': [
-		{
-			'id': 'about',
-			'label': 'About You',
-			/**
-			 * See the list of available icons below.
-			 */
-			'icon': 'single-01',
-			'form': {
-				'groups': [
-					{
-						/**
-						 * Group heading is optional.
-						 */
-						'label': 'About You',
-						'fields': [
-							{
-								'label': 'First Name',
-								'key': 'first_name',
-								'type': 'text',
-								/**
-								 * Optional text to be displayed beneath the field.
-								 */
-								'help': 'What is your first name?'
-							},
-							{
-								'label': 'Last Name',
-								'key': 'last_name',
-								'type': 'text',
-								'help': 'What is your last name?'
-							},
-							{
-								'label': 'Gender',
-								'key': 'gender',
-								'type': 'dropdown',
-								'options': [
-									{'label': 'Male', 'value': 'male'},
-									{'label': 'Female', 'value': 'female'},
-									{'label': 'Unspecified', 'value': 'unspecified'},
-								],
-								'help': 'What is your gender?'
-							},
-							{
-								'label': 'Which of the following foods do you like?',
-								'key': 'foods',
-								'type': 'checkbox',
-								'options': [
-									{ 'label': 'Ice Cream', 'value': 'ice_cream' },
-									{ 'label': 'Carrots', 'value': 'carrots' },
-									{ 'label': 'Cake', 'value': 'cake' },
-									{ 'label': 'Spinach', 'value': 'spinach' }
-								],
-								'help': 'Select one or more foods that you like.'
-							},
-							{
-								'label': 'Coolness',
-								'key': 'coolness',
-								'type': 'slider',
-								'min': 0,
-								'max': 9001
-							},
-							{
-								'label': 'Eye Color',
-								'key': 'eye_color',
-								'type': 'color',
-								'format': 'hex', // can be hex, hsl or rgb
-								'help': 'Your eye color'
-							},
-							{
-								'label': 'Ipc button',
-								'key': 'resetButton',
-								'type': 'button',
-								'buttonLabel': 'Restart to apply changes',
-								'help': 'This button sends on a custom ipc channel',
-								'hideLabel': false
-							},
-						]
-					}
-				]
-			}
-		},
-		{
-			'id': 'notes',
-			'label': 'Notes',
-			'icon': 'folder-15',
-			'form': {
-				'groups': [
-					{
-						'label': 'Stuff',
-						'fields': [
-							{
-								'label': 'Read notes from folder',
-								'key': 'folder',
-								'type': 'directory',
-								'help': 'The location where your notes will be stored.',
-								'multiSelections': false,
-								'noResolveAliases': false,
-								'treatPackageAsDirectory': false,
-								'dontAddToRecent': true
-							},
-							{
-								'label': 'Select some images',
-								'buttonLabel': 'Choose Files',
-								'key': 'images',
-								'type': 'file',
-								'help': 'List of selected images',
-								'filters': [
-									{ name: 'Joint Photographic Experts Group (JPG)', extensions: ['jpg', 'jpeg', 'jpe', 'jfif', 'jfi', 'jif'] },
-									{ name: 'Portable Network Graphics (PNG)', extensions: ['png'] },
-									{ name: 'Graphics Interchange Format (GIF)', extensions: ['gif'] },
-									{ name: 'All Images', extensions: ['jpg', 'jpeg', 'jpe', 'jfif', 'jfi', 'jif', 'png', 'gif'] },
-									//{ name: 'All Files', extensions: ['*'] }
-								],
-								'multiSelections': true, //Allow multiple paths to be selected
-								'showHiddenFiles': true, //Show hidden files in dialog
-								'noResolveAliases': false, //(macos) Disable the automatic alias (symlink) path resolution. Selected aliases will now return the alias path instead of their target path.
-								'treatPackageAsDirectory': false, //(macos) Treat packages, such as .app folders, as a directory instead of a file.
-								'dontAddToRecent': true //(windows) Do not add the item being opened to the recent documents list.
-							},
-							{
-								'label': 'Other Settings',
-								'fields': [
-									{
-										'label': "Foo or Bar?",
-										'key': 'foobar',
-										'type': 'radio',
-										'options': [
-											{'label': 'Foo', 'value': 'foo'},
-											{'label': 'Bar', 'value': 'bar'},
-											{'label': 'FooBar', 'value': 'foobar'},
-										],
-										'help': 'Foo? Bar?'
-									}
-								]
-						  },
-						  {
-							  'heading': 'Important Message',
-							  'content': '<p>The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence.</p>',
-							  'type': 'message',
-						  }
-						]
-					}
-				]
-			}
-		},
-		{
-			'id': 'lists',
-			'label': 'Lists',
-			'icon': 'notes',
-			'form': {
-				'groups': [
-					{
-						'label': 'Lists',
-						'fields': [
-							{
-								'label': 'Favorite foods',
-								'key': 'foods',
-								'type': 'list',
-								'size': 15,
-								'help': 'A list of your favorite foods',
-								'addItemValidator': /^[A-Za-z ]+$/.toString(),
-								'addItemLabel': 'Add favorite food'
-							},
-							{
-								'label': 'Best places to visit',
-								'key': 'places',
-								'type': 'list',
-								'size': 10,
-								'style': {
-									'width': '75%'
-								},
-								'help': 'An ordered list of nice places to visit',
-								'orderable': true
-							}
-						]
-					}
-				]
-			}
-		},
-		{
-			'id': 'space',
-			'label': 'Other Settings',
-			'icon': 'spaceship',
-			'form': {
-				'groups': [
-					{
-						'label': 'Other Settings',
-						'fields': [
-							{
-								'label': "Foo or Bar?",
-								'key': 'foobar',
-								'type': 'radio',
-								'options': [
-									{'label': 'Foo', 'value': 'foo'},
-									{'label': 'Bar', 'value': 'bar'},
-									{'label': 'FooBar', 'value': 'foobar'},
-								],
-								'help': 'Foo? Bar?'
-							}
-						]
-					}
-				]
-			}
-		}
-	],
-	/**
-	 * These parameters on the preference window settings can be overwritten
-	 */
-	browserWindowOpts: {
-		'title': 'My custom preferences title',
-		'width': 900,
-		'maxWidth': 1000,
-		'height': 700,
-		'maxHeight': 1000,
-		'resizable': true,
-		'maximizable': false,
-		//...
-	},
-	/**
-	 * These parameters create an optional menu bar
-	 */
-	menu: Menu.buildFromTemplate(
-		[
-			{
-			label: 'Window',
-			role: 'window',
-			submenu: [
-				{
-				label: 'Close',
-				accelerator: 'CmdOrCtrl+W',
-				role: 'close'
-				}
-			]
-			}
-		]
-	),
-	/**
-	* If you want to apply your own CSS. The path should be relative to your appPath.
-	*/
-	css: 'custom-style.css'
+  /**
+   * Where should preferences be saved?
+   */
+  dataStore: path.resolve(app.getPath('userData'), 'preferences.json'),
+  /**
+   * Default values.
+   */
+  defaults: {
+    notes: {
+      folder: path.resolve(os.homedir(), 'Notes'),
+    },
+    markdown: {
+      auto_format_links: true,
+      show_gutter: false,
+    },
+    preview: {
+      show: true,
+    },
+    drawer: {
+      show: true,
+    },
+  },
+  /**
+   * The preferences window is divided into sections. Each section has a label, an icon, and one or
+   * more fields associated with it. Each section should also be given a unique ID.
+   */
+  sections: [
+    {
+      id: 'about',
+      label: 'About You',
+      /**
+       * See the list of available icons below.
+       */
+      icon: 'single-01',
+      form: {
+        groups: [
+          {
+            /**
+             * Group heading is optional.
+             */
+            label: 'About You',
+            fields: [
+              {
+                label: 'First Name',
+                key: 'first_name',
+                type: 'text',
+                /**
+                 * Optional text to be displayed beneath the field.
+                 */
+                help: 'What is your first name?',
+              },
+              {
+                label: 'Last Name',
+                key: 'last_name',
+                type: 'text',
+                help: 'What is your last name?',
+              },
+              {
+                label: 'Gender',
+                key: 'gender',
+                type: 'dropdown',
+                options: [
+                  { label: 'Male', value: 'male' },
+                  { label: 'Female', value: 'female' },
+                  { label: 'Unspecified', value: 'unspecified' },
+                ],
+                help: 'What is your gender?',
+              },
+              {
+                label: 'Which of the following foods do you like?',
+                key: 'foods',
+                type: 'checkbox',
+                options: [
+                  { label: 'Ice Cream', value: 'ice_cream' },
+                  { label: 'Carrots', value: 'carrots' },
+                  { label: 'Cake', value: 'cake' },
+                  { label: 'Spinach', value: 'spinach' },
+                ],
+                help: 'Select one or more foods that you like.',
+              },
+              {
+                label: 'Coolness',
+                key: 'coolness',
+                type: 'slider',
+                min: 0,
+                max: 9001,
+              },
+              {
+                label: 'Eye Color',
+                key: 'eye_color',
+                type: 'color',
+                format: 'hex', // can be hex, hsl or rgb
+                help: 'Your eye color',
+              },
+              {
+                label: 'Ipc button',
+                key: 'resetButton',
+                type: 'button',
+                buttonLabel: 'Restart to apply changes',
+                help: 'This button sends on a custom ipc channel',
+                hideLabel: false,
+              },
+            ],
+          },
+        ],
+      },
+    },
+    {
+      id: 'notes',
+      label: 'Notes',
+      icon: 'folder-15',
+      form: {
+        groups: [
+          {
+            label: 'Stuff',
+            fields: [
+              {
+                label: 'Read notes from folder',
+                key: 'folder',
+                type: 'directory',
+                help: 'The location where your notes will be stored.',
+                multiSelections: false,
+                noResolveAliases: false,
+                treatPackageAsDirectory: false,
+                dontAddToRecent: true,
+              },
+              {
+                label: 'Select some images',
+                buttonLabel: 'Choose Files',
+                key: 'images',
+                type: 'file',
+                help: 'List of selected images',
+                filters: [
+                  {
+                    name: 'Joint Photographic Experts Group (JPG)',
+                    extensions: ['jpg', 'jpeg', 'jpe', 'jfif', 'jfi', 'jif'],
+                  },
+                  {
+                    name: 'Portable Network Graphics (PNG)',
+                    extensions: ['png'],
+                  },
+                  {
+                    name: 'Graphics Interchange Format (GIF)',
+                    extensions: ['gif'],
+                  },
+                  {
+                    name: 'All Images',
+                    extensions: [
+                      'jpg',
+                      'jpeg',
+                      'jpe',
+                      'jfif',
+                      'jfi',
+                      'jif',
+                      'png',
+                      'gif',
+                    ],
+                  },
+                  //{ name: 'All Files', extensions: ['*'] }
+                ],
+                multiSelections: true, //Allow multiple paths to be selected
+                showHiddenFiles: true, //Show hidden files in dialog
+                noResolveAliases: false, //(macos) Disable the automatic alias (symlink) path resolution. Selected aliases will now return the alias path instead of their target path.
+                treatPackageAsDirectory: false, //(macos) Treat packages, such as .app folders, as a directory instead of a file.
+                dontAddToRecent: true, //(windows) Do not add the item being opened to the recent documents list.
+              },
+              {
+                label: 'Other Settings',
+                fields: [
+                  {
+                    label: 'Foo or Bar?',
+                    key: 'foobar',
+                    type: 'radio',
+                    options: [
+                      { label: 'Foo', value: 'foo' },
+                      { label: 'Bar', value: 'bar' },
+                      { label: 'FooBar', value: 'foobar' },
+                    ],
+                    help: 'Foo? Bar?',
+                  },
+                ],
+              },
+              {
+                heading: 'Important Message',
+                content:
+                  '<p>The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence.</p>',
+                type: 'message',
+              },
+            ],
+          },
+        ],
+      },
+    },
+    {
+      id: 'lists',
+      label: 'Lists',
+      icon: 'notes',
+      form: {
+        groups: [
+          {
+            label: 'Lists',
+            fields: [
+              {
+                label: 'Favorite foods',
+                key: 'foods',
+                type: 'list',
+                size: 15,
+                help: 'A list of your favorite foods',
+                addItemValidator: /^[A-Za-z ]+$/.toString(),
+                addItemLabel: 'Add favorite food',
+              },
+              {
+                label: 'Best places to visit',
+                key: 'places',
+                type: 'list',
+                size: 10,
+                style: {
+                  width: '75%',
+                },
+                help: 'An ordered list of nice places to visit',
+                orderable: true,
+              },
+            ],
+          },
+        ],
+      },
+    },
+    {
+      id: 'space',
+      label: 'Other Settings',
+      icon: 'spaceship',
+      form: {
+        groups: [
+          {
+            label: 'Other Settings',
+            fields: [
+              {
+                label: 'Foo or Bar?',
+                key: 'foobar',
+                type: 'radio',
+                options: [
+                  { label: 'Foo', value: 'foo' },
+                  { label: 'Bar', value: 'bar' },
+                  { label: 'FooBar', value: 'foobar' },
+                ],
+                help: 'Foo? Bar?',
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
+  /**
+   * These parameters on the preference window settings can be overwritten
+   */
+  browserWindowOpts: {
+    title: 'My custom preferences title',
+    width: 900,
+    maxWidth: 1000,
+    height: 700,
+    maxHeight: 1000,
+    resizable: true,
+    maximizable: false,
+    //...
+  },
+  /**
+   * These parameters create an optional menu bar
+   */
+  menu: Menu.buildFromTemplate([
+    {
+      label: 'Window',
+      role: 'window',
+      submenu: [
+        {
+          label: 'Close',
+          accelerator: 'CmdOrCtrl+W',
+          role: 'close',
+        },
+      ],
+    },
+  ]),
+  /**
+   * If you want to apply your own CSS. The path should be relative to your appPath.
+   */
+  css: 'custom-style.css',
 });
 ```
