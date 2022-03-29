@@ -70,8 +70,16 @@ class ElectronPreferences extends EventEmitter2 {
 			// Set default preference values
 			for (const prefDefault of _.keys(this.defaults)) {
 
-				if (!(prefDefault in this.preferences)) {
+				// PrefDefault is a group key
 
+				if ((prefDefault in this.preferences)) {
+
+					// Merge preferences with defaults (in case new preference was added, set it's default)
+					this.preferences[prefDefault] = { ...this.defaults[prefDefault], ...this.preferences[prefDefault] };
+
+				} else {
+
+					// If group doesn't exist, copy all group defaults
 					this.preferences[prefDefault] = this.defaults[prefDefault];
 
 				}
@@ -271,7 +279,7 @@ class ElectronPreferences extends EventEmitter2 {
 		}
 
 		// Object.assign is shallow, let's process browserWindow.webPreferences
-		browserWindowOptions.webPreferences = Object.assign(defaultWebPreferences, browserWindowOptions.webPreferences, unOverridableWebPreferences)
+		browserWindowOptions.webPreferences = Object.assign(defaultWebPreferences, browserWindowOptions.webPreferences, unOverridableWebPreferences);
 
 		return browserWindowOptions;
 
