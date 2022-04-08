@@ -23,13 +23,8 @@ const savePreferences = preferences => {
 
 };
 
-const savePreferencesDebounced = preferences => {
-
-	const debounceDelay = (!isNaN(config.debounce) && config.debounce);
-
-	return debounce(preferences => savePreferences(preferences), debounceDelay ?? 150)(preferences);
-
-};
+const debounceDelay = (!isNaN(config.debounce) && config.debounce);
+const savePreferencesDebounced = debounce(preferences => savePreferences(preferences), debounceDelay ?? 150);
 
 for (const section of sections) {
 
