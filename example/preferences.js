@@ -7,8 +7,12 @@ const os = require('os');
 const ElectronPreferences = require('../');
 
 const preferences = new ElectronPreferences({
-	css: 'custom-style.css',
-	dataStore: path.resolve(__dirname, 'preferences.json'),
+	debug: true, // True will open the dev tools
+	config: {
+		css: 'custom-style.css',
+		dataStore: path.resolve(__dirname, 'preferences.json'),
+		debounce: 0,
+	},
 	defaults: {
 		notes: {
 			folder: path.resolve(os.homedir(), 'Notes'),
@@ -19,7 +23,9 @@ const preferences = new ElectronPreferences({
 		},
 		// ...
 	},
-	debug: false, // True will open the dev tools
+	browserWindowOverrides: {
+		title: 'My Electron Preferences',
+	},
 	webPreferences: {
 		webSecurity: true,
 	},
@@ -38,9 +44,6 @@ const preferences = new ElectronPreferences({
 			},
 		],
 	),
-	browserWindowOverrides: {
-		title: 'My Electron Preferences',
-	},
 	sections: [
 		{
 			id: 'about',

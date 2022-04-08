@@ -18,11 +18,29 @@ class ElectronPreferences extends EventEmitter2 {
 		super();
 
 		_.defaultsDeep(options, {
+			config: {
+				debounce: 150,
+			},
 			sections: [],
 			webPreferences: {
 				devTools: false,
 			},
 		});
+
+		this.options = options;
+
+		// Legacy: Set config values
+		if (options.css && !options.config.css) {
+
+			this.options.config.css = options.css;
+
+		}
+
+		if (options.dataStore && !options.config.dataStore) {
+
+			this.options.config.dataStore = options.dataStore;
+
+		}
 
 		for (const [ sectionIdx, section ] of options.sections.entries()) {
 
@@ -40,8 +58,6 @@ class ElectronPreferences extends EventEmitter2 {
 			});
 
 		}
-
-		this.options = options;
 
 		if (!this.dataStore) {
 
@@ -112,6 +128,12 @@ class ElectronPreferences extends EventEmitter2 {
 
 		});
 
+		ipcMain.on('getConfig', event => {
+
+			event.returnValue = this.options.config;
+
+		});
+
 		ipcMain.on('getSections', event => {
 
 			event.returnValue = this.options.sections;
@@ -171,13 +193,19 @@ class ElectronPreferences extends EventEmitter2 {
 
 	get dataStore() {
 
-		return this.options.dataStore;
+		return this.options.config.dataStore;
 
 	}
 
 	get browserWindowOverrides() {
 
 		return this.options.browserWindowOverrides;
+
+	}
+
+	get config() {
+
+		return this.options.config;
 
 	}
 
@@ -336,9 +364,10 @@ class ElectronPreferences extends EventEmitter2 {
 		this.prefsWindow.webContents.on('dom-ready', async () => {
 
 			// Load custom css file
-			if (this.options.css) {
+			const cssFile = this.options.config.css;
+			if (cssFile) {
 
-				const file = path.join(app.getAppPath(), this.options.css)
+				const file = path.join(app.getAppPath(), cssFile)
 					.replace(/\\/g, '/'); // Make sure it also works in Windows
 
 				try {

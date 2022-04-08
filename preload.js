@@ -6,9 +6,10 @@ const { contextBridge } = electron;
 const { ipcRenderer } = electron;
 
 contextBridge.exposeInMainWorld('api', {
-	getSections: () => ipcRenderer.sendSync('getSections'),
-	getPreferences: () => ipcRenderer.sendSync('getPreferences'),
 	getDefaults: () => ipcRenderer.sendSync('getDefaults'),
+	getConfig: () => ipcRenderer.sendSync('getConfig'),
+	getPreferences: () => ipcRenderer.sendSync('getPreferences'),
+	getSections: () => ipcRenderer.sendSync('getSections'),
 	setPreferences: preferences => ipcRenderer.send('setPreferences', preferences),
 	showOpenDialog: dialogOptions => ipcRenderer.sendSync('showOpenDialog', dialogOptions),
 	sendButtonClick: channel => ipcRenderer.sendSync('sendButtonClick', channel),

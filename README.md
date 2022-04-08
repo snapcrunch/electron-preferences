@@ -101,17 +101,22 @@ const ElectronPreferences = require('electron-preferences');
 // import ElectronPreferences from 'electron-preferences'; // ...or if you prefer to use module imports
 
 const preferences = new ElectronPreferences({
+	config: {
+		// Provide a custom CSS file, relative to your appPath.
+		css: 'preference-styles.css'
+
+		// Preference file path
+		dataStore: '~/preferences.json', // defaults to <userData>/preferences.json
+
+		debounce: 150, // debounce preference save settings; 0 to disable
+	},
+
+
 	// Override default preference BrowserWindow values
 	browserWindowOpts: { /* ... */ },
 	
 	// Create an optional menu bar
 	menu: Menu.buildFromTemplate(/* ... */),
-	
-	// Provide a custom CSS file, relative to your appPath.
-	css: 'preference-styles.css'
-
-	// Preference file path
-	dataStore: '~/preferences.json', // defaults to <userData>/preferences.json
 
 	// Preference default values
 	defaults: { 
@@ -474,10 +479,12 @@ const ElectronPreferences = require('electron-preferences');
 // import ElectronPreferences from 'electron-preferences' //Or if you prefer to use module imports
 
 const preferences = new ElectronPreferences({
-	/**
-	 * Where should preferences be saved?
-	 */
-	'dataStore': path.resolve(app.getPath('userData'), 'preferences.json'),
+	'config': {
+		/**
+		 * Where should preferences be saved?
+		 */
+		'dataStore': path.resolve(app.getPath('userData'), 'preferences.json'),
+	},
 	/**
 	 * Default values.
 	 */
