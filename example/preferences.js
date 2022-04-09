@@ -11,7 +11,7 @@ const preferences = new ElectronPreferences({
 	config: {
 		css: 'custom-style.css',
 		dataStore: path.resolve(__dirname, 'preferences.json'),
-		// Debounce: 0,
+		debounce: 10,
 	},
 	defaults: {
 		notes: {
