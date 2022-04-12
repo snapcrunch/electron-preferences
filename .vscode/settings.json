@@ -1,0 +1,22 @@
+{
+  "editor.formatOnSave": true,
+  "npm.autoDetect": "off",
+  "search.exclude": {
+    "**/node_modules": true
+  },
+  "files.exclude": {
+    "**/*.js.map": true,
+    "**/*.jsx.map": true,
+    "**/*.js": {
+      "when": "$(basename).ts"
+    },
+    "**/*?.js": { "when": "$(basename).tsx" },
+    "**/*.jsx": {
+      "when": "$(basename).tsx"
+    }
+  },
+  "[markdown]": {
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 120
+  }
+}
