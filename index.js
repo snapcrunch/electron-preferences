@@ -39,6 +39,7 @@ class ElectronPreferences extends EventEmitter2 {
 
 		if (options.dataStore && !options.config.dataStore) {
 
+			console.warn("DEPRECATED: dataStore option has been deprecated and will be removed in a future version. It now lives under config.dataStore.");
 			this.options.config.dataStore = options.dataStore;
 
 		}
