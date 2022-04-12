@@ -32,6 +32,7 @@ class ElectronPreferences extends EventEmitter2 {
 		// Legacy: Set config values
 		if (options.css && !options.config.css) {
 
+			console.warn("DEPRECATED: css option has been deprecated and will be removed in a future version. It now lives under config.css.");
 			this.options.config.css = options.css;
 
 		}
