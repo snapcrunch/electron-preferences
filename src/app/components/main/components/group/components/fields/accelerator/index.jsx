@@ -48,7 +48,7 @@ const AcceleratorField = ({ field, value, onChange }) => {
 		// Start key array with any modifiers
 		const keys = [
 			event.ctrlKey && 'Control',
-			event.metaKey && metaKeyName, // Probably should be called meta
+			event.metaKey && metaKeyName,
 			event.altKey && altKeyName,
 			event.shiftKey && 'Shift',
 		].filter(Boolean); // Remove false values
