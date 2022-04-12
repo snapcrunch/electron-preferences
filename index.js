@@ -366,7 +366,7 @@ class ElectronPreferences extends EventEmitter2 {
 		this.prefsWindow.webContents.on('dom-ready', async () => {
 
 			// Load custom css file
-			const cssFile = this.options.config.css;
+			const cssFile = this.config.css;
 			if (cssFile) {
 
 				const file = path.join(app.getAppPath(), cssFile)
