@@ -12,8 +12,8 @@ insert_final_newline = true
 # Set default charset
 [*.{js,jsx,ts,tsx,json,yml,yaml}]
 charset = utf-8
-indent_style = space
-indent_size = 2
+indent_style = tab
+tab_width = 1
 
 [*.{md}]
 charset = utf-8
