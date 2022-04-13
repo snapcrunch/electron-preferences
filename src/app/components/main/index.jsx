@@ -7,6 +7,20 @@ import Group from './components/group';
 
 class Main extends React.Component {
 
+	constructor() {
+
+		super();
+		this.mainRef = React.createRef();
+
+	}
+
+	componentDidUpdate() {
+
+		this.mainRef.current.scrollTo({ top: 0 });
+		console.log('ho');
+
+	}
+
 	render() {
 
 		const groups = this.form.groups.map((group, idx) => (
@@ -14,7 +28,7 @@ class Main extends React.Component {
 		));
 
 		return (
-			<div className="main" role="tabpanel">
+			<div className="main" role="tabpanel" ref={this.mainRef}>
 				{ groups }
 			</div>
 		);
