@@ -17,7 +17,6 @@ class Main extends React.Component {
 	componentDidUpdate() {
 
 		this.mainRef.current.scrollTo({ top: 0 });
-		console.log('ho');
 
 	}
 
