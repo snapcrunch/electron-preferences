@@ -14,9 +14,13 @@ class Main extends React.Component {
 
 	}
 
-	componentDidUpdate() {
+	componentDidUpdate(prevProps) {
 
-		this.mainRef.current.scrollTo({ top: 0 });
+		if (prevProps.activeSection !== this.props.activeSection) {
+
+			this.mainRef.current.scrollTo({ top: 0 });
+
+		}
 
 	}
 
