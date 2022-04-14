@@ -108,35 +108,35 @@ class ColorField extends React.Component {
 		let style = '';
 		switch (this.format) {
 
-			case 'rgb': {
+		case 'rgb': {
 
-				style = `rgba(${this.value.r}, ${this.value.g}, ${this.value.b}, ${this.value.a})`;
+			style = `rgba(${this.value.r}, ${this.value.g}, ${this.value.b}, ${this.value.a})`;
 
-				break;
+			break;
 
-			}
+		}
 
-			case 'hex': {
+		case 'hex': {
 
-				style = this.value;
+			style = this.value;
 
-				break;
+			break;
 
-			}
+		}
 
-			case 'hsl': {
+		case 'hsl': {
 
-				style = `hsla(${this.value.h}, ${this.value.s * 100}%, ${this.value.l * 100}%, ${this.value.a})`;
+			style = `hsla(${this.value.h}, ${this.value.s * 100}%, ${this.value.l * 100}%, ${this.value.a})`;
 
-				break;
+			break;
 
-			}
+		}
 
-			default: if (this.value.hex) {
+		default: if (this.value.hex) {
 
-				style = this.value.hex;
+			style = this.value.hex;
 
-			}
+		}
 
 		}
 
@@ -148,29 +148,29 @@ class ColorField extends React.Component {
 
 		switch (this.format) {
 
-			case 'rgb': {
+		case 'rgb': {
 
-				color = color.rgb;
+			color = color.rgb;
 
-				break;
+			break;
 
-			}
+		}
 
-			case 'hex': {
+		case 'hex': {
 
-				color = color.hex;
+			color = color.hex;
 
-				break;
+			break;
 
-			}
+		}
 
-			case 'hsl': {
+		case 'hsl': {
 
-				color = color.hsl;
+			color = color.hsl;
 
-				break;
+			break;
 
-			}
+		}
 		// No default
 
 		}

@@ -13,7 +13,7 @@ contextBridge.exposeInMainWorld('api', {
 		ipcRenderer.send('showPreferences');
 
 	},
-	closePreferences: () => {
+	closePreferences() {
 
 		ipcRenderer.send('closePreferences');
 
