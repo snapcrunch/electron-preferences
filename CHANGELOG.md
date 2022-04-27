@@ -6,9 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 - Debounce option added. By default debouce is 200ms, change to 0 to disable.
+- Added `allowOnlyModifier` property to the accelerator input to allow shortcuts like `Alt` or `Shift`
 
 ## [2.6.0] - 2022-03-29
 ### Fixed
+- Reset scroll when switching between tabs (#158)
 - Set defaults for new preferences added in a group after app has started (#141)
 - Include files to be exposed in npm build (#119)
 - Correct `menuBar` option in README (#130)
