@@ -6,11 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Fixed
-- Freezing UI when clicking a button type in the preferences window #161
+- Freezing UI when clicking a button type in the preferences window (#161)
 
 ### Added
 - Added `allowOnlyModifier` property to the accelerator input to allow shortcuts like `Alt` or `Shift`
 - type 'number' instead of having to declare type 'text' with 'inputType = number' (#168)
+- Maximum and minimum list size via `min` and `max` list properties (#164)
 
 ### Changed
 - bump dependencies to their latest version
