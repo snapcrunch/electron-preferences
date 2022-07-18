@@ -36,7 +36,7 @@
     "cache-loader": "^4.1.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",
-    "electron": "^19.0.7",
+    "electron": "^19.0.8",
     "eslint": "^8.19.0",
     "eslint-plugin-react": "^7.30.1",
     "react": "^18.2.0",
