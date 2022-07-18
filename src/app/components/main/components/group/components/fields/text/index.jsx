@@ -37,7 +37,7 @@ class TextField extends React.Component {
 
 	get inputType() {
 
-		return this.field.inputType || 'text';
+		return this.field.inputType || this.field.type || 'text';
 
 	}
 
