@@ -23,7 +23,9 @@ contextBridge.exposeInMainWorld('api', {
 
 		onPreferencesChangedHandler = handler;
 
-	},
+	}, 
+	getDefaults: () => ipcRenderer.sendSync('getDefaults'),
+	resetToDefaults: () => ipcRenderer.send('resetToDefaults'),
 });
 
 ipcRenderer.on('preferencesUpdated', (e, preferences) => {
