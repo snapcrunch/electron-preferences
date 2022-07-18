@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Added `allowOnlyModifier` property to the accelerator input to allow shortcuts like `Alt` or `Shift`
+- type 'number' instead of having to declare type 'text' with 'inputType = number' (#168)
+
+### Changed
+- bump dependencies to their latest version
 
 ## [2.6.0] - 2022-03-29
 ### Fixed

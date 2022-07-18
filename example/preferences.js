@@ -73,6 +73,11 @@ const preferences = new ElectronPreferences({
                             type: 'text',
                             inputType: 'number',
                         },
+																								{
+																												label: 'Age2',
+																												key: 'age2',
+																												type: 'number',
+																								},
                         {
                             label: 'Which of the following foods do you like?',
                             key: 'foods',
