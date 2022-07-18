@@ -18,6 +18,7 @@ import ButtonField from './components/fields/button';
 const fieldMap = {
 	directory: DirectoryField,
 	text: TextField,
+	number: TextField,
 	message: MessageField,
 	dropdown: DropdownField,
 	checkbox: CheckboxField,
