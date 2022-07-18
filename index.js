@@ -161,6 +161,12 @@ class ElectronPreferences extends EventEmitter2 {
 
 		});
 
+		ipcMain.on('resetToDefaults', event => {
+
+			this.resetToDefaults();
+
+		});
+
 		if (_.isFunction(options.afterLoad)) {
 
 			options.afterLoad(this);
@@ -183,7 +189,7 @@ class ElectronPreferences extends EventEmitter2 {
 
 	get defaults() {
 
-		return this.options.defaults || {};
+		return _.cloneDeep(this.options.defaults || {});
 
 	}
 
@@ -392,6 +398,14 @@ class ElectronPreferences extends EventEmitter2 {
 
 		this.prefsWindow.close();
 
+	}
+
+	resetToDefaults() {
+
+					this._preferences = this.defaults;
+					
+					this.save();
+					this.broadcast();
 	}
 
 }
