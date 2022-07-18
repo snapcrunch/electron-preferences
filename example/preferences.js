@@ -19,7 +19,7 @@ const preferences = new ElectronPreferences({
         },
         // ...
     },
-    debug: true, // True will open the dev tools
+    // debug: true, // True will open the dev tools
     webPreferences: {
         webSecurity: true,
     },
