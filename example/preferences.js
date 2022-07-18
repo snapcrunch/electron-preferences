@@ -163,6 +163,13 @@ const preferences = new ElectronPreferences({
                             content: '<p>The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence. The quick brown fox jumps over the long white fence.</p>',
                             type: 'message',
                         },
+																								{
+																												label: 'Do some action on the main process',
+																												key: 'do-action-on-main',
+																												type: 'button',
+																												buttonLabel: 'Just do it!',
+																												help: 'Can be used to trigger an action on the main process. For example, reset some preferences',
+																								}
                     ],
                 }, ],
             },
