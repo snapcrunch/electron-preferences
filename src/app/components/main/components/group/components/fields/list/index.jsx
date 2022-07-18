@@ -27,7 +27,7 @@ class ListField extends React.Component {
 	}
 
 	render() {
-
+					
 		return (
 			<div className={`field field-list key-${this.field.key}`}>
 				<div className="field-label" aria-label={ this.label }>{ this.label }</div>
@@ -50,8 +50,8 @@ class ListField extends React.Component {
 						</select>
 					</div>
 					<div className="ep-list-button-container">
-						<button className="ep-list-button" onClick={ this.addClick } aria-label="Add"><span className="ep-list-button-text">+</span></button>
-						<button className="ep-list-button" onClick={ this.removeClick } aria-label="Remove"><span className="ep-list-button-text">-</span></button>
+						<button className="ep-list-button" onClick={ this.addClick } aria-label="Add" disabled={ this.max > 0 && this.length >= this.max }><span className="ep-list-button-text">+</span></button>
+						<button className="ep-list-button" onClick={ this.removeClick } aria-label="Remove" disabled={ this.min >= this.length }><span className="ep-list-button-text">-</span></button>
 						{ this.orderable
 					&& <React.Fragment>
 						<button className="ep-list-button" onClick={ this.upClick } aria-label="Move up"><span className="ep-list-button-text">↑</span></button>
@@ -187,6 +187,19 @@ class ListField extends React.Component {
 
 		return this.field.size || 10;
 
+	}
+	
+	get length() {
+					const { value } = this;
+					return Array.isArray(value) ? value.length : (value ? 1 : 0);
+	}
+	
+	get min() {
+					return Math.max(this.field.min || 0, 0);
+	}
+	
+	get max() {
+					return Math.max(this.field.max || 0, 0);
 	}
 
 	get help() {

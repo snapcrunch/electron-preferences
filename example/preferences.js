@@ -234,6 +234,8 @@ const preferences = new ElectronPreferences({
                             help: 'A list of your favorite foods',
                             addItemValidator: /^[A-Za-z ]+$/.toString(),
                             addItemLabel: 'Add favorite food',
+																								    min: 1,
+																								    max: 4
                         },
                         {
                             label: 'Best places to visit',
