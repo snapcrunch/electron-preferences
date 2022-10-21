@@ -5,8 +5,10 @@ const electron = require('electron');
 const { contextBridge } = electron;
 const { ipcRenderer } = electron;
 
+const deserializeJson = (serializedJavascript) => eval('(' + serializedJavascript + ')'); //deserialize function for 'serialize-javascript' library
+
 contextBridge.exposeInMainWorld('api', {
-	getSections: () => ipcRenderer.sendSync('getSections'),
+	getSections: () => deserializeJson(ipcRenderer.sendSync('getSections')),
 	getPreferences: () => ipcRenderer.sendSync('getPreferences'),
 	getDefaults: () => ipcRenderer.sendSync('getDefaults'),
 	setPreferences: preferences => ipcRenderer.send('setPreferences', preferences),

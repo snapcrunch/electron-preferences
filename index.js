@@ -10,6 +10,7 @@ const _ = require('lodash');
 const { EventEmitter2 } = require('eventemitter2');
 const loadJsonFile = require('load-json-file');
 const writeJsonFile = require('write-json-file');
+const jsonSerializer = require('serialize-javascript'); //also serializes functions etc.
 
 class ElectronPreferences extends EventEmitter2 {
 
@@ -113,8 +114,8 @@ class ElectronPreferences extends EventEmitter2 {
 		});
 
 		ipcMain.on('getSections', event => {
-
-			event.returnValue = this.options.sections;
+			
+			event.returnValue = jsonSerializer(this.options.sections);
 
 		});
 

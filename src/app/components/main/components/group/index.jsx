@@ -14,6 +14,7 @@ import ColorField from './components/fields/color';
 import ListField from './components/fields/list';
 import FileField from './components/fields/file';
 import ButtonField from './components/fields/button';
+import HideableComponent from "../../../generic/hideable";
 
 const fieldMap = {
 	directory: DirectoryField,
@@ -35,6 +36,8 @@ class Group extends React.Component {
 
 	render() {
 
+    const { allPreferences } = this;
+    
 		const label = this.label ? <div className="group-label">{ this.label }</div> : null;
 
 		const fields = this.fields.map((field, idx) => {
@@ -46,7 +49,13 @@ class Group extends React.Component {
 
 			}
 
-			return <Field field={ field } key={ idx } value={ this.preferences[field.key] } onChange={ this.onFieldChange.bind(this, field.key) }/>;
+			return <HideableComponent field={ field } key={ idx } allPreferences={ allPreferences } >
+        <Field field={ field }
+               key={ idx }
+               value={ this.preferences[field.key] }
+               onChange={ this.onFieldChange.bind(this, field.key) }
+        />
+      </HideableComponent>;
 
 		})
 			.filter(field => field);
@@ -83,6 +92,12 @@ class Group extends React.Component {
 		return this.props.preferences;
 
 	}
+  
+  get allPreferences() {
+    
+    return this.props.allPreferences;
+    
+  }
 
 	get onFieldChange() {
 
