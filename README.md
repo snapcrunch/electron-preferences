@@ -36,6 +36,7 @@ This package provides [Electron](https://electronjs.org/) developers with a simp
 - Uses write-json-file under the hood
 - Customize styles using CSS
 - Customize the layout of the preference manager using JSON
+- Ability to conditionally show/hide different preferences
 
 #### Field Types
 
@@ -201,6 +202,9 @@ Title label for the preference.
 ##### `help` _(optional)_
 Help text to be displayed below the preference.
 
+##### `hideFunction` _(optional)_
+A function which provides the current preferences object and returns a boolean whether or not the current field should be hidden in the preferences window.
+
 
 ### Field-specific properties
 > _field_ `{ type: "..." }`
@@ -239,6 +243,20 @@ Require a modifier (ctrl, alt, shift, meta) to be used in the accelerator shortc
 
 
 ## Customization
+
+### Conditional preferences
+Sections, groups or fields can be conditionally hidden.
+Each one of these entities support the `hideFunction` property. This function has the current preferences as parameter and requires a boolean whether or not this entity should be hidden.
+
+#### Example
+````javascript
+hideFunction: (preferences) => {
+  // hide when sectionsEnabler.group2 preference is false  
+  return !preferences.sectionsEnabler?.group2;
+}
+````
+
+⚠️ Conditional preferences may be available in the preferences, even if they are hidden. It's up to the end user to first check on the hidden expression in case the conditional preference is hidden/shown or enabled/disabled.
 
 ### Dark or Light? 🌓
 
@@ -577,6 +595,16 @@ const preferences = new ElectronPreferences({
                 help: 'What is your last name?',
               },
               {
+                label: 'Enable Gender',
+                key: 'enableGender',
+                type: "radio",
+                options: [
+                  {label: "No", value: false},
+                  {label: "Yes", value: true}
+                ],
+                help: 'So woke!'
+              },
+              {
                 label: 'Gender',
                 key: 'gender',
                 type: 'dropdown',
@@ -585,6 +613,9 @@ const preferences = new ElectronPreferences({
                   { label: 'Female', value: 'female' },
                   { label: 'Unspecified', value: 'unspecified' },
                 ],
+                hideFunction: (preferences) => {
+                  return !preferences.about?.enableGender;
+                },
                 help: 'What is your gender?',
               },
               {
