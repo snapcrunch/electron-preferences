@@ -181,6 +181,8 @@ const preferences = ipcRenderer.sendSync('getPreferences');
 
 // Display the preferences window
 ipcRenderer.send('showPreferences');
+// Or show a specific section:
+ipcRenderer.send('showPreferences', 'about');
 
 // Listen to the `preferencesUpdated` event to be notified when preferences are changed.
 ipcRenderer.on('preferencesUpdated', (e, preferences) => {
