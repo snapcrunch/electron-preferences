@@ -301,11 +301,15 @@ class ElectronPreferences extends EventEmitter2 {
 
 	show(section) {
     
-    const sectionIds = this.options.sections.map(section => section.id);
-    if (!sectionIds.includes(section)) {
-      
-      console.warn(`Could not find a section with id '${section}'. Ignoring the parameter`);
-      section = undefined;
+    if (typeof(section) !== 'undefined') {
+
+      const sectionIds = this.options.sections.map(section => section.id);
+      if (!sectionIds.includes(section)) {
+
+        console.warn(`Could not find a section with id '${section}'. Ignoring the parameter`);
+        section = undefined;
+
+      }
       
     }
 
