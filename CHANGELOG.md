@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - `hideFunction` on sections, groups or fields which you can conditionally hide (via other preferences) (#160)
 - Ability to pass JS functions in the preference object to the renderer (#160)
+- Ability to pass `sectionId` to the `show()` function (#153)
 
 ### Changed
 - Bump dependencies to their latest version
