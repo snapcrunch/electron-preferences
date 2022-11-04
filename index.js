@@ -101,9 +101,9 @@ class ElectronPreferences extends EventEmitter2 {
 
 		this.save();
 
-		ipcMain.on('showPreferences', _ => {
+		ipcMain.on('showPreferences', (_, section) => {
 
-			this.show();
+			this.show(section);
 
 		});
 
@@ -155,14 +155,14 @@ class ElectronPreferences extends EventEmitter2 {
 
 		});
 
-		ipcMain.on('sendButtonClick', (event, message) => {
+		ipcMain.on('sendButtonClick', (_, message) => {
 
 			// Main process
 			this.emit('click', message);
 
 		});
 
-		ipcMain.on('resetToDefaults', event => {
+		ipcMain.on('resetToDefaults', _ => {
 
 			this.resetToDefaults();
 
@@ -299,7 +299,19 @@ class ElectronPreferences extends EventEmitter2 {
 
 	}
 
-	show() {
+	show(section) {
+    
+    if (typeof(section) !== 'undefined') {
+
+      const sectionIds = this.options.sections.map(section => section.id);
+      if (!sectionIds.includes(section)) {
+
+        console.warn(`Could not find a section with id '${section}'. Ignoring the parameter`);
+        section = undefined;
+
+      }
+      
+    }
 
 		if (this.prefsWindow) {
 
@@ -310,6 +322,13 @@ class ElectronPreferences extends EventEmitter2 {
 				this.prefsWindow.webContents.openDevTools();
 
 			}
+
+      if (section) {
+          this.prefsWindow.webContents.executeJavaScript(` \
+              document.getElementById("tab-${section}").click() \
+              ;0
+            `); // ";0" is needed so nothing is returned (especially not an non-cloneable IPC object) by JS.
+      }
 
 			return this.prefsWindow;
 
@@ -370,6 +389,23 @@ class ElectronPreferences extends EventEmitter2 {
 				}
 
 			}
+      
+      if (section) {
+        
+        try {
+
+          await this.prefsWindow.webContents.executeJavaScript(` \
+					  		document.getElementById("tab-${section}").click() \
+					  		;0
+					  	`); // ";0" is needed so nothing is returned (especially not an non-cloneable IPC object) by JS.
+          
+        } catch (error) {
+          
+          console.error(`Could not open the requested section ${section}: ${error}`);
+          
+        }
+        
+      }
 
 		});
 

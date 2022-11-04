@@ -4,6 +4,7 @@
 const bt = document.querySelectorAll('.bt')[0];
 const bt2 = document.querySelectorAll('.bt')[1];
 const bt3 = document.querySelectorAll('.bt')[2];
+const bt4 = document.querySelectorAll('.bt')[3];
 const prefsElement = document.querySelectorAll('.preferences')[0];
 prefsElement.innerHTML = JSON.stringify(api.getPreferences(), null, 4);
 
@@ -22,6 +23,12 @@ bt2.addEventListener('click', () => {
 bt3.addEventListener('click', () => {
 				
 	api.resetToDefaults();
+
+});
+
+bt4.addEventListener('click', () => {
+				
+	api.showPreferences("notes");
 
 });
 

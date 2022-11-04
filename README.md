@@ -149,6 +149,8 @@ const preferences = new ElectronPreferences({
 
 // Show the preferences window on demand.
 preferences.show();
+//or show a specific section by its ID
+preferences.show("about");
 
 // Get a value from the preferences data store
 const name = preferences.value('about.name');
@@ -179,6 +181,8 @@ const preferences = ipcRenderer.sendSync('getPreferences');
 
 // Display the preferences window
 ipcRenderer.send('showPreferences');
+// Or show a specific section:
+ipcRenderer.send('showPreferences', 'about');
 
 // Listen to the `preferencesUpdated` event to be notified when preferences are changed.
 ipcRenderer.on('preferencesUpdated', (e, preferences) => {
