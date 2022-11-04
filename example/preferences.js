@@ -237,6 +237,27 @@ const preferences = new ElectronPreferences({
       },
     },
     {
+      id: 'account',
+      label: 'Account',
+      icon: 'lock',
+      form: {
+        groups: [{
+          label: 'Account',
+          fields: [{
+            label: 'Username',
+            key: 'username',
+            type: 'text'
+          },
+          {
+            label: 'Password',
+            key: 'password',
+            type: 'secret'
+          },
+          ]
+        }]
+      }
+    },
+    {
       id: 'sectionsEnabler',
       label: 'Enable Sections',
       icon: 'preferences',

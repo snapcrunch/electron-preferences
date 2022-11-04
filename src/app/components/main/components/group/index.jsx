@@ -14,6 +14,7 @@ import ColorField from './components/fields/color';
 import ListField from './components/fields/list';
 import FileField from './components/fields/file';
 import ButtonField from './components/fields/button';
+import SecretField from './components/fields/secret';
 import HideableComponent from "../../../generic/hideable";
 
 const fieldMap = {
@@ -30,6 +31,7 @@ const fieldMap = {
 	list: ListField,
 	file: FileField,
 	button: ButtonField,
+  secret: SecretField
 };
 
 class Group extends React.Component {
