@@ -8,16 +8,8 @@ const { ipcRenderer } = electron;
 let onPreferencesChangedHandler = () => {};
 
 contextBridge.exposeInMainWorld('api', {
-	showPreferences() {
-
-		ipcRenderer.send('showPreferences');
-
-	},
-	closePreferences() {
-
-		ipcRenderer.send('closePreferences');
-
-	},
+	showPreferences: (section) => ipcRenderer.send('showPreferences', section),
+	closePreferences: () => ipcRenderer.send('closePreferences'),
 	getPreferences: () => ipcRenderer.sendSync('getPreferences'),
 	onPreferencesChanged(handler) {
 
@@ -26,6 +18,7 @@ contextBridge.exposeInMainWorld('api', {
 	}, 
 	getDefaults: () => ipcRenderer.sendSync('getDefaults'),
 	resetToDefaults: () => ipcRenderer.send('resetToDefaults'),
+  decrypt: encryptedSecret => ipcRenderer.sendSync('decrypt', encryptedSecret),
 });
 
 ipcRenderer.on('preferencesUpdated', (e, preferences) => {
