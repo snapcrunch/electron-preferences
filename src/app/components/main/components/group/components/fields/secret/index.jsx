@@ -30,6 +30,7 @@ class SecretField extends React.Component {
             <input type="text" onChange={ this.onChange.bind(this) } value={ this.value } aria-label={ this.label }/>
             <div className="buttons">
               <button className="bt" onClick={ this.saveSecret.bind(this) }>Save</button>
+              <button className="bt" onClick={ this.resetSecret.bind(this) }>Reset</button>
               <button className="bt" onClick={ this.cancelSecret.bind(this) }>Cancel</button>
             </div>
           </div>
@@ -97,6 +98,16 @@ class SecretField extends React.Component {
 
   cancelSecret() {
 
+    this.setState( {
+      showInputModal: false,
+      updatedSecret: ""
+    });
+
+  }
+
+  resetSecret() {
+    
+    this.props.onChange(null);
     this.setState( {
       showInputModal: false,
       updatedSecret: ""
