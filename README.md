@@ -250,9 +250,9 @@ number in ms. Timeout before the modal dialog is closed. Default 100ms.
 ### `text`
 
 ### `secret`
-All data stored as secret will be encrypted via electron's `safeStorage`. The output buffer is saved as base64 string.
+All data stored as secret will be encrypted via electron's [safeStorage](https://www.electronjs.org/docs/latest/api/safe-storage). The output buffer is saved as base64 string.
 To decrypt this string, use the `preferences.decrypt(encryptedSecretString)` function.
-⚠️ Please notice that on some OS systems, `safeStorage` will only be available after electron's `ready` event has triggered! 
+⚠️ Please notice that on some OS systems, [safeStorage](https://www.electronjs.org/docs/latest/api/safe-storage) will only be available after electron's `ready` event has triggered! (https://www.electronjs.org/docs/latest/api/safe-storage#safestorageisencryptionavailable)
 ##### `modalCloseTimeoutMS`
 `number`
 number in ms. Timeout before the modal dialog is closed. Default 100ms.
