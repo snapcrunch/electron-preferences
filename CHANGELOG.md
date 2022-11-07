@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `hideFunction` on sections, groups or fields which you can conditionally hide (via other preferences) (#160)
 - Ability to pass JS functions in the preference object to the renderer (#160)
 - Ability to pass `sectionId` to the `show()` function (#153)
+- `secret` field which encrypts the input via electron's `safeStorage` (#176)
+- `encrypt` and `decrypt` IPC calls which use electron's `safeStorage` (#176)
+- expose `decrypt` function on preferences object (#176)
 
 ### Changed
 - Bump dependencies to their latest version
