@@ -57,12 +57,6 @@ class SecretField extends React.Component {
 
   }
 
-  get inputType() {
-
-    return this.field.inputType || this.field.type || 'text';
-
-  }
-
   get help() {
 
     return this.field.help;
