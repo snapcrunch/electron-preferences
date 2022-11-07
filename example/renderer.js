@@ -5,6 +5,7 @@ const bt = document.querySelectorAll('.bt')[0];
 const bt2 = document.querySelectorAll('.bt')[1];
 const bt3 = document.querySelectorAll('.bt')[2];
 const bt4 = document.querySelectorAll('.bt')[3];
+const bt5 = document.querySelectorAll('.bt')[4];
 const prefsElement = document.querySelectorAll('.preferences')[0];
 prefsElement.innerHTML = JSON.stringify(api.getPreferences(), null, 4);
 
@@ -29,6 +30,17 @@ bt3.addEventListener('click', () => {
 bt4.addEventListener('click', () => {
 				
 	api.showPreferences("notes");
+
+});
+
+bt5.addEventListener('click', () => {
+  
+  const preferences = api.getPreferences();
+  
+  const encrypted = preferences.account.password;
+	const decrypted = api.decrypt(encrypted);
+  
+  alert(`Encrypted password: ${encrypted}\nDecrypted password: ${decrypted}`);
 
 });
 

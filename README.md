@@ -42,20 +42,21 @@ This package provides [Electron](https://electronjs.org/) developers with a simp
 
 The library includes built-in support for the following field types:
 
-| Preference `type` | Description                                               |
-| ----------------- | --------------------------------------------------------- |
-| `text`            | `<input type="text"/>`                                    |
-| `number`          | `<input type="number"/>`                                  |
-| `dropdown`        | `<select>`                                                |
-| `radio`           | `<input type="radio"/>`                                   |
-| `checkbox`        | `<input type="checkbox"/>`                                |
-| `slider`          | `<input type="range"/>`                                   |
-| `file`            | `<input type="file"/>`                                    |
-| `accelerator`     | Keyboard shortcut input                                   |
-| `color`           | Color picker input using simonwep/pickr                   |
-| `list`            | Ordered list with create/read/update/delete functionality |
-| `button`          | An IPC button to pass simple click events back to the main process |
-| `message`         | Read-only HTML panel for displaying information           |
+| Preference `type` | Description                                                                  |
+| ----------------- |------------------------------------------------------------------------------|
+| `text`            | `<input type="text"/>`                                                       |
+| `number`          | `<input type="number"/>`                                                     |
+| `dropdown`        | `<select>`                                                                   |
+| `radio`           | `<input type="radio"/>`                                                      |
+| `checkbox`        | `<input type="checkbox"/>`                                                   |
+| `slider`          | `<input type="range"/>`                                                      |
+| `file`            | `<input type="file"/>`                                                       |
+| `accelerator`     | Keyboard shortcut input                                                      |
+| `color`           | Color picker input using simonwep/pickr                                      |
+| `list`            | Ordered list with create/read/update/delete functionality                    |
+| `button`          | An IPC button to pass simple click events back to the main process           |
+| `message`         | Read-only HTML panel for displaying information                              |
+| `secret`          | Secret field. Value is stored encrypted. Decrypt via `preferences.decrypt()` |
 
 ---
 
@@ -234,6 +235,9 @@ Require a modifier (ctrl, alt, shift, meta) to be used in the accelerator shortc
 ### `file`
 
 ### `list`
+##### `modalCloseTimeoutMS`
+`number`
+number in ms. Timeout before the modal dialog is closed. Default 100ms.
 
 ### `message`
 
@@ -244,6 +248,14 @@ Require a modifier (ctrl, alt, shift, meta) to be used in the accelerator shortc
 ### `slider`
 
 ### `text`
+
+### `secret`
+All data stored as secret will be encrypted via electron's [safeStorage](https://www.electronjs.org/docs/latest/api/safe-storage). The output buffer is saved as base64 string.
+To decrypt this string, use the `preferences.decrypt(encryptedSecretString)` function.
+⚠️ Please notice that on some OS systems, [safeStorage](https://www.electronjs.org/docs/latest/api/safe-storage) will only be available after electron's `ready` event has triggered! (https://www.electronjs.org/docs/latest/api/safe-storage#safestorageisencryptionavailable)
+##### `modalCloseTimeoutMS`
+`number`
+number in ms. Timeout before the modal dialog is closed. Default 100ms.
 
 
 ## Customization
@@ -597,6 +609,11 @@ const preferences = new ElectronPreferences({
                 key: 'last_name',
                 type: 'text',
                 help: 'What is your last name?',
+              },
+              {
+                label: 'Password',
+                key: 'password',
+                type: 'secret'
               },
               {
                 label: 'Enable Gender',

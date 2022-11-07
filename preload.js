@@ -13,5 +13,6 @@ contextBridge.exposeInMainWorld('api', {
 	getDefaults: () => ipcRenderer.sendSync('getDefaults'),
 	setPreferences: preferences => ipcRenderer.send('setPreferences', preferences),
 	showOpenDialog: dialogOptions => ipcRenderer.sendSync('showOpenDialog', dialogOptions),
-	sendButtonClick: channel => ipcRenderer.send('sendButtonClick', channel)
+	sendButtonClick: channel => ipcRenderer.send('sendButtonClick', channel),
+  encrypt: secret => ipcRenderer.sendSync('encrypt', secret),
 });

@@ -2,7 +2,7 @@
 
 const electron = require('electron');
 
-const { app, BrowserWindow, ipcMain, webContents, dialog } = electron;
+const { app, BrowserWindow, ipcMain, webContents, dialog, safeStorage } = electron;
 const path = require('path');
 const url = require('url');
 const fs = require('fs');
@@ -168,6 +168,35 @@ class ElectronPreferences extends EventEmitter2 {
 
 		});
 
+    ipcMain.on('encrypt', (event, secret) => {
+      
+      if (!safeStorage.isEncryptionAvailable()) {
+        
+        console.warn("Cannot encrypt secret as electron's safeStorage isn't available");
+        event.returnValue = "";
+        return;
+        
+      }
+      
+      event.returnValue = safeStorage.encryptString(secret).toString('base64');
+      
+    });
+
+    ipcMain.on('decrypt', (event, encryptedSecret) => {
+      
+      if (!safeStorage.isEncryptionAvailable()) {
+        
+        console.warn("Cannot decrypt encrypted secret as electron's safeStorage isn't available");
+        event.returnValue = "";
+        return;
+        
+      }
+      
+      const encryptedBuffer = Buffer.from(encryptedSecret, 'base64');
+      event.returnValue = safeStorage.decryptString(encryptedBuffer);
+      
+    });
+    
 		if (_.isFunction(options.afterLoad)) {
 
 			options.afterLoad(this);
@@ -444,6 +473,20 @@ class ElectronPreferences extends EventEmitter2 {
 					this.save();
 					this.broadcast();
 	}
+  
+  decrypt(encryptedSecretString) {
+    
+    if (!safeStorage.isEncryptionAvailable()) {
+      
+      throw new Error("Cannot decrypt as electron's safeStorage isn't available yet");
+      
+    }
+    
+    const encryptedSecret = Buffer.from(encryptedSecretString, 'base64');
+    
+    return safeStorage.decryptString(encryptedSecret);
+    
+  }
 
 }
 
