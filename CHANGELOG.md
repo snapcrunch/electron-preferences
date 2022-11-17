@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.8.1] - 2022-11-17
+### Fixed
+- move serialize-javascript from dev dependencies to dependencies (#183)
+
+### Changed
+- Bump loader-utils dependencies to 1.4.2
+
 ## [2.8.0] - 2022-11-07
 ### Added
 - `hideFunction` on sections, groups or fields which you can conditionally hide (via other preferences) (#160)
