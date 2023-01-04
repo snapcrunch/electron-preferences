@@ -102,13 +102,13 @@ const ElectronPreferences = require('electron-preferences');
 
 const preferences = new ElectronPreferences({
 	// Override default preference BrowserWindow values
-	browserWindowOpts: { /* ... */ },
+    browserWindowOverrides: { /* ... */ },
 	
 	// Create an optional menu bar
 	menu: Menu.buildFromTemplate(/* ... */),
 	
 	// Provide a custom CSS file, relative to your appPath.
-	css: 'preference-styles.css'
+	css: 'preference-styles.css',
 
 	// Preference file path
 	dataStore: '~/preferences.json', // defaults to <userData>/preferences.json
