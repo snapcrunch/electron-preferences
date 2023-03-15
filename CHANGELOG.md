@@ -6,10 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.8.1] - 2023-03-15
+## [2.8.2] - 2023-03-15
 ### Fixed
 - Title attribute in `browserWindowOptions` wasn't applied (#184)
 - Bump vulnerable dependencies
+
+## [2.8.1] - 2022-11-17
+### Fixed
+- move serialize-javascript from dev dependencies to dependencies (#183)
+
+### Changed
+- Bump loader-utils dependencies to 1.4.2
 
 ## [2.8.0] - 2022-11-07
 ### Added
