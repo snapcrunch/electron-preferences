@@ -6,7 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Fixed
-- title attribute in `browserWindowOptions` wasn't applied (#184) 
+- Title attribute in `browserWindowOptions` wasn't applied (#184)
+- Bump vulnerable dependencies
 
 ## [2.8.0] - 2022-11-07
 ### Added
