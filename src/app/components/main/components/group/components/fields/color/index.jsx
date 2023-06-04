@@ -1,4 +1,3 @@
-/* global document */
 'use strict';
 
 import React from 'react';
@@ -23,16 +22,16 @@ class ColorField extends React.Component {
 
 		return (
 			<div className={`field field-color key-${this.field.key}`} ref={this.wrapperRef}>
-				<div className="field-label">{ this.label }</div>
-				<div className="color-container">
-					<div className="color-swatch" onClick={ this.handleClick }>
-						<div className="color" style={ this.style }/>
+				<div className='field-label'>{ this.label }</div>
+				<div className='color-container'>
+					<div className='color-swatch' onClick={ this.handleClick }>
+						<div className='color' style={ this.style }/>
 					</div>
-					{ this.state.displayColorPicker ? <div className="color-popover">
+					{ this.state.displayColorPicker ? <div className='color-popover'>
 						<ChromePicker color={ this.value } onChange={ this.onChange } disableAlpha={ this.format === 'hex' }/>
 					</div> : null }
 				</div>
-				{ this.help && <span className="help">{ this.help }</span> }
+				{ this.help && <span className='help'>{ this.help }</span> }
 			</div>
 		);
 

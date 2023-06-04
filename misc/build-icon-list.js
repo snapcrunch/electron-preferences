@@ -1,3 +1,4 @@
+// This file is currently not being used. It was used to generate the list of icons in the README.md file.
 'use strict';
 
 const path = require('path');
@@ -25,7 +26,7 @@ const tpl = Handlebars.compile(`
 </table>
 `);
 
-const icons = glob.sync('*.svg', {
+const icons = glob.sync('**/*.svg', {
 	cwd: srcFolder,
 })
 	.map(icon => ({

@@ -2,14 +2,14 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import HideableComponent from "../generic/hideable";
+import HideableComponent from '../generic/hideable';
 
 class Sidebar extends React.Component {
 
 	render() {
 
-    const { preferences } = this;
-    
+		const { preferences } = this;
+
 		const sections = this.sections.map(section => {
 
 			const isActive = this.activeSection === section.id;
@@ -21,38 +21,44 @@ class Sidebar extends React.Component {
 			}
 
 			const style = {
-				mask: `url("svg/${section.icon}.svg") no-repeat center / contain`,
-				WebkitMask: `url("svg/${section.icon}.svg") no-repeat center / contain`,
+				mask: `
+          url("svg/lucide/${section.icon}.svg") no-repeat center / contain, 
+          url("svg/legacy/${section.icon}.svg") no-repeat center / contain
+        `,
+				WebkitMask: `
+          url("svg/lucide/${section.icon}.svg") no-repeat center / contain, 
+          url("svg/legacy/${section.icon}.svg") no-repeat center / contain
+				`,
 			};
 
 			return (
-        <HideableComponent allPreferences={ preferences } field={ section }>
-          <li key={ section.id } className={ className } role="tab" id={ `tab-${section.id}` }
-            aria-selected={ isActive } aria-controls={ `tabpanel-${section.id}` } tabIndex={ isActive ? 0 : -1 }
-            aria-label={ section.label }
-            onClick={ this.selectSection.bind(this, section.id) }>
-            <div className="section-icon" style={ style } />
-            <span className="section-label">{ section.label }</span>
-          </li>
-        </HideableComponent>
+				<HideableComponent key={section.id} allPreferences={preferences} field={section}>
+					<li key={section.id} className={className} role='tab' id={`tab-${section.id}`}
+						aria-selected={isActive} aria-controls={`tabpanel-${section.id}`} tabIndex={isActive ? 0 : -1}
+						aria-label={section.label}
+						onClick={this.selectSection.bind(this, section.id)}>
+						<div className='section-icon' style={style} />
+						<span className='section-label'>{section.label}</span>
+					</li>
+				</HideableComponent>
 			);
 
 		});
 
 		return (
-			<ul className="sidebar" role="tablist" aria-label="Side bar" onKeyDown={ this.onTablistKeyDown }>
-				{ sections }
+			<ul className='sidebar' role='tablist' aria-label='Side bar' onKeyDown={this.onTablistKeyDown}>
+				{sections}
 			</ul>
 		);
 
 	}
 
-  get preferences() {
-    
-    return this.props.preferences;
-    
-  }
-  
+	get preferences() {
+
+		return this.props.preferences;
+
+	}
+
 	get sections() {
 
 		return this.props.sections;
@@ -141,7 +147,7 @@ Sidebar.propTypes = {
 	onSelectSection: PropTypes.func,
 	selectSection: PropTypes.func,
 	onTablistKeyDown: PropTypes.func,
-  preferences: PropTypes.object,
+	preferences: PropTypes.object,
 };
 
 export default Sidebar;
