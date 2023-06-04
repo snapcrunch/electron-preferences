@@ -1,4 +1,4 @@
-/* global api, document */
+/* global api */
 
 /* Eleectron Renderer Process */
 'use strict';
