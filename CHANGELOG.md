@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Debounce option added. By default debouce is 140ms, change to 0 to disable.
 - Added `allowOnlyModifier` property to the accelerator input to allow shortcuts like `Alt` or `Shift`
+- type 'number' instead of having to declare type 'text' with 'inputType = number' (#168)
+- Maximum and minimum list size via `min` and `max` list properties (#164)
+- `resetToDefaults` endpoint to the preferences object which removes any non-default properties and set all default properties to their default values (#97)
+
+### Changed
+- bump dependencies to their latest version
 
 ## [2.6.0] - 2022-03-29
 ### Fixed

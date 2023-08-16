@@ -2,7 +2,7 @@
 
 const electron = require('electron');
 
-const { app, BrowserWindow, ipcMain, webContents, dialog } = electron;
+const { app, BrowserWindow, ipcMain, webContents, dialog, safeStorage } = electron;
 const path = require('path');
 const url = require('url');
 const fs = require('fs');
@@ -10,6 +10,7 @@ const _ = require('lodash');
 const { EventEmitter2 } = require('eventemitter2');
 const loadJsonFile = require('load-json-file');
 const writeJsonFile = require('write-json-file');
+const jsonSerializer = require('serialize-javascript'); //also serializes functions etc.
 
 class ElectronPreferences extends EventEmitter2 {
 
@@ -118,9 +119,9 @@ class ElectronPreferences extends EventEmitter2 {
 
 		this.save();
 
-		ipcMain.on('showPreferences', _ => {
+		ipcMain.on('showPreferences', (_, section) => {
 
-			this.show();
+			this.show(section);
 
 		});
 
@@ -137,8 +138,8 @@ class ElectronPreferences extends EventEmitter2 {
 		});
 
 		ipcMain.on('getSections', event => {
-
-			event.returnValue = this.options.sections;
+			
+			event.returnValue = jsonSerializer(this.options.sections);
 
 		});
 
@@ -178,13 +179,48 @@ class ElectronPreferences extends EventEmitter2 {
 
 		});
 
-		ipcMain.on('sendButtonClick', (event, message) => {
+		ipcMain.on('sendButtonClick', (_, message) => {
 
 			// Main process
 			this.emit('click', message);
 
 		});
 
+		ipcMain.on('resetToDefaults', _ => {
+
+			this.resetToDefaults();
+
+		});
+
+    ipcMain.on('encrypt', (event, secret) => {
+      
+      if (!safeStorage.isEncryptionAvailable()) {
+        
+        console.warn("Cannot encrypt secret as electron's safeStorage isn't available");
+        event.returnValue = "";
+        return;
+        
+      }
+      
+      event.returnValue = safeStorage.encryptString(secret).toString('base64');
+      
+    });
+
+    ipcMain.on('decrypt', (event, encryptedSecret) => {
+      
+      if (!safeStorage.isEncryptionAvailable()) {
+        
+        console.warn("Cannot decrypt encrypted secret as electron's safeStorage isn't available");
+        event.returnValue = "";
+        return;
+        
+      }
+      
+      const encryptedBuffer = Buffer.from(encryptedSecret, 'base64');
+      event.returnValue = safeStorage.decryptString(encryptedBuffer);
+      
+    });
+    
 		if (_.isFunction(options.afterLoad)) {
 
 			options.afterLoad(this);
@@ -213,7 +249,7 @@ class ElectronPreferences extends EventEmitter2 {
 
 	get defaults() {
 
-		return this.options.defaults || {};
+		return _.cloneDeep(this.options.defaults || {});
 
 	}
 
@@ -322,7 +358,19 @@ class ElectronPreferences extends EventEmitter2 {
 
 	}
 
-	show() {
+	show(section) {
+    
+    if (typeof(section) !== 'undefined') {
+
+      const sectionIds = this.options.sections.map(section => section.id);
+      if (!sectionIds.includes(section)) {
+
+        console.warn(`Could not find a section with id '${section}'. Ignoring the parameter`);
+        section = undefined;
+
+      }
+      
+    }
 
 		if (this.prefsWindow) {
 
@@ -333,6 +381,13 @@ class ElectronPreferences extends EventEmitter2 {
 				this.prefsWindow.webContents.openDevTools();
 
 			}
+
+      if (section) {
+          this.prefsWindow.webContents.executeJavaScript(` \
+              document.getElementById("tab-${section}").click() \
+              ;0
+            `); // ";0" is needed so nothing is returned (especially not an non-cloneable IPC object) by JS.
+      }
 
 			return this.prefsWindow;
 
@@ -394,6 +449,23 @@ class ElectronPreferences extends EventEmitter2 {
 				}
 
 			}
+      
+      if (section) {
+        
+        try {
+
+          await this.prefsWindow.webContents.executeJavaScript(` \
+					  		document.getElementById("tab-${section}").click() \
+					  		;0
+					  	`); // ";0" is needed so nothing is returned (especially not an non-cloneable IPC object) by JS.
+          
+        } catch (error) {
+          
+          console.error(`Could not open the requested section ${section}: ${error}`);
+          
+        }
+        
+      }
 
 		});
 
@@ -424,6 +496,28 @@ class ElectronPreferences extends EventEmitter2 {
 		this.prefsWindow.close();
 
 	}
+
+	resetToDefaults() {
+
+					this._preferences = this.defaults;
+					
+					this.save();
+					this.broadcast();
+	}
+  
+  decrypt(encryptedSecretString) {
+    
+    if (!safeStorage.isEncryptionAvailable()) {
+      
+      throw new Error("Cannot decrypt as electron's safeStorage isn't available yet");
+      
+    }
+    
+    const encryptedSecret = Buffer.from(encryptedSecretString, 'base64');
+    
+    return safeStorage.decryptString(encryptedSecret);
+    
+  }
 
 }
 

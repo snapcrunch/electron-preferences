@@ -53,6 +53,11 @@
     color: #0084ff;
   }
 
+  .ep-list-button:disabled {
+    color: #bbb;
+    background-color: #666;
+  }
+
   .ep-list-button-text {
     padding-left: 7px;
     padding-right: 7px;

@@ -19,6 +19,12 @@ preferences.on('save', preferences => {
 
 });
 
+preferences.on('click', (key) => {
+				if (key === 'do-action-on-main') {
+								console.log('We are logging something in the main process because of a button click in the preferences window!');
+				}
+});
+
 let mainWindow;
 
 function createWindow() {

@@ -36,25 +36,27 @@ This package provides [Electron](https://electronjs.org/) developers with a simp
 - Uses write-json-file under the hood
 - Customize styles using CSS
 - Customize the layout of the preference manager using JSON
+- Ability to conditionally show/hide different preferences
 
 #### Field Types
 
 The library includes built-in support for the following field types:
 
-| Preference `type` | Description                                               |
-| ----------------- | --------------------------------------------------------- |
-| `text`            | `<input type="text"/>`                                    |
-| `number`          | `<input type="number"/>`                                  |
-| `dropdown`        | `<select>`                                                |
-| `radio`           | `<input type="radio"/>`                                   |
-| `checkbox`        | `<input type="checkbox"/>`                                |
-| `slider`          | `<input type="range"/>`                                   |
-| `file`            | `<input type="file"/>`                                    |
-| `accelerator`     | Keyboard shortcut input                                   |
-| `color`           | Color picker input using simonwep/pickr                   |
-| `list`            | Ordered list with create/read/update/delete functionality |
-| `button`          | An IPC button to pass simple click events back to the main process |
-| `message`         | Read-only HTML panel for displaying information           |
+| Preference `type` | Description                                                                  |
+| ----------------- |------------------------------------------------------------------------------|
+| `text`            | `<input type="text"/>`                                                       |
+| `number`          | `<input type="number"/>`                                                     |
+| `dropdown`        | `<select>`                                                                   |
+| `radio`           | `<input type="radio"/>`                                                      |
+| `checkbox`        | `<input type="checkbox"/>`                                                   |
+| `slider`          | `<input type="range"/>`                                                      |
+| `file`            | `<input type="file"/>`                                                       |
+| `accelerator`     | Keyboard shortcut input                                                      |
+| `color`           | Color picker input using simonwep/pickr                                      |
+| `list`            | Ordered list with create/read/update/delete functionality                    |
+| `button`          | An IPC button to pass simple click events back to the main process           |
+| `message`         | Read-only HTML panel for displaying information                              |
+| `secret`          | Secret field. Value is stored encrypted. Decrypt via `preferences.decrypt()` |
 
 ---
 
@@ -105,13 +107,13 @@ const preferences = new ElectronPreferences({
 
 
 	// Override default preference BrowserWindow values
-	browserWindowOpts: { /* ... */ },
+    browserWindowOverrides: { /* ... */ },
 	
 	// Create an optional menu bar
 	menu: Menu.buildFromTemplate(/* ... */),
 	
 	// Provide a custom CSS file, relative to your appPath.
-	css: 'preference-styles.css'
+	css: 'preference-styles.css',
 
 	// Preference file path
 	dataStore: '~/preferences.json', // defaults to <userData>/preferences.json
@@ -153,6 +155,8 @@ const preferences = new ElectronPreferences({
 
 // Show the preferences window on demand.
 preferences.show();
+//or show a specific section by its ID
+preferences.show("about");
 
 // Get a value from the preferences data store
 const name = preferences.value('about.name');
@@ -183,6 +187,8 @@ const preferences = ipcRenderer.sendSync('getPreferences');
 
 // Display the preferences window
 ipcRenderer.send('showPreferences');
+// Or show a specific section:
+ipcRenderer.send('showPreferences', 'about');
 
 // Listen to the `preferencesUpdated` event to be notified when preferences are changed.
 ipcRenderer.on('preferencesUpdated', (e, preferences) => {
@@ -205,6 +211,9 @@ Title label for the preference.
 
 ##### `help` _(optional)_
 Help text to be displayed below the preference.
+
+##### `hideFunction` _(optional)_
+A function which provides the current preferences object and returns a boolean whether or not the current field should be hidden in the preferences window.
 
 
 ### Field-specific properties
@@ -231,6 +240,9 @@ Require a modifier (ctrl, alt, shift, meta) to be used in the accelerator shortc
 ### `file`
 
 ### `list`
+##### `modalCloseTimeoutMS`
+`number`
+number in ms. Timeout before the modal dialog is closed. Default 100ms.
 
 ### `message`
 
@@ -242,8 +254,30 @@ Require a modifier (ctrl, alt, shift, meta) to be used in the accelerator shortc
 
 ### `text`
 
+### `secret`
+All data stored as secret will be encrypted via electron's [safeStorage](https://www.electronjs.org/docs/latest/api/safe-storage). The output buffer is saved as base64 string.
+To decrypt this string, use the `preferences.decrypt(encryptedSecretString)` function.
+⚠️ Please notice that on some OS systems, [safeStorage](https://www.electronjs.org/docs/latest/api/safe-storage) will only be available after electron's `ready` event has triggered! (https://www.electronjs.org/docs/latest/api/safe-storage#safestorageisencryptionavailable)
+##### `modalCloseTimeoutMS`
+`number`
+number in ms. Timeout before the modal dialog is closed. Default 100ms.
+
 
 ## Customization
+
+### Conditional preferences
+Sections, groups or fields can be conditionally hidden.
+Each one of these entities support the `hideFunction` property. This function has the current preferences as parameter and requires a boolean whether or not this entity should be hidden.
+
+#### Example
+````javascript
+hideFunction: (preferences) => {
+  // hide when sectionsEnabler.group2 preference is false  
+  return !preferences.sectionsEnabler?.group2;
+}
+````
+
+⚠️ Conditional preferences may be available in the preferences, even if they are hidden. It's up to the end user to first check on the hidden expression in case the conditional preference is hidden/shown or enabled/disabled.
 
 ### Dark or Light? 🌓
 
@@ -586,6 +620,21 @@ const preferences = new ElectronPreferences({
                 help: 'What is your last name?',
               },
               {
+                label: 'Password',
+                key: 'password',
+                type: 'secret'
+              },
+              {
+                label: 'Enable Gender',
+                key: 'enableGender',
+                type: "radio",
+                options: [
+                  {label: "No", value: false},
+                  {label: "Yes", value: true}
+                ],
+                help: 'So woke!'
+              },
+              {
                 label: 'Gender',
                 key: 'gender',
                 type: 'dropdown',
@@ -594,6 +643,9 @@ const preferences = new ElectronPreferences({
                   { label: 'Female', value: 'female' },
                   { label: 'Unspecified', value: 'unspecified' },
                 ],
+                hideFunction: (preferences) => {
+                  return !preferences.about?.enableGender;
+                },
                 help: 'What is your gender?',
               },
               {
