@@ -5,37 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
-## [2.8.2] - 2023-03-15
-### Fixed
-- Title attribute in `browserWindowOptions` wasn't applied (#184)
-- Bump vulnerable dependencies
-
-## [2.8.1] - 2022-11-17
-### Fixed
-- move serialize-javascript from dev dependencies to dependencies (#183)
-
-### Changed
-- Bump loader-utils dependencies to 1.4.2
-
-## [2.8.0] - 2022-11-07
-### Added
-- `hideFunction` on sections, groups or fields which you can conditionally hide (via other preferences) (#160)
-- Ability to pass JS functions in the preference object to the renderer (#160)
-- Ability to pass `sectionId` to the `show()` function (#153)
-- `secret` field which encrypts the input via electron's `safeStorage` (#176)
-- `encrypt` and `decrypt` IPC calls which use electron's `safeStorage` (#176)
-- expose `decrypt` function on preferences object (#176)
-
-### Changed
-- Bump dependencies to their latest version
-
-## [2.7.0] - 2022-07-18
-### Fixed
-- Freezing UI when clicking a button type in the preferences window (#161)
-- Defaults could be changed by passing around the defaults object (#150)
-
-### Added
+- Debounce option added. By default debouce is 140ms, change to 0 to disable.
 - Added `allowOnlyModifier` property to the accelerator input to allow shortcuts like `Alt` or `Shift`
 - type 'number' instead of having to declare type 'text' with 'inputType = number' (#168)
 - Maximum and minimum list size via `min` and `max` list properties (#164)

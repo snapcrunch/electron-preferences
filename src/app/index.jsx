@@ -1,6 +1,6 @@
 /* global api, document */
 
-/* Eleectron Renderer Process */
+/* Electron Renderer Process */
 'use strict';
 
 import React from 'react';
@@ -13,14 +13,18 @@ import '../../scss/style.scss';
 
 const allSections = api.getSections();
 const preferences = api.getPreferences();
+const config = api.getConfig();
 
 const sections = allSections.filter(section => _.isBoolean(section.enabled) ? section.enabled : true);
 
-const dSavePreferences = debounce(preferences => {
+const savePreferences = preferences => {
 
 	api.setPreferences(preferences);
 
-}, 200);
+};
+
+const debounceDelay = (!isNaN(config.debounce) && config.debounce);
+const savePreferencesDebounced = debounce(preferences => savePreferences(preferences), debounceDelay ?? 150);
 
 for (const section of sections) {
 
@@ -72,7 +76,7 @@ class App extends React.Component {
 			preferences,
 		});
 
-		dSavePreferences(preferences);
+		savePreferencesDebounced(preferences);
 
 	}
 

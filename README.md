@@ -101,6 +101,11 @@ const ElectronPreferences = require('electron-preferences');
 // import ElectronPreferences from 'electron-preferences'; // ...or if you prefer to use module imports
 
 const preferences = new ElectronPreferences({
+	config: {
+		debounce: 150, // debounce preference save settings event; 0 to disable
+	},
+
+
 	// Override default preference BrowserWindow values
     browserWindowOverrides: { /* ... */ },
 	
@@ -129,8 +134,8 @@ const preferences = new ElectronPreferences({
 			form: {
 				groups: [
 					{
-						'label': 'About You', // optional
-						'fields': [
+						label: 'About You', // optional
+						fields: [
 							{
 								label: 'Name',
 								key: 'name',
@@ -553,10 +558,14 @@ const ElectronPreferences = require('electron-preferences');
 // import ElectronPreferences from 'electron-preferences' //Or if you prefer to use module imports
 
 const preferences = new ElectronPreferences({
-  /**
-   * Where should preferences be saved?
-   */
-  dataStore: path.resolve(app.getPath('userData'), 'preferences.json'),
+  config: {
+    /**
+     * Where should preferences be saved?
+    */
+    dataStore: path.resolve(app.getPath('userData'), 'preferences.json'),
+    css: 'preferences.css', // Custom CSS File
+    debounce: 200, // debounce saving preferences, 0 to disable
+  },
   /**
    * Default values.
    */

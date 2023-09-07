@@ -7,6 +7,10 @@ const os = require('os');
 const ElectronPreferences = require('../');
 
 const preferences = new ElectronPreferences({
+	debug: true, // True will open the dev tools
+	config: {
+		debounce: 10,
+	},
   css: 'custom-style.css',
   dataStore: path.resolve(__dirname, 'preferences.json'),
   defaults: {
