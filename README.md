@@ -100,6 +100,10 @@ For an example usage of the library, check out `example/preferences.js`
 const ElectronPreferences = require('electron-preferences');
 // import ElectronPreferences from 'electron-preferences'; // ...or if you prefer to use module imports
 
+//Import electron `app` module and nodes `path` module
+const { app } = require('electron');
+const path = require('path');
+
 const preferences = new ElectronPreferences({
 	config: {
 		debounce: 150, // debounce preference save settings event; 0 to disable
@@ -115,8 +119,8 @@ const preferences = new ElectronPreferences({
 	// Provide a custom CSS file, relative to your appPath.
 	css: 'preference-styles.css',
 
-	// Preference file path
-	dataStore: '~/preferences.json', // defaults to <userData>/preferences.json
+	// Preference file path. Where your preferences are saved (required)
+	dataStore: path.join(app.getPath("userData"), 'preferences.json'),
 
 	// Preference default values
 	defaults: { 
