@@ -6,6 +6,7 @@ const { contextBridge } = electron;
 const { ipcRenderer } = electron;
 
 const deserializeJson = (serializedJavascript) => eval('(' + serializedJavascript + ')'); //deserialize function for 'serialize-javascript' library
+let onPreferencesChangedHandler = () => {};
 
 contextBridge.exposeInMainWorld('api', {
 	getSections: () => deserializeJson(ipcRenderer.sendSync('getSections')),
@@ -16,4 +17,8 @@ contextBridge.exposeInMainWorld('api', {
 	showOpenDialog: dialogOptions => ipcRenderer.sendSync('showOpenDialog', dialogOptions),
 	sendButtonClick: channel => ipcRenderer.send('sendButtonClick', channel),
   encrypt: secret => ipcRenderer.sendSync('encrypt', secret),
+  onPreferencesChanged: handler => { onPreferencesChangedHandler = handler; },
+});
+ipcRenderer.on('preferencesUpdated', (e, preferences) => {
+  onPreferencesChangedHandler(preferences);
 });
