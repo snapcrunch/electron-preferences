@@ -6,7 +6,7 @@ const { contextBridge } = electron;
 const { ipcRenderer } = electron;
 
 const deserializeJson = (serializedJavascript) => eval('(' + serializedJavascript + ')'); //deserialize function for 'serialize-javascript' library
-let onPreferencesUpdatedHandler = () => { };
+let onPreferencesUpdatedHandler; 
 
 contextBridge.exposeInMainWorld('api', {
 	getSections: () => deserializeJson(ipcRenderer.sendSync('getSections')),
@@ -20,5 +20,5 @@ contextBridge.exposeInMainWorld('api', {
 	onPreferencesUpdated: handler => { onPreferencesUpdatedHandler = handler; },
 });
 ipcRenderer.on('preferencesUpdated', (e, preferences) => {
-	onPreferencesUpdatedHandler(preferences);
+	typeof onPreferencesUpdatedHandler === "function" && onPreferencesUpdatedHandler(preferences);
 });
